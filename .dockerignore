@@ -1,0 +1,6 @@
+*
+!shelfos/
+!run.py
+!requirements.txt
+!release/
+**/__pycache__/

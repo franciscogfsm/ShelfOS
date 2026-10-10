@@ -55,6 +55,15 @@ def main():
     n_img = sum(len(v) for v in pred.values())
     n_area = sum(len(x) for v in pred.values() for x in v.values())
     print(f"wrote {a.out}: {n_img} images, {n_area} areas, {time.time() - t0:.1f}s on {service.embedder.device}")
+    from .validate import expected_images, validate
+
+    problems = validate(json.loads(Path(a.out).read_text(encoding="utf-8")), service.areas, expected_images(a.images, set(service.areas)))
+    if problems:
+        print(f"\nWARNING: {len(problems)} problem(s) with the submission file:")
+        for p in problems[:50]:
+            print("  -", p)
+        raise SystemExit(1)
+    print("validated: official format, every area of every image answered")
 
 
 if __name__ == "__main__":

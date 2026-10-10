@@ -113,7 +113,7 @@ Both labellers must use the same rules, otherwise the labels are noise. Draft:
 - **full** = area covered, looks like just after restocking.
 - **half** = anything in between.
 - **wrong product** = only if what's visible is clearly a different product from the planogram name (e.g. bananas where oranges are expected; loose vs packaged also counts as different). Same fruit, variety you can't tell apart → not wrong.
-- **empty area** → leave compliant `true` and press `u` (Q3 unanswered).
+- **empty area** → compliant `true`. No `u` needed (Q3 answered by the organisers on 10 Oct 2026: an empty area is compliant; `false` is only for a different product being present).
 - Shopper/cart hides most of the area → best guess + `u`.
 - **Label your honest best guess. Do NOT lean low while labelling.** The "lean low because −3 > −2" rule is applied later, in the decision step; doing it here too would count it twice.
 
@@ -141,7 +141,7 @@ Next: **Step 2 = first real model** (simple image features + calibrated classifi
 2. **Q5** What separates half from full? How were occluded / off-image areas annotated?
 3. **Q6** May we use other train/test frames of the same camera when predicting a validation image?
 4. **Q7** At what times were the validation images taken?
-5. **Q3** Empty area → compliant true or false? **Q4** Wrong product → stock of what's there?
+5. ~~**Q3** Empty area → compliant true or false?~~ **Answered: true.** See "Rules confirmed by the organisers" in `README.md`. **Q4** Wrong product → stock of what's there?
 6. **Q1** How many validation submissions, and when?
 
 Write every answer in the header of `HACKATHON_LOG.md`.

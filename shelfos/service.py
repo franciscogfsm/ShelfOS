@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 from .bank import thumbs_of
-from .engine import Engine, official
+from .engine import OBSTRUCT_FROM, Engine, official
 from .features import MODEL_NAME, Embedder
 from .planogram import Area, load_planogram
 from .scoring import score_submission, stock_points
@@ -49,7 +49,7 @@ class ShelfService:
         self.areas: dict[str, list[Area]] = load_planogram(planogram_path)
         self.engine = Engine.load(model_path)
         self.engine.empty_compliant = empty_compliant
-        self.embedder = Embedder(self.engine.model_name or MODEL_NAME, device=device, size=self.engine.crop_size)
+        self.embedder = Embedder(self.engine.model_name or MODEL_NAME, device=device, size=self.engine.crop_size, tta=getattr(self.engine, "tta", False))
         self.embedder.warmup()
         fh, fw = self.engine.frame_size[1], self.engine.frame_size[0]
         self.hidden = {cam: [i for i, a in enumerate(areas) if a.visible_fraction((fh, fw)) < MIN_VISIBLE] for cam, areas in self.areas.items()}
@@ -142,6 +142,10 @@ class ShelfService:
         else:
             image = self._fit_frame(image, warnings)
             details = self.predict_image(image, camera, name)
+            blocked = [a.area_id for a, d in zip(self.areas[camera], details) if d.get("obstruction", 0) >= OBSTRUCT_FROM]
+            if blocked:
+                warnings.append(f"{len(blocked)} area(s) partly hidden by something new on the shelf (shopper, cart, boxes): {', '.join(blocked[:6])}"
+                                f"{'...' if len(blocked) > 6 else ''}; answered on the low side")
         ts = timestamp_of(name)
         if ts is None:
             ts = self._next_ts(camera)
@@ -251,6 +255,7 @@ class ShelfService:
             "occ": round(d["occupancy"], 3),
             "map": [[round(v, 1) for v in row] for row in d["occupancy_map"]],
             "looks": d.get("looks_like", []),
+            "obstruction": round(float(d.get("obstruction", 0.0)), 3),
             "source": d.get("source", "image"),
             "official": official(d, self.empty_compliant),
         }

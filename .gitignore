@@ -14,3 +14,6 @@ labels/review/*.lock
 __pycache__/
 *.pyc
 .DS_Store
+
+# images analysed by the app or the command line
+runs/

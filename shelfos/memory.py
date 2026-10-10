@@ -8,7 +8,13 @@ from __future__ import annotations
 
 import numpy as np
 
-N_FEATS = 10
+N_FEATS = 11
+NOVEL_SIM = 0.5  # a patch that matches no earlier frame of its area better than this is something new on the shelf
+NOVEL = 10  # index of the novelty feature: the share of such patches (people, carts, boxes, cloth, foreign product)
+
+
+_GRID = 14
+_INNER = np.array([r * _GRID + c for r in range(1, _GRID - 1) for c in range(1, _GRID - 1)])  # the padded border belongs to neighbours
 
 
 def _norm(x):
@@ -108,6 +114,7 @@ class AreaMemory:
             out[q, 2] = np.sort(sim_full, 1)[:, :49].mean(1)
             out[q, 3] = np.sum(glob[q] * _norm(mu), 1)
             emp_self = self_row[q][:, None] == emp[None, :]
+            sim_emp = None
             if len(emp) >= 2 or (len(emp) == 1 and not emp_self.any()):
                 se = np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[emp], np.float32))
                 se[emp_self] = -1
@@ -121,6 +128,14 @@ class AreaMemory:
             om = (w @ self.occ[ref]) / w.sum(1)
             out[q, 7] = occ_mean[q] / np.maximum(om, 0.15)
             out[q, 8] = occ_mean[q] - om
+            # novelty: inner patches that look like nothing this area has shown all day, at any stock level
+            rest = pool[~np.isin(pool, ref) & ~np.isin(pool, emp)]
+            best = sim_full if sim_emp is None else np.maximum(sim_full, sim_emp)
+            if len(rest):
+                sr = np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[rest], np.float32))
+                sr[self_row[q][:, None] == rest[None, :]] = -1
+                best = np.maximum(best, sr.max(1))
+            out[q, NOVEL] = (best[:, _INNER] < NOVEL_SIM).mean(1)
             # persistence: the level of the most similar earlier frame of this area
             S = glob[q] @ self.X[pool].T
             S[self_row[q][:, None] == pool[None, :]] = -9

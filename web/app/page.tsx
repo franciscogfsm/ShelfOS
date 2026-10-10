@@ -5,6 +5,7 @@ import { Health, RunEvent, Score, Upload, analyzeFiles, analyzeFolder, fromDrop,
 import { AreaDetail, AreaList, Badges, CameraStage, Crop, DayStrip, FrameView, Kpi } from "./components";
 import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task, clock, confidence, duration, frameAt, since, statusOf, tally, tasksAt, timeline, withFrame } from "./lib";
 import { IDLE, RunState, RunView } from "./run";
+import Loading from "./loading";
 
 type View = "tasks" | "wall" | "camera" | "run";
 type Tab = "tasks" | "products";
@@ -23,6 +24,7 @@ export default function Page() {
   const [filter, setFilter] = useState<Status | "all">("all");
   const [tab, setTab] = useState<Tab>("tasks");
   const [done, setDone] = useState<Set<string>>(new Set());
+  const [notice, setNotice] = useState<{ key: string; product: string } | null>(null);
   const [playing, setPlaying] = useState(false);
   const [run, setRun] = useState<RunState>(IDLE);
   const [score, setScore] = useState<Score | null>(null);
@@ -35,6 +37,12 @@ export default function Page() {
   const store = useMemo(() => (raw ? { ...raw, cameras: raw.cameras.filter((c) => c.frames.length) } : null), [raw]);
   const line = useMemo(() => (store ? timeline(store) : { min: 0, max: 1, latest: 1 }), [store]);
   const tasks = useMemo(() => (store ? tasksAt(store, ts) : []), [store, ts]);
+
+  useEffect(() => {
+    if (!notice) return;
+    const timer = window.setTimeout(() => setNotice(null), 5000);
+    return () => window.clearTimeout(timer);
+  }, [notice]);
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
@@ -229,7 +237,7 @@ export default function Page() {
         </div>
       </div>
     );
-  if (!store) return <div className="h-full grid place-items-center text-muted text-sm">Loading shelf state…</div>;
+  if (!store) return <Loading />;
 
   const blank = store.cameras.length === 0;
   const shown = view === "tasks" ? "wall" : view; // what the main pane shows on a wide screen
@@ -253,20 +261,23 @@ export default function Page() {
     setAreaId(t.area.id);
     setView("camera");
   };
-  const toggleDone = (key: string) =>
+  const toggleDone = (key: string) => {
+    const task = tasks.find((t) => t.key === key);
+    if (task && !done.has(key)) setNotice({ key, product: task.area.product });
     setDone((d) => {
       const n = new Set(d);
       if (n.has(key)) n.delete(key);
       else n.add(key);
       return n;
     });
+  };
 
   return (
-    <div className={`h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
+    <div className={`app-shell h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
       {/* ── top bar ───────────────────────────────────────────── */}
-      <header className="flex flex-wrap items-center gap-x-6 gap-y-2 px-4 lg:px-6 py-2.5 lg:py-0 lg:h-14 border-b border-line bg-panel/80 backdrop-blur">
+      <header className="app-header flex flex-wrap items-center gap-x-6 gap-y-2 px-4 lg:px-6 py-2.5 lg:py-0 lg:h-18 border-b border-line bg-panel/80 backdrop-blur">
         <div className="flex items-center gap-3">
-          <Logo />
+          <div className="brand-mark"><Logo /></div>
           <span className="text-[17px] font-semibold tracking-tight">
             Shelf<span className="text-ok">OS</span>
           </span>
@@ -274,10 +285,11 @@ export default function Page() {
             {store.store} · {store.section}
           </span>
         </div>
-        <div className="order-last lg:order-none flex w-full lg:w-auto rounded-lg border border-line p-0.5 text-xs">
+        <div className="main-nav order-last lg:order-none flex w-full lg:w-auto rounded-lg border border-line p-0.5 text-xs">
           {VIEWS.filter(([v]) => !blank || v === "run").map(([v, name]) => (
             <button
               key={v}
+              aria-pressed={view === v}
               onClick={() => setView(v)}
               className={`flex flex-1 lg:flex-none items-center justify-center gap-1.5 px-3 py-1.5 rounded-md whitespace-nowrap transition-colors ${v === "tasks" ? "lg:hidden" : ""} ${view === v ? (v === "run" ? "bg-accent/15 text-accent" : "bg-raised text-white") : v === "wall" && view === "tasks" ? "text-muted lg:bg-raised lg:text-white" : v === "run" ? "text-accent hover:bg-accent/10" : "text-muted hover:text-white"}`}
             >
@@ -309,7 +321,7 @@ export default function Page() {
 
       {/* ── the day ───────────────────────────────────────────── */}
       {!blank && (
-        <div className="flex items-center gap-3 lg:gap-4 px-4 lg:px-6 py-2.5 border-b border-line bg-panel/40">
+        <div className="timeline-bar flex items-center gap-3 lg:gap-4 px-4 lg:px-6 py-3 border-b border-line bg-panel/40">
           <button onClick={togglePlay} aria-label={playingNow ? "Pause" : "Play the day"} className="size-9 shrink-0 grid place-items-center rounded-full border border-line hover:border-ok/60 hover:text-ok transition-colors">
             {playingNow ? (
               <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="1.5" y="1" width="3" height="10" rx="1" /><rect x="7.5" y="1" width="3" height="10" rx="1" /></svg>
@@ -330,7 +342,8 @@ export default function Page() {
 
       <div className={`grid min-h-0 ${blank ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
         {/* ── main ─────────────────────────────────────────────── */}
-        <main className={`min-h-0 min-w-0 overflow-y-auto p-4 lg:p-5 ${view === "tasks" && !blank ? "hidden lg:block" : ""}`}>
+        <main className={`workspace min-h-0 min-w-0 overflow-y-auto p-4 lg:p-7 ${view === "tasks" && !blank ? "hidden lg:block" : ""}`}>
+          <div key={shown} className="view-enter">
           {shown === "run" || blank ? (
             <RunView
               store={store}
@@ -349,13 +362,22 @@ export default function Page() {
             />
           ) : shown === "wall" ? (
             <div className="flex flex-col gap-5">
-              <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
+              <section className="overview-heading">
+                <div>
+                  <div className="eyebrow"><span /> SHELF INTELLIGENCE / OVERVIEW</div>
+                  <h1>Every shelf. <span>In sight.</span></h1>
+                  <p>{store.store} · {store.section} <span className="heading-divider">/</span> A clear picture. A smarter shift.</p>
+                </div>
+                <div className="snapshot-chip"><span className="status-beacon" />{isLive ? "Latest snapshot" : "Historical snapshot"}<span className="font-mono">{clock(ts)}</span></div>
+              </section>
+              <div className="metrics-grid grid grid-cols-2 xl:grid-cols-4 gap-3">
                 <Kpi label="On the shelf" value={`${Math.round(((total - counts.empty) / total) * 100)}%`} sub={`${total - counts.empty} of ${total} areas have product`} tone={counts.empty ? "empty" : "ok"} />
                 <Kpi label="Fully stocked" value={`${Math.round((tasks.filter((t) => t.pred.level === "full").length / total) * 100)}%`} sub={`${counts.low} running low`} tone={counts.low ? "low" : "ok"} />
                 <Kpi label="Planogram match" value={`${Math.round(((total - counts.wrong) / total) * 100)}%`} sub={counts.wrong ? `${counts.wrong} holding the wrong product` : "everything in its place"} tone={counts.wrong ? "wrong" : "ok"} />
                 <Kpi label="To do now" value={String(open.length)} sub={done.size ? `${done.size} done this shift` : "open tasks across the store"} tone={open.length ? "accent" : "ok"} />
               </div>
-              <div className="grid sm:grid-cols-2 2xl:grid-cols-3 gap-4">
+              <div className="section-heading"><div><span className="eyebrow">VISUAL MONITORING</span><h2>Store wall <span>{store.cameras.length.toString().padStart(2, "0")}</span></h2></div><span className="text-xs text-muted">Select a camera to inspect <span aria-hidden="true">↗</span></span></div>
+              <div className="camera-grid grid sm:grid-cols-2 2xl:grid-cols-3 gap-4">
                 {store.cameras.map((c) => {
                   const f = frameAt(c, ts);
                   const n = tally(c, f);
@@ -368,8 +390,10 @@ export default function Page() {
                         setAreaId(null);
                         setView("camera");
                       }}
-                      className="group relative text-left rounded-xl overflow-hidden border border-line bg-black transition-all hover:border-white/30 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-20px_rgba(47,224,160,0.35)]"
+                      className="camera-card group relative text-left rounded-xl overflow-hidden border border-line bg-black transition-all hover:border-white/30 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-20px_rgba(47,224,160,0.35)]"
                     >
+                      <div className="camera-caption"><span><svg className="camera-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3" /><path d="m16 10 5-3v10l-5-3" /></svg> Camera {c.id}</span><span>{c.areas.length} areas <span className="camera-arrow" aria-hidden="true">↗</span></span></div>
+                      <div className="relative camera-image">
                       <FrameView store={store} cam={c} frame={f} filter={filter} compact />
                       <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2 bg-gradient-to-b from-black/70 to-transparent">
                         <span className="flex items-center gap-2 rounded-md bg-black/60 px-2 py-1 font-mono text-[11px] backdrop-blur-sm">
@@ -387,6 +411,8 @@ export default function Page() {
                           return <span key={a.id} className="h-1 flex-1 rounded-sm" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.45 : 1 }} />;
                         })}
                       </div>
+                      </div>
+                      <div className="camera-footer"><span style={{ color: STATUS[worst].color }}><span aria-hidden="true">● </span>{worst === "ok" ? "All areas in good shape" : `${n.empty + n.wrong + n.low} areas need attention`}</span><span>Inspect feed <span aria-hidden="true">→</span></span></div>
                     </button>
                   );
                 })}
@@ -415,7 +441,7 @@ export default function Page() {
                   );
                 })}
               </div>
-              <div className="grid items-start gap-4 2xl:grid-cols-[minmax(0,1fr)_340px]">
+              <div key={cam.id} className="camera-detail-enter grid items-start gap-4 2xl:grid-cols-[minmax(0,1fr)_340px]">
                 <CameraStage store={store} cam={cam} frame={frame} areaId={areaId} filter={filter} onSelect={setAreaId} />
                 {selected && frame.areas[selected.id] ? (
                   <AreaDetail key={selected.id} store={store} cam={cam} frame={frame} area={selected} onPick={scrub} onClose={() => setAreaId(null)} />
@@ -425,19 +451,20 @@ export default function Page() {
               </div>
             </div>
           )}
+          </div>
         </main>
 
         {/* ── work queue ───────────────────────────────────────── */}
         {!blank && (
-          <aside className={`${view === "tasks" ? "flex" : "hidden"} lg:flex border-l border-line min-h-0 flex-col bg-panel`}>
+          <aside className={`task-panel ${view === "tasks" ? "flex" : "hidden"} lg:flex border-l border-line min-h-0 flex-col bg-panel`}>
             <div className="px-5 pt-4 border-b border-line">
               <div className="flex items-end justify-between">
                 <div>
-                  <div className="text-[10px] uppercase tracking-[0.14em] text-muted">Shift plan · {clock(ts)}</div>
+                  <div className="eyebrow">YOUR NEXT MOVES · {clock(ts)}</div>
                   <div className="mt-1 text-xl font-medium tracking-tight">
                     {open.length ? (
                       <>
-                        {open.length} <span className="text-muted">thing{open.length === 1 ? "" : "s"} to do</span>
+                        {open.length} <span className="text-muted">task{open.length === 1 ? "" : "s"} to tackle</span>
                       </>
                     ) : (
                       <span className="text-ok">All shelves compliant</span>
@@ -445,7 +472,7 @@ export default function Page() {
                   </div>
                 </div>
                 {done.size > 0 && (
-                  <button onClick={() => setDone(new Set())} className="text-[11px] text-muted hover:text-white mb-1">
+                  <button onClick={() => { setDone(new Set()); setNotice(null); }} className="text-[11px] text-muted hover:text-white mb-1">
                     {done.size} done · reset
                   </button>
                 )}
@@ -459,6 +486,7 @@ export default function Page() {
               </div>
             </div>
             <div className="flex-1 overflow-y-auto">
+              <div key={tab} className="queue-enter">
               {tab === "tasks" ? (
                 <>
                   {ISSUES.map((s) => {
@@ -477,7 +505,7 @@ export default function Page() {
                         {group.map((t) => {
                           const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
                           return (
-                            <div key={t.key} className={`group flex items-center gap-3 pl-5 pr-3 py-2.5 border-b border-line/50 transition-colors ${t.area.id === areaId && shown === "camera" ? "bg-raised" : "hover:bg-raised/60"}`}>
+                            <div key={t.key} className={`task-row group flex items-center gap-3 pl-5 pr-3 py-2.5 border-b border-line/50 transition-colors ${t.area.id === areaId && shown === "camera" ? "bg-raised" : "hover:bg-raised/60"}`}>
                               <button onClick={() => focus(t)} className="flex items-center gap-3 min-w-0 flex-1 text-left">
                                 <div className="relative shrink-0">
                                   <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="w-14 h-14 rounded-lg" />
@@ -515,6 +543,7 @@ export default function Page() {
               ) : (
                 <Products tasks={tasks} onPick={focus} />
               )}
+              </div>
             </div>
             <div className="px-5 py-2.5 border-t border-line text-[10px] text-muted font-mono flex justify-between">
               <span className="hidden lg:inline">← → hour · space play · esc wall</span>
@@ -526,6 +555,16 @@ export default function Page() {
         )}
       </div>
 
+      {notice && (
+        <div className="completion-toast" role="status">
+          <span className="toast-check" aria-hidden="true">✓</span>
+          <div><strong>Task complete</strong><span>{notice.product}</span></div>
+          <button onClick={() => {
+            setDone((d) => { const next = new Set(d); next.delete(notice.key); return next; });
+            setNotice(null);
+          }}>Undo</button>
+        </div>
+      )}
       {dragging && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-ink/85 backdrop-blur-sm pointer-events-none">
           <div className="rounded-3xl border-2 border-dashed border-accent px-16 py-12 text-center shadow-[0_0_120px_-20px_rgba(34,211,238,0.6)]">

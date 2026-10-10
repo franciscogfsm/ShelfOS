@@ -73,7 +73,7 @@ function tidy(frame: Frame): Frame {
 export async function loadStore(): Promise<Store> {
   const base = apiBase();
   try {
-    const r = await fetch(`${base}/api/store`, { cache: "no-store" });
+    const r = await fetch(`${base}/api/store`, { cache: "no-store", signal: AbortSignal.timeout(5000) });
     if (r.ok && (r.headers.get("content-type") ?? "").includes("json")) {
       const s: Store = await r.json();
       for (const c of s.cameras) c.frames.forEach(tidy);

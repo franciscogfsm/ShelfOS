@@ -1,27 +1,43 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
 import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, bbox, centroid, clock, duration, frameAt, frameSrc, points, productName, since, statusOf } from "./lib";
 
 /** Camera image with the planogram areas drawn on it. */
-export function FrameView({
+export const FrameView = memo(function FrameView({
   store, cam, frame, filter = "all", compact = false, areaId, hover, onHover, onSelect,
 }: {
   store: Store; cam: Camera; frame: Frame; filter?: Status | "all"; compact?: boolean;
   areaId?: string | null; hover?: string | null; onHover?: (id: string | null) => void; onSelect?: (id: string) => void;
 }) {
   const { width: w, height: h } = store;
+  const svg = useRef<SVGSVGElement>(null);
+  const [visible, setVisible] = useState(!compact);
+  const [loaded, setLoaded] = useState(false);
+  const vignette = useId();
+  useEffect(() => {
+    if (visible || !svg.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "300px" });
+    observer.observe(svg.current);
+    return () => observer.disconnect();
+  }, [visible]);
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="block w-full h-auto select-none bg-black">
-      <image href={frameSrc(store, cam, frame)} width={w} height={h} />
-      {!compact && <rect width={w} height={h} fill="url(#vignette)" pointerEvents="none" />}
+    <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className="frame-view block w-full h-auto select-none" data-loaded={loaded}>
+      <rect width={w} height={h} fill="#14201f" />
+      {visible && <image className="frame-image" href={frameSrc(store, cam, frame)} width={w} height={h} onLoad={() => setLoaded(true)} />}
+      {!compact && <rect width={w} height={h} fill={`url(#${vignette})`} pointerEvents="none" />}
       <defs>
-        <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+        <radialGradient id={vignette} cx="50%" cy="50%" r="75%">
           <stop offset="60%" stopColor="#000" stopOpacity="0" />
           <stop offset="100%" stopColor="#000" stopOpacity="0.45" />
         </radialGradient>
       </defs>
-      {cam.areas.map((a) => {
+      {visible && cam.areas.map((a) => {
         const p = frame.areas[a.id];
         if (!p) return null;
         const s = statusOf(p);
@@ -40,7 +56,7 @@ export function FrameView({
               strokeOpacity={quiet && !active ? 0.5 : 1}
               strokeDasharray={p.source === "memory" ? "10 7" : undefined}
               strokeLinejoin="round"
-              className={`${onSelect ? "cursor-pointer" : ""} ${s === "empty" && !active ? "pulse" : ""}`}
+              className={`shelf-region ${onSelect ? "cursor-pointer" : ""} ${s === "empty" && !active && !compact ? "pulse" : ""}`}
               onMouseEnter={onHover && (() => onHover(a.id))}
               onMouseLeave={onHover && (() => onHover(null))}
               onClick={onSelect && (() => onSelect(a.id))}
@@ -58,7 +74,7 @@ export function FrameView({
       })}
     </svg>
   );
-}
+});
 
 export function CameraStage({
   store, cam, frame, areaId, filter, onSelect,
@@ -96,28 +112,29 @@ export function CameraStage({
   );
 }
 
-export function Crop({ store, cam, frame, area, className }: { store: Store; cam: Camera; frame: Frame; area: AreaDef; className?: string }) {
+export const Crop = memo(function Crop({ store, cam, frame, area, className }: { store: Store; cam: Camera; frame: Frame; area: AreaDef; className?: string }) {
   const b = bbox(area.quad, store.width, store.height);
   return (
     <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} preserveAspectRatio="xMidYMid slice" className={className}>
       <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} />
     </svg>
   );
-}
+});
 
-export function Kpi({ label, value, sub, tone }: { label: string; value: string; sub: string; tone: Status | "accent" }) {
+export const Kpi = memo(function Kpi({ label, value, sub, tone }: { label: string; value: string; sub: string; tone: Status | "accent" }) {
   const color = tone === "accent" ? ACCENT : STATUS[tone].color;
   return (
-    <div className="relative overflow-hidden rounded-xl border border-line bg-panel px-4 py-3.5">
-      <div className="absolute -right-8 -top-10 size-28 rounded-full blur-2xl opacity-25" style={{ background: color }} />
+    <div className="metric-card relative overflow-hidden rounded-xl border border-line bg-panel px-4 py-3.5">
+      <div className="metric-glow" style={{ background: color }} />
       <div className="text-[10px] uppercase tracking-[0.14em] text-muted">{label}</div>
-      <div className="mt-1 font-mono text-[34px] leading-none tracking-tight tabular-nums" style={{ color }}>
-        {value}
+      <div className="metric-value mt-1 text-[34px] leading-none tracking-tight tabular-nums">
+        <span key={value} className="metric-number">{value}</span>
       </div>
       <div className="mt-1.5 text-xs text-muted truncate">{sub}</div>
+      <div className="metric-rule" style={{ background: color }} />
     </div>
   );
-}
+});
 
 /** Small count badges for one camera frame: how many areas need each action. */
 export function Badges({ n }: { n: Record<Status, number> }) {
@@ -286,6 +303,11 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
         {p.source === "memory" && (
           <div className="rounded-md border border-low/40 bg-low/10 px-3 py-2 text-xs text-low">
             This image could not be read here. The answer is the last known state of the slot, so the output file is still complete.
+          </div>
+        )}
+        {p.source !== "memory" && (p.obstruction ?? 0) >= 0.3 && (
+          <div className="rounded-md border border-low/40 bg-low/10 px-3 py-2 text-xs text-low">
+            About {Math.round((p.obstruction ?? 0) * 100)}% of this slot is covered by something that was never on this shelf today (a shopper, a cart, boxes, a cloth). What is underneath cannot be seen, so the stock level is answered on the low side.
           </div>
         )}
 

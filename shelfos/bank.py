@@ -17,9 +17,9 @@ def thumbs_of(crops: list[np.ndarray]) -> np.ndarray:
     return np.stack([c[::step, ::step] for c in crops])
 
 
-def build_bank(planogram_path, images_root, out_path, model_name: str = MODEL_NAME, size: int = CROP, embedder: Embedder | None = None) -> None:
+def build_bank(planogram_path, images_root, out_path, model_name: str = MODEL_NAME, size: int = CROP, embedder: Embedder | None = None, tta: bool = False) -> None:
     areas = load_planogram(planogram_path)
-    emb = embedder or Embedder(model_name, size=size)
+    emb = embedder or Embedder(model_name, size=size, tta=tta)
     meta, crops = [], []
     for cam, files in list_images(images_root).items():
         for t, f in enumerate(files):
@@ -35,4 +35,5 @@ def build_bank(planogram_path, images_root, out_path, model_name: str = MODEL_NA
     np.savez_compressed(
         out_path, glob=glob.astype(np.float32), patches=patches, camera=m[:, 0], area=m[:, 1], product=m[:, 2],
         fname=m[:, 3], t=m[:, 4].astype(int), thumbs=thumbs_of(crops), model=np.array(emb.model_name), size=np.array(emb.size),
+        tta=np.array(bool(emb.tta)),
     )

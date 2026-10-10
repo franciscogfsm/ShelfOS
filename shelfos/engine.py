@@ -11,13 +11,16 @@ from sklearn.linear_model import LogisticRegression
 from .camera_id import CameraIdentifier
 from .compliance import ComplianceModel
 from .labels import load_labels
-from .memory import AreaMemory
+from .memory import NOVEL, AreaMemory
 from .occupancy import PatchOccupancy, load_background_rects, occupancy_features, patch_tokens
 from .planogram import Area
 from .scoring import ID_PAYOFF, LEVELS, STOCK_PAYOFF, VALUES, decide_stock
 
 OCC_SCALE = 0.5
 MEM_SCALE = 0.5
+OBSTRUCT_FROM = 0.30  # share of never-seen patches from which an area counts as partly obstructed
+OBSTRUCT_FULL = 0.70  # ... and from which the discount is complete
+OBSTRUCT_DISCOUNT = 0.6  # at most this much of P(full) is removed
 
 
 def bank_labels(bank, labels_path):
@@ -64,8 +67,10 @@ class Engine:
     empty_compliant: bool = True
     model_name: str = ""
     crop_size: int = 224
+    tta: bool = False  # the bank was embedded with mirror averaging, so new crops must be too
     memory_cls = AreaMemory  # not dataclass fields: swapped by experiments
     STOCK_C = 1.0
+    RECENCY_W = 0.0
 
     # ---- training -------------------------------------------------------------------------
     @classmethod
@@ -85,7 +90,12 @@ class Engine:
         e.memory = cls.memory_cls(X[m], bank["patches"][m], f[m, 0], y[m], area[m], fname=bank["fname"][m], t=bank["t"][m])
         R = e.memory.features(X[m], bank["patches"][m], f[m, 0], area[m], self_row=np.arange(m.sum()))
         e.mem_mu, e.mem_sd = R.mean(0), R.std(0) + 1e-6
-        e.stock_clf = LogisticRegression(C=cls.STOCK_C, max_iter=3000).fit(e._design(X[m], f[m], R), y[m], sample_weight=np.where(ys[m], 1.0, 0.5))
+        sw = np.where(ys[m], 1.0, 0.5)
+        if cls.RECENCY_W:  # frames from later in the day weigh more: validation images are expected late in the day
+            t = bank["t"].astype(float)
+            last = np.array([t[bank["camera"] == c].max() for c in bank["camera"]])
+            sw = sw * (1.0 + cls.RECENCY_W * (t[m] / np.maximum(last[m], 1.0)))
+        e.stock_clf = LogisticRegression(C=cls.STOCK_C, max_iter=3000).fit(e._design(X[m], f[m], R), y[m], sample_weight=sw)
         e.comply = ComplianceModel().fit(X, area, product, c, y >= 1, weight=np.where(cs, 1.0, 0.5))
         e.last_seen = cls._last_seen(area, bank["t"], y, c, e.comply.prior)
         return e
@@ -123,6 +133,8 @@ class Engine:
         R = self.memory.features(glob, patches, f[:, 0], area, self_row)
         probs = np.zeros((len(glob), 3))
         probs[:, self.stock_clf.classes_] = self.stock_clf.predict_proba(self._design(glob, f, R))
+        novelty = R[:, NOVEL] if R.shape[1] > NOVEL else np.zeros(len(glob))
+        probs = self._obstruction_guard(probs, novelty)
         level = decide_stock(probs)
         p_ok = self.comply.predict(glob, area, product, known=self_row >= 0)
         looks = self.comply.identify(glob)
@@ -137,9 +149,25 @@ class Engine:
                 "occupancy": round(float(f[i, 0]), 4),
                 "occupancy_map": np.round(maps[i], 2).tolist(),
                 "looks_like": [[pid, round(s, 3)] for pid, s in looks[i]],
+                "obstruction": round(float(novelty[i]), 3),
                 "source": "image",
             }))
         return out
+
+    OBSTRUCT = (OBSTRUCT_FROM, OBSTRUCT_FULL, OBSTRUCT_DISCOUNT)
+
+    def _obstruction_guard(self, probs: np.ndarray, novelty: np.ndarray) -> np.ndarray:
+        """Something that was never on this shelf covers part of the area (a shopper, a cart, boxes, a
+        night cloth, a foreign product). What is under it cannot be seen, so the evidence for 'full'
+        is discounted in proportion and the expected-score rule answers on the low side (over-estimating
+        costs 3, under-estimating 2)."""
+        lo, hi, discount = self.OBSTRUCT
+        if not discount:
+            return probs
+        p = probs.copy()
+        k = np.clip((novelty - lo) / (hi - lo), 0, 1)
+        p[:, 2] *= 1 - k * discount
+        return p / p.sum(1, keepdims=True)
 
     def fallback(self, areas: list[Area]) -> list[dict]:
         """No usable image: answer from what each area looked like at the end of the reference day,
@@ -150,7 +178,7 @@ class Engine:
             lv = int(decide_stock(np.array(probs)))
             out.append(self._finish({
                 "stock_level": LEVELS[lv], "stock_value": VALUES[lv], "stock_probs": [round(float(x), 4) for x in probs],
-                "p_compliant": round(float(p_ok), 4), "occupancy": 0.0, "occupancy_map": [], "looks_like": [], "source": "memory",
+                "p_compliant": round(float(p_ok), 4), "occupancy": 0.0, "occupancy_map": [], "looks_like": [], "obstruction": 0.0, "source": "memory",
             }))
         return out
 

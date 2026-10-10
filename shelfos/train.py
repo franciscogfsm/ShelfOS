@@ -26,6 +26,7 @@ def train(bank_path="cache/bank.npz", labels="labels/silver_labels.txt", rects="
     engine = Engine.fit(bank, labels, rects)
     engine.model_name = str(bank["model"]) if "model" in bank else MODEL_NAME
     engine.crop_size = int(bank["size"]) if "size" in bank else CROP
+    engine.tta = bool(bank["tta"]) if "tta" in bank else False
     # camera signatures, so loose image files can be assigned to their camera
     engine.cameras = CameraIdentifier()
     if Path(images).is_dir():

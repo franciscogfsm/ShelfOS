@@ -93,12 +93,16 @@ class PrevMemory(AreaMemory):
         return np.hstack([base, extra])
 
 
-def variant(memory_cls=AreaMemory, design=None, name="v", C=None):
+def variant(memory_cls=AreaMemory, design=None, name="v", C=None, recency=None, obstruct=None):
     cls = type(name, (Engine,), {"memory_cls": memory_cls})
     if design:
         cls._design = design
     if C is not None:
         cls.STOCK_C = C
+    if recency is not None:
+        cls.RECENCY_W = recency
+    if obstruct is not None:
+        cls.OBSTRUCT = obstruct
     return cls
 
 
@@ -136,6 +140,10 @@ VARIANTS = {
     "C=0.1": variant(C=0.1),
     "C=0.3": variant(C=0.3),
     "C=3": variant(C=3.0),
+    "recency1": variant(recency=1.0),
+    "recency3": variant(recency=3.0),
+    "no-guard": variant(obstruct=(0.3, 0.7, 0.0)),
+    "guard-hard": variant(obstruct=(0.2, 0.5, 0.9)),
 }
 
 

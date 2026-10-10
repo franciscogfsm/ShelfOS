@@ -59,13 +59,13 @@ export function RunView({
   const emptyCompliant = store.emptyCompliant ?? true;
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="run-workspace flex flex-col gap-5">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <div className="min-w-0">
-          <div className="text-[10px] uppercase tracking-[0.14em] text-accent">Test run</div>
-          <h1 className="mt-1 text-2xl font-medium tracking-tight">Try ShelfOS on images it has never seen</h1>
+          <div className="eyebrow">SHELF INTELLIGENCE / IMAGE LAB</div>
+          <h1 className="mt-2 text-3xl font-medium tracking-tight">New images. Clear answers.</h1>
           <p className="mt-1 text-sm text-muted max-w-2xl">
-            Every planogram area of every image gets a stock level and a planogram check, written exactly in the annotation format of the brief.
+            Turn shelf images into stock levels, product checks, and a plan for what comes next.
           </p>
         </div>
         <ServerChip live={!!store.live} health={health} />

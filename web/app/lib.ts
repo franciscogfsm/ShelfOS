@@ -12,6 +12,8 @@ export interface AreaPred {
   looks?: [string, number][];
   /** "memory": the image was unreadable here, answered from the last known state */
   source?: "image" | "memory";
+  /** share of the slot covered by something never seen on this shelf today (shopper, cart, boxes) */
+  obstruction?: number;
 }
 export interface AreaDef {
   id: string;
