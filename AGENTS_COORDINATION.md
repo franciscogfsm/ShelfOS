@@ -63,8 +63,7 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
 - Machine is free.
 
 ## Running now
-- Opus: scratch CV on `cache/bank_tta.npz` (CPU, ~3 GB RAM, no GPU), started 20:58: engine vs "causal memory"
-  (training crops described from older frames only, as validation crops will be). Results go to Proposals.
+- Opus: short scratch CV runs on `cache/bank_tta.npz` (CPU, ~3 GB RAM, no GPU, about 1 min each), on and off.
   Fable: if you need the machine for a retrain, write it here and I stop.
 
 ## Proposals (Opus writes, Fable applies)
@@ -142,3 +141,29 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   Rodrigo's cameras, 11 on Francisco's). Upward model flags (H->F) are left out on purpose. After `--apply`,
   retrain; I can then measure late/fwd on the new labels if you want. Also worth adding to the rehearsal: the
   last photos under new, later file names, since validation names are not in the reference day.
+- [Opus 21:15] **Label fix ready, measured, NOT applied (I am not allowed to write the shared label files; the
+  user has the two commands).** The user reported the app answering "empty" on 6371_7 at 19:19 with three
+  melons in the crate and said this must not happen. That crop is labelled E, so the shipped model learned it.
+  I reviewed the last four photos of all 152 areas by eye (sheets cut from the originals) with the organisers'
+  rule. Result, set **v3: 24 photos in 13 areas, E -> H** (sellable product visible; comply N -> T):
+  6215_2 t11; 6215_4 t6,10,11; 6215_8 t7; 6215_9 t10,11; 6371_7 t12; 6376_2 t0,1,2; 6383_9 t12; 6385_5 t13;
+  6443_11 t6-11; 6462_9 t12; 6468_15 t12; 6491_7 t11; 6591_6 t11,12. Dropped from the old C1 list: 6594_9 t0-2
+  (one net of garlic = one unit) and 6383_7 t11,12 (wrong product in the basket). Single units stay E.
+  Same engine as shipped (HOUR_SCALE=0, validated rects), bank_tta, same folds:
+  | train / truth | late | late, 2 steps out | fwd |
+  |---|---|---|---|
+  | today / today | +0.605, 79.3% | +0.474 | +0.765, 86.3% |
+  | today / v3 (what we score now if v3 is right) | +0.688, 83.4% | +0.599 | +0.794, 87.7% |
+  | v3 / v3 | +0.730, 85.5% | +0.664 | +0.802, 88.0% |
+  | v3 / today (cost if v3 is wrong) | +0.602, 79.1% | +0.493 | +0.756, 85.7% |
+  So: +2.1 pp late / +0.3 pp fwd if right, -0.2 / -0.6 if wrong. CV understates it, because the shipped model
+  has also seen the E labels of the last photos, which are its references for every validation crop.
+  **Fable, after the user applies it (silver mtime changes from 17:18): retrain both models + selftest.**
+  Later `--apply` runs must list the new reviewer first (`--apply claude rodrigo francisco`), otherwise the
+  labeler reports 13 conflicts and writes nothing.
+- [Opus 21:15] Also measured, same setup: **"causal memory"** (training crops described only from older frames
+  of their area, as validation crops will be). Worse: late +0.586 / +0.559 (two variants) vs +0.605, fwd +0.733 /
+  +0.707 vs +0.765, with more over-estimates. Rejected, do not retry. The 8 borderline full -> half relabels I
+  considered add nothing measurable in training (+0.2 pp) and cost 1 pp if wrong: not proposed.
+- [Opus 21:15] Note for the 80/20 choice: two steps after the last training photo the model is much weaker than
+  one step after (+0.474 vs +0.737 on today's labels). About half of the validation images are two steps out.

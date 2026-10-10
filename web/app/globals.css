@@ -297,22 +297,25 @@ input[type="range"].scrub {
 .camera-stage { border-radius: 22px; box-shadow: 0 0 0 1px rgb(var(--fg) / calc(.078 * var(--k))), 0 30px 70px -40px rgb(0 0 0 / calc(1 * var(--shade))); }
 /* Camera detail: the picture stays inside the viewport, a little under the space it has. */
 .camera-page { display: flex; flex: 1; flex-direction: column; min-height: 0; gap: 10px; }
-.camera-stage-row { display: grid; flex: 1; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 10px; min-height: 0; align-items: start; }
+.camera-stage-row { display: grid; flex: 1; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 12px; min-height: 0; align-items: stretch; }
 .camera-fit-slot { container-type: size; display: grid; height: 100%; min-width: 0; min-height: 0; place-items: center; }
 .camera-stage.fitted { position: relative; aspect-ratio: var(--frame-ar); width: min(97cqi, calc(97cqb * var(--frame-ar))); height: auto; max-width: 97%; max-height: 97cqb; }
 .camera-frame-fit { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
-.camera-areas { display: flex; flex-direction: column; align-self: start; width: 100%; min-height: 0; max-height: min(100%, 380px); overflow: hidden; }
-.camera-areas-head { flex-shrink: 0; padding: 14px 16px 12px; border-bottom: 1px solid rgb(var(--fg) / calc(.078 * var(--k))); }
-.camera-area-scroll { min-height: 0; overflow: auto; }
-.area-group { display: flex; align-items: center; gap: 8px; padding: 10px 16px 4px; font-size: 10px; font-weight: 550; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.area-group i { width: 6px; height: 6px; border-radius: 50%; }
-.area-group span { margin-left: auto; font-family: var(--font-mono); letter-spacing: 0; color: var(--dim); }
-.area-row { display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 8px 16px 10px; border: 0; border-bottom: 1px solid rgb(var(--fg) / calc(.05 * var(--k))); background: transparent; color: inherit; text-align: left; cursor: pointer; }
-.area-row:hover { background: rgb(var(--fg) / calc(.05 * var(--k))); }
-.area-dot { width: 7px; height: 7px; margin-top: 5px; border-radius: 50%; flex-shrink: 0; }
-.area-copy { min-width: 0; flex: 1; }
-.area-copy strong { display: block; font-size: 13.5px; font-weight: 550; line-height: 1.35; letter-spacing: -.01em; overflow-wrap: anywhere; }
-.area-copy small { display: block; margin-top: 2px; font-size: 11px; line-height: 1.35; color: var(--muted); }
+.planogram-board { display: flex; flex-direction: column; align-self: start; width: 100%; min-height: 0; max-height: min(100%, 440px); overflow: hidden; }
+.plan-head { flex-shrink: 0; padding: 16px 16px 12px; }
+.plan-kicker { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; font-weight: 550; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+.plan-kicker span { letter-spacing: 0; font-family: var(--font-mono); }
+.plan-head h2 { margin-top: 6px; font-size: 20px; font-weight: 600; letter-spacing: -.04em; line-height: 1.15; }
+.plan-head h2 span { color: var(--dim); font-weight: 500; }
+.plan-mix { display: flex; gap: 3px; height: 4px; margin-top: 14px; }
+.plan-mix i { display: block; min-width: 8px; border-radius: 99px; }
+.plan-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; font-size: 11px; font-weight: 550; }
+.plan-list { min-height: 0; overflow: auto; padding: 0 6px 8px; }
+.plan-row { display: block; width: calc(100% - 0px); margin: 2px 0; padding: 10px 12px 10px 14px; border: 1px solid transparent; border-radius: 14px; background: transparent; color: inherit; text-align: left; cursor: pointer; box-shadow: inset 3px 0 0 var(--tone); }
+.plan-row:hover { border-color: rgb(var(--fg) / calc(.08 * var(--k))); background: rgb(var(--fg) / calc(.045 * var(--k))); }
+.plan-row strong { display: block; font-size: 14px; font-weight: 550; line-height: 1.3; letter-spacing: -.015em; }
+.plan-row span { display: flex; align-items: baseline; gap: 8px; margin-top: 3px; font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+.plan-row em { margin-left: auto; font-style: normal; font-family: var(--font-sans), system-ui, sans-serif; font-weight: 600; font-size: 11px; color: var(--tone); }
 .frame-view { aspect-ratio: auto; }
 .frame-image { opacity: 0; transition: opacity 180ms ease-out; }
 .frame-view[data-loaded="true"] .frame-image { opacity: 1; }
@@ -471,9 +474,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 @media (min-width: 1024px) {
   .task-panel { margin: 0 20px 20px 0; }
 }
-@media (min-width: 1536px) {
-  .camera-stage-row { grid-template-columns: minmax(0, 1fr) 380px; grid-template-rows: minmax(0, 1fr); }
-  .camera-areas { max-height: 100%; height: auto; }
+@media (min-width: 1280px) {
+  .camera-stage-row { grid-template-columns: minmax(0, 1fr) 320px; grid-template-rows: minmax(0, 1fr); }
+  .planogram-board { max-height: 100%; }
 }
 @media (min-width: 1280px) { .metrics-grid { gap: 14px; } }
 @media (max-width: 1279px) {

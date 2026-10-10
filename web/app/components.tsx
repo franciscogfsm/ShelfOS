@@ -460,33 +460,28 @@ export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; 
     .filter((a) => frame.areas[a.id])
     .map((a) => ({ a, p: frame.areas[a.id], s: statusOf(frame.areas[a.id]) }))
     .sort((x, y) => STATUS[x.s].rank - STATUS[y.s].rank || x.a.id.localeCompare(y.a.id, undefined, { numeric: true }));
-  const todo = rows.filter((r) => r.s !== "ok").length;
-  const groups = ORDER.map((s) => ({ s, rows: rows.filter((r) => r.s === s) })).filter((g) => g.rows.length);
+  const counts = Object.fromEntries(ORDER.map((s) => [s, rows.filter((r) => r.s === s).length])) as Record<Status, number>;
+  const todo = rows.length - counts.ok;
   return (
-    <section className="camera-areas glass-card" aria-label={`Camera ${cam.id} planogram`}>
-      <div className="camera-areas-head">
-        <div className="text-[10px] uppercase tracking-[0.14em] text-muted">
-          Camera {cam.id} · {clock(frame.ts)}
+    <section className="planogram-board glass-card" aria-label={`Camera ${cam.id} planogram`}>
+      <header className="plan-head">
+        <div className="plan-kicker">Camera {cam.id}<span>{clock(frame.ts)}</span></div>
+        <h2>{todo ? <>{todo} to fix <span>of {rows.length}</span></> : <>All {rows.length} in place</>}</h2>
+        <div className="plan-mix" aria-hidden="true">
+          {ORDER.map((s) => counts[s] > 0 && <i key={s} style={{ flexGrow: counts[s], background: STATUS[s].color }} />)}
         </div>
-        <div className="mt-1 text-[15px] font-medium tracking-tight leading-snug">
-          {rows.length} planogram areas
-          {todo ? <span style={{ color: STATUS[rows[0].s].color }}> · {todo} need attention</span> : <span className="text-muted"> · all compliant</span>}
+        <div className="plan-legend">
+          {ORDER.filter((s) => counts[s] > 0).map((s) => (
+            <span key={s} style={{ color: STATUS[s].color }}>{counts[s]} {STATUS[s].label}</span>
+          ))}
         </div>
-      </div>
-      <div className="camera-area-scroll">
-        {groups.map((g) => (
-          <div key={g.s}>
-            <div className="area-group"><i style={{ background: STATUS[g.s].color }} />{STATUS[g.s].label}<span>{g.rows.length}</span></div>
-            {g.rows.map(({ a, s }) => (
-              <button key={a.id} onClick={() => onSelect(a.id)} className="area-row" title={STATUS[s].hint}>
-                <span className="area-dot" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.45 : 1 }} />
-                <span className="area-copy">
-                  <strong>{a.product}</strong>
-                  <small>slot {a.id.split("_")[1]} · {STATUS[s].hint}</small>
-                </span>
-              </button>
-            ))}
-          </div>
+      </header>
+      <div className="plan-list">
+        {rows.map(({ a, s }) => (
+          <button key={a.id} type="button" onClick={() => onSelect(a.id)} className="plan-row" style={{ "--tone": STATUS[s].color } as React.CSSProperties}>
+            <strong>{a.product}</strong>
+            <span>slot {a.id.split("_")[1]}<em>{STATUS[s].label}</em></span>
+          </button>
         ))}
       </div>
     </section>
