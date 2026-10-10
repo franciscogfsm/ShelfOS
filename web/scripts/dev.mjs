@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { readFile, writeFile } from 'node:fs/promises';
+import { access, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { createServer } from 'node:net';
@@ -11,8 +11,16 @@ const children = new Set();
 let stopping = false;
 
 export async function ensureEnv(directory = root) {
+  try { await access(resolve(directory, '.env')); return; }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
+  let template;
+  try { template = await readFile(resolve(directory, '.env.example')); }
+  catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    template = 'OPENROUTER_API_KEY=\nOPENROUTER_MODEL=google/gemini-3.8-flash\n';
+  }
   try {
-    await writeFile(resolve(directory, '.env'), await readFile(resolve(directory, '.env.example')), { flag: 'wx' });
+    await writeFile(resolve(directory, '.env'), template, { flag: 'wx' });
     console.log('[ShelfOS] Created .env — add OPENROUTER_API_KEY there to enable chat.');
   } catch (error) { if (error.code !== 'EEXIST') throw error; }
 }
@@ -46,12 +54,13 @@ export async function chooseBackend(first = 8000) {
   throw Error('No backend port is available. Set SHELFOS_API_PORT to a free port.');
 }
 
-function launch(command, args, options) {
+function launch(command, args, options, acceptExit) {
   const child = spawn(command, args, { stdio: 'inherit', windowsHide: true, ...options });
   children.add(child);
   child.once('error', error => { console.error(`[ShelfOS] ${error.message}`); shutdown(1); });
-  child.once('exit', (code, signal) => {
+  child.once('exit', async (code, signal) => {
     children.delete(child);
+    if (!stopping && acceptExit && await acceptExit()) return;
     if (!stopping) { console.error(`[ShelfOS] ${command} stopped (${signal ?? code}).`); shutdown(code ?? 1); }
   });
   return child;
@@ -78,7 +87,14 @@ export async function main() {
   if (backend.reuse) console.log(`[ShelfOS] Using existing backend: ${backend.url}`);
   else {
     console.log(`[ShelfOS] Starting backend: ${backend.url} (first run may prepare the model)`);
-    const python = launch(process.env.PYTHON ?? 'python', ['-u', resolve(root, 'run.py'), '--no-browser', '--port', String(backend.port)], { cwd: root });
+    const python = launch(process.env.PYTHON ?? 'python', ['-u', resolve(root, 'run.py'), '--no-browser', '--port', String(backend.port)], { cwd: root }, async () => {
+      // Another dev session may finish starting on this port while our model loads.
+      if (await backendReady(backend.url)) {
+        console.log(`[ShelfOS] Another backend is ready on ${backend.url}; using it.`);
+        return true;
+      }
+      return false;
+    });
     const started = Date.now(); let lastNotice = 0;
     while (!await backendReady(backend.url)) {
       if (stopping || python.exitCode !== null) return;

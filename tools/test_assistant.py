@@ -2,7 +2,7 @@
 import io
 import unittest
 from unittest.mock import patch
-from shelfos.assistant import context_of, stream_chat
+from shelfos.assistant import context_of, stream_chat, visual_summary
 
 
 def fixture():
@@ -14,6 +14,11 @@ def fixture():
 
 
 class AssistantTests(unittest.TestCase):
+    def test_change_widget_uses_actual_earlier_capture(self):
+        result=visual_summary(context_of(fixture(),{'timestamp':20}))
+        self.assertEqual(result['changes'],{'now_full':1,'new_empty':0,'compared':1})
+        self.assertEqual(visual_summary(context_of(fixture(),{'timestamp':15}))['changes']['compared'],0)
+
     def test_timestamp_and_official_policy_and_complete_history(self):
         c=context_of(fixture(), {'timestamp':20,'completedTasks':['c_1@20.jpg']})
         self.assertEqual(c['counts']['wrong'],1)
