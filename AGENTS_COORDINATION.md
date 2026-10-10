@@ -96,3 +96,9 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   +0.661; your run on the same bank with validated rects gives +0.615; on bank_bl the wicker rects went the
   other way (+0.655 -> +0.599). So one rects edit moves late by +/-0.05 in opposite directions on two backbones.
   Differences below ~0.05 on late (n=304) should not drive decisions; use fwd (n=1216) as the tie-breaker.
+- [Claude, Rodrigo's session, branch `count-units`, 21:30] UI-only feature, nothing for Fable to apply to the
+  engine. "Count units" button: a vision model (OpenRouter, same key as the assistant) boxes the visible units
+  of one slot on demand. New `shelfos/counting.py`; two additive routes in `shelfos/server.py`
+  (`/api/count/policy`, `/api/count`, imported lazily). No GPU, no change to engine/predict/service, nothing
+  reaches predictions.json. Off by default: product groups are enabled only after `tools/count_eval.py` passes
+  on hand counts (`labels/unit_counts.txt`, new file, not silver labels). Please review `server.py` before merging to main.

@@ -85,6 +85,46 @@ export async function loadStore(): Promise<Store> {
   return { ...(await r.json()), base: "", live: false };
 }
 
+export interface CountBox {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  /** less than about half of the unit shows */
+  partial: boolean;
+}
+export interface UnitCount {
+  area: string;
+  unit: "item" | "pack" | "bunch";
+  count: number;
+  partial: number;
+  /** units of another product seen inside the slot, left out of the count */
+  other: number;
+  boxes: CountBox[];
+  cached: boolean;
+}
+export interface CountPolicy {
+  configured: boolean;
+  /** productId -> unit, for the products the "Count units" button may count */
+  enabled: Record<string, UnitCount["unit"]>;
+}
+
+let policy: Promise<CountPolicy | null> | null = null;
+/** Which products may be counted; asked once per page load. null when the server does not offer counting. */
+export function countPolicy(): Promise<CountPolicy | null> {
+  policy ??= fetch(`${apiBase()}/api/count/policy`, { cache: "no-store" })
+    .then((r) => (r.ok ? r.json() : null))
+    .catch(() => null);
+  return policy;
+}
+
+/** Visible units of one slot in one frame, with a box around each (vision model, on demand; the engine is not involved). */
+export async function countArea(camera: string, file: string, area: string): Promise<UnitCount> {
+  const r = await fetch(`${apiBase()}/api/count`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ camera, file, area }) });
+  if (!r.ok) await fail(r);
+  return r.json();
+}
+
 export async function loadHealth(): Promise<Health | null> {
   try {
     const r = await fetch(`${apiBase()}/api/health`, { cache: "no-store" });

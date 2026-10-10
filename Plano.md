@@ -2,6 +2,41 @@
 
 Base: o que já está no repo (`web/` Next.js 16, `shelfos/` motor + servidor, README de 10 out). Cada ideia é feita, testada e fechada antes de começar a seguinte.
 
+> **Atualização 10 out, à noite.** A B foi feita pela equipa. A C virou "ritmo" (ver abaixo). A e D ficam por fazer e foram substituídas por **"Count units"** (secção no fim).
+
+## Count units: contar as unidades visíveis (ramo `count-units`)
+
+**O que o staff vê:** no detalhe de uma área, o botão "Count units" desenha um retângulo à volta de cada unidade e escreve "≈ 9 items visible · 2 partly hidden".
+- O número é sempre "≈ N visible". O que está por baixo da camada de cima não se vê e não se inventa.
+- As unidades a mais de metade tapadas aparecem a tracejado.
+
+**Isolado do motor:**
+- quem conta é um modelo de visão (Gemini via OpenRouter, a mesma chave do assistente), só quando se carrega no botão;
+- zero GPU;
+- nada em `engine`/`predict`/`service` mudou;
+- nada chega a `predictions.json`.
+
+**Defesas:**
+- tudo o que fica fora do quadrilátero da área vai pintado de cinzento;
+- uma caixa só conta se o centro estiver na área;
+- o modelo só procura o produto esperado, e outros produtos ficam de fora;
+- áreas `wrong` não se contam;
+- caixas duplicadas e absurdas são removidas;
+- granel (feijão-verde, uva a granel, gengibre, alho a granel) nunca é contado.
+
+**Só ligamos o que passa no teste**, com critério fixado antes de ver resultados: por grupo de produto, ≥ 5 áreas e ≥ 80 % dentro de ±max(2, 15 %) da contagem à mão.
+- **Contagens à mão:** `labels/unit_counts.txt` tem 30 áreas reais (15 `large`, 7 `medium`, 8 `pack`). Contei-as eu e falta uma pessoa confirmá-las.
+- **`bunch` (bananas) fica desligado à partida:** nenhuma área de banana se conta com segurança à mão.
+- **Teste por correr:** falta a chave OpenRouter. Comandos:
+  ```bash
+  python tools/count_eval.py                 # um pedido por área, uns cêntimos; diz ENABLE / keep off por grupo
+  # pôr os grupos ENABLE em ENABLED_GROUPS (shelfos/counting.py)
+  python tools/precount.py                   # cache do dia de referência: a demo funciona sem rede
+  ```
+- Para experimentar antes do teste: `SHELFOS_COUNT_GROUPS=large` no `.env`.
+
+**Limitação conhecida:** vários quadriláteros do planograma apanham também a fila de cima ou a caixa ao lado (ex. 6468_15, 6443_12). A defesa "só o produto esperado" trata do caso em que o vizinho é outro produto. Se o vizinho for o mesmo produto, conta para as duas áreas.
+
 ## Antes de tudo: o que estas ideias valem
 
 - **Pontos oficiais: zero.** A pontuação só olha para `planogram_compliant` e `stock_value`. A UI/UX (1–5) só desempata.

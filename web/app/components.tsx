@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
+import { CountPolicy, UnitCount, countArea, countPolicy } from "./api";
 import { paceOf } from "./forecast";
 import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, bbox, centroid, clock, duration, frameAt, frameSrc, points, productName, since, statusOf } from "./lib";
 
@@ -305,6 +306,25 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
   const pace = s === "low" ? paceOf(cam, area.id, frame.ts) : null;
   const hasMap = p.map.length > 0;
   const looks = (p.looks ?? []).filter(([id]) => id !== area.productId).slice(0, 2);
+  // "Count units": a vision model boxes the visible units on demand; the engine's answers are untouched
+  const [policy, setPolicy] = useState<CountPolicy | null>(null);
+  useEffect(() => {
+    if (store.live) countPolicy().then(setPolicy);
+  }, [store.live]);
+  const [counted, setCounted] = useState<{ file: string; busy?: boolean; result?: UnitCount; error?: string } | null>(null);
+  const tally = counted?.file === frame.file ? counted : null;
+  const unit = policy?.configured ? policy.enabled[area.productId] : undefined;
+  const count = async () => {
+    const file = frame.file;
+    const settle = (next: NonNullable<typeof counted>) => setCounted((c) => (c?.file === file ? next : c));
+    setCounted({ file, busy: true });
+    try {
+      settle({ file, result: await countArea(cam.id, file, area.id) });
+    } catch (e) {
+      settle({ file, error: e instanceof Error ? e.message : String(e) });
+    }
+  };
+  const line = Math.max(b.w, b.h);
   return (
     <div className="popup-backdrop" onClick={onClose}>
     <section role="dialog" aria-modal="true" aria-label={area.product} onClick={(e) => e.stopPropagation()} className="popup glass px-5 sm:px-6 pb-6 pt-4 grid md:grid-cols-[minmax(0,300px)_1fr] gap-x-7 gap-y-3">
@@ -322,6 +342,12 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
             <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} className="w-full aspect-square rounded-lg bg-black" preserveAspectRatio="xMidYMid slice">
               <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} />
               <polygon points={points(area.quad)} fill="none" stroke={STATUS[s].color} strokeWidth={Math.max(b.w, b.h) / 90} strokeLinejoin="round" />
+              {tally?.result?.boxes.map((u, i) => (
+                <g key={i} fill="none" strokeDasharray={u.partial ? `${line / 70} ${line / 110}` : undefined}>
+                  <rect x={u.x} y={u.y} width={u.w} height={u.h} rx={line / 200} stroke="#000" strokeOpacity={0.55} strokeWidth={line / 110} />
+                  <rect x={u.x} y={u.y} width={u.w} height={u.h} rx={line / 200} stroke="#fff" strokeWidth={line / 260} />
+                </g>
+              ))}
             </svg>
             {showMap && hasMap && (
               <div className="absolute inset-[9%] grid rounded overflow-hidden mix-blend-screen" style={{ gridTemplateColumns: `repeat(${p.map.length}, 1fr)` }}>
@@ -345,6 +371,32 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           <button onClick={() => setShowMap(!showMap)} className={`col-span-2 mt-1 rounded-md border px-2.5 py-1.5 text-[11px] transition-colors ${showMap ? "border-white/30 text-white bg-white/10" : "border-line text-muted hover:text-white"}`}>
             {showMap ? "Hide" : "Show"} what ShelfOS sees as product
           </button>
+        )}
+        {store.live && policy?.configured && s !== "wrong" && (
+          <div className="col-span-2 text-[11px]">
+            {!unit ? (
+              <p className="text-muted">Not countable from this camera.</p>
+            ) : tally?.result ? (
+              <div>
+                <div className="text-sm font-medium">
+                  ≈ {tally.result.count} {tally.result.unit}
+                  {tally.result.count === 1 ? "" : "s"} visible
+                  {tally.result.partial > 0 && <span className="text-muted font-normal"> · {tally.result.partial} partly hidden</span>}
+                </div>
+                <p className="mt-0.5 text-muted">
+                  Only what the camera can see; more may be underneath.
+                  {tally.result.other > 0 && ` ${tally.result.other} of another product left out.`}
+                </p>
+              </div>
+            ) : (
+              <>
+                <button onClick={count} disabled={tally?.busy} className="w-full rounded-md border border-line px-2.5 py-1.5 text-muted transition-colors hover:text-white disabled:opacity-60">
+                  {tally?.busy ? "Counting…" : "Count units"}
+                </button>
+                {tally?.error && <p className="mt-1" style={{ color: STATUS.empty.color }}>{tally.error}</p>}
+              </>
+            )}
+          </div>
         )}
       </div>
 

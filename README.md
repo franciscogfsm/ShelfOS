@@ -70,6 +70,16 @@ To score a prediction file against an annotation file with the official rules, d
 python -c "import json,sys; from shelfos.scoring import score_submission as s; print(s(json.load(open(sys.argv[1])), json.load(open(sys.argv[2]))))" predictions.json annotations.json
 ```
 
+**Count units.** In an area's detail, **Count units** boxes every unit of the expected product
+the camera can see and says "≈ 9 items visible · 2 partly hidden". Units under the top layer
+are not visible and are not guessed.
+- How it counts: a vision model behind OpenRouter (`shelfos/counting.py`, the same
+  `OPENROUTER_API_KEY` as the assistant), on demand only.
+- It is separate from the engine. It uses no GPU and never touches `predictions.json`.
+- It counts only the product groups that passed the hand-count test: `python tools/count_eval.py`
+  against `labels/unit_counts.txt`, pass mark in `Plano.md`.
+- `python tools/precount.py` caches the reference day, so the demo needs no network.
+
 ## What it does with awkward input
 
 | Input | What happens |
