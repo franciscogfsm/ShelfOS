@@ -159,7 +159,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6215_3": {
   "reviewed": true,
@@ -277,7 +278,7 @@
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751021396.jpg": {
     "compliant": true,
@@ -321,7 +322,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6215_5": {
   "reviewed": true,
@@ -564,7 +566,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6215_8": {
   "reviewed": true,
@@ -645,7 +648,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6215_9": {
   "reviewed": true,
@@ -807,7 +811,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6371_1": {
   "reviewed": true,
@@ -1416,7 +1421,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6371_8": {
   "reviewed": true,
@@ -1590,7 +1596,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_1": {
   "reviewed": true,
@@ -1677,7 +1684,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_2": {
   "reviewed": true,
@@ -1764,7 +1772,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_3": {
   "reviewed": true,
@@ -1851,7 +1860,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_4": {
   "reviewed": true,
@@ -1938,7 +1948,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_5": {
   "reviewed": true,
@@ -2025,7 +2036,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_6": {
   "reviewed": true,
@@ -2373,7 +2385,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_10": {
   "reviewed": true,
@@ -2398,7 +2411,7 @@
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751013720.jpg": {
     "compliant": true,
@@ -2460,7 +2473,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_11": {
   "reviewed": true,
@@ -2547,7 +2561,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6373_12": {
   "reviewed": true,
@@ -2634,7 +2649,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_1": {
   "reviewed": true,
@@ -2721,7 +2737,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_2": {
   "reviewed": true,
@@ -2808,7 +2825,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_3": {
   "reviewed": true,
@@ -2895,7 +2913,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_4": {
   "reviewed": true,
@@ -3069,7 +3088,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_6": {
   "reviewed": true,
@@ -3243,7 +3263,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_8": {
   "reviewed": true,
@@ -3330,7 +3351,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_9": {
   "reviewed": true,
@@ -3504,7 +3526,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_11": {
   "reviewed": true,
@@ -3591,7 +3614,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_12": {
   "reviewed": true,
@@ -3678,7 +3702,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_13": {
   "reviewed": true,
@@ -3931,7 +3956,7 @@
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751049028.jpg": {
     "compliant": true,
@@ -3939,7 +3964,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6376_16": {
   "reviewed": true,
@@ -4113,7 +4139,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6383_2": {
   "reviewed": true,
@@ -4200,7 +4227,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6383_3": {
   "reviewed": true,
@@ -4287,7 +4315,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6383_4": {
   "reviewed": true,
@@ -4461,7 +4490,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6383_6": {
   "reviewed": true,
@@ -4504,19 +4534,19 @@
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "half"
+    "stock": "empty"
    },
    "1751025309.jpg": {
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "half"
+    "stock": "empty"
    },
    "1751029430.jpg": {
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "half"
+    "stock": "empty"
    },
    "1751033092.jpg": {
     "compliant": true,
@@ -4548,7 +4578,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6383_7": {
   "reviewed": true,
@@ -4635,7 +4666,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6383_8": {
   "reviewed": true,
@@ -5088,7 +5120,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6385_4": {
   "reviewed": true,
@@ -5101,37 +5134,37 @@
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751005283.jpg": {
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751008904.jpg": {
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751012735.jpg": {
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751016383.jpg": {
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751020485.jpg": {
     "compliant": true,
     "unsure": false,
     "unknown": false,
-    "stock": "full"
+    "stock": "half"
    },
    "1751024401.jpg": {
     "compliant": true,
@@ -5181,7 +5214,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6385_5": {
   "reviewed": true,
@@ -5367,7 +5401,8 @@
     "unknown": false,
     "stock": "full"
    }
-  }
+  },
+  "resolved": true
  },
  "6385_7": {
   "reviewed": true,
@@ -5553,7 +5588,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6385_9": {
   "reviewed": true,
@@ -5733,7 +5769,8 @@
     "unknown": false,
     "stock": "half"
    }
-  }
+  },
+  "resolved": true
  },
  "6386_2": {
   "reviewed": true,
@@ -6081,7 +6118,8 @@
     "unknown": false,
     "stock": "empty"
    }
-  }
+  },
+  "resolved": true
  },
  "6386_6": {
   "reviewed": true,

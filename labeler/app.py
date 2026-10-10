@@ -156,8 +156,27 @@ def assigned_cameras(name: str, cameras: list[str], override: str | None) -> lis
     return cameras[:half] if part == 0 else cameras[half:]
 
 
+def read_opinion(path: Path, frames) -> dict:
+    """Segunda opinião (formato silver) -> {area: {frame: {stock|None, compliant, unsure}}}."""
+    out = {}
+    for area, (stock, comply) in read_silver_text(path.read_text(encoding="utf-8-sig")).items():
+        fs = frames.get(area.split("_")[0], [])
+        if len(stock) != len(fs):
+            print(f"aviso: {area} na opinião não bate com o nº de imagens, ignorado")
+            continue
+        out[area] = {
+            f: {"stock": SILVER_STOCK.get(s.upper()), "compliant": c.upper() != "F", "unsure": s.islower() or c.islower()}
+            for f, s, c in zip(fs, stock, comply)
+        }
+    return out
+
+
+def disagrees(op: dict, v: dict) -> bool:
+    return (op["stock"] is not None and op["stock"] != v["stock"]) or op["compliant"] != v["compliant"]
+
+
 class Store:
-    def __init__(self, name: str, prefill: Path | None, cameras: str | None = None):
+    def __init__(self, name: str, prefill: Path | None, cameras: str | None = None, opinion: Path | None = None):
         ensure_images()
         self.name = name
         self.planogram = load_planogram()
@@ -178,6 +197,17 @@ class Store:
         self.path = LABELS / f"{name}.json"
         self.saved = json.loads(self.path.read_text()) if self.path.exists() else {}
         self.lock = threading.Lock()
+        # modo --resolver: só as áreas onde a segunda opinião discorda (ou que já resolveste)
+        self.opinion = read_opinion(opinion, self.frames) if opinion else None
+        self.resolver_areas = None
+        if self.opinion is not None:
+            self.resolver_areas = {
+                a for a, op in self.opinion.items()
+                if a.split("_")[0] in self.cameras and (
+                    self.saved.get(a, {}).get("resolved")
+                    or any(disagrees(op[f], v) for f, v in self.area_state(a.split("_")[0], a)["frames"].items())
+                )
+            }
 
     def area_state(self, cam: str, area: str) -> dict:
         if area in self.saved:
@@ -186,18 +216,21 @@ class Store:
         return {"reviewed": False, "frames": {f: pre.get(f, default_label()) for f in self.frames[cam]}}
 
     def meta(self) -> dict:
+        keep = (lambda a: a in self.resolver_areas) if self.resolver_areas is not None else (lambda a: True)
+        cameras = []
+        for cam, areas in self.planogram.items():
+            shown = [
+                dict(a, state=self.area_state(cam, a["area_id"]),
+                     opinion=self.opinion.get(a["area_id"]) if self.opinion else None)
+                for a in areas if keep(a["area_id"])
+            ]
+            if cam in self.cameras and shown:
+                cameras.append({"id": cam, "frames": self.frames[cam], "areas": shown})
         return {
             "name": self.name,
             "prefill_source": self.prefill_source,
-            "cameras": [
-                {
-                    "id": cam,
-                    "frames": self.frames[cam],
-                    "areas": [dict(a, state=self.area_state(cam, a["area_id"])) for a in areas],
-                }
-                for cam, areas in self.planogram.items()
-                if cam in self.cameras
-            ],
+            "resolver": self.opinion is not None,
+            "cameras": cameras,
         }
 
     def update(self, area: str, state: dict) -> dict:
@@ -211,10 +244,15 @@ class Store:
                 raise ValueError(f"stock inválido: {v['stock']}")
             frames[f] = {k: bool(v.get(k)) for k in ("compliant", "unsure", "unknown")} | {"stock": v["stock"]}
         with self.lock:
+            # relê do disco: o modo normal e o --resolver podem estar abertos ao mesmo tempo
+            if self.path.exists():
+                self.saved = json.loads(self.path.read_text())
             prev = self.saved.get(area, {})
             # "base" = como o silver estava quando começaste: serve para detetar conflitos no --apply
             base = prev.get("base") or self.silver.get(area)
             self.saved[area] = {"reviewed": bool(state["reviewed"]), "base": base, "frames": frames}
+            if state.get("resolved") or prev.get("resolved"):
+                self.saved[area]["resolved"] = True
             write_json(self.path, self.saved)
             return self.export()
 
@@ -370,7 +408,9 @@ def main():
     ap.add_argument("--name", help="o teu nome (cada pessoa tem o seu ficheiro)")
     ap.add_argument("--prefill", type=Path, help="JSON no formato oficial para pré-preencher (em vez do silver)")
     ap.add_argument("--cameras", help="ex.: 6215,6371 ou 'all' (por defeito: a tua metade, ver TEAM)")
-    ap.add_argument("--port", type=int, default=8765)
+    ap.add_argument("--resolver", nargs="?", type=Path, const=HERE / "data" / "claude_opinion.txt",
+                    help="só as áreas onde a segunda opinião discorda (porta 8766 por defeito)")
+    ap.add_argument("--port", type=int)
     ap.add_argument("--merge", nargs="+", metavar="NOME", help="junta labels/<nome>.json de várias pessoas")
     ap.add_argument("--apply", nargs="+", metavar="NOME", help="escreve as áreas revistas em labels/silver_labels.txt")
     args = ap.parse_args()
@@ -381,13 +421,19 @@ def main():
         return apply(args.apply)
     if not args.name:
         ap.error("--name é obrigatório")
-    store = Store(args.name, args.prefill, args.cameras)
+    if args.resolver and not args.resolver.exists():
+        raise SystemExit(f"não existe {args.resolver}")
+    store = Store(args.name, args.prefill, args.cameras, args.resolver)
+    port = args.port or (8766 if args.resolver else 8765)
     print(store.export())
     n_areas = sum(len(store.planogram[c]) for c in store.cameras)
     print(f"{args.name}: {len(store.cameras)} câmaras ({', '.join(store.cameras)}), {n_areas} áreas")
-    print(f"pré-preenchido com: {store.prefill_source}")
-    print(f"abre http://localhost:{args.port}  (Ctrl+C para sair; tudo é guardado a cada tecla)", flush=True)
-    ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(store)).serve_forever()
+    if args.resolver:
+        print(f"modo resolver: {len(store.resolver_areas)} áreas com desacordo ({args.resolver.name})")
+    else:
+        print(f"pré-preenchido com: {store.prefill_source}")
+    print(f"abre http://localhost:{port}  (Ctrl+C para sair; tudo é guardado a cada tecla)", flush=True)
+    ThreadingHTTPServer(("127.0.0.1", port), make_handler(store)).serve_forever()
 
 
 if __name__ == "__main__":

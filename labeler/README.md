@@ -43,6 +43,12 @@ Dá a tua melhor estimativa honesta. **Não puxes o stock para baixo aqui**: iss
 - `output/<nome>_annotations_reviewed.json`: só as áreas que confirmaste com `Enter`.
 - `docs/`: regras para o LLM / decisão final.
 
+## Resolver desacordos com uma segunda opinião
+```bash
+python3 labeler/app.py --name rodrigo --resolver     # abre http://localhost:8766
+```
+Mostra só as áreas onde a segunda opinião (`labeler/data/claude_opinion.txt`, local e fora do git) discorda das tuas labels, com o dia inteiro na tira. As fotos em desacordo ficam a laranja com `⚑ Claude: …`. Escolhe o valor final com as teclas de sempre e confirma a área com `Enter`. As alterações vão para o mesmo `labels/<nome>.json`. Pode correr ao mesmo tempo que o modo normal.
+
 ## Juntar e passar para o modelo
 ```bash
 python3 labeler/app.py --merge rodrigo francisco   # -> output/merged_annotations.json

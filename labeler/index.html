@@ -29,6 +29,8 @@
   .row button.on.unsure { background: #fdd835; border-color: #f9a825; }
   .row button.on.unknown { background: #555; color: #fff; border-color: #555; }
   .row button.wrong { flex: 2; }
+  .card.dis { background: #fff3e0; }
+  .claude { font: 600 12px system-ui; color: #e65100; margin-top: 3px; }
   .time { font-size: 12px; color: #555; display: flex; justify-content: space-between; margin-top: 2px; }
   .help { color: #555; font-size: 13px; line-height: 1.7; }
   kbd { background: #fff; border: 1px solid #bbb; border-radius: 3px; padding: 0 5px; font: 12px monospace; }
@@ -61,7 +63,9 @@
   </div>
 </main>
 <script>
-const W = 1280, H = 720, LEVELS = ["empty", "half", "full"];
+const W = 1280, H = 720, LEVELS = ["empty", "half", "full"], PT = { empty: "vazio", half: "meio", full: "cheio" };
+// no modo --resolver uma área conta como feita quando a resolves, não quando foi revista
+const DONE = () => (meta && meta.resolver ? "resolved" : "reviewed");
 let meta, areas = [], ai = 0, fi = 0;
 const imgs = {};
 const $ = id => document.getElementById(id);
@@ -113,23 +117,28 @@ const cur = () => areas[ai];
 function render() {
   const { cam, area } = cur(), st = area.state, frames = cam.frames;
   fi = Math.max(0, Math.min(fi, frames.length - 1));
-  const done = areas.filter(x => x.area.state.reviewed).length;
-  $("progress").textContent = `${done}/${areas.length} áreas revistas · área ${ai + 1}/${areas.length}`;
+  const done = areas.filter(x => x.area.state[DONE()]).length;
+  const word = meta.resolver ? "resolvidas" : "revistas";
+  $("progress").textContent = `${done}/${areas.length} áreas ${word} · área ${ai + 1}/${areas.length}`;
   $("cam").value = cam.id;
   $("title").innerHTML = `${area.area_id} <small>· ${area.product_name}</small>` +
-    (st.reviewed ? '<span class="tag ok">revista</span>' : '<span class="tag todo">por rever</span>');
+    (st[DONE()] ? `<span class="tag ok">${meta.resolver ? "resolvida" : "revista"}</span>`
+                : `<span class="tag todo">${meta.resolver ? "por resolver" : "por rever"}</span>`) +
+    (area.opinion ? ` <small>· ${frames.filter(f => differs(area.opinion[f], st.frames[f])).length} fotos em que o Claude discorda (⚑)</small>` : "");
   drawFull(cam, frames[fi], area);
   drawCrop($("zoom"), img(cam.id, frames[fi]), area.quad, 560, 380, 0.25);
 
   const strip = $("strip"); strip.innerHTML = "";
   frames.forEach((f, j) => {
     const v = st.frames[f], card = document.createElement("div");
-    card.className = "card" + (j === fi ? " sel" : "");
+    const op = area.opinion && area.opinion[f], dis = differs(op, v);
+    card.className = "card" + (j === fi ? " sel" : "") + (dis ? " dis" : "");
     const cv = document.createElement("canvas");
     drawCrop(cv, img(cam.id, f), area.quad, 180, 130, 0.12);
     card.appendChild(cv);
     card.insertAdjacentHTML("beforeend",
       `<div class="time"><span>${time(f)}</span><span>${j + 1}/${frames.length}</span></div>
+       ${dis ? `<div class="claude">⚑ Claude: ${PT[op.stock] || "?"}${op.compliant ? "" : " · produto errado"}${op.unsure ? " (incerto)" : ""}</div>` : ""}
        <div class="row">${LEVELS.map(l => `<button data-a="${l}" class="${l}${v.stock === l ? " on" : ""}">${l[0].toUpperCase()}</button>`).join("")}</div>
        <div class="row"><button data-a="wrong" class="wrong${v.compliant ? "" : " on"}" title="produto errado">✗ errado</button>
        <button data-a="unsure" class="unsure${v.unsure ? " on" : ""}" title="incerto">~</button>
@@ -188,11 +197,17 @@ function toggleUnknown(all) {
 }
 function go(step) {
   let i = ai;
-  do { i += step; } while ($("skip").checked && i >= 0 && i < areas.length && areas[i].area.state.reviewed);
+  do { i += step; } while ($("skip").checked && i >= 0 && i < areas.length && areas[i].area.state[DONE()]);
   if (i < 0 || i >= areas.length) { render(); $("status").textContent = step > 0 ? "chegaste ao fim 🎉" : "início"; return; }
   ai = i; fi = 0; render();
 }
-function confirmArea() { cur().area.state.reviewed = true; save(); go(1); }
+function confirmArea() {
+  const st = cur().area.state;
+  st.reviewed = true;
+  if (meta.resolver) st.resolved = true;
+  save(); go(1);
+}
+function differs(op, v) { return !!op && ((op.stock && op.stock !== v.stock) || op.compliant !== v.compliant); }
 
 document.addEventListener("keydown", e => {
   if (e.target.tagName === "SELECT") return;
@@ -220,13 +235,13 @@ $("cam").onchange = e => { ai = areas.findIndex(x => x.cam.id === e.target.value
 
 fetch("/api/meta").then(r => r.json()).then(m => {
   meta = m;
-  $("who").textContent = m.name; $("src").textContent = m.prefill_source;
+  $("who").textContent = m.name + (m.resolver ? " · modo resolver" : ""); $("src").textContent = m.prefill_source;
   m.cameras.forEach(cam => {
     $("cam").insertAdjacentHTML("beforeend", `<option value="${cam.id}">câmara ${cam.id}</option>`);
     cam.areas.forEach(area => areas.push({ cam, area }));
     cam.frames.forEach(f => img(cam.id, f));
   });
-  const first = areas.findIndex(x => !x.area.state.reviewed);
+  const first = areas.findIndex(x => !x.area.state[DONE()]);
   ai = first < 0 ? 0 : first;
   render();
 });
