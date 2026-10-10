@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
     <div className="loading-shell app-shell h-full" role="status" aria-label="Loading shelf state" aria-busy="true">
-      <div className="loading-header"><div className="loading-brand">Shelf<span>OS</span></div><div className="skeleton loading-nav" /></div>
+      <div className="loading-header"><div className="skeleton loading-store" /><div className="skeleton loading-nav" /></div>
       <div className="loading-timeline skeleton" />
       <div className="loading-body">
         <div className="loading-main">

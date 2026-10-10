@@ -90,7 +90,7 @@ export function RunView({
       )}
 
       {hasRun && (
-        <section className="rounded-xl border border-line bg-panel overflow-hidden">
+        <section className="glass-card overflow-hidden">
           <div className="flex flex-wrap items-stretch">
             <Stat label="Images" value={String(images)} sub={running && run.expected ? `of ${run.expected}` : `${new Set(frames.map((x) => x.cam.id)).size} cameras`} />
             <Stat label="Planogram areas" value={String(areas)} sub="none missing from the file" />
@@ -105,7 +105,7 @@ export function RunView({
                 <a
                   href={predictionsUrl("run")}
                   download="predictions.json"
-                  className="flex items-center gap-2.5 rounded-lg bg-ok px-5 py-3 text-sm font-semibold text-black shadow-[0_10px_40px_-10px_rgba(47,224,160,0.7)] hover:brightness-110 transition"
+                  className="flex items-center gap-2.5 rounded-lg bg-ok px-5 py-3 text-sm font-semibold text-black hover:brightness-110 transition"
                 >
                   <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M7.5 1.5v8.5m0 0L4 6.6m3.5 3.4L11 6.6M2 13.2h11" /></svg>
                   Download predictions.json
@@ -154,7 +154,7 @@ export function RunView({
       {hasRun && !running && <ScorePanel store={store} score={score} error={scoreError} found={run.annotations ?? null} onScore={onScore} onFocus={onFocus} />}
 
       {run.skipped.length > 0 && (
-        <details className="rounded-xl border border-line bg-panel px-4 py-3 text-xs">
+        <details className="glass-card px-4 py-3 text-xs">
           <summary className="cursor-pointer text-muted">
             {run.skipped.length} file{run.skipped.length === 1 ? "" : "s"} left out
           </summary>
@@ -174,12 +174,12 @@ export function RunView({
             <button
               key={`${cam.id}/${frame.file}`}
               onClick={() => onOpen(cam, frame)}
-              className="arrive group relative text-left rounded-xl overflow-hidden border border-line bg-black transition-all hover:border-white/30 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-20px_rgba(34,211,238,0.4)]"
+              className="arrive group relative text-left rounded-xl overflow-hidden border border-line bg-black transition-all hover:border-white/30 hover:-translate-y-0.5"
             >
               <FrameView store={store} cam={cam} frame={frame} compact />
               <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2 bg-gradient-to-b from-black/70 to-transparent">
                 <span className="flex items-center gap-2 rounded-md bg-black/60 px-2 py-1 font-mono text-[11px] backdrop-blur-sm">
-                  <span className="size-1.5 rounded-full bg-accent shadow-[0_0_8px_#22d3ee]" />
+                  <span className="size-1.5 rounded-full bg-accent" />
                   CAM {cam.id}
                   <span className="text-white/60">{clock(frame.ts)}</span>
                 </span>
@@ -223,7 +223,7 @@ function ServerChip({ live, health }: { live: boolean; health: Health | null }) 
     );
   return (
     <span className="shrink-0 flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-xs">
-      <span className="size-2 rounded-full bg-ok shadow-[0_0_10px_#2fe0a0]" />
+      <span className="size-2 rounded-full bg-ok" />
       Server ready
       {health && (
         <span className="text-muted font-mono text-[11px]">
@@ -309,7 +309,7 @@ function Dropzone({ compact, busy, onFiles, onFolder }: { compact: boolean; busy
       </div>
     );
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-dashed border-accent/40 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.10),transparent_60%)] px-5 sm:px-8 py-10">
+    <div className="relative overflow-hidden rounded-2xl border border-dashed border-accent/40 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.07),transparent_60%)] px-5 sm:px-8 py-10">
       {inputs}
       <div className="mx-auto max-w-xl text-center">
         <div className="mx-auto size-12 grid place-items-center rounded-2xl border border-accent/40 bg-accent/10 text-accent">
@@ -362,7 +362,7 @@ function ScorePanel({
   );
   if (!score)
     return (
-      <section className="flex flex-wrap items-center gap-4 rounded-xl border border-line bg-panel px-5 py-3.5">
+      <section className="flex flex-wrap items-center gap-4 glass-card px-5 py-3.5">
         <div className="min-w-[240px] flex-1">
           <div className="text-sm">Have the ground truth? Score this run with the official rules</div>
           <div className="text-xs text-muted">
@@ -393,7 +393,7 @@ function ScorePanel({
   const pct = score.max ? (score.score / score.max) * 100 : 0;
   const tone = STATUS[pct >= 70 ? "ok" : pct >= 40 ? "low" : "empty"].color;
   return (
-    <section className="rounded-xl border border-line bg-panel overflow-hidden">
+    <section className="glass-card overflow-hidden">
       <div className="grid lg:grid-cols-[auto_1fr]">
         <div className="px-6 py-5 lg:border-r border-line">
           <div className="text-[10px] uppercase tracking-[0.14em] text-muted">Official score</div>

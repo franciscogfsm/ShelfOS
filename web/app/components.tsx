@@ -28,7 +28,7 @@ export const FrameView = memo(function FrameView({
   }, [visible]);
   return (
     <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className="frame-view block w-full h-auto select-none" data-loaded={loaded}>
-      <rect width={w} height={h} fill="#14201f" />
+      <rect width={w} height={h} fill="#101012" />
       {visible && <image className="frame-image" href={frameSrc(store, cam, frame)} width={w} height={h} onLoad={() => setLoaded(true)} />}
       {!compact && <rect width={w} height={h} fill={`url(#${vignette})`} pointerEvents="none" />}
       <defs>
@@ -83,30 +83,29 @@ export function CameraStage({
   const hovered = hover ? cam.areas.find((a) => a.id === hover) : undefined;
   const hp = hovered && frame.areas[hovered.id];
   return (
-    <div className="relative rounded-xl overflow-hidden border border-line bg-black shadow-[0_30px_80px_-40px_rgba(34,211,238,0.25)]">
+    <div className="camera-stage relative overflow-hidden bg-black">
       <FrameView store={store} cam={cam} frame={frame} filter={filter} areaId={areaId} hover={hover} onHover={setHover} onSelect={(id) => onSelect(id === areaId ? null : id)} />
-      <div className="absolute left-3 top-3 flex items-center gap-2 rounded-md bg-black/70 px-2.5 py-1 text-[11px] font-mono backdrop-blur">
-        <span className="size-1.5 rounded-full" style={{ background: frame.origin === "run" ? ACCENT : STATUS.ok.color, boxShadow: `0 0 8px ${frame.origin === "run" ? ACCENT : STATUS.ok.color}` }} />
+      <div className="glass-chip absolute left-3 top-3 font-mono">
         CAM {cam.id} · {clock(frame.ts)}
-        {frame.origin === "run" && <span className="text-accent">· tested image</span>}
+        {frame.origin === "run" && <span className="text-white/60">· tested image</span>}
       </div>
       {hovered && hp && (
-        <div className="absolute right-3 top-3 flex items-center gap-2 rounded-md bg-black/80 px-3 py-1.5 text-xs backdrop-blur">
+        <div className="glass-chip absolute right-3 top-3 text-xs">
           <span className="size-2 rounded-full" style={{ background: STATUS[statusOf(hp)].color }} />
           <span>{hovered.product}</span>
           <span className="text-muted">· {STATUS[statusOf(hp)].label}</span>
         </div>
       )}
-      <div className="absolute left-3 bottom-3 hidden sm:flex gap-3 rounded-md bg-black/70 px-2.5 py-1.5 text-[10px] text-white/80 backdrop-blur">
+      <div className="glass-chip absolute left-3 bottom-3 max-sm:hidden gap-3 text-[10px] text-white/80">
         {ORDER.map((s) => (
           <span key={s} className="flex items-center gap-1.5">
-            <span className="size-2 rounded-sm" style={{ background: STATUS[s].color }} />
+            <span className="size-1.5 rounded-full" style={{ background: STATUS[s].color }} />
             {STATUS[s].label}
           </span>
         ))}
       </div>
       {!!frame.warnings?.length && (
-        <div className="absolute right-3 bottom-3 max-w-[60%] rounded-md bg-black/80 px-2.5 py-1.5 text-[11px] text-low backdrop-blur">⚠ {frame.warnings.join(" · ")}</div>
+        <div className="glass-chip absolute right-3 bottom-3 max-w-[60%] text-low">⚠ {frame.warnings.join(" · ")}</div>
       )}
     </div>
   );
@@ -124,8 +123,7 @@ export const Crop = memo(function Crop({ store, cam, frame, area, className }: {
 export const Kpi = memo(function Kpi({ label, value, sub, tone }: { label: string; value: string; sub: string; tone: Status | "accent" }) {
   const color = tone === "accent" ? ACCENT : STATUS[tone].color;
   return (
-    <div className="metric-card relative overflow-hidden rounded-xl border border-line bg-panel px-4 py-3.5">
-      <div className="metric-glow" style={{ background: color }} />
+    <div className="metric-card glass-card relative overflow-hidden">
       <div className="text-[10px] uppercase tracking-[0.14em] text-muted">{label}</div>
       <div className="metric-value mt-1 text-[34px] leading-none tracking-tight tabular-nums">
         <span key={value} className="metric-number">{value}</span>
@@ -143,12 +141,13 @@ export function Badges({ n }: { n: Record<Status, number> }) {
     <span className="flex gap-1">
       {ISSUES.map((s) =>
         n[s] ? (
-          <span key={s} className="rounded px-1.5 py-0.5 text-[10px] font-mono font-medium text-black" style={{ background: STATUS[s].color }} title={`${n[s]} ${STATUS[s].label.toLowerCase()}`}>
-            {n[s]} {STATUS[s].glyph}
+          <span key={s} className="glass-chip font-mono" title={`${n[s]} ${STATUS[s].label.toLowerCase()}`}>
+            <span className="size-1.5 rounded-full" style={{ background: STATUS[s].color }} />
+            {n[s]}
           </span>
         ) : null,
       )}
-      {!any && <span className="rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-medium text-ok backdrop-blur-sm">all compliant</span>}
+      {!any && <span className="glass-chip text-white/75">all compliant</span>}
     </span>
   );
 }
@@ -219,11 +218,6 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
   const s = statusOf(p);
   const b = bbox(area.quad, store.width, store.height);
   const [showMap, setShowMap] = useState(false);
-  const root = useRef<HTMLElement>(null);
-  // on a small screen the explanation opens below the image: bring it into view
-  useEffect(() => {
-    root.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, []);
   // the frame where this area looked best today, as a visual reference
   const best = useMemo(() => {
     let top = cam.frames[0];
@@ -238,12 +232,13 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
   const hasMap = p.map.length > 0;
   const looks = (p.looks ?? []).filter(([id]) => id !== area.productId).slice(0, 2);
   return (
-    <section ref={root} className="rounded-xl border border-line bg-panel px-5 pb-5 pt-3 grid md:grid-cols-[minmax(0,300px)_1fr] gap-x-6 gap-y-3 2xl:grid-cols-1">
+    <div className="popup-backdrop" onClick={onClose}>
+    <section role="dialog" aria-modal="true" aria-label={area.product} onClick={(e) => e.stopPropagation()} className="popup glass px-5 sm:px-6 pb-6 pt-4 grid md:grid-cols-[minmax(0,300px)_1fr] gap-x-7 gap-y-3">
       <div className="col-span-full flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · slot {area.id.split("_")[1]}
         </span>
-        <button onClick={onClose} aria-label="Close" title="Back to all areas (Esc)" className="-mr-2 size-7 grid place-items-center rounded-full text-muted hover:text-white hover:bg-raised">
+        <button onClick={onClose} aria-label="Close" title="Back to all areas (Esc)" className="-mr-2 size-8 grid place-items-center rounded-full text-muted hover:text-white hover:bg-raised">
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="m1.5 1.5 8 8m0-8-8 8" /></svg>
         </button>
       </div>
@@ -257,7 +252,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
             {showMap && hasMap && (
               <div className="absolute inset-[9%] grid rounded overflow-hidden mix-blend-screen" style={{ gridTemplateColumns: `repeat(${p.map.length}, 1fr)` }}>
                 {p.map.flat().map((v, i) => (
-                  <span key={i} style={{ background: `rgba(47,224,160,${v * 0.75})` }} />
+                  <span key={i} style={{ background: `rgba(255,255,255,${v * 0.6})` }} />
                 ))}
               </div>
             )}
@@ -273,7 +268,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           <figcaption className="mt-1.5 text-[10px] uppercase tracking-[0.12em] text-muted">At its best · {clock(best.ts)}</figcaption>
         </figure>
         {hasMap && (
-          <button onClick={() => setShowMap(!showMap)} className={`col-span-2 mt-1 rounded-md border px-2.5 py-1.5 text-[11px] transition-colors ${showMap ? "border-ok/60 text-ok bg-ok/10" : "border-line text-muted hover:text-white"}`}>
+          <button onClick={() => setShowMap(!showMap)} className={`col-span-2 mt-1 rounded-md border px-2.5 py-1.5 text-[11px] transition-colors ${showMap ? "border-white/30 text-white bg-white/10" : "border-line text-muted hover:text-white"}`}>
             {showMap ? "Hide" : "Show"} what ShelfOS sees as product
           </button>
         )}
@@ -288,7 +283,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
               </span>
               {STATUS[s].label} · {STATUS[s].action}
             </div>
-            <h2 className="mt-1 text-2xl 2xl:text-xl font-medium tracking-tight truncate">{area.product}</h2>
+            <h2 className="mt-1 text-2xl font-medium tracking-tight truncate">{area.product}</h2>
             <div className="text-[11px] text-muted font-mono truncate">
               {area.rawName} · #{area.productId}
             </div>
@@ -296,7 +291,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           </div>
           <div className="text-right shrink-0">
             <div className="text-[10px] uppercase tracking-[0.14em] text-muted whitespace-nowrap">Shelf covered</div>
-            <div className="font-mono text-3xl 2xl:text-2xl tabular-nums tracking-tight">{hasMap ? `${Math.round(p.occ * 100)}%` : "–"}</div>
+            <div className="font-mono text-3xl tabular-nums tracking-tight">{hasMap ? `${Math.round(p.occ * 100)}%` : "–"}</div>
           </div>
         </div>
 
@@ -311,7 +306,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           </div>
         )}
 
-        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4 2xl:grid-cols-1">
+        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
           <div>
             <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">Stock level</div>
             {(["Empty", "Half", "Full"] as const).map((name, i) => {
@@ -379,6 +374,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
         </div>
       </div>
     </section>
+    </div>
   );
 }
 
@@ -392,19 +388,19 @@ export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; 
     .sort((x, y) => STATUS[x.s].rank - STATUS[y.s].rank || x.a.id.localeCompare(y.a.id, undefined, { numeric: true }));
   const todo = rows.filter((r) => r.s !== "ok").length;
   return (
-    <section className="rounded-xl border border-line bg-panel overflow-hidden">
+    <section className="glass-card overflow-hidden">
       <div className="px-4 py-3 border-b border-line">
         <div className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · {clock(frame.ts)}
         </div>
         <div className="mt-0.5 text-sm">
-          {rows.length} planogram areas · {todo ? <span style={{ color: STATUS[rows[0].s].color }}>{todo} need attention</span> : <span className="text-ok">all compliant</span>}
+          {rows.length} planogram areas · {todo ? <span style={{ color: STATUS[rows[0].s].color }}>{todo} need attention</span> : <span className="text-muted">all compliant</span>}
         </div>
       </div>
       <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-1">
         {rows.map(({ a, p, s }) => (
           <button key={a.id} onClick={() => onSelect(a.id)} className="flex items-center gap-2.5 px-4 py-2 text-left border-b border-line/50 hover:bg-raised/60 transition-colors" title="See why ShelfOS made this call">
-            <span className="size-2 shrink-0 rounded-full" style={{ background: STATUS[s].color, boxShadow: s === "ok" ? undefined : `0 0 8px ${STATUS[s].color}` }} />
+            <span className="size-1.5 shrink-0 rounded-full" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.35 : 1 }} />
             <span className={`min-w-0 flex-1 truncate text-xs ${s === "ok" ? "text-white/70" : ""}`}>{a.product}</span>
             <span className="shrink-0 text-[10px] font-mono" style={{ color: s === "ok" ? undefined : STATUS[s].color }}>
               {s === "ok" ? <span className="text-muted">{p.level}</span> : STATUS[s].label.toLowerCase()}

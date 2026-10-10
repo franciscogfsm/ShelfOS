@@ -62,15 +62,15 @@ export interface Task {
 
 /** The four states of the brief: "compliant, low, empty or holding the wrong product". */
 export const STATUS: Record<Status, { label: string; action: string; hint: string; color: string; glyph: string; rank: number }> = {
-  empty: { label: "Empty", action: "Restock now", hint: "Nothing on the shelf", color: "#ff5d73", glyph: "!", rank: 0 },
-  wrong: { label: "Wrong product", action: "Fix placement", hint: "Holding another product", color: "#b98cff", glyph: "⇄", rank: 1 },
-  low: { label: "Low", action: "Restock soon", hint: "About half left", color: "#ffb938", glyph: "↓", rank: 2 },
-  ok: { label: "Compliant", action: "No action", hint: "Full and in place", color: "#2fe0a0", glyph: "✓", rank: 3 },
+  empty: { label: "Empty", action: "Restock now", hint: "Nothing on the shelf", color: "#ff6b7a", glyph: "!", rank: 0 },
+  wrong: { label: "Wrong product", action: "Fix placement", hint: "Holding another product", color: "#a996ff", glyph: "⇄", rank: 1 },
+  low: { label: "Low", action: "Restock soon", hint: "About half left", color: "#f5b84a", glyph: "↓", rank: 2 },
+  ok: { label: "Compliant", action: "No action", hint: "Full and in place", color: "#e4e4e7", glyph: "✓", rank: 3 },
 };
 export const ORDER: Status[] = ["empty", "wrong", "low", "ok"];
 export const ISSUES: Status[] = ["empty", "wrong", "low"];
 export const LEVEL_VALUE: Record<Level, number> = { empty: 0, half: 0.5, full: 1 };
-export const ACCENT = "#22d3ee";
+export const ACCENT = "#fafafa";
 
 export function statusOf(p: AreaPred): Status {
   if (p.level === "empty") return "empty";

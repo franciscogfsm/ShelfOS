@@ -37,6 +37,19 @@ def bank_labels(bank, labels_path):
     return y, ys, c, cs
 
 
+def capture_times(fname, n: int):
+    """Unix capture time of each crop from its image file name (e.g. 1751052241.jpg), None when the
+    name is not a timestamp; the memory then treats the crop as later than everything it holds."""
+    if fname is None:
+        return None
+    names = np.broadcast_to(np.asarray(fname).astype(str), (n,))
+    out = []
+    for s in names:
+        stem = Path(s).stem
+        out.append(int(stem) if stem.isdigit() and len(stem) >= 9 else None)
+    return out
+
+
 def p_identity(pred: dict, empty_compliant: bool = True) -> float:
     """P(planogram_compliant is annotated true), integrating over the stock uncertainty: with
     probability P(empty) there is nothing to identify and the convention for empty areas decides,
@@ -130,7 +143,7 @@ class Engine:
         self_row = self.memory.rows_of(area, fname) if fname is not None else np.full(len(area), -1)
         maps = self.occ.maps(patch_tokens(patches, thumbs))
         f = occupancy_features(maps)
-        R = self.memory.features(glob, patches, f[:, 0], area, self_row)
+        R = self.memory.features(glob, patches, f[:, 0], area, self_row, t_query=capture_times(fname, len(area)))
         probs = np.zeros((len(glob), 3))
         probs[:, self.stock_clf.classes_] = self.stock_clf.predict_proba(self._design(glob, f, R))
         novelty = R[:, NOVEL] if R.shape[1] > NOVEL else np.zeros(len(glob))

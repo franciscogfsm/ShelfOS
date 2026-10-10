@@ -8,9 +8,13 @@ from __future__ import annotations
 
 import numpy as np
 
-N_FEATS = 11
+N_BASE = 11
+N_CHANGE = 7
+N_FEATS = N_BASE + N_CHANGE
 NOVEL_SIM = 0.5  # a patch that matches no earlier frame of its area better than this is something new on the shelf
 NOVEL = 10  # index of the novelty feature: the share of such patches (people, carts, boxes, cloth, foreign product)
+CHANGE_SIM = 0.7  # a patch at least this similar to the same patch of the previous frame has not changed
+CHANGE_REFS = 2  # compare with this many of the latest earlier frames (the nearest weighs double)
 
 
 _GRID = 14
@@ -83,11 +87,59 @@ class AreaMemory:
                     out[i] = hit[0]
         return out
 
-    def features(self, glob, patches, occ_mean, area, self_row=None) -> np.ndarray:
+    def features(self, glob, patches, occ_mean, area, self_row=None, t_query=None) -> np.ndarray:
         """[N, N_FEATS] for query crops. self_row[i] is the memory row of query i (or -1) so that
-        a training crop is never compared with itself."""
+        a training crop is never compared with itself. t_query[i] is the capture time of query i
+        (None: the query is later than everything memorised)."""
+        base = self._base_features(glob, patches, occ_mean, area, self_row)
+        return np.hstack([base, self._change_features(glob, patches, occ_mean, area, self_row, t_query)])
+
+    def _change_features(self, glob, patches, occ_mean, area, self_row, t_query) -> np.ndarray:
+        """What changed since the area's latest earlier frames. The cameras are fixed, so a patch that
+        still matches the same patch of the previous frame is an unchanged piece of shelf. Returns, per
+        crop: share of unchanged inner patches, mean patch similarity, level of that frame, level
+        one-hot x unchanged share (a 'same as before' vote that fades as the shelf changes), and the
+        occupancy difference. The errors this targets are shelves that were full an hour ago and have
+        since been half emptied: the appearance still says 'full', the change says otherwise."""
         n = len(glob)
-        out = np.zeros((n, N_FEATS), np.float32)
+        out = np.zeros((n, N_CHANGE), np.float32)
+        if self.t is None:
+            return out
+        area = np.asarray(area).astype(str)
+        self_row = np.full(n, -1) if self_row is None else np.asarray(self_row)
+        Pq = self.project(patches)
+        for i in range(n):
+            pool = self.rows.get(area[i])
+            if pool is None or not len(pool):
+                continue
+            if self_row[i] >= 0:
+                tq = self.t[self_row[i]]
+            elif t_query is not None and t_query[i] is not None:
+                tq = int(t_query[i])
+            else:
+                tq = 10**9
+            prev = pool[(self.t[pool] < tq) & (pool != self_row[i])]
+            if not len(prev):  # earlier than anything memorised: use the nearest frames instead
+                prev = pool[pool != self_row[i]]
+                if not len(prev):
+                    continue
+                prev = prev[np.argsort(np.abs(self.t[prev] - tq))][::-1]
+            js = prev[np.argsort(self.t[prev])][-CHANGE_REFS:][::-1]
+            ws = np.array([2.0, 1.0][: len(js)])
+            ws /= ws.sum()
+            for w, j in zip(ws, js):
+                sim = np.einsum("pd,pd->p", Pq[i], np.asarray(self.P[j], np.float32))[_INNER]
+                same = float((sim > CHANGE_SIM).mean())
+                out[i, 0] += w * same
+                out[i, 1] += w * float(sim.mean())
+                out[i, 2] += w * self.y[j] / 2
+                out[i, 3 + self.y[j]] += w * same
+                out[i, 6] += w * float(occ_mean[i] - self.occ[j])
+        return out
+
+    def _base_features(self, glob, patches, occ_mean, area, self_row=None) -> np.ndarray:
+        n = len(glob)
+        out = np.zeros((n, N_BASE), np.float32)
         area = np.asarray(area).astype(str)
         self_row = np.full(n, -1) if self_row is None else np.asarray(self_row)
         for a in np.unique(area):

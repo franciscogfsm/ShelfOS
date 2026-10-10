@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Health, RunEvent, Score, Upload, analyzeFiles, analyzeFolder, fromDrop, loadHealth, loadStore, resetRun, scoreAgainst, setPolicy, sort } from "./api";
 import { AreaDetail, AreaList, Badges, CameraStage, Crop, DayStrip, FrameView, Kpi } from "./components";
@@ -11,6 +12,12 @@ type View = "tasks" | "wall" | "camera" | "run";
 type Tab = "tasks" | "products";
 // "tasks" is a view of its own on a phone; on a wide screen the work queue is always on the right
 const VIEWS: [View, string][] = [["tasks", "Tasks"], ["wall", "Store wall"], ["camera", "Camera"], ["run", "Test images"]];
+const NAV_ICON: Record<View, React.ReactNode> = {
+  tasks: <path d="M4 6.5 5.5 8 8 5m3 1.5h9M4 12.5l1.5 1.5L8 11m3 1.5h9M4 18.5 5.5 20 8 17m3 1.5h9" />,
+  wall: <><rect x="4" y="4" width="6.5" height="6.5" rx="2" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" /></>,
+  camera: <><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.2l1.3-2h6l1.3 2h1.2A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5Z" /><circle cx="12" cy="12.5" r="3.2" /></>,
+  run: <path d="M12 15V4m0 0L8 8m4-4 4 4M5 15v2.5A1.5 1.5 0 0 0 6.5 19h11a1.5 1.5 0 0 0 1.5-1.5V15" />,
+};
 const message = (e: unknown) => (e instanceof Error ? e.message : String(e));
 
 export default function Page() {
@@ -233,13 +240,14 @@ export default function Page() {
     return (
       <div className="h-full grid place-items-center text-sm text-muted">
         <div className="max-w-md text-center leading-relaxed">
-          No shelf data yet. Start ShelfOS with <code className="font-mono text-ok">python run.py</code> in the project folder, then reload.
+          No shelf data yet. Start ShelfOS with <code className="font-mono text-white">python run.py</code> in the project folder, then reload.
         </div>
       </div>
     );
   if (!store) return <Loading />;
 
   const blank = store.cameras.length === 0;
+  const [place, town] = store.store.split(/,\s*(?=[^,]*$)/);
   const shown = view === "tasks" ? "wall" : view; // what the main pane shows on a wide screen
   const cam = store.cameras.find((c) => c.id === camId) ?? store.cameras[0];
   const frame = cam && frameAt(cam, ts);
@@ -275,54 +283,46 @@ export default function Page() {
   return (
     <div className={`app-shell h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
       {/* ── top bar ───────────────────────────────────────────── */}
-      <header className="app-header flex flex-wrap items-center gap-x-6 gap-y-2 px-4 lg:px-6 py-2.5 lg:py-0 lg:h-18 border-b border-line bg-panel/80 backdrop-blur">
-        <div className="flex items-center gap-3">
-          <div className="brand-mark"><Logo /></div>
-          <span className="text-[17px] font-semibold tracking-tight">
-            Shelf<span className="text-ok">OS</span>
-          </span>
-          <span className="hidden xl:inline text-xs text-muted border-l border-line pl-3">
-            {store.store} · {store.section}
-          </span>
+      <header className="app-header flex flex-wrap items-center gap-x-6 gap-y-3 px-4 lg:px-6 py-3 lg:py-0 lg:h-[76px]">
+        <div className="store-id flex min-w-0 items-center gap-3 lg:flex-1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-10.6a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z" /><circle cx="12" cy="10.4" r="2.3" /></svg>
+          <div className="min-w-0">
+            <div className="truncate text-sm font-semibold tracking-tight">{place}</div>
+            <div className="truncate text-[11px] text-muted">{[town, store.section].filter(Boolean).join(" · ")}</div>
+          </div>
         </div>
-        <div className="main-nav order-last lg:order-none flex w-full lg:w-auto rounded-lg border border-line p-0.5 text-xs">
+        <nav className="main-nav glass order-last lg:order-none flex w-full lg:w-auto" aria-label="Views">
           {VIEWS.filter(([v]) => !blank || v === "run").map(([v, name]) => (
             <button
               key={v}
               aria-pressed={view === v}
               onClick={() => setView(v)}
-              className={`flex flex-1 lg:flex-none items-center justify-center gap-1.5 px-3 py-1.5 rounded-md whitespace-nowrap transition-colors ${v === "tasks" ? "lg:hidden" : ""} ${view === v ? (v === "run" ? "bg-accent/15 text-accent" : "bg-raised text-white") : v === "wall" && view === "tasks" ? "text-muted lg:bg-raised lg:text-white" : v === "run" ? "text-accent hover:bg-accent/10" : "text-muted hover:text-white"}`}
+              className={`nav-item flex-1 lg:flex-none ${v === "tasks" ? "lg:hidden" : ""} ${v === "wall" && view === "tasks" ? "nav-item-wide" : ""}`}
             >
-              {v === "run" && (
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8V1.5m0 0L3.5 4M6 1.5 8.5 4M1.5 8v1.5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8" /></svg>
-              )}
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{NAV_ICON[v]}</svg>
               {name}
             </button>
           ))}
+        </nav>
+        <div className="flex lg:flex-1 justify-end">
+          {!blank && (
+            <div className="status-pills glass hidden md:flex">
+              {ORDER.map((s) => (
+                <button key={s} aria-pressed={filter === s} title={STATUS[s].label} onClick={() => setFilter(filter === s ? "all" : s)} style={{ color: STATUS[s].color }}>
+                  <span className="size-1.5 rounded-full bg-current" />
+                  <span className="font-mono tabular-nums text-[13px] text-white/90">{counts[s]}</span>
+                  <span className="hidden 2xl:inline text-[11px] text-muted">{STATUS[s].label}</span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-        <div className="flex-1" />
-        {!blank && (
-          <div className="hidden md:flex gap-1.5">
-            {ORDER.map((s) => (
-              <button
-                key={s}
-                onClick={() => setFilter(filter === s ? "all" : s)}
-                className={`flex items-center gap-2 rounded-lg border px-3 py-1.5 text-xs transition-colors ${filter === s ? "bg-raised" : "border-line hover:border-white/20"}`}
-                style={filter === s ? { borderColor: STATUS[s].color } : undefined}
-              >
-                <span className="size-2 rounded-full" style={{ background: STATUS[s].color, boxShadow: `0 0 10px ${STATUS[s].color}` }} />
-                <span className="font-mono tabular-nums text-sm">{counts[s]}</span>
-                <span className="hidden xl:inline text-muted">{STATUS[s].label}</span>
-              </button>
-            ))}
-          </div>
-        )}
       </header>
 
       {/* ── the day ───────────────────────────────────────────── */}
       {!blank && (
-        <div className="timeline-bar flex items-center gap-3 lg:gap-4 px-4 lg:px-6 py-3 border-b border-line bg-panel/40">
-          <button onClick={togglePlay} aria-label={playingNow ? "Pause" : "Play the day"} className="size-9 shrink-0 grid place-items-center rounded-full border border-line hover:border-ok/60 hover:text-ok transition-colors">
+        <div className="timeline-bar flex items-center gap-3 lg:gap-4 px-4 lg:px-6 py-3">
+          <button onClick={togglePlay} aria-label={playingNow ? "Pause" : "Play the day"} className="size-9 shrink-0 grid place-items-center rounded-full glass text-white/80 hover:text-white transition-colors">
             {playingNow ? (
               <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="1.5" y="1" width="3" height="10" rx="1" /><rect x="7.5" y="1" width="3" height="10" rx="1" /></svg>
             ) : (
@@ -331,10 +331,10 @@ export default function Page() {
           </button>
           <div className="w-[76px] lg:w-[92px] shrink-0">
             <div className="font-mono text-xl lg:text-2xl leading-none tabular-nums tracking-tight">{clock(ts)}</div>
-            <div className={`mt-1 text-[10px] uppercase tracking-[0.14em] ${isLive ? "text-ok" : "text-muted"}`}>{isLive ? "● Latest" : "History"}</div>
+            <div className={`mt-1 text-[10px] uppercase tracking-[0.14em] ${isLive ? "text-white/80" : "text-muted"}`}>{isLive ? "Latest" : "History"}</div>
           </div>
           <DayStrip store={store} ts={ts} line={line} onChange={scrub} />
-          <button onClick={() => scrub(line.latest)} disabled={isLive} className="hidden sm:block shrink-0 text-xs rounded-lg border border-line px-3 py-2 text-muted enabled:hover:text-white enabled:hover:border-white/25 disabled:opacity-40">
+          <button onClick={() => scrub(line.latest)} disabled={isLive} className="glass hidden sm:block shrink-0 text-xs rounded-full px-4 py-2 text-white/80 enabled:hover:text-white disabled:opacity-40">
             Jump to latest
           </button>
         </div>
@@ -364,11 +364,11 @@ export default function Page() {
             <div className="flex flex-col gap-5">
               <section className="overview-heading">
                 <div>
-                  <div className="eyebrow"><span /> SHELF INTELLIGENCE / OVERVIEW</div>
+                  <div className="eyebrow">OVERVIEW</div>
                   <h1>Every shelf. <span>In sight.</span></h1>
-                  <p>{store.store} · {store.section} <span className="heading-divider">/</span> A clear picture. A smarter shift.</p>
+                  <p>{store.section}, area by area.</p>
                 </div>
-                <div className="snapshot-chip"><span className="status-beacon" />{isLive ? "Latest snapshot" : "Historical snapshot"}<span className="font-mono">{clock(ts)}</span></div>
+                <div className="snapshot-chip glass"><span className="status-beacon" />{isLive ? "Latest snapshot" : "Historical snapshot"}<span className="font-mono">{clock(ts)}</span></div>
               </section>
               <div className="metrics-grid grid grid-cols-2 xl:grid-cols-4 gap-3">
                 <Kpi label="On the shelf" value={`${Math.round(((total - counts.empty) / total) * 100)}%`} sub={`${total - counts.empty} of ${total} areas have product`} tone={counts.empty ? "empty" : "ok"} />
@@ -390,29 +390,28 @@ export default function Page() {
                         setAreaId(null);
                         setView("camera");
                       }}
-                      className="camera-card group relative text-left rounded-xl overflow-hidden border border-line bg-black transition-all hover:border-white/30 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-20px_rgba(47,224,160,0.35)]"
+                      className="camera-card group relative text-left"
                     >
                       <div className="camera-caption"><span><svg className="camera-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3" /><path d="m16 10 5-3v10l-5-3" /></svg> Camera {c.id}</span><span>{c.areas.length} areas <span className="camera-arrow" aria-hidden="true">↗</span></span></div>
                       <div className="relative camera-image">
                       <FrameView store={store} cam={c} frame={f} filter={filter} compact />
-                      <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2 bg-gradient-to-b from-black/70 to-transparent">
-                        <span className="flex items-center gap-2 rounded-md bg-black/60 px-2 py-1 font-mono text-[11px] backdrop-blur-sm">
-                          <span className="size-1.5 rounded-full" style={{ background: STATUS[worst].color, boxShadow: `0 0 8px ${STATUS[worst].color}` }} />
+                      <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2.5">
+                        <span className="glass-chip font-mono">
                           CAM {c.id}
                           <span className="text-white/60">{clock(f.ts)}</span>
-                          {f.origin === "run" && <span className="text-accent">tested</span>}
+                          {f.origin === "run" && <span className="text-white/60">tested</span>}
                         </span>
                         <Badges n={n} />
                       </div>
-                      <div className="absolute inset-x-0 bottom-0 flex gap-[3px] px-2.5 pb-2.5 pt-6 bg-gradient-to-t from-black/85 to-transparent">
+                      <div className="absolute inset-x-0 bottom-0 flex gap-[3px] px-3 pb-3 pt-6 bg-gradient-to-t from-black/60 to-transparent">
                         {c.areas.map((a) => {
                           const p = f.areas[a.id];
                           const s = p ? statusOf(p) : "ok";
-                          return <span key={a.id} className="h-1 flex-1 rounded-sm" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.45 : 1 }} />;
+                          return <span key={a.id} className="h-1 flex-1 rounded-sm" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.3 : 1 }} />;
                         })}
                       </div>
                       </div>
-                      <div className="camera-footer"><span style={{ color: STATUS[worst].color }}><span aria-hidden="true">● </span>{worst === "ok" ? "All areas in good shape" : `${n.empty + n.wrong + n.low} areas need attention`}</span><span>Inspect feed <span aria-hidden="true">→</span></span></div>
+                      <div className="camera-footer"><span className="flex items-center gap-2"><span className="size-1.5 rounded-full" style={{ background: STATUS[worst].color, opacity: worst === "ok" ? 0.4 : 1 }} />{worst === "ok" ? "All areas in good shape" : `${n.empty + n.wrong + n.low} areas need attention`}</span><span>Inspect feed <span aria-hidden="true">→</span></span></div>
                     </button>
                   );
                 })}
@@ -432,7 +431,7 @@ export default function Page() {
                         setCamId(c.id);
                         setAreaId(null);
                       }}
-                      className={`shrink-0 flex items-center gap-2 rounded-lg border px-3 py-1.5 text-xs font-mono transition-colors ${c.id === cam.id ? "border-ok/70 bg-ok/10 text-white" : "border-line text-muted hover:text-white hover:border-white/25"}`}
+                      className={`shrink-0 flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-mono transition-colors ${c.id === cam.id ? "border-white/30 bg-white/10 text-white" : "border-line text-muted hover:text-white hover:border-white/25"}`}
                     >
                       <span className="size-1.5 rounded-full" style={{ background: STATUS[worst].color }} />
                       {c.id}
@@ -443,11 +442,8 @@ export default function Page() {
               </div>
               <div key={cam.id} className="camera-detail-enter grid items-start gap-4 2xl:grid-cols-[minmax(0,1fr)_340px]">
                 <CameraStage store={store} cam={cam} frame={frame} areaId={areaId} filter={filter} onSelect={setAreaId} />
-                {selected && frame.areas[selected.id] ? (
-                  <AreaDetail key={selected.id} store={store} cam={cam} frame={frame} area={selected} onPick={scrub} onClose={() => setAreaId(null)} />
-                ) : (
-                  <AreaList cam={cam} frame={frame} onSelect={setAreaId} />
-                )}
+                <AreaList cam={cam} frame={frame} onSelect={setAreaId} />
+                {selected && frame.areas[selected.id] && <AreaDetail key={selected.id} store={store} cam={cam} frame={frame} area={selected} onPick={scrub} onClose={() => setAreaId(null)} />}
               </div>
             </div>
           )}
@@ -456,7 +452,7 @@ export default function Page() {
 
         {/* ── work queue ───────────────────────────────────────── */}
         {!blank && (
-          <aside className={`task-panel ${view === "tasks" ? "flex" : "hidden"} lg:flex border-l border-line min-h-0 flex-col bg-panel`}>
+          <aside className={`task-panel glass-card ${view === "tasks" ? "flex" : "hidden"} lg:flex min-h-0 flex-col`}>
             <div className="px-5 pt-4 border-b border-line">
               <div className="flex items-end justify-between">
                 <div>
@@ -467,7 +463,7 @@ export default function Page() {
                         {open.length} <span className="text-muted">task{open.length === 1 ? "" : "s"} to tackle</span>
                       </>
                     ) : (
-                      <span className="text-ok">All shelves compliant</span>
+                      <span>All shelves compliant</span>
                     )}
                   </div>
                 </div>
@@ -479,7 +475,7 @@ export default function Page() {
               </div>
               <div className="mt-3 flex gap-5 text-xs">
                 {(["tasks", "products"] as Tab[]).map((t) => (
-                  <button key={t} onClick={() => setTab(t)} className={`pb-2.5 border-b-2 -mb-px transition-colors ${tab === t ? "border-ok text-white" : "border-transparent text-muted hover:text-white"}`}>
+                  <button key={t} onClick={() => setTab(t)} className={`pb-2.5 border-b-2 -mb-px transition-colors ${tab === t ? "border-white text-white" : "border-transparent text-muted hover:text-white"}`}>
                     {t === "tasks" ? "Tasks" : "Stock by product"}
                   </button>
                 ))}
@@ -494,8 +490,9 @@ export default function Page() {
                     if (!group.length) return null;
                     return (
                       <section key={s}>
-                        <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-2 bg-panel/95 backdrop-blur text-[11px] border-b border-line/60">
-                          <span className="font-medium uppercase tracking-[0.12em]" style={{ color: STATUS[s].color }}>
+                        <div className="queue-head sticky top-0 z-10 flex items-center justify-between px-5 text-[11px]">
+                          <span className="flex items-center gap-2 font-medium uppercase tracking-[0.12em] text-white/85">
+                            <span className="size-1.5 rounded-full" style={{ background: STATUS[s].color }} />
                             {STATUS[s].action}
                           </span>
                           <span className="font-mono text-muted">
@@ -505,13 +502,11 @@ export default function Page() {
                         {group.map((t) => {
                           const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
                           return (
-                            <div key={t.key} className={`task-row group flex items-center gap-3 pl-5 pr-3 py-2.5 border-b border-line/50 transition-colors ${t.area.id === areaId && shown === "camera" ? "bg-raised" : "hover:bg-raised/60"}`}>
+                            <div key={t.key} className={`task-row group flex items-center gap-3 ${t.area.id === areaId && shown === "camera" ? "bg-raised" : ""}`}>
                               <button onClick={() => focus(t)} className="flex items-center gap-3 min-w-0 flex-1 text-left">
                                 <div className="relative shrink-0">
-                                  <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="w-14 h-14 rounded-lg" />
-                                  <span className="absolute -left-1 -top-1 size-4 grid place-items-center rounded-full text-[10px] font-bold text-black" style={{ background: STATUS[s].color }}>
-                                    {STATUS[s].glyph}
-                                  </span>
+                                  <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="w-12 h-12 rounded-xl" />
+                                  <span className="absolute -left-0.5 -top-0.5 size-2.5 rounded-full ring-2 ring-[#0c0c0e]" style={{ background: STATUS[s].color }} />
                                 </div>
                                 <div className="min-w-0 flex-1">
                                   <div className="truncate text-sm">{t.area.product}</div>
@@ -528,7 +523,7 @@ export default function Page() {
                                 onClick={() => toggleDone(t.key)}
                                 aria-label="Mark done"
                                 title="Mark done"
-                                className="size-8 shrink-0 grid place-items-center rounded-full border border-line text-muted hover:border-ok hover:text-ok hover:bg-ok/10 transition-colors"
+                                className="size-8 shrink-0 grid place-items-center rounded-full border border-line text-muted hover:border-white/40 hover:text-white hover:bg-white/10 transition-colors"
                               >
                                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m2.5 7 2.8 2.8 5.2-6" /></svg>
                               </button>
@@ -566,8 +561,8 @@ export default function Page() {
         </div>
       )}
       {dragging && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-ink/85 backdrop-blur-sm pointer-events-none">
-          <div className="rounded-3xl border-2 border-dashed border-accent px-16 py-12 text-center shadow-[0_0_120px_-20px_rgba(34,211,238,0.6)]">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-black/60 backdrop-blur-md pointer-events-none">
+          <div className="glass rounded-3xl px-16 py-12 text-center">
             <div className="text-2xl font-medium tracking-tight">Drop to analyse</div>
             <div className="mt-2 text-sm text-muted">A folder, images or a .zip. Add annotations.json to score the run.</div>
           </div>
@@ -616,16 +611,5 @@ function Products({ tasks, onPick }: { tasks: Task[]; onPick: (t: Task) => void 
         );
       })}
     </div>
-  );
-}
-
-function Logo() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
-      <rect x="1" y="1" width="20" height="20" rx="6" stroke="#2fe0a0" strokeOpacity=".5" />
-      <rect x="5" y="6" width="12" height="2.2" rx="1.1" fill="#2fe0a0" />
-      <rect x="5" y="10" width="8" height="2.2" rx="1.1" fill="#ffb938" />
-      <rect x="5" y="14" width="3" height="2.2" rx="1.1" fill="#ff5d73" />
-    </svg>
   );
 }
