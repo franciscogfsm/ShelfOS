@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
+import { paceOf } from "./forecast";
 import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, bbox, centroid, clock, duration, frameAt, frameSrc, points, productName, since, statusOf } from "./lib";
 
 /** Camera image with the planogram areas drawn on it. */
@@ -301,6 +302,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
     return top;
   }, [cam, area.id]);
   const started = since(cam, area.id, frame);
+  const pace = s === "low" ? paceOf(cam, area.id, frame.ts) : null;
   const hasMap = p.map.length > 0;
   const looks = (p.looks ?? []).filter(([id]) => id !== area.productId).slice(0, 2);
   return (
@@ -360,6 +362,11 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
               {area.rawName} · #{area.productId}
             </div>
             {s !== "ok" && frame.ts > started && <div className="mt-1 text-[11px] text-muted">Like this for {duration(frame.ts - started)}</div>}
+            {pace && (
+              <div className="mt-0.5 text-[11px] text-muted">
+                Full at {clock(pace.fullFrom)}, half by {clock(pace.halfAt)}: sold down in {duration(pace.seconds)}
+              </div>
+            )}
           </div>
           <div className="text-right shrink-0">
             <div className="text-[10px] uppercase tracking-[0.14em] text-muted whitespace-nowrap">Shelf covered</div>

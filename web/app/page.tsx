@@ -11,6 +11,7 @@ import { Search } from "./search";
 import { Analytics } from "./analytics";
 import { ThemeToggle } from "./theme";
 import { ProductImage, preloadProductImages } from "./product-image";
+import { Pace, paceAt } from "./forecast";
 
 type View = "tasks" | "wall" | "camera" | "analytics" | "run";
 type Tab = "tasks" | "products";
@@ -49,6 +50,8 @@ export default function Page() {
   const store = useMemo(() => (raw ? { ...raw, cameras: raw.cameras.filter((c) => c.frames.length) } : null), [raw]);
   const line = useMemo(() => (store ? timeline(store) : { min: 0, max: 1, latest: 1 }), [store]);
   const tasks = useMemo(() => (store ? tasksAt(store, ts) : []), [store, ts]);
+  // how fast each half-empty slot went from full to half today
+  const paces = useMemo(() => (store ? paceAt(store, ts) : new Map<string, Pace>()), [store, ts]);
   useEffect(() => {
     preloadProductImages(tasks.map((task) => task.area.rawName || task.area.product));
   }, [tasks]);
@@ -281,7 +284,11 @@ export default function Page() {
   const cam = store.cameras.find((c) => c.id === camId) ?? store.cameras[0];
   const frame = cam && frameAt(cam, ts);
   const counts = Object.fromEntries(ORDER.map((s) => [s, tasks.filter((t) => t.status === s).length])) as Record<Status, number>;
-  const open = tasks.filter((t) => t.status !== "ok" && !done.has(t.key));
+  // within "Restock soon", the slots that sold down fastest come first
+  const sellTime = (t: Task) => (t.status === "low" ? paces.get(t.area.id)?.seconds : undefined) ?? Number.MAX_SAFE_INTEGER;
+  const open = tasks
+    .filter((t) => t.status !== "ok" && !done.has(t.key))
+    .sort((a, b) => STATUS[a.status].rank - STATUS[b.status].rank || sellTime(a) - sellTime(b));
   const queue = open.filter((t) => filter === "all" || t.status === filter);
   const total = tasks.length || 1;
   const shelf = (total - counts.empty) / total;
@@ -464,6 +471,7 @@ export default function Page() {
                         <div className="task-grid">
                           {group.map((t, i) => {
                             const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
+                            const pace = t.status === "low" ? paces.get(t.area.id) : undefined;
                             return (
                               <div key={t.key} className="task-card glass-card" style={{ "--i": Math.min(i, 12) } as React.CSSProperties}>
                                 <button onClick={() => focus(t)} className="flex min-w-0 flex-1 items-center gap-3.5 text-left">
@@ -474,7 +482,7 @@ export default function Page() {
                                       {STATUS[s].hint}
                                       {held >= 60 && <span className="text-muted">· for {duration(held)}</span>}
                                     </div>
-                                    <div className="mt-1 text-[11px] text-muted font-mono">cam {t.cam.id} · slot {t.area.id.split("_")[1]}</div>
+                                    <div className="mt-1 text-[11px] text-muted font-mono">cam {t.cam.id} · slot {t.area.id.split("_")[1]}{pace && ` · full → half in ${duration(pace.seconds)}`}</div>
                                   </div>
                                 </button>
                                 <button onClick={() => toggleDone(t.key)} aria-label={`Mark ${t.area.product} done`} title="Mark done" className="task-done">
@@ -638,6 +646,7 @@ export default function Page() {
                         </div>
                         {group.map((t) => {
                           const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
+                          const pace = t.status === "low" ? paces.get(t.area.id) : undefined;
                           return (
                             <div key={t.key} className={`task-row group flex items-center gap-3 ${t.area.id === areaId && shown === "camera" ? "bg-raised" : ""}`}>
                               <button onClick={() => focus(t)} className="flex items-center gap-3 min-w-0 flex-1 text-left">
@@ -652,7 +661,7 @@ export default function Page() {
                                     {held >= 60 && ` · for ${duration(held)}`}
                                   </div>
                                   <div className="text-[10px] text-muted/80 font-mono">
-                                    cam {t.cam.id} · slot {t.area.id.split("_")[1]} · {Math.round(confidence(t.pred) * 100)}% sure
+                                    cam {t.cam.id} · slot {t.area.id.split("_")[1]} · {Math.round(confidence(t.pred) * 100)}% sure{pace && ` · full → half in ${duration(pace.seconds)}`}
                                   </div>
                                 </div>
                               </button>

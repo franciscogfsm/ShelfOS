@@ -17,3 +17,6 @@ runs/
 
 # deployable copy built by tools/release.py (pushed to its own Space / registry, not here)
 release/
+
+# build output from running Next.js at the repo root by mistake (the app lives in web/)
+/.next/

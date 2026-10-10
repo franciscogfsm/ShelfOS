@@ -104,7 +104,7 @@ def main():
     )
     size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file()) / 1e6
     print(f"release/ ready: {size:.0f} MB, backbones {names}, engine {engine_path.stat().st_size / 1e6:.0f} MB")
-    print("next: see DEPLOY.md")
+    print("next: see docs/DEPLOY.md")
 
 
 if __name__ == "__main__":
