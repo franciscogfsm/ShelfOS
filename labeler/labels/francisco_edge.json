@@ -1,0 +1,7244 @@
+{
+ "6215_1": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6215_2": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6215_3": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6215_4": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6215_5": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6215_6": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6215_7": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6215_8": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6215_9": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6215_10": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6215_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6215_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6215_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6215_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_1": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6376_2": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6376_3": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_4": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_5": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6376_6": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_7": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_8": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_9": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_10": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_11": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_12": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_13": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_14": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6376_15": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6376_16": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6376_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6376_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6383_1": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_2": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": true,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": true,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_3": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_4": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_5": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_6": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_7": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_8": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6383_9": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6383_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_single_item": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_scattered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_sparse_clustered": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_half_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_nearly_full": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_full_stock": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_bananas": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_wrong_similar": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_mixed_products": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_packaging_empty": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_hand_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shopper_occlusion": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_shadow": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_glare": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6383_degraded_cctv": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6443_1": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_2": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6443_3": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6443_4": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_5": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_6": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6443_7": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_8": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6443_9": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_10": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6443_11": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_12": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_13": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6443_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6443_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_1": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_2": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6491_3": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6491_4": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6491_5": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_6": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_7": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_8": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_9": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_10": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6491_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6491_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_1": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6594_2": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_single_item": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shadow": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_glare": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6594_3": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_4": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_5": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_6": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6594_7": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6594_8": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6594_9": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6594_10": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_11": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6594_12": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6594_13": {
+  "reviewed": true,
+  "base": null,
+  "frames": {
+   "bulk_6594_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_single_item": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_scattered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_sparse_clustered": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_half_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_nearly_full": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_full_stock": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_bananas": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_wrong_similar": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_mixed_products": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_packaging_empty": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_hand_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shopper_occlusion": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_shadow": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_glare": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "bulk_6594_degraded_cctv": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ }
+}

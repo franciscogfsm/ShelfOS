@@ -1,0 +1,5886 @@
+{
+ "6215": {
+  "bulk_6215_empty": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   }
+  },
+  "bulk_6215_single_item": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   }
+  },
+  "bulk_6215_sparse_scattered": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   }
+  },
+  "bulk_6215_sparse_clustered": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6215_half_stock": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6215_nearly_full": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_full_stock": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_wrong_bananas": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_wrong_similar": {
+   "6215_1": {
+    "planogram_compliant": false,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_10": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_mixed_products": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_packaging_empty": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   }
+  },
+  "bulk_6215_hand_occlusion": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_shopper_occlusion": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_shadow": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_glare": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6215_degraded_cctv": {
+   "6215_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_3": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_6": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_8": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6215_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6215_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  }
+ },
+ "6376": {
+  "bulk_6376_empty": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_single_item": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_sparse_scattered": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_sparse_clustered": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_half_stock": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_nearly_full": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_full_stock": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_wrong_bananas": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_wrong_similar": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_mixed_products": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_packaging_empty": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_hand_occlusion": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_shopper_occlusion": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_shadow": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_glare": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6376_degraded_cctv": {
+   "6376_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_3": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_5": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_7": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_8": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_9": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_14": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6376_15": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6376_16": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  }
+ },
+ "6383": {
+  "bulk_6383_empty": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_single_item": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_sparse_scattered": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_sparse_clustered": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_half_stock": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_nearly_full": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_full_stock": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_wrong_bananas": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_wrong_similar": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_mixed_products": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_packaging_empty": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_hand_occlusion": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_shopper_occlusion": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_shadow": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_glare": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  },
+  "bulk_6383_degraded_cctv": {
+   "6383_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_7": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6383_9": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   }
+  }
+ },
+ "6443": {
+  "bulk_6443_empty": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_single_item": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_sparse_scattered": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_sparse_clustered": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_half_stock": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_nearly_full": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_full_stock": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_wrong_bananas": {
+   "6443_1": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_wrong_similar": {
+   "6443_1": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_mixed_products": {
+   "6443_1": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_packaging_empty": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_hand_occlusion": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_shopper_occlusion": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_shadow": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_glare": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6443_degraded_cctv": {
+   "6443_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6443_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_10": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6443_11": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_12": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6443_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  }
+ },
+ "6491": {
+  "bulk_6491_empty": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_single_item": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_sparse_scattered": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_sparse_clustered": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_half_stock": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_nearly_full": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_full_stock": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_wrong_bananas": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_wrong_similar": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_mixed_products": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_packaging_empty": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_hand_occlusion": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_shopper_occlusion": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_shadow": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_glare": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6491_degraded_cctv": {
+   "6491_1": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_2": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_3": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6491_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6491_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_6": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_7": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_8": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_9": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6491_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  }
+ },
+ "6594": {
+  "bulk_6594_empty": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_single_item": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_sparse_scattered": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_sparse_clustered": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_half_stock": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_nearly_full": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_full_stock": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_wrong_bananas": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_wrong_similar": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_mixed_products": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": false,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_packaging_empty": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_hand_occlusion": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_shopper_occlusion": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_shadow": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_glare": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  },
+  "bulk_6594_degraded_cctv": {
+   "6594_1": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_2": {
+    "planogram_compliant": false,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_3": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_4": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_5": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_6": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_7": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_8": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_9": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_10": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   },
+   "6594_11": {
+    "planogram_compliant": true,
+    "stock_level": "half",
+    "stock_value": 0.5
+   },
+   "6594_12": {
+    "planogram_compliant": true,
+    "stock_level": "empty",
+    "stock_value": 0
+   },
+   "6594_13": {
+    "planogram_compliant": true,
+    "stock_level": "full",
+    "stock_value": 1
+   }
+  }
+ }
+}
