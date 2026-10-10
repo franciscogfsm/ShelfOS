@@ -101,6 +101,12 @@ def serve(a) -> None:
     from shelfos.server import create_app
     from shelfos.service import ShelfService
 
+    try:  # before the model is loaded: a second server would fail to bind and the browser would open the first one
+        socket.create_connection(("127.0.0.1", a.port), timeout=0.5).close()
+    except OSError:
+        pass
+    else:
+        sys.exit(f"Port {a.port} is already in use (another ShelfOS still running?). Stop it, or start this one with --port N.")
     built = ROOT / "web" / "out" / "index.html"
     if built.exists() and any(p.stat().st_mtime > built.stat().st_mtime for p in (ROOT / "web" / "app").rglob("*") if p.is_file()):
         print("NOTE: the built interface (web/out) is older than web/app. Run `npm run build` inside web/ to see the latest screens.")

@@ -55,6 +55,8 @@ class ShelfService:
                  reference_images="data/images", run_dir="runs/latest", device: str | None = None, empty_compliant: bool = True):
         t0 = time.time()
         self.areas: dict[str, list[Area]] = load_planogram(planogram_path)
+        self.model_path = Path(model_path)
+        self.model_time = int(self.model_path.stat().st_mtime)  # of the file loaded now: a retrain needs a restart
         self.engine = Engine.load(model_path)
         self.engine.empty_compliant = empty_compliant
         self.embedder = Embedder(self.engine.model_name or MODEL_NAME, device=device, size=self.engine.crop_size, tta=getattr(self.engine, "tta", False))
@@ -256,6 +258,9 @@ class ShelfService:
         f = self.run_dir / "run.json"
         if f.exists():
             try:
+                if f.stat().st_mtime < self.model_time:  # answers of an engine that has been replaced since
+                    print(f"{f} is older than {self.model_path.name}: not loaded, analyse those images again")
+                    return
                 self.run = json.loads(f.read_text(encoding="utf-8"))
             except (OSError, ValueError):
                 self.run = {}
@@ -358,4 +363,5 @@ class ShelfService:
 
     def health(self) -> dict:
         return {"ready": True, "device": self.embedder.device, "model": self.embedder.model_name, "cameras": len(self.areas),
-                "areas": sum(len(v) for v in self.areas.values()), "emptyCompliant": self.empty_compliant, "loadSeconds": round(self.load_seconds, 1)}
+                "areas": sum(len(v) for v in self.areas.values()), "emptyCompliant": self.empty_compliant, "loadSeconds": round(self.load_seconds, 1),
+                "engine": self.model_path.name, "engineTime": self.model_time}
