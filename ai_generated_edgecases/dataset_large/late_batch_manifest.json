@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "purpose": "synthetic challenge dataset; no automatic training",
+  "reference_sources": [
+    {
+      "camera": "6215",
+      "source": "data/images/6215/1751001268.jpg",
+      "image": "reference_sources/6215_1751001268.jpg"
+    },
+    {
+      "camera": "6376",
+      "source": "data/images/6376/1751001169.jpg",
+      "image": "reference_sources/6376_1751001169.jpg"
+    },
+    {
+      "camera": "6383",
+      "source": "data/images/6383/1751001156.jpg",
+      "image": "reference_sources/6383_1751001156.jpg"
+    },
+    {
+      "camera": "6443",
+      "source": "data/images/6443/1751001244.jpg",
+      "image": "reference_sources/6443_1751001244.jpg"
+    },
+    {
+      "camera": "6491",
+      "source": "data/images/6491/1751005570.jpg",
+      "image": "reference_sources/6491_1751005570.jpg"
+    },
+    {
+      "camera": "6594",
+      "source": "data/images/6594/1751001189.jpg",
+      "image": "reference_sources/6594_1751001189.jpg"
+    }
+  ],
+  "notes": [
+    "Never infer ground truth from a generation prompt.",
+    "Only reviewed individual areas are scored.",
+    "Existing provenance unknown: do not train on these test images.",
+    "Ambiguous occlusion stock and aspect-ratio mismatches are unscored.",
+    "Controlled train and test edits use different source cameras.",
+    "New generated images have no scored labels until visual area-level review.",
+    "Many variants share six real source frames: they are not independent observations.",
+    "Production may have trained on the real source frames. This is a stress test, not an unbiased generalisation benchmark.",
+    "Original TRAIN references stay in images/train and must not contribute to TEST scores.",
+    "Prompts describe intentions, not ground truth; generation can change geometry or unrelated objects."
+  ],
+  "cases": [
+    {
+      "id": "bulk_6376_full_stock",
+      "camera": "6376",
+      "scenario": "full_stock",
+      "source": "data/images/6376/1751001169.jpg",
+      "source_group": "real_6376_1751001169",
+      "capture_name": "1751001169.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: Fill the top-row kiwi crate between the pale melons and yellow citrus densely with its original food, covering the entire base without overflowing. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/full_stock/bulk_6376_full_stock.png",
+      "origin": "new_generation",
+      "sha256": "d40e8dfc35e91f209358911cdb1887fe58e9147e211fb9bdd06bff88c58b967e",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    },
+    {
+      "id": "bulk_6376_wrong_bananas",
+      "camera": "6376",
+      "scenario": "wrong_bananas",
+      "source": "data/images/6376/1751001169.jpg",
+      "source_group": "real_6376_1751001169",
+      "capture_name": "1751001169.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: Replace all food in the top-row kiwi crate between the pale melons and yellow citrus with yellow banana bunches; if that container originally holds bananas, replace them with red tomatoes instead. No original food remains in that container. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/wrong_bananas/bulk_6376_wrong_bananas.png",
+      "origin": "new_generation",
+      "sha256": "dcd6dc27d0b3144ad3cf5f61d27f60515cfcb6bec6f9a4fb0d9da66c8c93eb77",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    },
+    {
+      "id": "bulk_6376_wrong_similar",
+      "camera": "6376",
+      "scenario": "wrong_similar",
+      "source": "data/images/6376/1751001169.jpg",
+      "source_group": "real_6376_1751001169",
+      "capture_name": "1751001169.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: Replace all food in the top-row kiwi crate between the pale melons and yellow citrus with a visually similar but different fruit or vegetable category: tomatoes become red apples, onions become round brown potatoes, citrus becomes yellow tomatoes, bananas become yellow peppers, packed salad becomes a clearly visible tray of whole green pears. Choose one appropriate to this image. Keep other containers unchanged. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/wrong_similar/bulk_6376_wrong_similar.png",
+      "origin": "new_generation",
+      "sha256": "aef7692c6bd34df23e469178ef7186d06cc999ac9684bbcca996b9d6fdc8d119",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    },
+    {
+      "id": "bulk_6443_nearly_full",
+      "camera": "6443",
+      "scenario": "nearly_full",
+      "source": "data/images/6443/1751001244.jpg",
+      "source_group": "real_6443_1751001244",
+      "capture_name": "1751001244.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: Fill the top-left tomato crate with its original food but retain several clearly visible patches of base. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/nearly_full/bulk_6443_nearly_full.png",
+      "origin": "new_generation",
+      "sha256": "5a900e2b4b6c419ee271fcd19a510e65c4aa16ae08d539afda674225ce811d1c",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    },
+    {
+      "id": "bulk_6443_full_stock",
+      "camera": "6443",
+      "scenario": "full_stock",
+      "source": "data/images/6443/1751001244.jpg",
+      "source_group": "real_6443_1751001244",
+      "capture_name": "1751001244.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: Fill the top-left tomato crate densely with its original food, covering the entire base without overflowing. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/full_stock/bulk_6443_full_stock.png",
+      "origin": "new_generation",
+      "sha256": "4208cc98b14b7d62599f96309ba11e3c0c8d080339280e6d56c99f081f9accfc",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    },
+    {
+      "id": "bulk_6443_wrong_bananas",
+      "camera": "6443",
+      "scenario": "wrong_bananas",
+      "source": "data/images/6443/1751001244.jpg",
+      "source_group": "real_6443_1751001244",
+      "capture_name": "1751001244.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: Replace all food in the top-left tomato crate with yellow banana bunches; if that container originally holds bananas, replace them with red tomatoes instead. No original food remains in that container. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/wrong_bananas/bulk_6443_wrong_bananas.png",
+      "origin": "new_generation",
+      "sha256": "51a4ee9957a032f6b5dd38300e86cc9cadc0b9dbe0703bafe538aa7b58e364e0",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    },
+    {
+      "id": "bulk_6594_mixed_products",
+      "camera": "6594",
+      "scenario": "mixed_products",
+      "source": "data/images/6594/1751001189.jpg",
+      "source_group": "real_6594_1751001189",
+      "capture_name": "1751001189.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: In the top-row white-onion crate immediately left of the purple onions mix equal amounts of its original product and an obviously different food such as bananas or red peppers. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/mixed_products/bulk_6594_mixed_products.png",
+      "origin": "new_generation",
+      "sha256": "a6d7513838ae62d9ce0ec05e2f5c9acdb74d3616fdeb882beaa3300e5897e781",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    },
+    {
+      "id": "bulk_6594_packaging_empty",
+      "camera": "6594",
+      "scenario": "packaging_empty",
+      "source": "data/images/6594/1751001189.jpg",
+      "source_group": "real_6594_1751001189",
+      "capture_name": "1751001189.jpg",
+      "split": "test",
+      "reviewed": false,
+      "labels": {},
+      "prompt": "Use case: precise image edit for a synthetic supermarket computer-vision stress-test dataset. Edit target: the supplied real ceiling-camera frame. Preserve the EXACT original camera viewpoint, 16:9 framing, shelf and crate boundaries, display geometry and price label positions. Do not zoom, crop, rearrange shelving, add labels or overlays, or beautify the scene. Photorealistic ordinary supermarket CCTV, realistic original colours and image quality. Change only the requested condition, leaving every unrelated product and region unchanged. Requested condition: Empty the top-row white-onion crate immediately left of the purple onions of all food and leave only two crumpled transparent bags, a paper receipt, and an empty mesh bag on its base. Produce one full camera frame, never a collage or a grid.",
+      "image": "ai_generated_edgecases/dataset_large/images/test/packaging_empty/bulk_6594_packaging_empty.png",
+      "origin": "new_generation",
+      "sha256": "0979d0efb76a73a5430b866a8cf7a0a196266a6def4b0f66b7ade1cb4c9834e9",
+      "dimensions": [
+        1672,
+        941
+      ],
+      "duplicate_of": null,
+      "label_status": "needs_label_review"
+    }
+  ]
+}

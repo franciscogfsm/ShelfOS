@@ -72,6 +72,21 @@ class AreaMemory:
         for i, a in enumerate(np.asarray(area).astype(str)):
             self.rows[a] = np.append(self.rows.get(a, np.zeros(0, int)), n0 + i).astype(int)
 
+    def __len__(self) -> int:
+        return len(self.y)
+
+    def forget(self, n0: int) -> None:
+        """Drop everything remembered after the first n0 crops (undo remember())."""
+        if len(self.y) <= n0:
+            return
+        self.X, self.P, self.occ, self.y, self.area = self.X[:n0], self.P[:n0], self.occ[:n0], self.y[:n0], self.area[:n0]
+        if self.fname is not None:
+            self.fname = self.fname[:n0]
+        if self.t is not None:
+            self.t = self.t[:n0]
+        self.rows = {a: r[r < n0] for a, r in self.rows.items()}
+        self.rows = {a: r for a, r in self.rows.items() if len(r)}
+
     def rows_of(self, area, fname) -> np.ndarray:
         """Memory row of each (area, image file) pair, -1 when that crop is not memorised."""
         area = np.asarray(area).astype(str)

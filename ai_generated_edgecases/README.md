@@ -1,5 +1,9 @@
 # Reviewed synthetic stress tests
 
+## Expanded image collection
+
+The larger collection is in `dataset_large/`. Open `dataset_large/index.html` for a scenario-filtered gallery and inspect `dataset_large/inventory.json` for actual image counts. The generation plan covers 96 new full-frame edits across six cameras and sixteen scenarios. Outputs are copied into the project by `python tools/build_edgecase_dataset.py`; `bulk_results/` preserves each generated asset's original path. The new images are unlabelled stress-test inputs until area-level review, and do not alter the existing reviewed benchmark or production models.
+
 15 existing AI images were audited; 8 controlled variants were generated and visually reviewed. Prompts are in `prompts.json`; observations, partial labels and train/test assignments are in `manifest.json`. Generated output, rather than the intended prompt, determines each label.
 
 The test set contains 45 reviewed areas: 38 stock labels and 45 compliance labels. Ambiguous stock, occluded quantities and distorted geometry are excluded from scoring. Camera 6371 has an incompatible aspect ratio and is prediction-only. Four pineapple variants from camera 6468 are training-only. Controlled test edits use a different camera/source (6443). Existing image source provenance is unknown; they are test-only and should not become training data.
@@ -7,6 +11,8 @@ The test set contains 45 reviewed areas: 38 stock labels and 45 compliance label
 These are local, visually judged labels, not official ground truth. The selected difficult examples do not estimate real-world accuracy. Review half/full boundaries with the mentors before enlarging the dataset. Generation can change textures, geometry and unrelated objects; inspect every new output.
 
 ## Reproduce
+
+Storage note: the large experimental `edge_baseline.pkl` was removed when the disk filled during dataset expansion. The candidate and measured reports remain. Running `python tools/edgecase_train.py` recreates both experimental checkpoints; ensure sufficient free space first.
 
 From the repository root, with the existing Python environment and model checkpoints:
 

@@ -1,0 +1,967 @@
+{
+  "version": 1,
+  "reviewer": "Codex",
+  "label_authority": "local visual review; not official and no independent human adjudication",
+  "policy": "Full only with a densely covered base; half with food and significant exposed base; empty without food. Similar legitimate varieties conform; clear wrong categories do not. Single-item cases are half in this local convention and require mentor adjudication because rules mention almost empty.",
+  "cases": {
+    "bulk_6215_empty": {
+      "stock": "EEEEEEEEEE",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_single_item": {
+      "stock": "EEFEFEHEHH",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_sparse_scattered": {
+      "stock": "HEFEFEHEHH",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_sparse_clustered": {
+      "stock": "EEFEFEHEHH",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_half_stock": {
+      "stock": "HEFEFEHEHH",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_nearly_full": {
+      "stock": "HEHEHEHEHF",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_full_stock": {
+      "stock": "FFFFFFHFHF",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_wrong_bananas": {
+      "stock": "FFFFFFFFFF",
+      "noncompliant": [
+        7,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_wrong_similar": {
+      "stock": "HEFEFEHEHF",
+      "noncompliant": [
+        1,
+        3,
+        5,
+        7,
+        9,
+        10
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_mixed_products": {
+      "stock": "HEFEFEFEFF",
+      "noncompliant": [
+        3,
+        5,
+        7,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_packaging_empty": {
+      "stock": "EEFEFEHEHE",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_shadow": {
+      "stock": "HEFEFEHEHF",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_glare": {
+      "stock": "HEFEFEHEHF",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6215_degraded_cctv": {
+      "stock": "HEFEFEHEHF",
+      "noncompliant": [
+        3,
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6215-0.jpg",
+        "cache/label-grid-6215-1.jpg",
+        "cache/label-grid-6215-2.jpg",
+        "cache/label-grid-6215-3.jpg"
+      ]
+    },
+    "bulk_6376_empty": {
+      "stock": "FHHHHFHHHEHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_single_item": {
+      "stock": "FHHHHFHHHHHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_sparse_scattered": {
+      "stock": "FHHHHFHHHHHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_sparse_clustered": {
+      "stock": "FHHHHFHHHHHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_half_stock": {
+      "stock": "FHHHHFHHHHHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_nearly_full": {
+      "stock": "FHHHHFHHHHHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_full_stock": {
+      "stock": "FHHHHFHHHFHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_wrong_bananas": {
+      "stock": "FHHHHFHHHFHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_wrong_similar": {
+      "stock": "FHHHHFHHHFHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_mixed_products": {
+      "stock": "FHHHHFHHHFHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_packaging_empty": {
+      "stock": "FHHHHFHHHEHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_shadow": {
+      "stock": "FHHHHFHHHFHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_glare": {
+      "stock": "FHHHHFHHHFHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6376_degraded_cctv": {
+      "stock": "FHHHHFHHHFHFFFHF",
+      "noncompliant": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6376-0.jpg",
+        "cache/label-grid-6376-1.jpg",
+        "cache/label-grid-6376-2.jpg",
+        "cache/label-grid-6376-3.jpg"
+      ]
+    },
+    "bulk_6443_empty": {
+      "stock": "EHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_single_item": {
+      "stock": "HHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_sparse_scattered": {
+      "stock": "HHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_sparse_clustered": {
+      "stock": "HHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_half_stock": {
+      "stock": "HHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_nearly_full": {
+      "stock": "HHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_full_stock": {
+      "stock": "FHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_wrong_bananas": {
+      "stock": "FHHFHHFHHHHFF",
+      "noncompliant": [
+        1
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_wrong_similar": {
+      "stock": "FHHFHHFHHHHFF",
+      "noncompliant": [
+        1
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_mixed_products": {
+      "stock": "FHHFHHFHHHHFF",
+      "noncompliant": [
+        1
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_packaging_empty": {
+      "stock": "EHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_shadow": {
+      "stock": "FHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_glare": {
+      "stock": "FHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6443_degraded_cctv": {
+      "stock": "FHHFHHFHHHHFF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6443-0.jpg",
+        "cache/label-grid-6443-1.jpg",
+        "cache/label-grid-6443-2.jpg",
+        "cache/label-grid-6443-3.jpg"
+      ]
+    },
+    "bulk_6491_empty": {
+      "stock": "FEHEEFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_single_item": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_sparse_scattered": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_sparse_clustered": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_half_stock": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_nearly_full": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_full_stock": {
+      "stock": "FEHEFFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_wrong_bananas": {
+      "stock": "FEHEFFFFHF",
+      "noncompliant": [
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_wrong_similar": {
+      "stock": "FEHEFFFFHF",
+      "noncompliant": [
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_mixed_products": {
+      "stock": "FEHEFFFFHF",
+      "noncompliant": [
+        5
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_packaging_empty": {
+      "stock": "FEHEEFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_shadow": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_glare": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6491_degraded_cctv": {
+      "stock": "FEHEHFFFHF",
+      "noncompliant": [],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6491-0.jpg",
+        "cache/label-grid-6491-1.jpg",
+        "cache/label-grid-6491-2.jpg",
+        "cache/label-grid-6491-3.jpg"
+      ]
+    },
+    "bulk_6594_empty": {
+      "stock": "HHHEFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_single_item": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_sparse_scattered": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_sparse_clustered": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_half_stock": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_nearly_full": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_full_stock": {
+      "stock": "HHHFFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_wrong_bananas": {
+      "stock": "HHHFFHEHHFHHF",
+      "noncompliant": [
+        2,
+        4
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_wrong_similar": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2,
+        4
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_mixed_products": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2,
+        4
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_packaging_empty": {
+      "stock": "HHHEFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_shadow": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_glare": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    },
+    "bulk_6594_degraded_cctv": {
+      "stock": "HHHHFHEHHFHHF",
+      "noncompliant": [
+        2
+      ],
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions",
+      "evidence": [
+        "cache/label-grid-6594-0.jpg",
+        "cache/label-grid-6594-1.jpg",
+        "cache/label-grid-6594-2.jpg",
+        "cache/label-grid-6594-3.jpg"
+      ]
+    }
+  }
+}

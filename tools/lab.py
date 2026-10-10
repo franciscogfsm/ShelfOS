@@ -251,20 +251,43 @@ def variant(memory_cls=AreaMemory, design=None, name="v", C=None, recency=None, 
     return cls
 
 
-def no_memory(self, glob, f, R):
-    return np.hstack([glob, (f - self.occ_mu) / self.occ_sd * OCC_SCALE])
+def _hour(self, glob, H):
+    return (np.zeros((len(glob), 2), np.float32) if H is None else H) * self.HOUR_SCALE
 
 
-def no_glob(self, glob, f, R):
-    return np.hstack([(f - self.occ_mu) / self.occ_sd, (R - self.mem_mu) / self.mem_sd])
+def no_memory(self, glob, f, R, H=None):
+    return np.hstack([glob, (f - self.occ_mu) / self.occ_sd * OCC_SCALE, _hour(self, glob, H)])
 
 
-def mem1(self, glob, f, R):
-    return np.hstack([glob, (f - self.occ_mu) / self.occ_sd * OCC_SCALE, (R - self.mem_mu) / self.mem_sd * 1.0])
+def no_glob(self, glob, f, R, H=None):
+    return np.hstack([(f - self.occ_mu) / self.occ_sd, (R - self.mem_mu) / self.mem_sd, _hour(self, glob, H)])
+
+
+def mem1(self, glob, f, R, H=None):
+    return np.hstack([glob, (f - self.occ_mu) / self.occ_sd * OCC_SCALE, (R - self.mem_mu) / self.mem_sd * 1.0, _hour(self, glob, H)])
 
 
 def mem(**kw):
     return type("M", (AreaMemory,), kw)
+
+
+def eng(name="E", **kw):
+    return type(name, (Engine,), kw)
+
+
+class HGBEngine(Engine):
+    """Gradient-boosted trees on a compact design (PCA appearance + handcrafted features)."""
+
+    GLOB_DIM = 32
+    HGB: dict = {}
+
+    @classmethod
+    def make_stock_clf(cls):
+        from sklearn.ensemble import HistGradientBoostingClassifier
+
+        kw = dict(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=1.0, random_state=0)
+        kw.update(cls.HGB)
+        return HistGradientBoostingClassifier(**kw)
 
 
 VARIANTS = {
@@ -296,6 +319,26 @@ VARIANTS = {
     "pair": PairEngine,
     "pair-w1": type("P1", (PairEngine,), {"PAIR_W": 1.0}),
     "pair-w025": type("P025", (PairEngine,), {"PAIR_W": 0.25}),
+    "glob32": eng(GLOB_DIM=32),
+    "glob64": eng(GLOB_DIM=64),
+    "glob128": eng(GLOB_DIM=128),
+    "glob32-occ1-mem1": eng(GLOB_DIM=32, OCC_SCALE=1.0, MEM_SCALE=1.0),
+    "occ1-mem1": eng(OCC_SCALE=1.0, MEM_SCALE=1.0),
+    "occ2": eng(OCC_SCALE=2.0),
+    "hgb": HGBEngine,
+    "hgb64": type("HGB64", (HGBEngine,), {"GLOB_DIM": 64}),
+    "hgb8": type("HGB8", (HGBEngine,), {"GLOB_DIM": 8}),
+    "hgb16": type("HGB16", (HGBEngine,), {"GLOB_DIM": 16}),
+    "hgb-noglob": type("HGBng", (HGBEngine,), {"_design": no_glob}),
+    "hgb-leaf7": type("HGBl7", (HGBEngine,), {"HGB": dict(max_leaf_nodes=7)}),
+    "hgb-leaf31": type("HGBl31", (HGBEngine,), {"HGB": dict(max_leaf_nodes=31)}),
+    "hgb-slow": type("HGBslow", (HGBEngine,), {"HGB": dict(learning_rate=0.03, max_iter=600)}),
+    "hgb-reg": type("HGBreg", (HGBEngine,), {"HGB": dict(l2_regularization=5.0, min_samples_leaf=30)}),
+    "hgb-occ1-mem1": type("HGBom", (HGBEngine,), {"OCC_SCALE": 1.0, "MEM_SCALE": 1.0}),
+    "hgb16-reg": type("HGB16reg", (HGBEngine,), {"GLOB_DIM": 16, "HGB": dict(l2_regularization=5.0, min_samples_leaf=30)}),
+    "online": type("Online", (Engine,), {"ONLINE": True}),
+    "online-c7": type("Online7", (Engine,), {"ONLINE": True, "ONLINE_MIN_CONF": 0.7}),
+    "online-c9": type("Online9", (Engine,), {"ONLINE": True, "ONLINE_MIN_CONF": 0.9}),
     "no-guard": variant(obstruct=(0.3, 0.7, 0.0)),
     "guard-hard": variant(obstruct=(0.2, 0.5, 0.9)),
 }

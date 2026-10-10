@@ -249,8 +249,8 @@ export function DayStrip({ store, ts, line, onChange }: { store: Store; ts: numb
   const tested = useMemo(() => store.cameras.flatMap((c) => c.frames.filter((f) => f.origin === "run").map((f) => f.ts)), [store]);
   const pos = (t: number) => Math.min(100, Math.max(0, ((t - line.min) / Math.max(1, line.max - line.min)) * 100));
   return (
-    <div className="relative flex-1 h-[52px] min-w-0">
-      <div className="absolute inset-x-0 top-0 h-9 flex items-end gap-px">
+    <div className="relative flex-1 h-[60px] min-w-0">
+      <div className="absolute inset-x-0 top-0 h-9 flex items-end gap-px overflow-hidden">
         {bins.map((b, i) => (
           <div key={i} className="flex-1 flex flex-col-reverse" style={{ opacity: b.t <= ts ? 1 : 0.28 }}>
             {ISSUES.map((s) => (
@@ -267,7 +267,7 @@ export function DayStrip({ store, ts, line, onChange }: { store: Store; ts: numb
       </div>
       <div className="absolute inset-x-0 top-9 h-px bg-line" />
       {hours.map((t, i) => (
-        <span key={t} className={`absolute top-[40px] -translate-x-1/2 text-[9px] font-mono text-muted ${i % 3 ? "hidden md:inline" : ""}`} style={{ left: `${pos(t)}%` }}>
+        <span key={t} className={`absolute top-[46px] -translate-x-1/2 text-[9px] leading-none font-mono text-muted ${i % 3 ? "hidden md:inline" : ""}`} style={{ left: `${pos(t)}%` }}>
           {clock(t).slice(0, 2)}h
         </span>
       ))}
