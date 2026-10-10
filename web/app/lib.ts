@@ -105,6 +105,21 @@ export function tasksAt(store: Store, ts: number): Task[] {
   return out.sort((a, b) => STATUS[a.status].rank - STATUS[b.status].rank || confidence(b.pred) - confidence(a.pred));
 }
 
+/** Store score: each area is worth how much of the right product it holds. */
+export const POINTS: Record<Status, number> = { ok: 1, low: 0.5, wrong: 0, empty: 0 };
+
+/** What doing the task adds to the store score, in areas (0..1). */
+export const gain = (t: Task) => 1 - POINTS[t.status];
+
+/** Share of the store that is full and in place, 0..1. A task ticked done counts as fixed. */
+export function storeScore(tasks: Task[], done: Set<string>): number {
+  if (!tasks.length) return 1;
+  return tasks.reduce((sum, t) => sum + (done.has(t.key) ? 1 : POINTS[t.status]), 0) / tasks.length;
+}
+
+/** Biggest gain first; ties keep the order of `tasksAt` (worst status, then most confident). */
+export const byImpact = (tasks: Task[]) => [...tasks].sort((a, b) => gain(b) - gain(a));
+
 /** When the area last looked different from its current status (walking back through the day). */
 export function since(cam: Camera, areaId: string, frame: Frame): number {
   const now = statusOf(frame.areas[areaId]);

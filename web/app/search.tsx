@@ -89,7 +89,7 @@ export function Search({
     for (const s of ISSUES)
       out.push({ key: `f${s}`, group: "Actions", title: `Show ${STATUS[s].label.toLowerCase()} shelves`, sub: `${tasks.filter((t) => t.status === s).length} right now · ${STATUS[s].action.toLowerCase()}`, hay: plain(`filter show list ${WORDS[s]}`), color: STATUS[s].color, run: () => onFilter(s) });
     out.push(
-      { key: "v-tasks", group: "Actions", title: "Open tasks", sub: "Everything that needs doing, worst first", hay: "tasks tarefas todo to do work queue go open", glyph: "→", run: () => onView("tasks") },
+      { key: "v-tasks", group: "Actions", title: "Open tasks", sub: "Everything that needs doing, biggest impact first", hay: "tasks tarefas todo to do work queue go open", glyph: "→", run: () => onView("tasks") },
       { key: "v-wall", group: "Actions", title: "Open store wall", sub: "All cameras at a glance", hay: "store wall overview home cameras go open loja", glyph: "→", run: () => onView("wall") },
       { key: "v-analytics", group: "Actions", title: "Open analytics", sub: "The day in numbers: trends, cameras by hour, longest problems", hay: "analytics analise stats statistics numbers charts trends insights report heatmap go open", glyph: "→", run: () => onView("analytics") },
       { key: "v-run", group: "Actions", title: "Test new images", sub: "Drop a folder, images or a zip and get predictions.json", hay: "test images upload run predictions validation score analyse analyze folder zip testar", glyph: "↑", run: () => onView("run") },

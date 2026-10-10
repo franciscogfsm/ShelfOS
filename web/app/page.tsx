@@ -4,7 +4,7 @@ import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Health, RunEvent, Score, Upload, analyzeFiles, analyzeFolder, fromDrop, loadHealth, loadStore, resetRun, scoreAgainst, setPolicy, sort } from "./api";
 import { AreaDetail, AreaList, Badges, CameraStage, CountUp, Crop, DayStrip, FrameView, Kpi } from "./components";
-import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task, clock, confidence, duration, frameAt, since, statusOf, tally, tasksAt, timeline, withFrame } from "./lib";
+import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task, byImpact, clock, confidence, duration, frameAt, gain, since, statusOf, storeScore, tally, tasksAt, timeline, withFrame } from "./lib";
 import { IDLE, RunState, RunView } from "./run";
 import Loading from "./loading";
 import { Search } from "./search";
@@ -283,7 +283,17 @@ export default function Page() {
   const frame = cam && frameAt(cam, ts);
   const counts = Object.fromEntries(ORDER.map((s) => [s, tasks.filter((t) => t.status === s).length])) as Record<Status, number>;
   const open = tasks.filter((t) => t.status !== "ok" && !done.has(t.key));
-  const queue = open.filter((t) => filter === "all" || t.status === filter);
+  const queue = byImpact(open.filter((t) => filter === "all" || t.status === filter));
+  // "if you do this": what each task, and the next three, add to the store score
+  const grade = storeScore(tasks, done);
+  const next = queue.slice(0, 3);
+  const after = Math.min(1, grade + next.reduce((sum, t) => sum + gain(t), 0) / (tasks.length || 1));
+  const points = (t: Task) => `+${((gain(t) / (tasks.length || 1)) * 100).toFixed(1)} pts`;
+  const lift = next.length > 0 && (
+    <p className="score-lift">
+      {next.length === 1 ? "The next task takes" : `The next ${next.length} tasks take`} the store from <b>{Math.round(grade * 100)}%</b> to <b>{Math.round(after * 100)}%</b>
+    </p>
+  );
   const total = tasks.length || 1;
   const shelf = (total - counts.empty) / total;
   const full = tasks.filter((t) => t.pred.level === "full").length / total;
@@ -432,12 +442,16 @@ export default function Page() {
                 <div>
                   <div className="eyebrow">TASKS · {clock(ts)}</div>
                   <h1>{open.length ? <><CountUp value={open.length} /> <span>to do</span></> : <>All done. <span>Shelves are in shape.</span></>}</h1>
-                  <p>Tap a task to see the shelf. Tick it when it is done.</p>
+                  <p>Biggest impact first. Tap a task to see the shelf. Tick it when it is done.</p>
                 </div>
                 <div className="shift-progress glass-card">
-                  <div className="flex items-baseline justify-between gap-6 text-xs"><span className="text-muted">Done this shift</span><span className="font-mono tabular-nums"><CountUp value={done.size} /> / {done.size + open.length}</span></div>
-                  <div className="shift-bar"><span style={{ width: `${(done.size / Math.max(1, done.size + open.length)) * 100}%` }} /></div>
-                  {done.size > 0 && <button onClick={() => { setDone(new Set()); setNotice(null); }} className="mt-2 text-[11px] text-muted hover:text-white">Reset</button>}
+                  <div className="flex items-baseline justify-between gap-6 text-xs"><span className="text-muted">Store score</span><span className="font-mono tabular-nums text-lg"><CountUp value={Math.round(grade * 100)} />%</span></div>
+                  <div className="shift-bar"><span style={{ width: `${grade * 100}%` }} /></div>
+                  {lift}
+                  <div className="mt-2 flex items-baseline justify-between gap-6 text-[11px] text-muted">
+                    <span>Done this shift <span className="font-mono tabular-nums">{done.size} / {done.size + open.length}</span></span>
+                    {done.size > 0 && <button onClick={() => { setDone(new Set()); setNotice(null); }} className="hover:text-white">Reset</button>}
+                  </div>
                 </div>
               </section>
               <div className="filter-row">
@@ -453,42 +467,31 @@ export default function Page() {
                 <div className="glass-card overflow-hidden"><Products tasks={tasks} onPick={focus} /></div>
               ) : (
                 <>
-                  {ISSUES.map((s) => {
-                    const group = queue.filter((t) => t.status === s);
-                    if (!group.length) return null;
-                    return (
-                      <section key={s} className="flex flex-col gap-3">
-                        <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.14em] text-white/85">
-                          <span className="size-1.5 rounded-full" style={{ background: STATUS[s].color }} />
-                          {STATUS[s].action}
-                          <span className="font-mono text-muted normal-case tracking-normal">{group.length}</span>
-                        </div>
-                        <div className="task-grid">
-                          {group.map((t, i) => {
-                            const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
-                            return (
-                              <div key={t.key} className="task-card glass-card" style={{ "--i": Math.min(i, 12) } as React.CSSProperties}>
-                                <button onClick={() => focus(t)} className="flex min-w-0 flex-1 items-center gap-3.5 text-left">
-                                  <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="size-[68px] shrink-0 rounded-2xl" />
-                                  <div className="min-w-0 flex-1">
-                                    <div className="truncate text-[15px] font-medium">{t.area.product}</div>
-                                    <div className="mt-0.5 flex items-center gap-1.5 text-xs" style={{ color: STATUS[s].color }}>
-                                      {STATUS[s].hint}
-                                      {held >= 60 && <span className="text-muted">· for {duration(held)}</span>}
-                                    </div>
-                                    <div className="mt-1 text-[11px] text-muted font-mono">cam {t.cam.id} · slot {t.area.id.split("_")[1]}</div>
-                                  </div>
-                                </button>
-                                <button onClick={() => toggleDone(t.key)} aria-label={`Mark ${t.area.product} done`} title="Mark done" className="task-done">
-                                  <svg width="16" height="16" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m2.5 7 2.8 2.8 5.2-6" /></svg>
-                                </button>
+                  <div className="task-grid">
+                    {queue.map((t, i) => {
+                      const s = t.status;
+                      const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
+                      return (
+                        <div key={t.key} className="task-card glass-card" style={{ "--i": Math.min(i, 12) } as React.CSSProperties}>
+                          <button onClick={() => focus(t)} className="flex min-w-0 flex-1 items-center gap-3.5 text-left">
+                            <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="size-[68px] shrink-0 rounded-2xl" />
+                            <div className="min-w-0 flex-1">
+                              <div className="truncate text-[15px] font-medium">{t.area.product}</div>
+                              <div className="mt-0.5 flex items-center gap-1.5 text-xs" style={{ color: STATUS[s].color }}>
+                                {STATUS[s].hint}
+                                {held >= 60 && <span className="text-muted">· for {duration(held)}</span>}
                               </div>
-                            );
-                          })}
+                              <div className="mt-1 text-[11px] text-muted font-mono">cam {t.cam.id} · slot {t.area.id.split("_")[1]}</div>
+                            </div>
+                          </button>
+                          <span className="task-gain" title="Store score gained by doing this task">{points(t)}</span>
+                          <button onClick={() => toggleDone(t.key)} aria-label={`Mark ${t.area.product} done`} title="Mark done" className="task-done">
+                            <svg width="16" height="16" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m2.5 7 2.8 2.8 5.2-6" /></svg>
+                          </button>
                         </div>
-                      </section>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                   {queue.length === 0 && <div className="glass-card px-5 py-14 text-center text-sm text-muted">Nothing to do in this view.</div>}
                 </>
               )}
@@ -605,6 +608,7 @@ export default function Page() {
                       <span>All shelves compliant</span>
                     )}
                   </div>
+                  {lift}
                 </div>
                 {done.size > 0 && (
                   <button onClick={() => { setDone(new Set()); setNotice(null); }} className="text-[11px] text-muted hover:text-white mb-1">
@@ -624,52 +628,37 @@ export default function Page() {
               <div key={tab} className="queue-enter">
               {tab === "tasks" ? (
                 <>
-                  {ISSUES.map((s) => {
-                    const group = queue.filter((t) => t.status === s);
-                    if (!group.length) return null;
+                  {queue.map((t) => {
+                    const s = t.status;
+                    const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
                     return (
-                      <section key={s}>
-                        <div className="queue-head sticky top-0 z-10 flex items-center justify-between px-5 text-[11px]">
-                          <span className="flex items-center gap-2 font-medium uppercase tracking-[0.12em] text-white/85">
-                            <span className="size-1.5 rounded-full" style={{ background: STATUS[s].color }} />
-                            {STATUS[s].action}
-                          </span>
-                          <span className="font-mono text-muted">
-                            {group.length} {STATUS[s].label.toLowerCase()}
-                          </span>
-                        </div>
-                        {group.map((t) => {
-                          const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
-                          return (
-                            <div key={t.key} className={`task-row group flex items-center gap-3 ${t.area.id === areaId && shown === "camera" ? "bg-raised" : ""}`}>
-                              <button onClick={() => focus(t)} className="flex items-center gap-3 min-w-0 flex-1 text-left">
-                                <div className="relative shrink-0">
-                                  <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="w-12 h-12 rounded-xl" />
-                                  <span className="absolute -left-0.5 -top-0.5 size-2.5 rounded-full ring-2 ring-[var(--bg)]" style={{ background: STATUS[s].color }} />
-                                </div>
-                                <div className="min-w-0 flex-1">
-                                  <div className="truncate text-sm">{t.area.product}</div>
-                                  <div className="text-[11px] text-muted">
-                                    {STATUS[s].hint}
-                                    {held >= 60 && ` · for ${duration(held)}`}
-                                  </div>
-                                  <div className="text-[10px] text-muted/80 font-mono">
-                                    cam {t.cam.id} · slot {t.area.id.split("_")[1]} · {Math.round(confidence(t.pred) * 100)}% sure
-                                  </div>
-                                </div>
-                              </button>
-                              <button
-                                onClick={() => toggleDone(t.key)}
-                                aria-label="Mark done"
-                                title="Mark done"
-                                className="size-8 shrink-0 grid place-items-center rounded-full border border-line text-muted hover:border-white/40 hover:text-white hover:bg-white/10 transition-colors"
-                              >
-                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m2.5 7 2.8 2.8 5.2-6" /></svg>
-                              </button>
+                      <div key={t.key} className={`task-row group flex items-center gap-3 ${t.area.id === areaId && shown === "camera" ? "bg-raised" : ""}`}>
+                        <button onClick={() => focus(t)} className="flex items-center gap-3 min-w-0 flex-1 text-left">
+                          <div className="relative shrink-0">
+                            <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="w-12 h-12 rounded-xl" />
+                            <span className="absolute -left-0.5 -top-0.5 size-2.5 rounded-full ring-2 ring-[var(--bg)]" style={{ background: STATUS[s].color }} />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="truncate text-sm">{t.area.product}</div>
+                            <div className="text-[11px]" style={{ color: STATUS[s].color }}>
+                              {STATUS[s].hint}
+                              {held >= 60 && <span className="text-muted"> · for {duration(held)}</span>}
                             </div>
-                          );
-                        })}
-                      </section>
+                            <div className="text-[10px] text-muted/80 font-mono">
+                              cam {t.cam.id} · slot {t.area.id.split("_")[1]} · {Math.round(confidence(t.pred) * 100)}% sure
+                            </div>
+                          </div>
+                        </button>
+                        <span className="task-gain" title="Store score gained by doing this task">{points(t)}</span>
+                        <button
+                          onClick={() => toggleDone(t.key)}
+                          aria-label="Mark done"
+                          title="Mark done"
+                          className="size-8 shrink-0 grid place-items-center rounded-full border border-line text-muted hover:border-white/40 hover:text-white hover:bg-white/10 transition-colors"
+                        >
+                          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m2.5 7 2.8 2.8 5.2-6" /></svg>
+                        </button>
+                      </div>
                     );
                   })}
                   {queue.length === 0 && <div className="px-5 py-10 text-sm text-muted text-center">Nothing to do in this view.</div>}

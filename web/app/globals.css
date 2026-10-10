@@ -326,6 +326,9 @@ input[type="range"].scrub {
 .task-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
 .task-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px 12px 12px; animation: card-in 520ms var(--ease-out) backwards; transition: border-color 220ms, transform 300ms cubic-bezier(.22, 1, .36, 1); }
 .task-done { display: grid; place-items: center; flex-shrink: 0; width: 46px; height: 46px; border: 1px solid rgb(var(--fg) / calc(.141 * var(--k))); border-radius: 50%; color: var(--muted); transition: background-color 200ms, color 200ms, border-color 200ms, transform 160ms; }
+.task-gain { flex-shrink: 0; padding: 4px 8px; border: 1px solid rgb(var(--fg) / calc(.078 * var(--k))); border-radius: 999px; background: rgb(var(--fg) / calc(.031 * var(--k))); font-family: var(--font-mono); font-size: 11px; font-variant-numeric: tabular-nums; color: var(--ink-3); white-space: nowrap; }
+.score-lift { margin-top: 10px; font-size: 12px; line-height: 1.4; color: var(--muted); }
+.score-lift b { font-family: var(--font-mono); font-weight: 500; color: var(--ink); }
 .task-done:hover { color: var(--bg); background: var(--ink); border-color: var(--ink); }
 .task-done:active { transform: scale(.88); }
 @media (hover: hover) and (pointer: fine) { .task-card:hover { border-color: rgb(var(--fg) / calc(.18 * var(--k))); transform: translateY(-2px); } }
