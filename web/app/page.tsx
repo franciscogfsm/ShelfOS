@@ -8,15 +8,17 @@ import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task,
 import { IDLE, RunState, RunView } from "./run";
 import Loading from "./loading";
 import { Search } from "./search";
+import { Analytics } from "./analytics";
 import { ProductImage, preloadProductImages } from "./product-image";
 
-type View = "tasks" | "wall" | "camera" | "run";
+type View = "tasks" | "wall" | "camera" | "analytics" | "run";
 type Tab = "tasks" | "products";
-const VIEWS: [View, string][] = [["tasks", "Tasks"], ["wall", "Store wall"], ["camera", "Camera"], ["run", "Test images"]];
+const VIEWS: [View, string][] = [["tasks", "Tasks"], ["wall", "Store wall"], ["camera", "Camera"], ["analytics", "Analytics"], ["run", "Test images"]];
 const NAV_ICON: Record<View, React.ReactNode> = {
   tasks: <path d="M4 6.5 5.5 8 8 5m3 1.5h9M4 12.5l1.5 1.5L8 11m3 1.5h9M4 18.5 5.5 20 8 17m3 1.5h9" />,
   wall: <><rect x="4" y="4" width="6.5" height="6.5" rx="2" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" /></>,
   camera: <><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.2l1.3-2h6l1.3 2h1.2A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5Z" /><circle cx="12" cy="12.5" r="3.2" /></>,
+  analytics: <path d="M4 20h16M6.5 16v-4m5.5 4V6m5.5 10V9.5" />,
   run: <path d="M12 15V4m0 0L8 8m4-4 4 4M5 15v2.5A1.5 1.5 0 0 0 6.5 19h11a1.5 1.5 0 0 0 1.5-1.5V15" />,
 };
 const message = (e: unknown) => (e instanceof Error ? e.message : String(e));
@@ -388,7 +390,7 @@ export default function Page() {
         </div>
       )}
 
-      <div className={`grid min-h-0 ${blank || view === "tasks" ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
+      <div className={`grid min-h-0 ${blank || view === "tasks" || view === "analytics" ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
         {/* ── main ─────────────────────────────────────────────── */}
         <main className="workspace min-h-0 min-w-0 overflow-y-auto p-4 lg:p-7">
           <div key={shown} className="view-enter">
@@ -407,6 +409,23 @@ export default function Page() {
               onPolicy={changePolicy}
               onScore={doScore}
               onReset={clearRun}
+            />
+          ) : shown === "analytics" ? (
+            <Analytics
+              store={store}
+              tasks={tasks}
+              line={line}
+              ts={ts}
+              onTime={scrub}
+              onArea={(c, a) => {
+                setCamId(c.id);
+                setAreaId(a.id);
+                setView("camera");
+              }}
+              onCameraAt={(id, t) => {
+                scrub(t);
+                openCamera(id);
+              }}
             />
           ) : shown === "tasks" ? (
             <div className="tasks-page flex flex-col gap-5">
@@ -572,7 +591,7 @@ export default function Page() {
         </main>
 
         {/* ── work queue ───────────────────────────────────────── */}
-        {!blank && view !== "tasks" && (
+        {!blank && view !== "tasks" && view !== "analytics" && (
           <aside className="task-panel glass-card hidden lg:flex min-h-0 flex-col">
             <div className="px-5 pt-4 border-b border-line">
               <div className="flex items-end justify-between">

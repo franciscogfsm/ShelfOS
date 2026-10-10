@@ -46,7 +46,7 @@ export function Search({
   store, tasks, line, playing, onClose, onTask, onCamera, onView, onTime, onFilter, onPlay,
 }: {
   store: Store; tasks: Task[]; line: { min: number; max: number; latest: number }; playing: boolean;
-  onClose: () => void; onTask: (t: Task) => void; onCamera: (id: string) => void; onView: (v: "tasks" | "wall" | "run") => void;
+  onClose: () => void; onTask: (t: Task) => void; onCamera: (id: string) => void; onView: (v: "tasks" | "wall" | "analytics" | "run") => void;
   onTime: (ts: number) => void; onFilter: (s: Status) => void; onPlay: () => void;
 }) {
   const [q, setQ] = useState("");
@@ -91,6 +91,7 @@ export function Search({
     out.push(
       { key: "v-tasks", group: "Actions", title: "Open tasks", sub: "Everything that needs doing, worst first", hay: "tasks tarefas todo to do work queue go open", glyph: "→", run: () => onView("tasks") },
       { key: "v-wall", group: "Actions", title: "Open store wall", sub: "All cameras at a glance", hay: "store wall overview home cameras go open loja", glyph: "→", run: () => onView("wall") },
+      { key: "v-analytics", group: "Actions", title: "Open analytics", sub: "The day in numbers: trends, cameras by hour, longest problems", hay: "analytics analise stats statistics numbers charts trends insights report heatmap go open", glyph: "→", run: () => onView("analytics") },
       { key: "v-run", group: "Actions", title: "Test new images", sub: "Drop a folder, images or a zip and get predictions.json", hay: "test images upload run predictions validation score analyse analyze folder zip testar", glyph: "↑", run: () => onView("run") },
       { key: "a-play", group: "Actions", title: playing ? "Pause the day" : "Play the day", sub: "Watch the shelves change from opening to now", hay: "play pause replay day timeline history time lapse", glyph: "▶", run: onPlay },
       { key: "a-latest", group: "Actions", title: "Jump to latest", sub: `Back to ${clock(line.latest)}`, hay: "latest now live current jump agora", glyph: "↦", run: () => onTime(line.latest) },

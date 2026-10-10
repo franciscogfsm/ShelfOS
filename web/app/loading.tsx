@@ -13,7 +13,7 @@ export default function Loading() {
           <div className="grid gap-2"><Sk w={190} h={12} /><Sk w={120} h={9} /></div>
         </div>
         <nav className="main-nav glass order-last lg:order-none flex w-full lg:w-auto" aria-hidden="true">
-          {[92, 118, 104, 128].map((w) => <span key={w} className="nav-item flex-1 lg:flex-none"><Sk w={w - 36} h={10} /></span>)}
+          {[92, 118, 104, 112, 128].map((w) => <span key={w} className="nav-item flex-1 lg:flex-none"><Sk w={w - 36} h={10} /></span>)}
         </nav>
         <div className="flex lg:flex-1 items-center justify-end gap-2.5">
           <Sk h={40} r={999} className="w-10 md:w-[150px]" />
