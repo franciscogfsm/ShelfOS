@@ -586,9 +586,10 @@ export default function Page() {
                 })}
               </div>
               <div key={cam.id} className="camera-detail-enter camera-stage-row">
-                <CameraStage store={store} cam={cam} frame={frame} areaId={areaId} filter={filter} onSelect={setAreaId} />
+                <CameraStage store={store} cam={cam} frame={frame} areaId={areaId} filter={filter} onSelect={setAreaId}>
+                  {selected && frame.areas[selected.id] && <AreaDetail key={selected.id} store={store} cam={cam} frame={frame} area={selected} onPick={scrub} onClose={() => setAreaId(null)} />}
+                </CameraStage>
                 <AreaList cam={cam} frame={frame} onSelect={setAreaId} />
-                {selected && frame.areas[selected.id] && <AreaDetail key={selected.id} store={store} cam={cam} frame={frame} area={selected} onPick={scrub} onClose={() => setAreaId(null)} />}
               </div>
             </>
           )}

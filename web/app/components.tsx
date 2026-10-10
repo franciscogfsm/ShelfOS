@@ -16,6 +16,7 @@ export const FrameView = memo(function FrameView({
   const [visible, setVisible] = useState(!compact);
   const [loaded, setLoaded] = useState(false);
   const vignette = useId();
+  const focus = areaId && frame.areas[areaId] ? cam.areas.find((a) => a.id === areaId) : undefined;
   useEffect(() => {
     if (visible || !svg.current) return;
     const observer = new IntersectionObserver(([entry]) => {
@@ -38,20 +39,25 @@ export const FrameView = memo(function FrameView({
           <stop offset="100%" stopColor="#000" stopOpacity="0.45" />
         </radialGradient>
       </defs>
+      {/* a picked area keeps the picture sharp and darkens only what is around it; a click out there lets go of it */}
+      {focus && (
+        <path className="spotlight" fillRule="evenodd" d={`M0 0H${w}V${h}H0ZM${focus.quad.map((q) => q.join(" ")).join("L")}Z`} onClick={onSelect && (() => onSelect(focus.id))} />
+      )}
       {visible && cam.areas.map((a) => {
         const p = frame.areas[a.id];
         if (!p) return null;
         const s = statusOf(p);
         const active = a.id === areaId || a.id === hover;
+        const picked = a.id === focus?.id;
         const dim = filter !== "all" && filter !== s;
         const quiet = s === "ok";
         const [cx, cy] = centroid(a.quad, w, h);
         return (
-          <g key={a.id} opacity={dim ? 0.18 : 1} className="transition-opacity">
+          <g key={a.id} opacity={dim ? 0.18 : focus && !active ? 0.4 : 1} className="transition-opacity">
             <polygon
               points={points(a.quad)}
               fill={STATUS[s].color}
-              fillOpacity={active ? 0.25 : quiet ? 0 : 0.13}
+              fillOpacity={picked ? 0 : active ? 0.25 : quiet ? 0 : 0.13}
               stroke={STATUS[s].color}
               strokeWidth={active ? 4.5 : quiet ? (compact ? 1.5 : 1.25) : compact ? 4 : 2.75}
               strokeOpacity={quiet && !active ? 0.5 : 1}
@@ -62,7 +68,7 @@ export const FrameView = memo(function FrameView({
               onMouseLeave={onHover && (() => onHover(null))}
               onClick={onSelect && (() => onSelect(a.id))}
             />
-            {!quiet && !compact && (
+            {!quiet && !compact && !picked && (
               <g pointerEvents="none">
                 <circle cx={cx} cy={cy} r={13} fill="#05070a" fillOpacity={0.85} stroke={STATUS[s].color} strokeWidth={2} />
                 <text x={cx} y={cy + 5.5} textAnchor="middle" fontSize={16} fontWeight={700} fill={STATUS[s].color}>
@@ -78,14 +84,20 @@ export const FrameView = memo(function FrameView({
 });
 
 export function CameraStage({
-  store, cam, frame, areaId, filter, onSelect,
-}: { store: Store; cam: Camera; frame: Frame; areaId: string | null; filter: Status | "all"; onSelect: (id: string | null) => void }) {
+  store, cam, frame, areaId, filter, onSelect, children,
+}: { store: Store; cam: Camera; frame: Frame; areaId: string | null; filter: Status | "all"; onSelect: (id: string | null) => void; children?: React.ReactNode }) {
   const [hover, setHover] = useState<string | null>(null);
   const hovered = hover ? cam.areas.find((a) => a.id === hover) : undefined;
   const hp = hovered && frame.areas[hovered.id];
+  const picked = areaId && frame.areas[areaId] ? cam.areas.find((a) => a.id === areaId) : undefined;
+  // the detail of a picked area sits beside it, on the side of the picture with more room, level with it
+  const at = picked && bbox(picked.quad, store.width, store.height, 0);
+  const x0 = at ? at.x / store.width : 0;
+  const x1 = at ? (at.x + at.w) / store.width : 0;
   return (
     <div className="camera-fit-slot">
-    <div className="camera-stage fitted relative overflow-hidden bg-black" style={{ "--frame-ar": store.width / store.height } as React.CSSProperties}>
+    <div className="stage-wrap" style={{ "--frame-ar": store.width / store.height } as React.CSSProperties}>
+    <div className="camera-stage relative overflow-hidden bg-black">
       <FrameView store={store} cam={cam} frame={frame} filter={filter} fit areaId={areaId} hover={hover} onHover={setHover} onSelect={(id) => onSelect(id === areaId ? null : id)} />
       <div className="glass-chip absolute left-3 top-3 font-mono">
         CAM {cam.id} · {clock(frame.ts)}
@@ -109,6 +121,12 @@ export function CameraStage({
       {!!frame.warnings?.length && (
         <div className="glass-chip absolute right-3 bottom-3 max-w-[60%] text-low">⚠ {frame.warnings.join(" · ")}</div>
       )}
+    </div>
+    {at && children && (
+      <div className="area-slot" data-side={1 - x1 >= x0 ? "right" : "left"} style={{ "--x0": x0, "--x1": x1, "--cy": (at.y + at.h / 2) / store.height } as React.CSSProperties}>
+        {children}
+      </div>
+    )}
     </div>
     </div>
   );
@@ -306,9 +324,8 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
   const hasMap = p.map.length > 0;
   const looks = (p.looks ?? []).filter(([id]) => id !== area.productId).slice(0, 2);
   return (
-    <div className="popup-backdrop" onClick={onClose}>
-    <section role="dialog" aria-modal="true" aria-label={area.product} onClick={(e) => e.stopPropagation()} className="popup glass px-5 sm:px-6 pb-6 pt-4 grid md:grid-cols-[minmax(0,300px)_1fr] gap-x-7 gap-y-3">
-      <div className="col-span-full flex items-center justify-between">
+    <section role="dialog" aria-label={area.product} className="popup glass px-5 pb-5 pt-3 flex flex-col gap-3">
+      <div className="flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · slot {area.id.split("_")[1]}
         </span>
@@ -316,6 +333,26 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="m1.5 1.5 8 8m0-8-8 8" /></svg>
         </button>
       </div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap" style={{ color: STATUS[s].color }}>
+            <span className="size-4 grid place-items-center rounded-full text-[10px] font-bold text-[#09090b]" style={{ background: STATUS[s].color }}>
+              {STATUS[s].glyph}
+            </span>
+            {STATUS[s].label} · {STATUS[s].action}
+          </div>
+          <h2 className="mt-1 text-xl leading-tight font-medium tracking-tight line-clamp-2">{area.product}</h2>
+          <div className="text-[11px] text-muted font-mono truncate">
+            {area.rawName} · #{area.productId}
+          </div>
+          {s !== "ok" && frame.ts > started && <div className="mt-1 text-[11px] text-muted">Like this for {duration(frame.ts - started)}</div>}
+        </div>
+        <div className="text-right shrink-0">
+          <div className="text-[10px] uppercase tracking-[0.14em] text-muted whitespace-nowrap">Shelf covered</div>
+          <div className="font-mono text-2xl tabular-nums tracking-tight">{hasMap ? `${Math.round(p.occ * 100)}%` : "–"}</div>
+        </div>
+      </div>
+      <div className="popup-body">
       <div className="grid grid-cols-2 gap-2 self-start">
         <figure>
           <div className="relative">
@@ -349,26 +386,6 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
       </div>
 
       <div className="min-w-0 flex flex-col gap-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap" style={{ color: STATUS[s].color }}>
-              <span className="size-4 grid place-items-center rounded-full text-[10px] font-bold text-[#09090b]" style={{ background: STATUS[s].color }}>
-                {STATUS[s].glyph}
-              </span>
-              {STATUS[s].label} · {STATUS[s].action}
-            </div>
-            <h2 className="mt-1 text-2xl font-medium tracking-tight truncate">{area.product}</h2>
-            <div className="text-[11px] text-muted font-mono truncate">
-              {area.rawName} · #{area.productId}
-            </div>
-            {s !== "ok" && frame.ts > started && <div className="mt-1 text-[11px] text-muted">Like this for {duration(frame.ts - started)}</div>}
-          </div>
-          <div className="text-right shrink-0">
-            <div className="text-[10px] uppercase tracking-[0.14em] text-muted whitespace-nowrap">Shelf covered</div>
-            <div className="font-mono text-3xl tabular-nums tracking-tight">{hasMap ? `${Math.round(p.occ * 100)}%` : "–"}</div>
-          </div>
-        </div>
-
         {p.source === "memory" && (
           <div className="rounded-md border border-low/40 bg-low/10 px-3 py-2 text-xs text-low">
             This image could not be read here. The answer is the last known state of the slot, so the output file is still complete.
@@ -380,7 +397,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           </div>
         )}
 
-        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
+        <div className="popup-stats">
           <div>
             <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">Stock level</div>
             {(["Empty", "Half", "Full"] as const).map((name, i) => {
@@ -447,8 +464,8 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           </div>
         </div>
       </div>
+      </div>
     </section>
-    </div>
   );
 }
 
