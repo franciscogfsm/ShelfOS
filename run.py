@@ -27,6 +27,7 @@ import webbrowser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+CWD = Path.cwd()  # where the command was typed: relative --images / --out are meant from there
 os.chdir(ROOT)
 sys.path.insert(0, str(ROOT))
 os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
@@ -39,9 +40,18 @@ PLANOGRAM, IMAGES = Path("data/planogram.json"), Path("data/images")
 BACKBONES = "vit_base_patch16_dinov3.lvd1689m+vit_large_patch16_dinov3.lvd1689m"
 
 
-def ensure_model(force: bool = False) -> None:
-    """Embed the reference day and fit the engine if that has not been done on this machine yet."""
-    if MODEL.exists() and REFERENCE.exists() and not force:
+def typed_path(p: str, must_exist: bool = False) -> str:
+    """A relative path is taken from where the command was typed; an input that is only found in the repo keeps working."""
+    q = Path(p.strip().strip('"'))
+    if q.is_absolute() or (must_exist and not (CWD / q).exists() and q.exists()):
+        return str(q)
+    return str(CWD / q)
+
+
+def ensure_model(force: bool = False, reference: bool = True) -> None:
+    """Embed the reference day and fit the engine if that has not been done on this machine yet.
+    reference=False: the caller only needs the engine (--images never reads the reference day)."""
+    if MODEL.exists() and (REFERENCE.exists() or not reference) and not force:
         return
     if not PLANOGRAM.exists() or not IMAGES.is_dir():
         sys.exit(f"The reference day is missing. Put the challenge images in {IMAGES}/<camera>/<timestamp>.jpg and the planogram in {PLANOGRAM}.")
@@ -63,6 +73,8 @@ def predict(a) -> None:
     service, events = run(a.images, str(MODEL), str(PLANOGRAM), empty_compliant=not a.empty_noncompliant, device="cpu" if a.cpu else None)
     pred = service.predictions("run")
     out = Path(a.out)
+    if not pred:
+        sys.exit(f"\nNo image in {a.images} was answered (see above), so {out} was not written.")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(pred, indent=1), encoding="utf-8")
     n_img = sum(len(v) for v in pred.values())
@@ -72,6 +84,15 @@ def predict(a) -> None:
     print(f"\n{out.resolve()}\n{n_img} images, {n_area} areas, {time.time() - t0:.1f}s on {service.embedder.device}"
           f"{f', {len(skipped)} files skipped' if skipped else ''}{f', {len(warned)} images with warnings' if warned else ''}")
     print(f"empty areas reported as planogram_compliant={'false' if a.empty_noncompliant else 'true'}")
+    from shelfos.validate import expected_images, validate
+
+    problems = validate(pred, service.areas, expected_images(a.images, set(service.areas)))
+    if problems:  # reported, not fatal: the file is written and one of the notes is harmless
+        print(f"\nWARNING: {len(problems)} problem(s) with the submission file:")
+        for p in problems[:50]:
+            print("  -", p)
+    else:
+        print("validated: official format, every area of every image answered")
 
 
 def serve(a) -> None:
@@ -107,7 +128,11 @@ def main():
     ap.add_argument("--no-browser", action="store_true")
     ap.add_argument("--cpu", action="store_true")
     a = ap.parse_args()
-    ensure_model(force=a.train)
+    if a.images:
+        a.images, a.out = typed_path(a.images, must_exist=True), typed_path(a.out)
+        if not Path(a.images).exists():
+            sys.exit(f"--images: nothing at {a.images}")
+    ensure_model(force=a.train, reference=not a.images)
     if a.images:
         predict(a)
     elif not a.train:

@@ -20,7 +20,7 @@ from .features import MODEL_NAME, Embedder
 from .planogram import Area, load_planogram
 from .scoring import score_submission, stock_points
 
-IMAGE_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+IMAGE_EXT = {".jpg", ".jpeg", ".jpe", ".jfif", ".png", ".bmp", ".webp", ".tif", ".tiff", ".jp2"}  # same set in validate.py
 _SMALL = {"CNT", "KG", "IMP", "CAT", "I", "EMB.", "EMB", "SC", "INT", "R0", "CAL", "CAL.", "IGP", "P/", "S/", "A/AA", "A/AA/AAA", "EMB:."}
 MIN_VISIBLE = 0.15  # an area with less of its quad inside the frame is answered from memory
 
@@ -40,6 +40,14 @@ def timestamp_of(name: str) -> int | None:
     """Capture time from a file name such as 1751052241.jpg (also when it carries a prefix)."""
     m = re.search(r"(?<!\d)(1[5-9]\d{8})(?!\d)", Path(name).stem)
     return int(m.group(1)) if m else None
+
+
+def _zip_bytes(zf: zipfile.ZipFile, name: str) -> bytes:
+    """One member of a zip; b"" when it cannot be read (encrypted, corrupt), which is then handled like an unreadable image."""
+    try:
+        return zf.read(name)
+    except Exception:
+        return b""
 
 
 class ShelfService:
@@ -83,6 +91,12 @@ class ShelfService:
             hits = [c for c in re.findall(r"(?<!\d)(\d{3,6})(?!\d)", Path(parts[-1]).stem) if c in self.areas]
             if len(set(hits)) == 1:
                 named, source = hits[0], "name"
+        if named is None:  # a folder that carries the id among other text: cam_6215
+            for p in reversed(parts[:-1]):
+                hits = {c for c in re.findall(r"(?<!\d)(\d{3,6})(?!\d)", p) if c in self.areas}
+                if len(hits) == 1:
+                    named, source = hits.pop(), "folder"
+                    break
         seen, sim, margin = (None, 0.0, 0.0)
         if image is not None and self.engine.cameras is not None:
             seen, sim, margin = self.engine.cameras.identify(image)
@@ -140,8 +154,12 @@ class ShelfService:
             warnings.append("image could not be read; answered from the last known state of each area")
             details = self.engine.fallback(self.areas[camera])
         else:
-            image = self._fit_frame(image, warnings)
-            details = self.predict_image(image, camera, name)
+            try:
+                image = self._fit_frame(image, warnings)
+                details = self.predict_image(image, camera, name)
+            except Exception as e:  # a missing area costs 5 points; the last known state does not
+                warnings.append(f"image could not be analysed ({type(e).__name__}); answered from the last known state of each area")
+                details = self.engine.fallback(self.areas[camera])
             blocked = [a.area_id for a, d in zip(self.areas[camera], details) if d.get("obstruction", 0) >= OBSTRUCT_FROM]
             if blocked:
                 warnings.append(f"{len(blocked)} area(s) partly hidden by something new on the shelf (shopper, cart, boxes): {', '.join(blocked[:6])}"
@@ -157,9 +175,12 @@ class ShelfService:
             self.run.setdefault(camera, {})[name] = record
             if save:
                 dst = self.run_dir / "frames" / camera / name
-                dst.parent.mkdir(parents=True, exist_ok=True)
-                if data:
-                    dst.write_bytes(data)
+                try:
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    if data:
+                        dst.write_bytes(data)
+                except OSError:  # the copy is only for display; the answer is already in the run
+                    pass
         return {"type": "frame", "camera": camera, "file": name, "ms": ms, "cameraSource": source, "warnings": warnings, "frame": self._frame_json(record, "run")}
 
     def _next_ts(self, camera: str) -> int:
@@ -180,7 +201,7 @@ class ShelfService:
                     yield {"type": "skip", "file": rel, "reason": "not a readable zip file"}
                     continue
                 inner = sorted(n for n in zf.namelist() if not n.endswith("/"))
-                members = [(n, zf.read(n)) for n in inner if is_image(n)]
+                members = [(n, _zip_bytes(zf, n)) for n in inner if is_image(n)]
                 for n in inner:
                     if not is_image(n) and "__MACOSX" not in n and not Path(n).name.startswith("."):
                         yield {"type": "skip", "file": n, "reason": "not an image"}
@@ -225,8 +246,11 @@ class ShelfService:
 
     def _save_run(self) -> None:
         with self.lock:
-            self.run_dir.mkdir(parents=True, exist_ok=True)
-            (self.run_dir / "run.json").write_text(json.dumps(self.run), encoding="utf-8")
+            try:
+                self.run_dir.mkdir(parents=True, exist_ok=True)
+                (self.run_dir / "run.json").write_text(json.dumps(self.run), encoding="utf-8")
+            except OSError:  # the run stays in memory, which is what predictions() reads
+                pass
 
     def _load_run(self) -> None:
         f = self.run_dir / "run.json"
