@@ -101,6 +101,9 @@ def serve(a) -> None:
     from shelfos.server import create_app
     from shelfos.service import ShelfService
 
+    built = ROOT / "web" / "out" / "index.html"
+    if built.exists() and any(p.stat().st_mtime > built.stat().st_mtime for p in (ROOT / "web" / "app").rglob("*") if p.is_file()):
+        print("NOTE: the built interface (web/out) is older than web/app. Run `npm run build` inside web/ to see the latest screens.")
     print("Loading the model ...")
     service = ShelfService(str(MODEL), str(PLANOGRAM), str(REFERENCE), str(IMAGES), device="cpu" if a.cpu else None, empty_compliant=not a.empty_noncompliant)
     app = create_app(service, ROOT / "web" / "out")
