@@ -10,6 +10,16 @@ python run.py --train                 # only if labels or code changed
 python tools/release.py               # builds the UI and gathers everything into release/
 ```
 
+Two engines are trained (`python -m shelfos.train`):
+
+| engine | backbone | use |
+| --- | --- | --- |
+| `models/engine.pkl` | DINOv3 ViT-B + ViT-L ensemble, mirror TTA (1.5 GB of weights) | official submission, run locally on the GPU: best CV score |
+| `models/engine_lite.pkl` | DINOv3 ViT-B, mirror TTA (340 MB) | cloud demo on a free CPU: ~4x faster, ~0.03 pts/area lower in CV |
+
+`python tools/release.py --engine models/engine_lite.pkl` builds the cloud release with the light
+engine; the Dockerfile and the app are identical, only `models/` changes.
+
 `release/` is self-contained: code, `models/engine.pkl`, backbone weights, planogram,
 reference frames (shown in the app), the built UI, a `Dockerfile`, a Space `README.md` and a
 `.gitattributes` for git-lfs. Nothing in it needs the network at run time.

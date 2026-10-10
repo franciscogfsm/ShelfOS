@@ -75,8 +75,10 @@ python -c "import json,sys; from shelfos.scoring import score_submission as s; p
 ## How it works
 
 1. **Geometry.** Each planogram quadrilateral is perspective-rectified to a square crop.
-2. **Features.** A frozen DINOv3 ViT-B/16 gives one global embedding and a 14x14 grid of
-   patch tokens per crop. No fine-tuning. One image (about 12 areas) is one forward pass.
+2. **Features.** Frozen DINOv3 backbones (ViT-B/16 + ViT-L/16, features concatenated; the
+   light engine uses ViT-B alone) give one global embedding and a 14x14 grid of patch tokens
+   per crop, averaged over the crop and its mirror image. No fine-tuning. One image (about
+   12 areas) is one batched forward pass.
 3. **Occupancy.** A patch classifier separates product from background (crate, tray,
    cardboard, basket) and gives the share of the area that is covered.
 4. **Shelf memory.** The cameras are fixed, so the crops of one area line up patch for patch
@@ -104,15 +106,26 @@ Cross-validation of the engine against those labels, last measured on the aftern
 
 | Held out | Areas | Stock level correct | Product answer correct | Share of the maximum score |
 | --- | --- | --- | --- | --- |
-| The last two frames of every camera | 304 | 90.5% | 99.0% | 80.3% |
+| The last two frames of every camera | 304 | 91.8% | 99.0% | 82.9% |
 | Each later part of the day, after training on the earlier part | 1216 | 94.1% | 99.7% | 88.4% |
 
 The share of the maximum is lower than the two accuracies because a wrong answer costs
 points (-2 or -3) on top of the point it does not earn. Most stock errors overestimate the
-level: 24 of the 29 in the first row.
+level: 20 of the 25 in the first row.
 
-Tried and dropped because they did not measure better: a larger backbone (ViT-L), 448 px
-crops, blending in a nearest-neighbour vote, and shifting the decision towards "half".
+Same split, step by step (points per area out of a maximum of 2, stock + product):
+
+| Engine | Stock pts | Product pts | Over / under |
+| --- | --- | --- | --- |
+| ViT-B, no shelf-novelty feature | +0.635 | +0.970 | 24 / 5 |
+| + novelty feature and obstruction guard | +0.661 | +0.970 | 22 / 5 |
+| + mirror test-time augmentation (`engine_lite.pkl`) | +0.661 | +0.980 | 22 / 5 |
+| + ViT-L in ensemble (`engine.pkl`, shipped) | +0.688 | +0.970 | 20 / 5 |
+
+Tried and dropped because they did not measure better on both splits: 448 px crops,
+blending in a nearest-neighbour vote, temperature scaling, and a fixed shift of the decision
+towards the lower level (it gains on the last-frames split and loses the same on the
+forward split, so it is noise; the expected-score rule already leans low).
 
 ### Labelling tool
 

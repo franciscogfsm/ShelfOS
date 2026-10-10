@@ -54,15 +54,20 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--out", default="release")
     ap.add_argument("--no-ui-build", action="store_true", help="reuse web/out instead of running `next build`")
+    ap.add_argument("--engine", default="models/engine.pkl", help="engine to ship (models/engine_lite.pkl = ViT-B only, ~4x faster on CPU)")
+    ap.add_argument("--reference", default=None, help="reference_day json matching --engine (default: derived from the engine name)")
     a = ap.parse_args()
     out = ROOT / a.out
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
 
-    engine_path = ROOT / "models" / "engine.pkl"
+    engine_path = ROOT / a.engine
     if not engine_path.exists():
-        sys.exit("models/engine.pkl is missing: run `python run.py --train` first")
+        sys.exit(f"{a.engine} is missing: run `python -m shelfos.train --bank cache/<bank>.npz --out {a.engine}` first")
+    reference_path = ROOT / (a.reference or ("models/reference_day_lite.json" if engine_path.stem.endswith("_lite") else "models/reference_day.json"))
+    if not reference_path.exists():
+        sys.exit(f"{reference_path.relative_to(ROOT)} is missing: it is written by shelfos.train together with the engine")
     with open(engine_path, "rb") as fh:
         engine = pickle.load(fh)
     from shelfos.features import split_names
@@ -74,7 +79,7 @@ def main():
             sys.exit(f"backbone weights {w} are missing: start the app once so they are downloaded")
         copy(w, out / "models" / "backbone" / w.name)
     copy(engine_path, out / "models" / "engine.pkl")
-    copy(ROOT / "models" / "reference_day.json", out / "models" / "reference_day.json")
+    copy(reference_path, out / "models" / "reference_day.json")
     copy(ROOT / "data" / "planogram.json", out / "data" / "planogram.json")
     copy(ROOT / "data" / "images", out / "data" / "images")
 

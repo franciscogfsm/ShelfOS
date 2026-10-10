@@ -14,3 +14,6 @@ __pycache__/
 
 # images analysed by the app or the command line
 runs/
+
+# deployable copy built by tools/release.py (pushed to its own Space / registry, not here)
+release/
