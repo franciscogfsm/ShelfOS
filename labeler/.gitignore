@@ -1,0 +1,4 @@
+# imagens extraídas do zip e backups do silver (ficam só no teu PC)
+data/
+backups/
+*.tmp

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<title>Labeler</title>
+<style>
+  body { font: 14px system-ui, sans-serif; margin: 0; background: #f4f4f2; color: #222; }
+  header { position: sticky; top: 0; z-index: 2; background: #222; color: #fff; padding: 8px 14px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  header button, header select { font: inherit; padding: 4px 10px; }
+  #confirm { background: #2e7d32; color: #fff; border: 0; border-radius: 4px; font-weight: 600; }
+  #status { margin-left: auto; opacity: .8; }
+  main { padding: 12px 14px; }
+  h2 { margin: 0 0 8px; font-size: 18px; }
+  h2 small { font-weight: 400; color: #666; }
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; margin-left: 8px; }
+  .tag.ok { background: #c8e6c9; } .tag.todo { background: #ffe0b2; }
+  #big { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+  #big canvas { background: #000; border-radius: 4px; }
+  #strip { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0; }
+  .card { flex: 0 0 auto; background: #fff; border: 3px solid transparent; border-radius: 6px; padding: 4px; cursor: pointer; width: 190px; }
+  .card.sel { border-color: #1565c0; }
+  .card canvas { display: block; margin: 0 auto; }
+  .row { display: flex; gap: 3px; margin-top: 4px; align-items: center; }
+  .row button { flex: 1; font: 600 12px system-ui; padding: 3px 0; border: 1px solid #bbb; border-radius: 3px; background: #fafafa; cursor: pointer; }
+  .row button.on.empty { background: #e53935; color: #fff; border-color: #e53935; }
+  .row button.on.half { background: #fb8c00; color: #fff; border-color: #fb8c00; }
+  .row button.on.full { background: #43a047; color: #fff; border-color: #43a047; }
+  .row button.on.wrong { background: #b71c1c; color: #fff; border-color: #b71c1c; }
+  .row button.on.unsure { background: #fdd835; border-color: #f9a825; }
+  .row button.on.unknown { background: #555; color: #fff; border-color: #555; }
+  .row button.wrong { flex: 2; }
+  .time { font-size: 12px; color: #555; display: flex; justify-content: space-between; margin-top: 2px; }
+  .help { color: #555; font-size: 13px; line-height: 1.7; }
+  kbd { background: #fff; border: 1px solid #bbb; border-radius: 3px; padding: 0 5px; font: 12px monospace; }
+</style>
+</head>
+<body>
+<header>
+  <b id="who"></b>
+  <span id="progress"></span>
+  <select id="cam"></select>
+  <button id="prev">◀ Área anterior</button>
+  <button id="confirm">✓ Confirmar e seguinte (Enter)</button>
+  <label><input type="checkbox" id="skip" checked> saltar áreas já revistas</label>
+  <span id="status"></span>
+</header>
+<main>
+  <h2 id="title"></h2>
+  <div id="big"><canvas id="full"></canvas><canvas id="zoom"></canvas></div>
+  <div id="strip"></div>
+  <div class="help">
+    <kbd>←</kbd><kbd>→</kbd> escolher imagem ·
+    <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> (ou <kbd>E</kbd><kbd>H</kbd><kbd>F</kbd>) vazio / meio / cheio e avança ·
+    <kbd>4</kbd> tapado / não dá para ver ·
+    <kbd>5</kbd> produto certo · <kbd>6</kbd> outro produto (ou <kbd>X</kbd>) · <kbd>7</kbd> produto desconhecido ·
+    <kbd>U</kbd> incerto ·
+    <kbd>Shift</kbd>+tecla aplica a esta foto e a todas as seguintes ·
+    <kbd>Enter</kbd> confirmar área e seguinte ·
+    <kbd>Backspace</kbd> área anterior<br>
+    Pré-preenchido com <b id="src"></b>. Tudo é guardado a cada alteração. Regra: dá a tua melhor estimativa honesta, sem puxar para baixo.
+  </div>
+</main>
+<script>
+const W = 1280, H = 720, LEVELS = ["empty", "half", "full"];
+let meta, areas = [], ai = 0, fi = 0;
+const imgs = {};
+const $ = id => document.getElementById(id);
+
+function img(cam, f) {
+  const k = cam + "/" + f;
+  if (!imgs[k]) { imgs[k] = new Image(); imgs[k].src = "/img/" + k; }
+  return imgs[k];
+}
+function whenLoaded(im, fn) { im.complete && im.naturalWidth ? fn() : im.addEventListener("load", fn, { once: true }); }
+
+function poly(ctx, quad, tx, color, width) {
+  ctx.beginPath();
+  quad.forEach(([x, y], i) => { const [a, b] = tx(x, y); i ? ctx.lineTo(a, b) : ctx.moveTo(a, b); });
+  ctx.closePath(); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+}
+
+function drawCrop(cv, im, quad, maxW, maxH, pad) {
+  const xs = quad.map(p => p[0]), ys = quad.map(p => p[1]);
+  let x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const px = (x1 - x0) * pad, py = (y1 - y0) * pad;
+  x0 = Math.max(0, x0 - px); y0 = Math.max(0, y0 - py); x1 = Math.min(W, x1 + px); y1 = Math.min(H, y1 + py);
+  const s = Math.min(maxW / (x1 - x0), maxH / (y1 - y0));
+  cv.width = Math.round((x1 - x0) * s); cv.height = Math.round((y1 - y0) * s);
+  const ctx = cv.getContext("2d");
+  whenLoaded(im, () => {
+    ctx.drawImage(im, x0, y0, x1 - x0, y1 - y0, 0, 0, cv.width, cv.height);
+    poly(ctx, quad, (x, y) => [(x - x0) * s, (y - y0) * s], "#00e5ff", 2);
+  });
+}
+
+function drawFull(cam, f, area) {
+  const cv = $("full"), s = 620 / W;
+  cv.width = 620; cv.height = H * s;
+  const ctx = cv.getContext("2d"), im = img(cam.id, f);
+  whenLoaded(im, () => {
+    ctx.drawImage(im, 0, 0, cv.width, cv.height);
+    cam.areas.forEach(a => a !== area && poly(ctx, a.quad, (x, y) => [x * s, y * s], "rgba(255,255,255,.35)", 1));
+    poly(ctx, area.quad, (x, y) => [x * s, y * s], "#00e5ff", 3);
+  });
+}
+
+function time(f) {
+  return new Date(parseInt(f) * 1000).toLocaleTimeString("pt-PT", { timeZone: "Europe/Lisbon", hour: "2-digit", minute: "2-digit" });
+}
+
+const cur = () => areas[ai];
+
+function render() {
+  const { cam, area } = cur(), st = area.state, frames = cam.frames;
+  fi = Math.max(0, Math.min(fi, frames.length - 1));
+  const done = areas.filter(x => x.area.state.reviewed).length;
+  $("progress").textContent = `${done}/${areas.length} áreas revistas · área ${ai + 1}/${areas.length}`;
+  $("cam").value = cam.id;
+  $("title").innerHTML = `${area.area_id} <small>· ${area.product_name}</small>` +
+    (st.reviewed ? '<span class="tag ok">revista</span>' : '<span class="tag todo">por rever</span>');
+  drawFull(cam, frames[fi], area);
+  drawCrop($("zoom"), img(cam.id, frames[fi]), area.quad, 560, 380, 0.25);
+
+  const strip = $("strip"); strip.innerHTML = "";
+  frames.forEach((f, j) => {
+    const v = st.frames[f], card = document.createElement("div");
+    card.className = "card" + (j === fi ? " sel" : "");
+    const cv = document.createElement("canvas");
+    drawCrop(cv, img(cam.id, f), area.quad, 180, 130, 0.12);
+    card.appendChild(cv);
+    card.insertAdjacentHTML("beforeend",
+      `<div class="time"><span>${time(f)}</span><span>${j + 1}/${frames.length}</span></div>
+       <div class="row">${LEVELS.map(l => `<button data-a="${l}" class="${l}${v.stock === l ? " on" : ""}">${l[0].toUpperCase()}</button>`).join("")}</div>
+       <div class="row"><button data-a="wrong" class="wrong${v.compliant ? "" : " on"}" title="produto errado">✗ errado</button>
+       <button data-a="unsure" class="unsure${v.unsure ? " on" : ""}" title="incerto">~</button>
+       <button data-a="unknown" class="unknown${v.unknown ? " on" : ""}" title="tapado / não dá para ver">?</button></div>`);
+    card.onclick = e => {
+      fi = j;
+      const a = e.target.dataset && e.target.dataset.a;
+      if (LEVELS.includes(a)) setStock(a, false, false);
+      else if (a === "wrong") toggleWrong(false);
+      else if (a === "unsure") toggleUnsure();
+      else if (a === "unknown") toggleUnknown();
+      else render();
+    };
+    strip.appendChild(card);
+  });
+  const sel = strip.children[fi];
+  if (sel) sel.scrollIntoView({ block: "nearest", inline: "nearest" });
+}
+
+let saveTimer;
+function save() {
+  const { area } = cur(), body = JSON.stringify({ area_id: area.area_id, state: area.state });
+  $("status").textContent = "a guardar…";
+  fetch("/api/area", { method: "POST", body }).then(r => r.json()).then(r => {
+    $("status").textContent = r.error ? "ERRO: " + r.error : "guardado ✓";
+  }).catch(() => $("status").textContent = "ERRO a guardar — o servidor está a correr?");
+}
+
+function targets(all) { const fr = cur().cam.frames; return all ? fr.slice(fi) : [fr[fi]]; }
+
+function setStock(level, all, advance) {
+  const st = cur().area.state;
+  targets(all).forEach(f => Object.assign(st.frames[f], { stock: level, unsure: false, unknown: false }));
+  if (advance && !all) fi++;
+  save(); render();
+}
+function toggleWrong(all) {
+  const st = cur().area.state;
+  setCompliant(!st.frames[cur().cam.frames[fi]].compliant, all, false);
+}
+function setCompliant(compliant, all, unsure) {
+  const st = cur().area.state;
+  targets(all).forEach(f => Object.assign(st.frames[f], { compliant, unsure }));
+  save(); render();
+}
+function toggleUnsure() {
+  const v = cur().area.state.frames[cur().cam.frames[fi]];
+  v.unsure = !v.unsure; save(); render();
+}
+function toggleUnknown(all) {
+  const st = cur().area.state, unknown = !st.frames[cur().cam.frames[fi]].unknown;
+  // tapado: o stock fica como palpite (o ficheiro oficial precisa de um nível), marcado incerto
+  targets(all).forEach(f => Object.assign(st.frames[f], { unknown, unsure: unknown }));
+  if (!all) fi++;
+  save(); render();
+}
+function go(step) {
+  let i = ai;
+  do { i += step; } while ($("skip").checked && i >= 0 && i < areas.length && areas[i].area.state.reviewed);
+  if (i < 0 || i >= areas.length) { render(); $("status").textContent = step > 0 ? "chegaste ao fim 🎉" : "início"; return; }
+  ai = i; fi = 0; render();
+}
+function confirmArea() { cur().area.state.reviewed = true; save(); go(1); }
+
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "SELECT") return;
+  // e.code não depende do layout do teclado (PT/US)
+  const k = e.code, map = { KeyE: "empty", KeyH: "half", KeyF: "full", Digit1: "empty", Digit2: "half", Digit3: "full" };
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (map[k]) setStock(map[k], e.shiftKey, true);
+  else if (k === "KeyX") toggleWrong(e.shiftKey);
+  else if (k === "KeyU") toggleUnsure();
+  // mesmas teclas que o tools/label_review.py do Francisco
+  else if (k === "Digit4") toggleUnknown(e.shiftKey);
+  else if (k === "Digit5") setCompliant(true, e.shiftKey, false);
+  else if (k === "Digit6") setCompliant(false, e.shiftKey, false);
+  else if (k === "Digit7") setCompliant(true, e.shiftKey, true);
+  else if (k === "ArrowRight") { fi++; render(); }
+  else if (k === "ArrowLeft") { fi--; render(); }
+  else if (k === "Enter" || k === "NumpadEnter") confirmArea();
+  else if (k === "Backspace") go(-1);
+  else return;
+  e.preventDefault();
+});
+$("confirm").onclick = confirmArea;
+$("prev").onclick = () => go(-1);
+$("cam").onchange = e => { ai = areas.findIndex(x => x.cam.id === e.target.value); fi = 0; render(); };
+
+fetch("/api/meta").then(r => r.json()).then(m => {
+  meta = m;
+  $("who").textContent = m.name; $("src").textContent = m.prefill_source;
+  m.cameras.forEach(cam => {
+    $("cam").insertAdjacentHTML("beforeend", `<option value="${cam.id}">câmara ${cam.id}</option>`);
+    cam.areas.forEach(area => areas.push({ cam, area }));
+    cam.frames.forEach(f => img(cam.id, f));
+  });
+  const first = areas.findIndex(x => !x.area.state.reviewed);
+  ai = first < 0 ? 0 : first;
+  render();
+});
+</script>
+</body>
+</html>

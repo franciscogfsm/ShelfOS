@@ -18,7 +18,7 @@ questions are closed; do not reopen them.
   `stock_value: 0`.
 - When labelling, an empty area is compliant and needs no "unsure" mark. In the labelling
   guide (`STEP1_PLAN.md`, B3) the rule "empty area: compliant true, plus `u`" is now just
-  "empty area: compliant true".
+  "empty area: compliant true". Rule 10 in `labeler/docs/regras.md` says the same.
 
 The code already answers this way: `empty_compliant` is true by default in the engine, the
 service, the command line and the cross-validation. The `--empty-noncompliant` switch and
@@ -94,65 +94,32 @@ python -c "import json,sys; from shelfos.scoring import score_submission as s; p
 
 The dataset ships without annotations. `labels/silver_labels.txt` holds our own labels for
 the reference day: a first pass made by eye from image strips, then corrected by a person
-with the review tool below. They are not the official ground truth, and the half/full
+with the labelling tool below. They are not the official ground truth, and the half/full
 boundary in particular is a judgement call. The official score on the hidden validation set
 is unknown until the organisers run it.
 
-RESULTS_TABLE
+Cross-validation of the engine against those labels, last measured on the afternoon of
+10 Oct 2026. The model code has kept changing since, so for current numbers rerun
+`python tools/cv.py --split late` and `python tools/cv.py --split fwd`.
+
+| Held out | Areas | Stock level correct | Product answer correct | Share of the maximum score |
+| --- | --- | --- | --- | --- |
+| The last two frames of every camera | 304 | 90.5% | 99.0% | 80.3% |
+| Each later part of the day, after training on the earlier part | 1216 | 94.1% | 99.7% | 88.4% |
+
+The share of the maximum is lower than the two accuracies because a wrong answer costs
+points (-2 or -3) on top of the point it does not earn. Most stock errors overestimate the
+level: 24 of the 29 in the first row.
 
 Tried and dropped because they did not measure better: a larger backbone (ViT-L), 448 px
 crops, blending in a nearest-neighbour vote, and shifting the decision towards "half".
 
-### Human review tool
+### Labelling tool
 
-From the repository root, open the annotation tool with:
-
-```
-python tools/label_review.py
-```
-
-It opens a local browser and offers all **1,962 area-frames**. Use **1** = empty,
-**2** = half, **3** = full, **4** = covered/unknown. Each answer saves and advances.
-The exact crop and a wider view show the official area; only classify the interior
-of the yellow outline. Purple pixels lie outside the photograph. Left arrow goes
-back, right arrow skips without answering. Skipped cases remain unfinished.
-
-Progress resumes automatically from `labels/review/session.json`. The 73 stock
-answers already reviewed are included. To review product compliance as well:
-
-```
-python tools/label_review.py --task both
-```
-
-Choose stock with 1–4 and product with **5** = expected product, **6** = other
-product, **7** = empty/unknown. The tool advances after both selections. In stock
-mode, existing compliance labels are preserved. Unknown stock is written as `?`
-and excluded by the stock label loader. Human labels are not official ground truth.
-
-Answers generate `labels/review/reviewed_labels.txt`; the training source is only
-updated by the following command. Stop the review server with **Ctrl+C** first:
-
-```
-python tools/label_review.py --apply
-```
-
-Applying creates a backup and preserves unrelated edits in `labels/silver_labels.txt`.
-If another person changed a reviewed entry differently, the command refuses the
-merge and lists conflicts in `labels/review/conflicts.json`. This does not retrain
-the model. Dependencies are `numpy` and `opencv-python` (`python -m pip install
-numpy opencv-python` if missing).
-
-For a colleague to start a separate review of **every case from zero**:
-
-```
-python tools/label_review.py --state labels/review/colleague/session.json --task both
-```
-
-Use the same `--state` when applying that review. Separate sessions can run on
-different computers; on the same computer also pass a different `--port`.
-Other options: `--scope empty`, `--scope unsure`, `--no-browser`, `--images`,
-`--labels`, and `--planogram`. Default data paths are relative to the repository,
-so the tool has no machine-specific paths.
+Labels are reviewed by hand with the standalone tool in `labeler/` (no dependencies; see
+`labeler/README.md`). It writes reviewed areas back into `labels/silver_labels.txt` with
+`python3 labeler/app.py --apply <names>`. Then run `python run.py --train` so the model
+is rebuilt from the new labels.
 
 ## Open question for the organisers
 
@@ -169,6 +136,6 @@ shelfos/            engine (features, occupancy, memory, compliance, scoring), s
 web/                the interface (Next.js, exported to static files and served by run.py)
 tools/cv.py         cross-validation of the shipped engine against our labels
 tools/selftest.py   edge-case drill
-tools/label_review.py   label review tool
+labeler/            label review tool (standalone, see labeler/README.md)
 labels/             our labels for the reference day
 ```
