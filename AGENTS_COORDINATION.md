@@ -48,8 +48,24 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
      suggest lite should be the primary model. Need a cost-per-image estimate for the pitch (ms/img CPU & GPU, €/1k imgs).
   3. "Empty area is compliant" confirmed. Half/empty definition unchanged (buy? replenish? doubt → under).
 
+- [Fable 20:34] `no-hour` measured on bank_tta: late 79.8 -> 79.3, fwd 86.4 -> 86.3. `HOUR_SCALE = 0.0` set.
+- [Fable 20:38] Both models retrained with HOUR_SCALE=0 (engine.pkl 123s, engine_lite.pkl 28s). selftest ALL GOOD.
+  Opus 21:00 read: hour prior stays off; no-change proposal withdrawn; C1 labels stay as they are. Agreed.
+
+- [Fable 20:41] Rehearsal OK: folder and zip, identical official JSON, 28 images / 304 areas, 0 missing.
+  Wall clock ~50s on the full model (GPU). The 97.5% vs human labels is on frames the model was trained on; it is not the jury number.
+
+- [Fable 20:43] Cost on the same 28 images (per-image time, model load excluded):
+  - `engine.pkl` GPU: ~1100 ms (rehearsal, ~50 s wall for 28 images)
+  - `engine_lite.pkl` GPU: mean 347 ms (median 321, wall 18 s)
+  - `engine_lite.pkl` CPU: mean 3056 ms (median 2929, wall 90 s)
+  Accuracy is a tie on fwd (lite +0.765 vs full +0.766) and lite is ~2 pp lower on late. Default shipped model stays `engine.pkl` until the user picks the 80/20 tradeoff.
+- Machine is free.
+
 ## Running now
-- Fable: `tools/lab.py engine no-hour --bank=cache/bank_tta.npz --split=late,fwd` (started 20:30, ~10 min). Hold cv/lab jobs.
+- Opus: scratch CV on `cache/bank_tta.npz` (CPU, ~3 GB RAM, no GPU), started 20:58: engine vs "causal memory"
+  (training crops described from older frames only, as validation crops will be). Results go to Proposals.
+  Fable: if you need the machine for a retrain, write it here and I stop.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
@@ -96,3 +112,33 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   +0.661; your run on the same bank with validated rects gives +0.615; on bank_bl the wicker rects went the
   other way (+0.655 -> +0.599). So one rects edit moves late by +/-0.05 in opposite directions on two backbones.
   Differences below ~0.05 on late (n=304) should not drive decisions; use fwd (n=1216) as the tie-breaker.
+- [Opus 20:50] **Where the validation images are, and what follows.** No fit was run for this (file names, labels
+  and the OOF probabilities saved at 20:07). It corrects my line above: `late` is the split that matters.
+  1. Validation = the evening photos of the same day, after our last photo of each camera. Evidence: the brief
+     says one day split into three sets; our 181 photos have no gap (every step 60-78 min) and stop between
+     18:07 and 20:16 Lisbon; the brief's annotation example is 6215 / `1751052241.jpg` = 20:24 Lisbon, 1h48 after
+     our last 6215 photo; 289 areas forces the two single-image cameras to be 6386 plus one 9-area camera, which
+     fits 6385 (the only camera with 14 photos here). Strong inference, not confirmed by the organisers.
+     So `late` is the faithful split and `fwd` is optimistic. Inside late: +0.704 one step out, +0.618 two steps out.
+  2. Label mix, our labels: whole day E 6 / H 18 / F 76 %; last photo E 15 / H 24 / F 60 %. In the last three
+     steps H->F happened 2 times in 84 and E->F 0 in 17: nothing is replenished in the evening. Extrapolated one
+     and two steps further: about E 20-25 / H 25 / F 50 %.
+  3. Of the 34 E labels in the last two photos, 17 are C1 crops (sellable product visible), 2 single items,
+     15 bare. Today's model answers half on 10 of the 17 and empty on 7 (a model trained on C1: 13 and 4).
+     In validation that is roughly 20-35 areas where the E/H rule decides +1 against -2 or -3.
+  4. One official label exists: the brief's example gives 6215_2 at 20:24 as `half`. Our label for 6215_2 at
+     18:35 is E and the photo shows one bunch of bananas. With evening replenishment that rare, the likelier
+     story is that the organisers call one sellable bunch "half". The humans also labelled a similar single
+     bunch H at 12:59, so our own labels are not consistent on this case.
+  5. `AreaMemory._change_features` hands every later crop the labels of the area's last two photos. Those
+     labels are inputs at inference for every validation crop, not only training targets.
+  6. Caution rules on the saved probabilities (minimum P(empty) to answer empty, minimum P(full) to answer
+     full): every setting loses against A, C1 and B on late and fwd, except P(empty)>=0.6 against C1 (+0.02).
+     The decision rule stays as it is.
+  **Proposal (humans first, then your retrain):** one consistent rule for "a few sellable items" (my reading:
+  half) applied by the humans to the evening photos. `cache/opiniao_fim_do_dia.txt` is a second-opinion file for
+  `labeler/app.py --resolver`: today's labels except the 29 C1 crops (-> H) and the last three photos where the
+  model, trained on earlier photos only, answers lower or differs on E/H. It shows 26 areas, 48 photos (15 on
+  Rodrigo's cameras, 11 on Francisco's). Upward model flags (H->F) are left out on purpose. After `--apply`,
+  retrain; I can then measure late/fwd on the new labels if you want. Also worth adding to the rehearsal: the
+  last photos under new, later file names, since validation names are not in the reference day.

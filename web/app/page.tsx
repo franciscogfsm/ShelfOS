@@ -335,7 +335,7 @@ export default function Page() {
   };
 
   return (
-    <div className={`app-shell app-enter h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
+    <div className={`app-shell app-enter h-full overflow-hidden grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
       {/* ── top bar ───────────────────────────────────────────── */}
       <header className="app-header flex flex-wrap items-center gap-x-6 gap-y-3 px-4 lg:px-6 py-3 lg:py-0 lg:h-[76px]">
         <div className="flex min-w-0 items-center lg:flex-1">
@@ -356,6 +356,9 @@ export default function Page() {
           <ShelfAssistant store={store} timestamp={ts} camera={camId} area={areaId} completed={done} onArea={(camera, area) => { setCamId(camera); setAreaId(area); setView("camera"); }} />
         </nav>
         <div className="flex lg:flex-1 items-center justify-end gap-2.5">
+          <a href="/colaboradores" className="nav-item" title="Demo mobile para colaboradores" aria-label="Abrir demo dos colaboradores">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3" /><path d="M10 18h4" /></svg>
+          </a>
           {!blank && (
             <button onClick={() => setSearching(true)} className="search-trigger glass" aria-label="Search" title="Search (Ctrl K)">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /></svg>
@@ -399,10 +402,10 @@ export default function Page() {
         </div>
       )}
 
-      <div className={`grid min-h-0 ${blank || view === "tasks" || view === "analytics" ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
+      <div className={`grid h-full min-h-0 overflow-hidden ${blank || view === "tasks" || view === "analytics" ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
         {/* ── main ─────────────────────────────────────────────── */}
-        <main className="workspace min-h-0 min-w-0 overflow-y-auto p-4 lg:p-7">
-          <div key={shown} className="view-enter">
+        <main className={`workspace h-full min-h-0 min-w-0 p-4 lg:p-7 ${shown === "camera" ? "flex flex-col overflow-hidden" : "overflow-y-auto"}`}>
+          <div key={shown} className={`view-enter ${shown === "camera" ? "camera-page" : ""}`}>
           {shown === "run" || blank ? (
             <RunView
               store={store}
@@ -560,8 +563,8 @@ export default function Page() {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-4">
-              <div className="flex gap-2 overflow-x-auto pb-1">
+            <>
+              <div className="flex shrink-0 gap-2 overflow-x-auto pb-1">
                 {store.cameras.map((c) => {
                   const n = tally(c, frameAt(c, ts));
                   const worst = ISSUES.find((s) => n[s]) ?? "ok";
@@ -582,12 +585,12 @@ export default function Page() {
                   );
                 })}
               </div>
-              <div key={cam.id} className="camera-detail-enter grid items-start gap-4 2xl:grid-cols-[minmax(0,1fr)_340px]">
+              <div key={cam.id} className="camera-detail-enter camera-stage-row">
                 <CameraStage store={store} cam={cam} frame={frame} areaId={areaId} filter={filter} onSelect={setAreaId} />
                 <AreaList cam={cam} frame={frame} onSelect={setAreaId} />
                 {selected && frame.areas[selected.id] && <AreaDetail key={selected.id} store={store} cam={cam} frame={frame} area={selected} onPick={scrub} onClose={() => setAreaId(null)} />}
               </div>
-            </div>
+            </>
           )}
           </div>
         </main>

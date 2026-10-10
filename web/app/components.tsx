@@ -6,9 +6,9 @@ import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, b
 
 /** Camera image with the planogram areas drawn on it. */
 export const FrameView = memo(function FrameView({
-  store, cam, frame, filter = "all", compact = false, areaId, hover, onHover, onSelect,
+  store, cam, frame, filter = "all", compact = false, fit = false, areaId, hover, onHover, onSelect,
 }: {
-  store: Store; cam: Camera; frame: Frame; filter?: Status | "all"; compact?: boolean;
+  store: Store; cam: Camera; frame: Frame; filter?: Status | "all"; compact?: boolean; fit?: boolean;
   areaId?: string | null; hover?: string | null; onHover?: (id: string | null) => void; onSelect?: (id: string) => void;
 }) {
   const { width: w, height: h } = store;
@@ -28,7 +28,7 @@ export const FrameView = memo(function FrameView({
     return () => observer.disconnect();
   }, [visible]);
   return (
-    <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className="frame-view block w-full h-auto select-none" data-loaded={loaded}>
+    <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className={`frame-view select-none ${fit ? "camera-frame-fit" : "block w-full h-auto"}`} data-loaded={loaded}>
       <rect width={w} height={h} fill="none" />
       {visible && <image className="frame-image" href={frameSrc(store, cam, frame)} width={w} height={h} onLoad={() => setLoaded(true)} />}
       {!compact && <rect width={w} height={h} fill={`url(#${vignette})`} pointerEvents="none" />}
@@ -84,8 +84,9 @@ export function CameraStage({
   const hovered = hover ? cam.areas.find((a) => a.id === hover) : undefined;
   const hp = hovered && frame.areas[hovered.id];
   return (
-    <div className="camera-stage relative overflow-hidden bg-black">
-      <FrameView store={store} cam={cam} frame={frame} filter={filter} areaId={areaId} hover={hover} onHover={setHover} onSelect={(id) => onSelect(id === areaId ? null : id)} />
+    <div className="camera-fit-slot">
+    <div className="camera-stage fitted relative overflow-hidden bg-black" style={{ "--frame-ar": store.width / store.height } as React.CSSProperties}>
+      <FrameView store={store} cam={cam} frame={frame} filter={filter} fit areaId={areaId} hover={hover} onHover={setHover} onSelect={(id) => onSelect(id === areaId ? null : id)} />
       <div className="glass-chip absolute left-3 top-3 font-mono">
         CAM {cam.id} · {clock(frame.ts)}
         {frame.origin === "run" && <span className="text-white/60">· tested image</span>}
@@ -108,6 +109,7 @@ export function CameraStage({
       {!!frame.warnings?.length && (
         <div className="glass-chip absolute right-3 bottom-3 max-w-[60%] text-low">⚠ {frame.warnings.join(" · ")}</div>
       )}
+    </div>
     </div>
   );
 }
@@ -459,25 +461,32 @@ export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; 
     .map((a) => ({ a, p: frame.areas[a.id], s: statusOf(frame.areas[a.id]) }))
     .sort((x, y) => STATUS[x.s].rank - STATUS[y.s].rank || x.a.id.localeCompare(y.a.id, undefined, { numeric: true }));
   const todo = rows.filter((r) => r.s !== "ok").length;
+  const groups = ORDER.map((s) => ({ s, rows: rows.filter((r) => r.s === s) })).filter((g) => g.rows.length);
   return (
-    <section className="glass-card overflow-hidden">
-      <div className="px-4 py-3 border-b border-line">
+    <section className="camera-areas glass-card" aria-label={`Camera ${cam.id} planogram`}>
+      <div className="camera-areas-head">
         <div className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · {clock(frame.ts)}
         </div>
-        <div className="mt-0.5 text-sm">
-          {rows.length} planogram areas · {todo ? <span style={{ color: STATUS[rows[0].s].color }}>{todo} need attention</span> : <span className="text-muted">all compliant</span>}
+        <div className="mt-1 text-[15px] font-medium tracking-tight leading-snug">
+          {rows.length} planogram areas
+          {todo ? <span style={{ color: STATUS[rows[0].s].color }}> · {todo} need attention</span> : <span className="text-muted"> · all compliant</span>}
         </div>
       </div>
-      <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-1">
-        {rows.map(({ a, p, s }) => (
-          <button key={a.id} onClick={() => onSelect(a.id)} className="flex items-center gap-2.5 px-4 py-2 text-left border-b border-line/50 hover:bg-raised/60 transition-colors" title="See why ShelfOS made this call">
-            <span className="size-1.5 shrink-0 rounded-full" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.35 : 1 }} />
-            <span className={`min-w-0 flex-1 truncate text-xs ${s === "ok" ? "text-white/70" : ""}`}>{a.product}</span>
-            <span className="shrink-0 text-[10px] font-mono" style={{ color: s === "ok" ? undefined : STATUS[s].color }}>
-              {s === "ok" ? <span className="text-muted">{p.level}</span> : STATUS[s].label.toLowerCase()}
-            </span>
-          </button>
+      <div className="camera-area-scroll">
+        {groups.map((g) => (
+          <div key={g.s}>
+            <div className="area-group"><i style={{ background: STATUS[g.s].color }} />{STATUS[g.s].label}<span>{g.rows.length}</span></div>
+            {g.rows.map(({ a, s }) => (
+              <button key={a.id} onClick={() => onSelect(a.id)} className="area-row" title={STATUS[s].hint}>
+                <span className="area-dot" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.45 : 1 }} />
+                <span className="area-copy">
+                  <strong>{a.product}</strong>
+                  <small>slot {a.id.split("_")[1]} · {STATUS[s].hint}</small>
+                </span>
+              </button>
+            ))}
+          </div>
         ))}
       </div>
     </section>
