@@ -1,0 +1,6971 @@
+{
+ "6443_1": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFF",
+   "TTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_2": {
+  "reviewed": true,
+  "base": [
+   "HFFFFFHHFFFF",
+   "TTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_3": {
+  "reviewed": true,
+  "base": [
+   "hhhFFFFFFFFf",
+   "???ttttttttt"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_4": {
+  "reviewed": true,
+  "base": [
+   "ffffffffffff",
+   "tttttttttttt"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_5": {
+  "reviewed": true,
+  "base": [
+   "ffffffffffff",
+   "????????????"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_6": {
+  "reviewed": true,
+  "base": [
+   "ffFFFFffFFFF",
+   "ttTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_7": {
+  "reviewed": true,
+  "base": [
+   "ffffffffffff",
+   "tttttttttttt"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_8": {
+  "reviewed": true,
+  "base": [
+   "HHFFFFhhFFFF",
+   "ttTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_9": {
+  "reviewed": true,
+  "base": [
+   "ffffffffffff",
+   "tttttttttttt"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_10": {
+  "reviewed": true,
+  "base": [
+   "HHHFFFFFFFFF",
+   "tttttttttttt"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_11": {
+  "reviewed": true,
+  "base": [
+   "FFFFFHHHHHHH",
+   "TTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6443_12": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFffFFF",
+   "tttttttttttt"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6443_13": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFF",
+   "TTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001244.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005341.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020727.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024371.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028789.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032575.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036374.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040209.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044079.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6462_1": {
+  "reviewed": true,
+  "base": [
+   "EFFFFHHHHHHHE",
+   "NTTTTTTTTTTTN"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6462_2": {
+  "reviewed": true,
+  "base": [
+   "fffFFFFFFFFff",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6462_3": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFHHHH",
+   "tttTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6462_4": {
+  "reviewed": true,
+  "base": [
+   "EHFFFFFFFFFFH",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6462_5": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFfHffffH",
+   "Ntttttttttttt"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6462_6": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFFFFFFFF",
+   "Ntttttttttttt"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6462_7": {
+  "reviewed": true,
+  "base": [
+   "EFFFfFFFffffH",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6462_8": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFFFFFFFF",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6462_9": {
+  "reviewed": true,
+  "base": [
+   "EFFFhFFFFFFFH",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001155.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005795.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009411.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013242.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751016893.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751020617.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751024395.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028563.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032838.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036485.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040186.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751043841.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751047858.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6468_1": {
+  "reviewed": true,
+  "base": [
+   "EEFFFFFFFFFFF",
+   "NNTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_2": {
+  "reviewed": true,
+  "base": [
+   "HHEFFFFFFFFFF",
+   "TTNTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_3": {
+  "reviewed": true,
+  "base": [
+   "ffFFFFFFFHFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_4": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFf",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_5": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_6": {
+  "reviewed": true,
+  "base": [
+   "fffffffffffff",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6468_7": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "FFFTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_8": {
+  "reviewed": true,
+  "base": [
+   "fffFFFFFFFFFF",
+   "FFFTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_9": {
+  "reviewed": true,
+  "base": [
+   "FFFFfffffffHh",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6468_10": {
+  "reviewed": true,
+  "base": [
+   "fffffHHHHHhhh",
+   "ttttttttttttt"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6468_11": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "FFFTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_12": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "FFFTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005772.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_13": {
+  "reviewed": true,
+  "base": [
+   "HHFFFFFFFFFFF",
+   "FFFTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005772.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009863.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_14": {
+  "reviewed": true,
+  "base": [
+   "HHFffffffffff",
+   "FFFTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005772.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009863.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6468_15": {
+  "reviewed": true,
+  "base": [
+   "HFFFFFFFFFFFH",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6468_16": {
+  "reviewed": true,
+  "base": [
+   "fffFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001157.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005772.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009863.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013530.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017764.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021997.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751026188.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029957.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033646.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037301.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041038.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044824.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048837.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_1": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFFFFFFFF",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_2": {
+  "reviewed": true,
+  "base": [
+   "EEFFFFFFFFFFf",
+   "NNTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_3": {
+  "reviewed": true,
+  "base": [
+   "EHFFFFFFFFFFF",
+   "Ntttttttttttt"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": true,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_4": {
+  "reviewed": true,
+  "base": [
+   "EEFFhfhhfffff",
+   "NNTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_5": {
+  "reviewed": true,
+  "base": [
+   "EFFFHFhHfHHHE",
+   "NTTTTTTTTTTTN"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6491_6": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFFFFFfff",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_7": {
+  "reviewed": true,
+  "base": [
+   "EFFFHFHHHhHHE",
+   "NTTTTTTTTTTTN"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6491_8": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFFFFFFFf",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_9": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFFFFFFFF",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6491_10": {
+  "reviewed": true,
+  "base": [
+   "EFFFFFFFFFFFH",
+   "NTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001245.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005570.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751010016.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013784.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751018041.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021816.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025495.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029202.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033170.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036849.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040739.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044356.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048611.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6591_1": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFfH",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6591_2": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFf",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6591_3": {
+  "reviewed": true,
+  "base": [
+   "HHHHFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017235.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751020896.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751025118.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751028988.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751032871.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751036598.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751040216.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044047.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751048487.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6591_4": {
+  "reviewed": true,
+  "base": [
+   "ffffFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6591_5": {
+  "reviewed": true,
+  "base": [
+   "HHHHFFFFFFhhh",
+   "ffffTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005287.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009443.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013255.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6591_6": {
+  "reviewed": true,
+  "base": [
+   "hhhhhhhhhhhHH",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   }
+  }
+ },
+ "6591_7": {
+  "reviewed": true,
+  "base": [
+   "HHFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6591_8": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6591_9": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFff",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6591_10": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005287.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009443.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013255.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017235.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751020896.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025118.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751028988.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751032871.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751036598.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751040216.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751044047.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751048487.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_1": {
+  "reviewed": true,
+  "base": [
+   "HHHFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_2": {
+  "reviewed": true,
+  "base": [
+   "hhhhFFFFFFFFF",
+   "FFFFTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": false,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005322.jpg": {
+    "compliant": false,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751008928.jpg": {
+    "compliant": false,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013117.jpg": {
+    "compliant": false,
+    "unsure": true,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_3": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "ffffTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005322.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751008928.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_4": {
+  "reviewed": true,
+  "base": [
+   "FFFfFhHHFFFhh",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_5": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_6": {
+  "reviewed": true,
+  "base": [
+   "ffffFFFFFFFFF",
+   "TTTTttttttttt"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_7": {
+  "reviewed": true,
+  "base": [
+   "EEEFFFFFFFFFF",
+   "NNNTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_8": {
+  "reviewed": true,
+  "base": [
+   "FFFFfffffhHHH",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6594_9": {
+  "reviewed": true,
+  "base": [
+   "HHHFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_10": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFf",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_11": {
+  "reviewed": true,
+  "base": [
+   "fffffffffffff",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6594_12": {
+  "reviewed": true,
+  "base": [
+   "HHHHFFFFFFFFF",
+   "ffffTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751005322.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751008928.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751013117.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751017278.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6594_13": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTfffffffff"
+  ],
+  "frames": {
+   "1751001189.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005322.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751008928.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013117.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017278.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021279.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025171.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029354.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033482.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037746.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041681.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045458.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049768.jpg": {
+    "compliant": false,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_1": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_2": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_3": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFHH",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6781_4": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_5": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_6": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_7": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_8": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFFFFFFF",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ },
+ "6781_9": {
+  "reviewed": true,
+  "base": [
+   "FFFFFFFfffHHH",
+   "TTTTTTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "half"
+   }
+  }
+ },
+ "6781_10": {
+  "reviewed": true,
+  "base": [
+   "FFF?FFFFFFFFF",
+   "ttt?TTTTTTTTT"
+  ],
+  "frames": {
+   "1751001200.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751005810.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751009927.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751013921.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "empty"
+   },
+   "1751017932.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751021920.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751025662.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751029808.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751033637.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751037494.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751041407.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751045840.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   },
+   "1751049846.jpg": {
+    "compliant": true,
+    "unsure": false,
+    "unknown": false,
+    "stock": "full"
+   }
+  }
+ }
+}
