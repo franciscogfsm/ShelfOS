@@ -178,6 +178,16 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
 
     ui = Path(ui_dir)
     if (ui / "index.html").exists():
+        @app.get("/colaboradores", include_in_schema=False)
+        @app.get("/colaboradores/", include_in_schema=False)
+        def collaborators():
+            page = ui / "colaboradores.html"
+            if not page.exists():
+                page = ui / "colaboradores" / "index.html"
+            if not page.exists():
+                raise HTTPException(404, "Build the web app to open the collaborators demo")
+            return FileResponse(page)
+
         app.mount("/", StaticFiles(directory=ui, html=True), name="ui")
     else:
         @app.get("/")

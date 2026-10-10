@@ -295,6 +295,28 @@ input[type="range"].scrub {
 .camera-footer { padding: 10px 2px 0; font-size: 11px; color: var(--ink-3); }
 .camera-footer > span:last-child { color: var(--dim); transition: color 250ms; }
 .camera-stage { border-radius: 22px; box-shadow: 0 0 0 1px rgb(var(--fg) / calc(.078 * var(--k))), 0 30px 70px -40px rgb(0 0 0 / calc(1 * var(--shade))); }
+/* Camera detail: the picture stays inside the viewport, a little under the space it has. */
+.camera-page { display: flex; flex: 1; flex-direction: column; min-height: 0; gap: 10px; }
+.camera-stage-row { position: relative; display: grid; flex: 1; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 12px; min-height: 0; align-items: stretch; }
+.camera-fit-slot { container-type: size; display: grid; height: 100%; min-width: 0; min-height: 0; place-items: center; }
+.stage-wrap { aspect-ratio: var(--frame-ar); width: min(97cqi, calc(97cqb * var(--frame-ar))); height: auto; max-width: 97%; max-height: 97cqb; }
+.stage-wrap > .camera-stage { width: 100%; height: 100%; }
+.camera-frame-fit { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.planogram-board { display: flex; flex-direction: column; align-self: start; width: 100%; min-height: 0; max-height: min(100%, 440px); overflow: hidden; }
+.plan-head { flex-shrink: 0; padding: 16px 16px 12px; }
+.plan-kicker { display: flex; justify-content: space-between; gap: 12px; font-size: 10px; font-weight: 550; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+.plan-kicker span { letter-spacing: 0; font-family: var(--font-mono); }
+.plan-head h2 { margin-top: 6px; font-size: 20px; font-weight: 600; letter-spacing: -.04em; line-height: 1.15; }
+.plan-head h2 span { color: var(--dim); font-weight: 500; }
+.plan-mix { display: flex; gap: 3px; height: 4px; margin-top: 14px; }
+.plan-mix i { display: block; min-width: 8px; border-radius: 99px; }
+.plan-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 10px; font-size: 11px; font-weight: 550; }
+.plan-list { min-height: 0; overflow: auto; padding: 0 6px 8px; }
+.plan-row { display: block; width: calc(100% - 0px); margin: 2px 0; padding: 10px 12px 10px 14px; border: 1px solid transparent; border-radius: 14px; background: transparent; color: inherit; text-align: left; cursor: pointer; box-shadow: inset 3px 0 0 var(--tone); }
+.plan-row:hover { border-color: rgb(var(--fg) / calc(.08 * var(--k))); background: rgb(var(--fg) / calc(.045 * var(--k))); }
+.plan-row strong { display: block; font-size: 14px; font-weight: 550; line-height: 1.3; letter-spacing: -.015em; }
+.plan-row span { display: flex; align-items: baseline; gap: 8px; margin-top: 3px; font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+.plan-row em { margin-left: auto; font-style: normal; font-family: var(--font-sans), system-ui, sans-serif; font-weight: 600; font-size: 11px; color: var(--tone); }
 .frame-view { aspect-ratio: auto; }
 .frame-image { opacity: 0; transition: opacity 180ms ease-out; }
 .frame-view[data-loaded="true"] .frame-image { opacity: 1; }
@@ -337,7 +359,34 @@ input[type="range"].scrub {
 .filter-row button:active, .snapshot-chip:active, .metric-mix:active { transform: scale(.97); }
 .shift-bar > span, .metric-spark polyline { will-change: auto; }
 .popup-backdrop { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 16px; overflow-y: auto; background: var(--scrim); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: fade-in 240ms ease-out both; }
-.popup { width: min(860px, 100%); border-radius: 26px; background: linear-gradient(180deg, rgb(var(--fg) / calc(.102 * var(--k))), rgb(var(--fg) / calc(.039 * var(--k))) 40%, rgb(var(--fg) / calc(.059 * var(--k)))), rgb(var(--panel) / .851); -webkit-backdrop-filter: blur(30px) saturate(180%); backdrop-filter: blur(30px) saturate(180%); box-shadow: inset 0 1px 0 rgb(255 255 255 / calc(.22 * var(--hi))), inset 0 -1px 0 rgb(0 0 0 / calc(.302 * var(--shade))), 0 40px 100px -30px rgb(0 0 0 / calc(1 * var(--shade))); animation: popup-in 420ms var(--ease-spring) both; }
+.popup { width: 100%; border-radius: 26px; background: linear-gradient(180deg, rgb(var(--fg) / calc(.102 * var(--k))), rgb(var(--fg) / calc(.039 * var(--k))) 40%, rgb(var(--fg) / calc(.059 * var(--k)))), rgb(var(--panel) / .851); -webkit-backdrop-filter: blur(30px) saturate(180%); backdrop-filter: blur(30px) saturate(180%); box-shadow: inset 0 1px 0 rgb(255 255 255 / calc(.22 * var(--hi))), inset 0 -1px 0 rgb(0 0 0 / calc(.302 * var(--shade))), 0 40px 100px -30px rgb(0 0 0 / calc(1 * var(--shade))); animation: popup-in 420ms var(--ease-spring) both; }
+/* area detail: a panel beside the picked area, on the side of the picture with more room, level with it.
+   The picture stays sharp and only darkens around the area. The page does not scroll here, so the panel is laid
+   out in the whole row (the space the picture sits in, and the list under it): when it is taller than the
+   picture it grows past it, over the list if need be, and only then scrolls. */
+.spotlight { fill: #000; fill-opacity: .5; animation: fade-in 260ms ease-out both; }
+.popup-body { display: grid; gap: 16px 24px; }
+.popup-stats { display: grid; gap: 16px 20px; }
+/* --sw: width of the picture. --side, --out: the space left around it, left and right, above and below */
+.area-slot { --sw: min(97cqi, 97cqb * var(--frame-ar)); --side: calc((100cqi - var(--sw)) / 2); --out: calc((100cqb - var(--sw) / var(--frame-ar)) / 2); position: absolute; z-index: 5; bottom: 0; display: flex; flex-direction: column; pointer-events: none; }
+.area-slot > .popup { overflow-y: auto; pointer-events: auto; }
+@container (min-width: 420px) { .popup-stats { grid-template-columns: 1fr 1fr; } }
+@container (min-width: 520px) and (max-width: 639.98px) { .popup-body { grid-template-columns: minmax(0, 240px) 1fr; } }
+@container (min-width: 640px) {
+  .area-slot { --pw: clamp(320px, 38cqi, 400px); top: 0; width: var(--pw); }
+  .area-slot[data-side="right"] { left: min(calc(var(--side) + var(--x1) * var(--sw) + 14px), calc(100cqi - var(--pw))); }
+  .area-slot[data-side="left"] { left: max(calc(var(--side) + var(--x0) * var(--sw) - 14px - var(--pw)), 0px); }
+  /* the height left inside the picture is shared out above and below by how far down the area is */
+  .area-slot::before { content: ""; flex: var(--cy) 1 calc(var(--out) + 12px); }
+  .area-slot::after { content: ""; flex: calc(1 - var(--cy)) 1 calc(100% - 100cqb + var(--out) + 12px); }
+  .area-slot > .popup { flex: none; max-height: 100%; transform-origin: right center; }
+  .area-slot[data-side="right"] > .popup { transform-origin: left center; }
+}
+/* no room beside the area: a sheet under the picture, over the list */
+@container (max-width: 639.98px) {
+  .area-slot { top: calc(100cqb - var(--out) + 8px); left: 0; right: 0; }
+  .area-slot > .popup { min-height: 0; }
+}
 /* search: a command palette that drops in from the top */
 .search-trigger { display: flex; align-items: center; gap: 9px; height: 40px; padding: 0 8px 0 13px; border-radius: 999px; font-size: 13px; color: var(--muted); transition: color 200ms, transform 160ms; }
 .search-trigger:hover { color: var(--ink); }
@@ -452,6 +501,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 
 @media (min-width: 1024px) {
   .task-panel { margin: 0 20px 20px 0; }
+}
+@media (min-width: 1280px) {
+  .camera-stage-row { grid-template-columns: minmax(0, 1fr) 320px; grid-template-rows: minmax(0, 1fr); }
+  .planogram-board { max-height: 100%; }
 }
 @media (min-width: 1280px) { .metrics-grid { gap: 14px; } }
 @media (max-width: 1279px) {

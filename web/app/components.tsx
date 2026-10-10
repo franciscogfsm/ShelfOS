@@ -8,9 +8,9 @@ import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, b
 
 /** Camera image with the planogram areas drawn on it. */
 export const FrameView = memo(function FrameView({
-  store, cam, frame, filter = "all", compact = false, areaId, hover, onHover, onSelect,
+  store, cam, frame, filter = "all", compact = false, fit = false, areaId, hover, onHover, onSelect,
 }: {
-  store: Store; cam: Camera; frame: Frame; filter?: Status | "all"; compact?: boolean;
+  store: Store; cam: Camera; frame: Frame; filter?: Status | "all"; compact?: boolean; fit?: boolean;
   areaId?: string | null; hover?: string | null; onHover?: (id: string | null) => void; onSelect?: (id: string) => void;
 }) {
   const { width: w, height: h } = store;
@@ -18,6 +18,7 @@ export const FrameView = memo(function FrameView({
   const [visible, setVisible] = useState(!compact);
   const [loaded, setLoaded] = useState(false);
   const vignette = useId();
+  const focus = areaId && frame.areas[areaId] ? cam.areas.find((a) => a.id === areaId) : undefined;
   useEffect(() => {
     if (visible || !svg.current) return;
     const observer = new IntersectionObserver(([entry]) => {
@@ -30,7 +31,7 @@ export const FrameView = memo(function FrameView({
     return () => observer.disconnect();
   }, [visible]);
   return (
-    <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className="frame-view block w-full h-auto select-none" data-loaded={loaded}>
+    <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className={`frame-view select-none ${fit ? "camera-frame-fit" : "block w-full h-auto"}`} data-loaded={loaded}>
       <rect width={w} height={h} fill="none" />
       {visible && <image className="frame-image" href={frameSrc(store, cam, frame)} width={w} height={h} onLoad={() => setLoaded(true)} />}
       {!compact && <rect width={w} height={h} fill={`url(#${vignette})`} pointerEvents="none" />}
@@ -40,20 +41,25 @@ export const FrameView = memo(function FrameView({
           <stop offset="100%" stopColor="#000" stopOpacity="0.45" />
         </radialGradient>
       </defs>
+      {/* a picked area keeps the picture sharp and darkens only what is around it; a click out there lets go of it */}
+      {focus && (
+        <path className="spotlight" fillRule="evenodd" d={`M0 0H${w}V${h}H0ZM${focus.quad.map((q) => q.join(" ")).join("L")}Z`} onClick={onSelect && (() => onSelect(focus.id))} />
+      )}
       {visible && cam.areas.map((a) => {
         const p = frame.areas[a.id];
         if (!p) return null;
         const s = statusOf(p);
         const active = a.id === areaId || a.id === hover;
+        const picked = a.id === focus?.id;
         const dim = filter !== "all" && filter !== s;
         const quiet = s === "ok";
         const [cx, cy] = centroid(a.quad, w, h);
         return (
-          <g key={a.id} opacity={dim ? 0.18 : 1} className="transition-opacity">
+          <g key={a.id} opacity={dim ? 0.18 : focus && !active ? 0.4 : 1} className="transition-opacity">
             <polygon
               points={points(a.quad)}
               fill={STATUS[s].color}
-              fillOpacity={active ? 0.25 : quiet ? 0 : 0.13}
+              fillOpacity={picked ? 0 : active ? 0.25 : quiet ? 0 : 0.13}
               stroke={STATUS[s].color}
               strokeWidth={active ? 4.5 : quiet ? (compact ? 1.5 : 1.25) : compact ? 4 : 2.75}
               strokeOpacity={quiet && !active ? 0.5 : 1}
@@ -64,7 +70,7 @@ export const FrameView = memo(function FrameView({
               onMouseLeave={onHover && (() => onHover(null))}
               onClick={onSelect && (() => onSelect(a.id))}
             />
-            {!quiet && !compact && (
+            {!quiet && !compact && !picked && (
               <g pointerEvents="none">
                 <circle cx={cx} cy={cy} r={13} fill="#05070a" fillOpacity={0.85} stroke={STATUS[s].color} strokeWidth={2} />
                 <text x={cx} y={cy + 5.5} textAnchor="middle" fontSize={16} fontWeight={700} fill={STATUS[s].color}>
@@ -80,14 +86,21 @@ export const FrameView = memo(function FrameView({
 });
 
 export function CameraStage({
-  store, cam, frame, areaId, filter, onSelect,
-}: { store: Store; cam: Camera; frame: Frame; areaId: string | null; filter: Status | "all"; onSelect: (id: string | null) => void }) {
+  store, cam, frame, areaId, filter, onSelect, children,
+}: { store: Store; cam: Camera; frame: Frame; areaId: string | null; filter: Status | "all"; onSelect: (id: string | null) => void; children?: React.ReactNode }) {
   const [hover, setHover] = useState<string | null>(null);
   const hovered = hover ? cam.areas.find((a) => a.id === hover) : undefined;
   const hp = hovered && frame.areas[hovered.id];
+  const picked = areaId && frame.areas[areaId] ? cam.areas.find((a) => a.id === areaId) : undefined;
+  // the detail of a picked area sits beside it, on the side of the picture with more room, level with it
+  const at = picked && bbox(picked.quad, store.width, store.height, 0);
+  const x0 = at ? at.x / store.width : 0;
+  const x1 = at ? (at.x + at.w) / store.width : 0;
   return (
+    <div className="camera-fit-slot">
+    <div className="stage-wrap" style={{ "--frame-ar": store.width / store.height } as React.CSSProperties}>
     <div className="camera-stage relative overflow-hidden bg-black">
-      <FrameView store={store} cam={cam} frame={frame} filter={filter} areaId={areaId} hover={hover} onHover={setHover} onSelect={(id) => onSelect(id === areaId ? null : id)} />
+      <FrameView store={store} cam={cam} frame={frame} filter={filter} fit areaId={areaId} hover={hover} onHover={setHover} onSelect={(id) => onSelect(id === areaId ? null : id)} />
       <div className="glass-chip absolute left-3 top-3 font-mono">
         CAM {cam.id} · {clock(frame.ts)}
         {frame.origin === "run" && <span className="text-white/60">· tested image</span>}
@@ -110,6 +123,13 @@ export function CameraStage({
       {!!frame.warnings?.length && (
         <div className="glass-chip absolute right-3 bottom-3 max-w-[60%] text-low">⚠ {frame.warnings.join(" · ")}</div>
       )}
+    </div>
+    {at && children && (
+      <div className="area-slot" data-side={1 - x1 >= x0 ? "right" : "left"} style={{ "--x0": x0, "--x1": x1, "--cy": (at.y + at.h / 2) / store.height } as React.CSSProperties}>
+        {children}
+      </div>
+    )}
+    </div>
     </div>
   );
 }
@@ -326,9 +346,8 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
   };
   const line = Math.max(b.w, b.h);
   return (
-    <div className="popup-backdrop" onClick={onClose}>
-    <section role="dialog" aria-modal="true" aria-label={area.product} onClick={(e) => e.stopPropagation()} className="popup glass px-5 sm:px-6 pb-6 pt-4 grid md:grid-cols-[minmax(0,300px)_1fr] gap-x-7 gap-y-3">
-      <div className="col-span-full flex items-center justify-between">
+    <section role="dialog" aria-label={area.product} className="popup glass px-5 pb-5 pt-3 flex flex-col gap-3">
+      <div className="flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · slot {area.id.split("_")[1]}
         </span>
@@ -336,6 +355,31 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="m1.5 1.5 8 8m0-8-8 8" /></svg>
         </button>
       </div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap" style={{ color: STATUS[s].color }}>
+            <span className="size-4 grid place-items-center rounded-full text-[10px] font-bold text-[#09090b]" style={{ background: STATUS[s].color }}>
+              {STATUS[s].glyph}
+            </span>
+            {STATUS[s].label} · {STATUS[s].action}
+          </div>
+          <h2 className="mt-1 text-xl leading-tight font-medium tracking-tight line-clamp-2">{area.product}</h2>
+          <div className="text-[11px] text-muted font-mono truncate">
+            {area.rawName} · #{area.productId}
+          </div>
+          {s !== "ok" && frame.ts > started && <div className="mt-1 text-[11px] text-muted">Like this for {duration(frame.ts - started)}</div>}
+          {pace && (
+            <div className="mt-0.5 text-[11px] text-muted">
+              Full at {clock(pace.fullFrom)}, half by {clock(pace.halfAt)}: sold down in {duration(pace.seconds)}
+            </div>
+          )}
+        </div>
+        <div className="text-right shrink-0">
+          <div className="text-[10px] uppercase tracking-[0.14em] text-muted whitespace-nowrap">Shelf covered</div>
+          <div className="font-mono text-2xl tabular-nums tracking-tight">{hasMap ? `${Math.round(p.occ * 100)}%` : "–"}</div>
+        </div>
+      </div>
+      <div className="popup-body">
       <div className="grid grid-cols-2 gap-2 self-start">
         <figure>
           <div className="relative">
@@ -401,31 +445,6 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
       </div>
 
       <div className="min-w-0 flex flex-col gap-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap" style={{ color: STATUS[s].color }}>
-              <span className="size-4 grid place-items-center rounded-full text-[10px] font-bold text-[#09090b]" style={{ background: STATUS[s].color }}>
-                {STATUS[s].glyph}
-              </span>
-              {STATUS[s].label} · {STATUS[s].action}
-            </div>
-            <h2 className="mt-1 text-2xl font-medium tracking-tight truncate">{area.product}</h2>
-            <div className="text-[11px] text-muted font-mono truncate">
-              {area.rawName} · #{area.productId}
-            </div>
-            {s !== "ok" && frame.ts > started && <div className="mt-1 text-[11px] text-muted">Like this for {duration(frame.ts - started)}</div>}
-            {pace && (
-              <div className="mt-0.5 text-[11px] text-muted">
-                Full at {clock(pace.fullFrom)}, half by {clock(pace.halfAt)}: sold down in {duration(pace.seconds)}
-              </div>
-            )}
-          </div>
-          <div className="text-right shrink-0">
-            <div className="text-[10px] uppercase tracking-[0.14em] text-muted whitespace-nowrap">Shelf covered</div>
-            <div className="font-mono text-3xl tabular-nums tracking-tight">{hasMap ? `${Math.round(p.occ * 100)}%` : "–"}</div>
-          </div>
-        </div>
-
         {p.source === "memory" && (
           <div className="rounded-md border border-low/40 bg-low/10 px-3 py-2 text-xs text-low">
             This image could not be read here. The answer is the last known state of the slot, so the output file is still complete.
@@ -437,7 +456,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           </div>
         )}
 
-        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
+        <div className="popup-stats">
           <div>
             <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">Stock level</div>
             {(["Empty", "Half", "Full"] as const).map((name, i) => {
@@ -504,8 +523,8 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           </div>
         </div>
       </div>
+      </div>
     </section>
-    </div>
   );
 }
 
@@ -517,25 +536,27 @@ export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; 
     .filter((a) => frame.areas[a.id])
     .map((a) => ({ a, p: frame.areas[a.id], s: statusOf(frame.areas[a.id]) }))
     .sort((x, y) => STATUS[x.s].rank - STATUS[y.s].rank || x.a.id.localeCompare(y.a.id, undefined, { numeric: true }));
-  const todo = rows.filter((r) => r.s !== "ok").length;
+  const counts = Object.fromEntries(ORDER.map((s) => [s, rows.filter((r) => r.s === s).length])) as Record<Status, number>;
+  const todo = rows.length - counts.ok;
   return (
-    <section className="glass-card overflow-hidden">
-      <div className="px-4 py-3 border-b border-line">
-        <div className="text-[10px] uppercase tracking-[0.14em] text-muted">
-          Camera {cam.id} · {clock(frame.ts)}
+    <section className="planogram-board glass-card" aria-label={`Camera ${cam.id} planogram`}>
+      <header className="plan-head">
+        <div className="plan-kicker">Camera {cam.id}<span>{clock(frame.ts)}</span></div>
+        <h2>{todo ? <>{todo} to fix <span>of {rows.length}</span></> : <>All {rows.length} in place</>}</h2>
+        <div className="plan-mix" aria-hidden="true">
+          {ORDER.map((s) => counts[s] > 0 && <i key={s} style={{ flexGrow: counts[s], background: STATUS[s].color }} />)}
         </div>
-        <div className="mt-0.5 text-sm">
-          {rows.length} planogram areas · {todo ? <span style={{ color: STATUS[rows[0].s].color }}>{todo} need attention</span> : <span className="text-muted">all compliant</span>}
+        <div className="plan-legend">
+          {ORDER.filter((s) => counts[s] > 0).map((s) => (
+            <span key={s} style={{ color: STATUS[s].color }}>{counts[s]} {STATUS[s].label}</span>
+          ))}
         </div>
-      </div>
-      <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-1">
-        {rows.map(({ a, p, s }) => (
-          <button key={a.id} onClick={() => onSelect(a.id)} className="flex items-center gap-2.5 px-4 py-2 text-left border-b border-line/50 hover:bg-raised/60 transition-colors" title="See why ShelfOS made this call">
-            <span className="size-1.5 shrink-0 rounded-full" style={{ background: STATUS[s].color, opacity: s === "ok" ? 0.35 : 1 }} />
-            <span className={`min-w-0 flex-1 truncate text-xs ${s === "ok" ? "text-white/70" : ""}`}>{a.product}</span>
-            <span className="shrink-0 text-[10px] font-mono" style={{ color: s === "ok" ? undefined : STATUS[s].color }}>
-              {s === "ok" ? <span className="text-muted">{p.level}</span> : STATUS[s].label.toLowerCase()}
-            </span>
+      </header>
+      <div className="plan-list">
+        {rows.map(({ a, s }) => (
+          <button key={a.id} type="button" onClick={() => onSelect(a.id)} className="plan-row" style={{ "--tone": STATUS[s].color } as React.CSSProperties}>
+            <strong>{a.product}</strong>
+            <span>slot {a.id.split("_")[1]}<em>{STATUS[s].label}</em></span>
           </button>
         ))}
       </div>

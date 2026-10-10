@@ -112,7 +112,7 @@ class Engine:
     OCC_C = 0.2  # inverse regularisation of the patch product/background classifier (CV: late +0.618->+0.655, fwd +0.748->+0.766)
     STOCK_C = 1.0
     RECENCY_W = 0.0
-    HOUR_SCALE = 0.5  # weight of the time-of-day prior in the design matrix (0 = off)
+    HOUR_SCALE = 0.0  # time-of-day prior off: organisers said the model must learn from the image, not the time of day (cost measured: late -0.5pp, fwd -0.1pp)
     ONLINE = False  # remember each predicted frame so the next frame of the same camera is compared with it
     ONLINE_MIN_CONF = 0.0  # ... but only crops whose level is at least this certain
 
