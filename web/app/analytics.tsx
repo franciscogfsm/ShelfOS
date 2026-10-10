@@ -171,7 +171,7 @@ function Chart({ day, line, ts, modes, onJump, i }: { day: Day; line: Line; ts: 
   const layers = useMemo(() => {
     if (mode !== "attention") {
       const ys = day.series[mode].map((v) => H - v * (H - 24));
-      return [{ key: mode, color: "#fafafa", line: `M${curve(ys)}`, area: `M${curve(ys)} L${W},${H} L0,${H} Z` }];
+      return [{ key: mode, color: "var(--ink)", line: `M${curve(ys)}`, area: `M${curve(ys)} L${W},${H} L0,${H} Z` }];
     }
     const y = (v: number) => H - (v / top) * (H - 24);
     return ISSUES.map((s, k) => {
@@ -258,7 +258,7 @@ function Heat({ rows, cols, now, label }: { rows: HeatRow[]; cols: number[]; now
                 onClick={() => row.pick(t)}
                 className="an-cell"
                 title={`${row.label} at ${clock(t)} · ${c.tip}`}
-                style={{ ...delay(Math.min(r, 14) + i), background: c.worst ? `color-mix(in srgb, ${STATUS[c.worst].color} ${Math.round(22 + c.share * 78)}%, #ffffff0d)` : undefined }}
+                style={{ ...delay(Math.min(r, 14) + i), background: c.worst ? `color-mix(in srgb, ${STATUS[c.worst].color} ${Math.round(22 + c.share * 78)}%, rgb(var(--fg) / .06))` : undefined }}
               />
             );
           })}
@@ -460,7 +460,7 @@ function Group({
           <div className="an-head"><div><span className="eyebrow">AT {clock(ts)}</span><h3>Shelf mix</h3></div></div>
           <div className="an-donut">
             <svg viewBox="0 0 100 100" aria-hidden="true">
-              <circle cx="50" cy="50" r="42" fill="none" stroke="#ffffff0f" strokeWidth="9" />
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgb(var(--fg) / .07)" strokeWidth="9" />
               {mix.map(({ s, n, from }) => <circle key={s} cx="50" cy="50" r="42" fill="none" stroke={STATUS[s].color} strokeWidth="9" pathLength={100} strokeDasharray={`${Math.max(0, (n / total) * 100 - 0.8)} 100`} strokeDashoffset={-from} />)}
             </svg>
             <div className="an-donut-mid"><b className="tabular-nums"><CountUp value={pct(okNow / total)} />%</b><span>compliant</span></div>
@@ -504,7 +504,7 @@ function Group({
         <section className="an-card glass-card" style={delay(4)}>
           <div className="an-head">
             <div><span className="eyebrow">WORKLOAD</span><h3>Raised and fixed, hour by hour</h3><p>A problem is raised when a capture first shows it and fixed when a later one shows the area back in shape.</p></div>
-            <div className="an-legend"><span><i style={{ background: "#fafafa" }} />Raised</span><span><i style={{ background: STATUS.ok.color }} />Fixed</span></div>
+            <div className="an-legend"><span><i style={{ background: "var(--ink)" }} />Raised</span><span><i style={{ background: STATUS.ok.color }} />Fixed</span></div>
           </div>
           <div className="an-flow">
             {flow.map((f, i) => (

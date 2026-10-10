@@ -134,7 +134,7 @@ export const Kpi = memo(function Kpi({
   const pts = trend?.map((v, i) => `${((i / (trend.length - 1)) * 100).toFixed(2)},${y(v).toFixed(2)}`).join(" ");
   const now = trend && at !== undefined ? trend[Math.round(at * (trend.length - 1))] : undefined;
   return (
-    <div className="metric-card glass-card relative overflow-hidden">
+    <div className="metric-card glass-card relative overflow-hidden" style={{ "--tone": color } as React.CSSProperties}>
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-muted"><span className="size-1.5 rounded-full" style={{ background: color }} />{label}</div>
@@ -143,7 +143,7 @@ export const Kpi = memo(function Kpi({
         </div>
         {share !== undefined && (
           <svg className="metric-ring" viewBox="0 0 44 44" aria-hidden="true">
-            <circle cx="22" cy="22" r="18" fill="none" stroke="#ffffff14" strokeWidth="4" />
+            <circle cx="22" cy="22" r="18" fill="none" stroke="rgb(var(--fg) / .08)" strokeWidth="4" />
             <circle cx="22" cy="22" r="18" fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" pathLength={100} strokeDasharray={`${Math.max(0.01, share * 100)} 100`} transform="rotate(-90 22 22)" />
           </svg>
         )}
@@ -263,7 +263,7 @@ export function DayStrip({ store, ts, line, onChange }: { store: Store; ts: numb
         <span key={i} className="absolute top-[35px] h-[5px] w-[2px] -translate-x-1/2 rounded-full pointer-events-none" style={{ left: `${pos(t)}%`, background: ACCENT }} />
       ))}
       <div className="absolute top-0 h-9 w-px bg-white/90 pointer-events-none" style={{ left: `${pos(ts)}%` }}>
-        <span className="absolute -top-0.5 -left-[4px] size-[9px] rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]" />
+        <span className="absolute -top-0.5 -left-[4px] size-[9px] rounded-full bg-white shadow-[0_0_12px_rgb(var(--fg)_/_0.8)]" />
       </div>
       <div className="absolute inset-x-0 top-9 h-px bg-line" />
       {hours.map((t, i) => (
@@ -324,7 +324,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
             {showMap && hasMap && (
               <div className="absolute inset-[9%] grid rounded overflow-hidden mix-blend-screen" style={{ gridTemplateColumns: `repeat(${p.map.length}, 1fr)` }}>
                 {p.map.flat().map((v, i) => (
-                  <span key={i} style={{ background: `rgba(255,255,255,${v * 0.6})` }} />
+                  <span key={i} style={{ background: `rgb(var(--fg) / ${v * 0.6})` }} />
                 ))}
               </div>
             )}
@@ -350,7 +350,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap" style={{ color: STATUS[s].color }}>
-              <span className="size-4 grid place-items-center rounded-full text-[10px] font-bold text-black" style={{ background: STATUS[s].color }}>
+              <span className="size-4 grid place-items-center rounded-full text-[10px] font-bold text-[#09090b]" style={{ background: STATUS[s].color }}>
                 {STATUS[s].glyph}
               </span>
               {STATUS[s].label} · {STATUS[s].action}

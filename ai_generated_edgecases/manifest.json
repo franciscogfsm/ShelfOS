@@ -1,0 +1,562 @@
+{
+  "version": 1,
+  "label_author": "Codex visual review, 2026-10-10",
+  "label_status": "local_silver_not_official",
+  "notes": [
+    "Never infer ground truth from a generation prompt.",
+    "Only reviewed individual areas are scored.",
+    "Existing provenance unknown: do not train on these test images.",
+    "Ambiguous occlusion stock and aspect-ratio mismatches are unscored.",
+    "Controlled train and test edits use different source cameras."
+  ],
+  "cases": [
+    {
+      "id": "existing_6215_5fc95501",
+      "camera": "6215",
+      "image": "ai_generated_edgecases/imagens/6215/5fc95501-7a3b-4d29-8663-1d934896f598.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_5fc95501-7a3b-4d29-8663-1d934896f598.jpg",
+      "labels": {
+        "6215_2": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "packaging_only",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6215_7": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6215_ad536415",
+      "camera": "6215",
+      "image": "ai_generated_edgecases/imagens/6215/ad536415-edc8-4787-8fef-70f235e48612.jpg",
+      "split": "test",
+      "scenario": "occlusion",
+      "reviewed": false,
+      "source_group": "existing_unknown_ad536415-edc8-4787-8fef-70f235e48612.jpg",
+      "labels": {}
+    },
+    {
+      "id": "existing_6371_4c6d32e9",
+      "camera": "6371",
+      "image": "ai_generated_edgecases/imagens/6371/4c6d32e9-6f42-4468-b2e5-024b0149ccfd.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": false,
+      "source_group": "existing_unknown_4c6d32e9-6f42-4468-b2e5-024b0149ccfd.jpg",
+      "labels": {}
+    },
+    {
+      "id": "existing_6373_17674f13",
+      "camera": "6373",
+      "image": "ai_generated_edgecases/imagens/6373/17674f13-80d4-42f9-9098-165a8ab0c9b7.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_17674f13-80d4-42f9-9098-165a8ab0c9b7.jpg",
+      "labels": {
+        "6373_1": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6373_8": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6373_9": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6376_4b27d3d4",
+      "camera": "6376",
+      "image": "ai_generated_edgecases/imagens/6376/4b27d3d4-a999-4560-9aa7-b02e96219de7.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_4b27d3d4-a999-4560-9aa7-b02e96219de7.jpg",
+      "labels": {
+        "6376_3": {
+          "stock_level": null,
+          "planogram_compliant": false,
+          "scenario": "wrong_product",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6376_4": {
+          "stock_level": null,
+          "planogram_compliant": false,
+          "scenario": "wrong_product",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6376_5": {
+          "stock_level": null,
+          "planogram_compliant": false,
+          "scenario": "wrong_product",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6376_6": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "packaging_only",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6376_11": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6383_a1abca47",
+      "camera": "6383",
+      "image": "ai_generated_edgecases/imagens/6383/a1abca47-2cf3-4386-978e-9dbf42616840.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_a1abca47-2cf3-4386-978e-9dbf42616840.jpg",
+      "labels": {
+        "6383_2": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6383_3": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6383_4": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6383_8": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6385_2c343650",
+      "camera": "6385",
+      "image": "ai_generated_edgecases/imagens/6385/2c343650-10a0-4e82-a80c-cf89fffa0be6.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_2c343650-10a0-4e82-a80c-cf89fffa0be6.jpg",
+      "labels": {
+        "6385_1": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "packaging_only",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6385_8": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6386_b84bb638",
+      "camera": "6386",
+      "image": "ai_generated_edgecases/imagens/6386/b84bb638-112f-4043-a651-f3f0f96f6aac.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_b84bb638-112f-4043-a651-f3f0f96f6aac.jpg",
+      "labels": {
+        "6386_1": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6443_26b6206a",
+      "camera": "6443",
+      "image": "ai_generated_edgecases/imagens/6443/26b6206a-ce3f-483b-927f-375a2744f063.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_26b6206a-ce3f-483b-927f-375a2744f063.jpg",
+      "labels": {
+        "6443_1": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6443_5": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6443_9": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "packaging_only",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6443_10": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6443_13": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6462_41a9628f",
+      "camera": "6462",
+      "image": "ai_generated_edgecases/imagens/6462/41a9628f-fd71-4d85-ad87-13f655d02dc9.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_41a9628f-fd71-4d85-ad87-13f655d02dc9.jpg",
+      "labels": {
+        "6462_2": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6462_3": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6462_8": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6462_9": {
+          "stock_level": null,
+          "planogram_compliant": false,
+          "scenario": "wrong_product",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6468_6677235b",
+      "camera": "6468",
+      "image": "ai_generated_edgecases/imagens/6468/6677235b-1eac-4494-a9c3-aa71c6970c8d.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_6677235b-1eac-4494-a9c3-aa71c6970c8d.jpg",
+      "labels": {
+        "6468_2": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6468_3": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6468_5": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6468_7": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6468_8": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6491_ac43d56a",
+      "camera": "6491",
+      "image": "ai_generated_edgecases/imagens/6491/ac43d56a-2612-4910-8c17-cd20bd5a3dda.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_ac43d56a-2612-4910-8c17-cd20bd5a3dda.jpg",
+      "labels": {
+        "6491_2": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6491_7": {
+          "stock_level": null,
+          "planogram_compliant": false,
+          "scenario": "wrong_product",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6591_c17d8229",
+      "camera": "6591",
+      "image": "ai_generated_edgecases/imagens/6591/c17d8229-6470-48f3-b2a8-527618f3c10a.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_c17d8229-6470-48f3-b2a8-527618f3c10a.jpg",
+      "labels": {
+        "6591_1": {
+          "stock_level": null,
+          "planogram_compliant": false,
+          "scenario": "wrong_product",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6591_4": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6594_c8928aac",
+      "camera": "6594",
+      "image": "ai_generated_edgecases/imagens/6594/c8928aac-e71c-4a06-9dec-28cc98bf8f22.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": true,
+      "source_group": "existing_unknown_c8928aac-e71c-4a06-9dec-28cc98bf8f22.jpg",
+      "labels": {
+        "6594_7": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        },
+        "6594_13": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visual crop review by Codex; local silver label."
+        }
+      }
+    },
+    {
+      "id": "existing_6781_424d889f",
+      "camera": "6781",
+      "image": "ai_generated_edgecases/imagens/6781/424d889f-1c2f-4d85-b888-7b4551e13180.jpg",
+      "split": "test",
+      "scenario": "mixed_existing",
+      "reviewed": false,
+      "source_group": "existing_unknown_424d889f-1c2f-4d85-b888-7b4551e13180.jpg",
+      "labels": {}
+    },
+    {
+      "id": "controlled_depletion",
+      "camera": "6443",
+      "image": "ai_generated_edgecases/controlled/6443/depletion.png",
+      "split": "test",
+      "scenario": "empty_crate",
+      "reviewed": true,
+      "source_group": "real_6443_1751001244",
+      "capture_name": "1751001244.jpg",
+      "labels": {
+        "6443_1": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "empty_crate",
+          "note": "Visually inspected generated output, not prompt-derived label."
+        },
+        "6443_13": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "scenario": "sparse_stock"
+        }
+      }
+    },
+    {
+      "id": "controlled_packaging_only",
+      "camera": "6443",
+      "image": "ai_generated_edgecases/controlled/6443/packaging_only.png",
+      "split": "test",
+      "scenario": "packaging_only",
+      "reviewed": true,
+      "source_group": "real_6443_1751001244",
+      "capture_name": "1751001244.jpg",
+      "labels": {
+        "6443_1": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "scenario": "packaging_only",
+          "note": "Visually inspected generated output, not prompt-derived label."
+        },
+        "6443_13": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control"
+        }
+      }
+    },
+    {
+      "id": "controlled_wrong_product",
+      "camera": "6443",
+      "image": "ai_generated_edgecases/controlled/6443/wrong_product.png",
+      "split": "test",
+      "scenario": "wrong_product",
+      "reviewed": true,
+      "source_group": "real_6443_1751001244",
+      "capture_name": "1751001244.jpg",
+      "labels": {
+        "6443_1": {
+          "stock_level": "full",
+          "planogram_compliant": false,
+          "scenario": "wrong_product",
+          "note": "Visually inspected generated output, not prompt-derived label."
+        },
+        "6443_13": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control"
+        }
+      }
+    },
+    {
+      "id": "controlled_occluded",
+      "camera": "6443",
+      "image": "ai_generated_edgecases/controlled/6443/occluded.png",
+      "split": "test",
+      "scenario": "occlusion",
+      "reviewed": true,
+      "source_group": "real_6443_1751001244",
+      "capture_name": "1751001244.jpg",
+      "labels": {
+        "6443_1": {
+          "stock_level": null,
+          "planogram_compliant": true,
+          "scenario": "occlusion",
+          "note": "Stock intentionally unscored: true quantity under arm is unobservable."
+        },
+        "6443_13": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "scenario": "stocked_control"
+        }
+      }
+    },
+    {
+      "id": "pineapple_empty",
+      "camera": "6468",
+      "image": "ai_generated_edgecases/controlled/6468/pineapple_empty.png",
+      "source_image": "data/images/6468/1751001157.jpg",
+      "capture_name": "1751001157.jpg",
+      "source_group": "real_6468_1751001157",
+      "split": "train",
+      "scenario": "pineapple_empty",
+      "reviewed": true,
+      "labels": {
+        "6468_3": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "note": "Visually reviewed output. Half prompt requested two fruit but output has one large pineapple with most base exposed; label based on output."
+        }
+      }
+    },
+    {
+      "id": "pineapple_half",
+      "camera": "6468",
+      "image": "ai_generated_edgecases/controlled/6468/pineapple_half.png",
+      "source_image": "data/images/6468/1751001157.jpg",
+      "capture_name": "1751001157.jpg",
+      "source_group": "real_6468_1751001157",
+      "split": "train",
+      "scenario": "pineapple_half",
+      "reviewed": true,
+      "labels": {
+        "6468_3": {
+          "stock_level": "half",
+          "planogram_compliant": true,
+          "note": "Visually reviewed output. Half prompt requested two fruit but output has one large pineapple with most base exposed; label based on output."
+        }
+      }
+    },
+    {
+      "id": "pineapple_full",
+      "camera": "6468",
+      "image": "ai_generated_edgecases/controlled/6468/pineapple_full.png",
+      "source_image": "data/images/6468/1751001157.jpg",
+      "capture_name": "1751001157.jpg",
+      "source_group": "real_6468_1751001157",
+      "split": "train",
+      "scenario": "pineapple_full",
+      "reviewed": true,
+      "labels": {
+        "6468_3": {
+          "stock_level": "full",
+          "planogram_compliant": true,
+          "note": "Visually reviewed output. Half prompt requested two fruit but output has one large pineapple with most base exposed; label based on output."
+        }
+      }
+    },
+    {
+      "id": "pineapple_packaging",
+      "camera": "6468",
+      "image": "ai_generated_edgecases/controlled/6468/pineapple_packaging.png",
+      "source_image": "data/images/6468/1751001157.jpg",
+      "capture_name": "1751001157.jpg",
+      "source_group": "real_6468_1751001157",
+      "split": "train",
+      "scenario": "pineapple_packaging",
+      "reviewed": true,
+      "labels": {
+        "6468_3": {
+          "stock_level": "empty",
+          "planogram_compliant": true,
+          "note": "Visually reviewed output. Half prompt requested two fruit but output has one large pineapple with most base exposed; label based on output."
+        }
+      }
+    }
+  ]
+}

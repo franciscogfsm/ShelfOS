@@ -8,9 +8,8 @@ export default function Loading() {
   return (
     <div className="app-shell h-full grid grid-rows-[auto_auto_1fr] overflow-hidden" role="status" aria-label="Loading shelf state" aria-busy="true">
       <header className="app-header flex flex-wrap items-center gap-x-6 gap-y-3 px-4 lg:px-6 py-3 lg:py-0 lg:h-[76px]">
-        <div className="flex min-w-0 items-center gap-3 lg:flex-1">
-          <Sk w={20} h={20} r={10} />
-          <div className="grid gap-2"><Sk w={190} h={12} /><Sk w={120} h={9} /></div>
+        <div className="flex min-w-0 items-center lg:flex-1">
+          <span className="wordmark">Shelf<span>OS</span></span>
         </div>
         <nav className="main-nav glass order-last lg:order-none flex w-full lg:w-auto" aria-hidden="true">
           {[92, 118, 104, 112, 128].map((w) => <span key={w} className="nav-item flex-1 lg:flex-none"><Sk w={w - 36} h={10} /></span>)}

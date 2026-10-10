@@ -309,7 +309,7 @@ function Dropzone({ compact, busy, onFiles, onFolder }: { compact: boolean; busy
       </div>
     );
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-dashed border-accent/40 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.07),transparent_60%)] px-5 sm:px-8 py-10">
+    <div className="relative overflow-hidden rounded-2xl border border-dashed border-accent/40 bg-[radial-gradient(ellipse_at_top,rgb(var(--fg)/0.07),transparent_60%)] px-5 sm:px-8 py-10">
       {inputs}
       <div className="mx-auto max-w-xl text-center">
         <div className="mx-auto size-12 grid place-items-center rounded-2xl border border-accent/40 bg-accent/10 text-accent">

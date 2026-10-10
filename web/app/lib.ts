@@ -70,7 +70,7 @@ export const STATUS: Record<Status, { label: string; action: string; hint: strin
 export const ORDER: Status[] = ["empty", "wrong", "low", "ok"];
 export const ISSUES: Status[] = ["empty", "wrong", "low"];
 export const LEVEL_VALUE: Record<Level, number> = { empty: 0, half: 0.5, full: 1 };
-export const ACCENT = "#fafafa";
+export const ACCENT = "var(--ink)";
 
 export function statusOf(p: AreaPred): Status {
   if (p.level === "empty") return "empty";

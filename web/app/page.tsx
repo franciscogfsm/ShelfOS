@@ -9,6 +9,7 @@ import { IDLE, RunState, RunView } from "./run";
 import Loading from "./loading";
 import { Search } from "./search";
 import { Analytics } from "./analytics";
+import { ThemeToggle } from "./theme";
 import { ProductImage, preloadProductImages } from "./product-image";
 
 type View = "tasks" | "wall" | "camera" | "analytics" | "run";
@@ -276,7 +277,6 @@ export default function Page() {
   if (!store) return <Loading />;
 
   const blank = store.cameras.length === 0;
-  const [place, town] = store.store.split(/,\s*(?=[^,]*$)/);
   const shown = view;
   const cam = store.cameras.find((c) => c.id === camId) ?? store.cameras[0];
   const frame = cam && frameAt(cam, ts);
@@ -327,12 +327,8 @@ export default function Page() {
     <div className={`app-shell app-enter h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
       {/* ── top bar ───────────────────────────────────────────── */}
       <header className="app-header flex flex-wrap items-center gap-x-6 gap-y-3 px-4 lg:px-6 py-3 lg:py-0 lg:h-[76px]">
-        <div className="store-id flex min-w-0 items-center gap-3 lg:flex-1">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-10.6a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z" /><circle cx="12" cy="10.4" r="2.3" /></svg>
-          <div className="min-w-0">
-            <div className="truncate text-sm font-semibold tracking-tight">{place}</div>
-            <div className="truncate text-[11px] text-muted">{[town, store.section].filter(Boolean).join(" · ")}</div>
-          </div>
+        <div className="flex min-w-0 items-center lg:flex-1">
+          <span className="wordmark" title={[store.store, store.section].filter(Boolean).join(" · ")}>Shelf<span>OS</span></span>
         </div>
         <nav className="main-nav glass order-last lg:order-none flex w-full lg:w-auto" aria-label="Views">
           {VIEWS.filter(([v]) => !blank || v === "run").map(([v, name]) => (
@@ -366,6 +362,7 @@ export default function Page() {
               ))}
             </div>
           )}
+          <ThemeToggle />
         </div>
       </header>
 
@@ -646,7 +643,7 @@ export default function Page() {
                               <button onClick={() => focus(t)} className="flex items-center gap-3 min-w-0 flex-1 text-left">
                                 <div className="relative shrink-0">
                                   <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="w-12 h-12 rounded-xl" />
-                                  <span className="absolute -left-0.5 -top-0.5 size-2.5 rounded-full ring-2 ring-[#0c0c0e]" style={{ background: STATUS[s].color }} />
+                                  <span className="absolute -left-0.5 -top-0.5 size-2.5 rounded-full ring-2 ring-[var(--bg)]" style={{ background: STATUS[s].color }} />
                                 </div>
                                 <div className="min-w-0 flex-1">
                                   <div className="truncate text-sm">{t.area.product}</div>

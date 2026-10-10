@@ -1,0 +1,39 @@
+{
+  "tool": "built-in image_gen",
+  "test": [
+    [
+      "depletion",
+      "Use case: precise-object-edit. Asset type: synthetic computer-vision edge-case test frame. Edit the supplied real 1280x720 ceiling-camera supermarket tomato display photograph. Keep camera viewpoint, framing, image aspect ratio, crate boundaries, shelves, floor, price tags and every object outside explicitly changed crates unchanged. Photorealistic CCTV with original image sharpness, no stylization, no annotation, no text overlays. Do not shift, zoom, crop or rearrange geometry. Change ONLY the two top-tier tomato crates: left crate inside pixel polygon [(319,120),(605,110),(606,212),(331,220)] completely EMPTY of tomatoes, showing its turquoise perforated base. Right crate polygon [(600,111),(892,116),(882,217),(602,214)] retain about 40% of original tomatoes in a compact mound toward the right, with more than half the green base clearly exposed. All other crates exactly unchanged."
+    ],
+    [
+      "wrong_product",
+      "Use case: precise-object-edit. Asset type: synthetic computer-vision edge-case test frame. Edit the supplied real 1280x720 ceiling-camera supermarket tomato display photograph. Keep camera viewpoint, framing, image aspect ratio, crate boundaries, shelves, floor, price tags and every object outside explicitly changed crates unchanged. Photorealistic CCTV with original image sharpness, no stylization, no annotation, no text overlays. Do not shift, zoom, crop or rearrange geometry. Change ONLY the top-left crate inside pixel polygon [(319,120),(605,110),(606,212),(331,220)]: replace ALL round red tomatoes in this crate with a dense full crate of YELLOW BANANA BUNCHES. Banana fruit clearly identifiable and covering the base; none spilling over crate boundary. Top-right and lower-tier tomatoes must remain completely unchanged."
+    ],
+    [
+      "packaging_only",
+      "Use case: precise-object-edit. Asset type: synthetic computer-vision edge-case test frame. Edit the supplied real 1280x720 ceiling-camera supermarket tomato display photograph. Keep camera viewpoint, framing, image aspect ratio, crate boundaries, shelves, floor, price tags and every object outside explicitly changed crates unchanged. Photorealistic CCTV with original image sharpness, no stylization, no annotation, no text overlays. Do not shift, zoom, crop or rearrange geometry. Change ONLY the top-left tomato crate polygon [(319,120),(605,110),(606,212),(331,220)]: remove EVERY tomato. Leave a single crumpled clear plastic produce bag and one small white paper receipt on the exposed turquoise crate base. No food in that crate. Keep every other crate and its tomatoes unchanged."
+    ],
+    [
+      "occluded",
+      "Use case: precise-object-edit. Asset type: synthetic computer-vision edge-case test frame. Edit the supplied real 1280x720 ceiling-camera supermarket tomato display photograph. Keep camera viewpoint, framing, image aspect ratio, crate boundaries, shelves, floor, price tags and every object outside explicitly changed crates unchanged. Photorealistic CCTV with original image sharpness, no stylization, no annotation, no text overlays. Do not shift, zoom, crop or rearrange geometry. Add one realistic shopper's arm in dark navy sleeve reaching in from LEFT edge, crossing only the top-left tomato crate polygon [(319,120),(605,110),(606,212),(331,220)]. Forearm and hand obscure about half of that crate. The still-visible half should have just 5 red tomatoes and a large exposed turquoise base. Top-right and every other crate remain unchanged. Plausible human anatomy, no extra fingers. This is an ambiguous partially occluded stock case, do not fill the visible area with tomatoes."
+    ]
+  ],
+  "train": [
+    [
+      "pineapple_empty",
+      "Use case: precise-object-edit. Asset type: photorealistic synthetic CCTV training example. Supplied image is edit target of a fixed supermarket ceiling camera, 1280x720. Preserve original aspect ratio, framing, camera perspective, shelves, all bin boundaries, floor and ALL other fruit. Change ONLY the middle-tier LEFT pineapple bin inside polygon in original pixels [(257,282),(449,282),(477,483),(304,477)]. The bin is below the empty cardboard-lined top-left bin, above the bottom-left pineapple bin. Do NOT move any shelf, crop, zoom, add overlays or alter other areas. Preserve realistic CCTV texture. Remove all pineapples including their crowns from ONLY that middle-left bin. Its existing cardboard base is now completely visible and empty."
+    ],
+    [
+      "pineapple_half",
+      "Use case: precise-object-edit. Asset type: photorealistic synthetic CCTV training example. Supplied image is edit target of a fixed supermarket ceiling camera, 1280x720. Preserve original aspect ratio, framing, camera perspective, shelves, all bin boundaries, floor and ALL other fruit. Change ONLY the middle-tier LEFT pineapple bin inside polygon in original pixels [(257,282),(449,282),(477,483),(304,477)]. The bin is below the empty cardboard-lined top-left bin, above the bottom-left pineapple bin. Do NOT move any shelf, crop, zoom, add overlays or alter other areas. Preserve realistic CCTV texture. Reduce pineapples to exactly two recognizable small pineapples lying in a compact group at the right edge, leaving about 65 percent of its cardboard base exposed."
+    ],
+    [
+      "pineapple_full",
+      "Use case: precise-object-edit. Asset type: photorealistic synthetic CCTV training example. Supplied image is edit target of a fixed supermarket ceiling camera, 1280x720. Preserve original aspect ratio, framing, camera perspective, shelves, all bin boundaries, floor and ALL other fruit. Change ONLY the middle-tier LEFT pineapple bin inside polygon in original pixels [(257,282),(449,282),(477,483),(304,477)]. The bin is below the empty cardboard-lined top-left bin, above the bottom-left pineapple bin. Do NOT move any shelf, crop, zoom, add overlays or alter other areas. Preserve realistic CCTV texture. Fill ONLY that bin completely with a dense realistic pile of pineapples, their textured bodies covering the entire bin base with crowns overlapping naturally. No cardboard base visible within that bin."
+    ],
+    [
+      "pineapple_packaging",
+      "Use case: precise-object-edit. Asset type: photorealistic synthetic CCTV training example. Supplied image is edit target of a fixed supermarket ceiling camera, 1280x720. Preserve original aspect ratio, framing, camera perspective, shelves, all bin boundaries, floor and ALL other fruit. Change ONLY the middle-tier LEFT pineapple bin inside polygon in original pixels [(257,282),(449,282),(477,483),(304,477)]. The bin is below the empty cardboard-lined top-left bin, above the bottom-left pineapple bin. Do NOT move any shelf, crop, zoom, add overlays or alter other areas. Preserve realistic CCTV texture. Remove ALL pineapples and ALL crowns from ONLY that bin. Leave only a crumpled transparent plastic produce bag, an empty small cardboard carton and a white receipt on the bin base. No actual food. All other fruit unchanged."
+    ]
+  ]
+}

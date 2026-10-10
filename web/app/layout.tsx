@@ -19,7 +19,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        {/* the saved theme is applied before the first paint, so the page never flashes the other one */}
+        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem("shelfos-theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}` }} />
+      </head>
       <body className="h-full">{children}</body>
     </html>
   );
