@@ -134,6 +134,30 @@ export async function loadHealth(): Promise<Health | null> {
   }
 }
 
+export interface RipenessResult {
+  state: "green" | "turning" | "ripe" | "very_ripe" | "mixed" | "unclear" | "no_bananas";
+  label: string;
+  action: string;
+  review: boolean;
+  quality: "clear" | "limited" | "poor";
+  cached: boolean;
+}
+
+const ripenessRequests = new Map<string, Promise<RipenessResult>>();
+export function checkRipeness(camera: string, file: string, area: string): Promise<RipenessResult> {
+  const base = apiBase(), key = JSON.stringify([base, camera, file, area]);
+  const pending = ripenessRequests.get(key);
+  if (pending) return pending;
+  const request = (async () => {
+    const r = await fetch(`${base}/api/ripeness`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ camera, file, area }) });
+    if (!r.ok) await fail(r);
+    return r.json() as Promise<RipenessResult>;
+  })();
+  ripenessRequests.set(key, request);
+  void request.then(() => ripenessRequests.delete(key), () => ripenessRequests.delete(key));
+  return request;
+}
+
 /** Read a newline-delimited JSON stream, one event per image as it finishes. */
 async function stream(res: Response, onEvent: (e: RunEvent) => void) {
   if (!res.ok || !res.body) await fail(res);

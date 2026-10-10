@@ -8,6 +8,7 @@ usage: python tools/precount.py [--images data/images] [--planogram data/planogr
 """
 import argparse
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -21,27 +22,31 @@ def main():
     ap.add_argument("--images", default="data/images")
     ap.add_argument("--planogram", default="data/planogram.json")
     ap.add_argument("--all", action="store_true", help="every frame, not only the latest of each camera")
+    ap.add_argument("--workers", type=int, default=3, choices=range(1, 5), help="parallel requests (1-4, default 3)")
     a = ap.parse_args()
     key = config("OPENROUTER_API_KEY")
     if not key:
         raise SystemExit("Set OPENROUTER_API_KEY (environment or .env) first.")
     areas = load_planogram(a.planogram)
     asked = cached = failed = 0
-    for cam, files in list_images(a.images).items():
-        targets = [a for a in areas.get(cam, []) if countable(a.product_name)]
-        if not targets:
-            continue
-        for f in files if a.all else files[-1:]:
-            for area in targets:
-                try:
-                    out = count_area(f, cam, f.name, area, key)
-                except CountError as e:
-                    failed += 1
-                    print(f"  {area.area_id} {f.name}: {e}")
-                    continue
-                cached += out["cached"]
-                asked += not out["cached"]
-                print(f"  {area.area_id} {f.name}: {out['count']} {out['unit']}(s){' (cached)' if out['cached'] else ''}")
+    jobs = [(cam, f, area) for cam, files in list_images(a.images).items()
+            for f in (files if a.all else files[-1:])
+            for area in areas.get(cam, []) if countable(area.product_name)]
+    def run(job):
+        cam, f, area = job
+        try:
+            return job, count_area(f, cam, f.name, area, key), None
+        except CountError as e:
+            return job, None, str(e)
+    with ThreadPoolExecutor(max_workers=a.workers) as pool:
+        for (_, f, area), out, error in pool.map(run, jobs):
+            if error is not None:
+                failed += 1
+                print(f"  {area.area_id} {f.name}: {error}")
+                continue
+            cached += out["cached"]
+            asked += not out["cached"]
+            print(f"  {area.area_id} {f.name}: {out['count']} {out['unit']}(s){' (cached)' if out['cached'] else ''}")
     print(f"done: {asked} asked, {cached} already cached, {failed} failed")
 
 
