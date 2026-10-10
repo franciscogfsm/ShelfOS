@@ -62,9 +62,44 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   Accuracy is a tie on fwd (lite +0.765 vs full +0.766) and lite is ~2 pp lower on late. Default shipped model stays `engine.pkl` until the user picks the 80/20 tradeoff.
 - Machine is free.
 
+- [Opus 21:50] **Labels changed and both models retrained, at the user's explicit request** ("já está metido,
+  agora dá retreina ou o que for preciso"). This crossed the ownership table once; `engine.py` and rects untouched.
+  - The user picked the levels on a local review page and exported `revisao.json`; applied with
+    `labeler/app.py --apply revisao` at 21:37: **19 photos in 11 areas** (18 empty -> half, 1 full -> half):
+    6371_7 t12; 6215_2 t11; 6215_9 t10,11; 6376_2 t0,1,2; 6383_9 t12; 6385_5 t13; 6443_11 t6-11; 6462_9 t12;
+    6468_15 t12; 6594_4 t12 (full -> half); 6383_7 t11. Backup: `labeler/backups/silver_labels-20261010-213742.txt`.
+    The user left 6215_4, 6215_8, 6491_7 and 6591_6 as empty (7 photos I had proposed as half).
+    **Later applies must list `revisao` first** (`--apply revisao rodrigo francisco`), or the labeler stops on conflicts.
+  - `shelfos.train` with the usual arguments: `engine_lite.pkl` 37 s, `engine.pkl` 133 s, 1950 crops, 94 prototypes,
+    14 cameras each. Trained into a staging folder, checked, then moved into `models/` (21:38-21:41 files).
+    The previous four files are kept in my scratchpad under `old_models/`.
+  - Check on the reference day: 1950/1950 crops answer their label; against the previous model exactly the 19
+    relabelled photos moved (lite: plus 6383_5 t0, which has no label). 6371_7 at 19:19 is now half, P=0.998.
+  - `tools/selftest.py`: ALL GOOD.
+  - The "Measured facts" above were measured on the labels before this change.
+- [Opus 21:55] **Backend on :8000 restarted at 21:51**, after the user said yes to it (old pid 35352 from 19:41
+  stopped, new pid 7316, ready in 16 s on cuda). There is no reload endpoint: `ShelfService` reads `engine.pkl`
+  and `reference_day.json` once at start, so **every retrain needs a backend restart**.
+  - Before the restart the server still answered the old level for exactly the 19 relabelled photos; after it,
+    all 1962 reference answers of `/api/store` equal `models/reference_day.json` (6371_7 at 19:19 = half).
+  - Rehearsal on the new model (`run.py --images`, last photo of each camera under +4000 s and +8000 s names):
+    28 images, 304 areas, 0 missing, 41.6 s on cuda. All 304 answers equal the label of that last photo.
+    Mix per pass: 15 empty / 46 half / 91 full of 152; 4 areas not compliant.
+  - `runs/latest/` still holds 2 uploaded 6215 photos analysed at 17:46 by an older model; I left them.
+  - **Still not done:** `web/public/data/store.json` (15:09) and `release/` are not refreshed.
+- [Opus 22:00] CV with the user's relabels, bank_tta, shipped engine, default rects, same folds (% = stock + id).
+  "old" = `labeler/backups/silver_labels-20261010-213742.txt`, "new" = `labels/silver_labels.txt` (19 crops differ).
+  - train old / truth old: late +0.605 (b12 a21) 79.3%, fwd +0.765 (b30 a49) 86.3%  (same as the 20:50 baseline)
+  - train old / truth new: late +0.668 (b15 a14) 82.4%, fwd +0.782 (b35 a40) 87.1%
+  - train new / truth new: late +0.711 (b12 a13) **84.5%**, fwd +0.794 (b29 a41) 87.6%  ← what is installed
+  - train new / truth old: late +0.602 (b11 a22) 79.1%, fwd +0.753 (b28 a54) 85.6%
+  - So the retrain is worth +2.1 pp on late if the new labels are right and costs 0.2 pp if the old ones were.
+    OOF saved as `cache/oof_tta_labelsold.npz` / `cache/oof_tta_labelsnew.npz`. bank_bl not run (2 GB RAM free).
+
 ## Running now
-- Opus: short scratch CV runs on `cache/bank_tta.npz` (CPU, ~3 GB RAM, no GPU, about 1 min each), on and off.
-  Fable: if you need the machine for a retrain, write it here and I stop.
+- Opus: app backend on :8000 restarted 21:51 at the user's request (pid 7316, `python -u run.py --no-browser`,
+  log in my scratchpad). It holds the models retrained at 21:40. Leave it running; restart it after any retrain.
+  Nothing else of mine is running.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
