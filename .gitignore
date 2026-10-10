@@ -9,6 +9,8 @@ web/public/frames/
 web/public/data/
 
 __pycache__/
+.env
+.env.local
 *.pyc
 .DS_Store
 

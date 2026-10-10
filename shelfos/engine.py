@@ -103,10 +103,13 @@ class Engine:
     glob_basis: np.ndarray = None
     memory_cls = AreaMemory  # not dataclass fields: swapped by experiments
     STOCK_HEAD = "hgb"  # 'hgb' gradient-boosted trees | 'logreg' logistic regression
-    COMPLY_SWAP = (0, 0.0, 0.85)  # (k, weight, max prototype sim) synthetic wrong-product negatives for the compliance head
+    # (k, weight, max prototype sim): per labelled crop, k real crops of a visually different catalogue product are added as
+    # non-compliant examples of this area. Fixes the synthetic "bananas in the tomato crate" case; neutral on the real-frame CV.
+    COMPLY_SWAP = (1, 0.3, 0.85)
     GLOB_DIM: int | None = 32  # compress the appearance embedding to this many components in the stock head
     OCC_SCALE = OCC_SCALE
     MEM_SCALE = MEM_SCALE
+    OCC_C = 0.2  # inverse regularisation of the patch product/background classifier (CV: late +0.618->+0.655, fwd +0.748->+0.766)
     STOCK_C = 1.0
     RECENCY_W = 0.0
     HOUR_SCALE = 0.5  # weight of the time-of-day prior in the design matrix (0 = off)
@@ -124,7 +127,7 @@ class Engine:
         X, area, product = bank["glob"], bank["area"].astype(str), bank["product"].astype(str)
         tok = patch_tokens(bank["patches"], bank["thumbs"])
         e = cls()
-        e.occ = PatchOccupancy().fit(tok[rows], y[rows], ys[rows], extra_bg=load_background_rects(rects_path, area, bank["t"], tok, exclude=~rows))
+        e.occ = PatchOccupancy(C=cls.OCC_C).fit(tok[rows], y[rows], ys[rows], extra_bg=load_background_rects(rects_path, area, bank["t"], tok, exclude=~rows))
         f = occupancy_features(e.occ.maps(tok))
         m = y >= 0
         e.occ_mu, e.occ_sd = f[m].mean(0), f[m].std(0) + 1e-6

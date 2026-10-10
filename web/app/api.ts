@@ -7,7 +7,7 @@ export function apiBase(): string {
     const q = new URLSearchParams(window.location.search).get("api");
     if (q && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(q)) return q;
   }
-  return (process.env.NEXT_PUBLIC_API ?? "").replace(/\/$/, "");
+  return (process.env.NEXT_PUBLIC_API ?? (process.env.NODE_ENV === "development" ? "http://localhost:8000" : "")).replace(/\/$/, "");
 }
 
 export interface Health {

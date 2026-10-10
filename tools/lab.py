@@ -290,7 +290,83 @@ class HGBEngine(Engine):
         return HistGradientBoostingClassifier(**kw)
 
 
+class _Ensemble:
+    """Average of several probabilistic classifiers; bootstrap=True resamples rows per member."""
+
+    def __init__(self, makers, bootstrap=False, seed=0):
+        self.makers, self.bootstrap, self.seed = makers, bootstrap, seed
+
+    def fit(self, X, y, sample_weight=None):
+        rng = np.random.default_rng(self.seed)
+        self.members, self.classes_ = [], np.unique(y)
+        for mk in self.makers:
+            idx = rng.integers(0, len(y), len(y)) if self.bootstrap else np.arange(len(y))
+            sw = None if sample_weight is None else sample_weight[idx]
+            self.members.append(mk().fit(X[idx], y[idx], sample_weight=sw))
+        return self
+
+    def predict_proba(self, X):
+        out = np.zeros((len(X), len(self.classes_)))
+        for m in self.members:
+            p = m.predict_proba(X)
+            out[:, np.searchsorted(self.classes_, m.classes_)] += p
+        return out / len(self.members)
+
+
+class BagEngine(Engine):
+    """Bootstrap-bagged gradient-boosted trees: softer probabilities so the expected-value decision bites."""
+
+    N_BAG = 5
+
+    @classmethod
+    def make_stock_clf(cls):
+        from sklearn.ensemble import HistGradientBoostingClassifier
+
+        mk = lambda s: (lambda: HistGradientBoostingClassifier(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=5.0, min_samples_leaf=30, random_state=s))
+        return _Ensemble([mk(s) for s in range(cls.N_BAG)], bootstrap=True)
+
+
+class MixEngine(Engine):
+    """Trees + logistic regression on the same compact design."""
+
+    @classmethod
+    def make_stock_clf(cls):
+        from sklearn.ensemble import HistGradientBoostingClassifier
+
+        return _Ensemble([lambda: HistGradientBoostingClassifier(max_iter=300, learning_rate=0.05, max_leaf_nodes=15, l2_regularization=5.0, min_samples_leaf=30, random_state=0),
+                          lambda: LogisticRegression(C=1.0, max_iter=3000)])
+
+
+class HalfWEngine(Engine):
+    """Up-weight 'half' crops in the stock head: half<->full confusions are the costliest errors."""
+
+    HALF_W = 1.5
+
+    @classmethod
+    def make_stock_clf(cls):
+        base = Engine.make_stock_clf()
+        fit0 = base.fit
+
+        def fit(X, y, sample_weight=None):
+            sw = np.ones(len(y)) if sample_weight is None else np.asarray(sample_weight, float).copy()
+            sw[y == 1] *= cls.HALF_W
+            return fit0(X, y, sample_weight=sw)
+
+        base.fit = fit
+        return base
+
+
 VARIANTS = {
+    "occC02": eng(OCC_C=0.2),
+    "occC03": eng(OCC_C=0.3),
+    "occC05": eng(OCC_C=0.5),
+    "occC1": eng(OCC_C=1.0),
+    "occC3": eng(OCC_C=3.0),
+    "hgb-bag5": BagEngine,
+    "hgb-bag9": type("Bag9", (BagEngine,), {"N_BAG": 9}),
+    "hgb-mix": MixEngine,
+    "half-w15": HalfWEngine,
+    "half-w2": type("HalfW2", (HalfWEngine,), {"HALF_W": 2.0}),
     "pca64": variant(mem(PCA_DIM=64)),
     "pca128": variant(mem(PCA_DIM=128)),
     "pca256": variant(mem(PCA_DIM=256)),
