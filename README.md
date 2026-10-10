@@ -55,56 +55,9 @@ cd web && npm install && npx next dev
 
 ## Labels and measured results
 
-### Human review tool
-
-From the repository root, open the annotation tool with:
-
-```
-python tools/label_review.py
-```
-
-It opens a local browser and offers all **1,962 area-frames**. Use **1** = empty,
-**2** = half, **3** = full, **4** = covered/unknown. Each answer saves and advances.
-The exact crop and a wider view show the official area; only classify the interior
-of the yellow outline. Purple pixels lie outside the photograph. Left arrow goes
-back, right arrow skips without answering. Skipped cases remain unfinished.
-
-Progress resumes automatically from `labels/review/session.json`. The 73 stock
-answers already reviewed are included. To review product compliance as well:
-
-```
-python tools/label_review.py --task both
-```
-
-Choose stock with 1–4 and product with **5** = expected product, **6** = other
-product, **7** = empty/unknown. The tool advances after both selections. In stock
-mode, existing compliance labels are preserved. Unknown stock is written as `?`
-and excluded by the stock label loader. Human labels are not official ground truth.
-
-Answers generate `labels/review/reviewed_labels.txt`; the training source is only
-updated by the following command. Stop the review server with **Ctrl+C** first:
-
-```
-python tools/label_review.py --apply
-```
-
-Applying creates a backup and preserves unrelated edits in `labels/silver_labels.txt`.
-If another person changed a reviewed entry differently, the command refuses the
-merge and lists conflicts in `labels/review/conflicts.json`. This does not retrain
-the model. Dependencies are `numpy` and `opencv-python` (`python -m pip install
-numpy opencv-python` if missing).
-
-For a colleague to start a separate review of **every case from zero**:
-
-```
-python tools/label_review.py --state labels/review/colleague/session.json --task both
-```
-
-Use the same `--state` when applying that review. Separate sessions can run on
-different computers; on the same computer also pass a different `--port`.
-Other options: `--scope empty`, `--scope unsure`, `--no-browser`, `--images`,
-`--labels`, and `--planogram`. Default data paths are relative to the repository,
-so the tool has no machine-specific paths.
+Labels are reviewed by hand with the standalone tool in `labeler/` (no dependencies; see
+`labeler/README.md`). It writes reviewed areas back into `labels/silver_labels.txt` with
+`python3 labeler/app.py --apply <names>`.
 
 The dataset ships without annotations. `labels/silver_labels.txt` holds our own labels for
 all 1,962 area-frames, made by eye from `outputs/strips/`. They are not the official ground
