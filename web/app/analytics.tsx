@@ -40,6 +40,7 @@ function readDay(store: Store, line: Line, keep: (cam: Camera, area: AreaDef) =>
   const rows: Row[] = [];
   const events: { t: number; fixed: boolean }[] = [];
   const fixes: number[] = [];
+  let fixedRaised = 0; // fixes of problems that were counted as raised
   let captures = 0;
   for (const cam of store.cameras) {
     const areas = cam.areas.filter((a) => keep(cam, a));
@@ -73,16 +74,19 @@ function readDay(store: Store, line: Line, keep: (cam: Camera, area: AreaDef) =>
       rows.push({ cam, area, runs, bad, stock: seen ? stock / seen : 0 });
       // a problem is raised when a capture first shows it, and fixed when a later one shows the area in shape
       let started: number | null = null;
+      let counted = false; // a problem already there in the first capture was not raised during the day
       frames.forEach((f, i) => {
         const p = f.areas[area.id];
         if (!p) return;
         const ok = statusOf(p) === "ok";
         if (!ok && started === null) {
           started = f.ts;
-          if (i > 0) events.push({ t: f.ts, fixed: false });
+          counted = i > 0;
+          if (counted) events.push({ t: f.ts, fixed: false });
         } else if (ok && started !== null) {
           fixes.push(f.ts - started);
           events.push({ t: f.ts, fixed: true });
+          if (counted) fixedRaised++;
           started = null;
         }
       });
@@ -99,7 +103,7 @@ function readDay(store: Store, line: Line, keep: (cam: Camera, area: AreaDef) =>
     worst: issues.indexOf(peak),
     total: rows.length,
     raised: events.filter((e) => !e.fixed).length,
-    fixed: fixes.length,
+    fixed: fixedRaised,
     medianFix: fixes.length ? fixes[fixes.length >> 1] : null,
     available: counts.reduce((sum, n, i) => sum + (per[i] - n.empty) / per[i], 0) / N,
     lowest: Math.min(...counts.map((n, i) => (per[i] - n.empty) / per[i])),

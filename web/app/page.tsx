@@ -168,8 +168,10 @@ export default function Page() {
         } else if (e.type === "skip") setRun((r) => ({ ...r, skipped: [...r.skipped, { file: e.file, reason: e.reason }] }));
         else if (e.type === "done") setRun((r) => ({ ...r, phase: "done", ms: e.ms }));
       }, ctrl.signal);
+      if (abort.current !== ctrl) return; // a newer run has started: this one must not close it
       finish({});
     } catch (err) {
+      if (abort.current !== ctrl) return;
       if (ctrl.signal.aborted) finish({});
       else setRun((r) => ({ ...r, phase: "error", error: message(err) }));
     }

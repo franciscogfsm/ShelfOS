@@ -50,6 +50,7 @@ export default function Collaborators() {
   const [demoMode, setDemoMode] = useState(true);
   const [scanStage, setScanStage] = useState<"watching" | "analyzing" | "confirmed">("watching");
   const demoTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activeKey = useRef<string | null>(null); // the task on screen, for the polling effect below
   const cancelDemo = () => { if (demoTimer.current) clearTimeout(demoTimer.current); demoTimer.current = null; setChecking(false); };
   useEffect(() => {
     let alive = true, fetching = false;
@@ -70,6 +71,11 @@ export default function Collaborators() {
             setVerified(old => [...old, ...fixed.filter(t => !old.some(v => v.key === t.key))]);
             setDone(old => [...new Set([...old, ...fixed.map(t => t.key)])]);
             setNotice(`${fixed.length} ${fixed.length === 1 ? "tarefa confirmada" : "tarefas confirmadas"} pela nova leitura`);
+            if (fixed.some(t => t.key === activeKey.current)) { // the task on screen is done: the next one starts on the way, not "arrived"
+              if (demoTimer.current) clearTimeout(demoTimer.current);
+              demoTimer.current = null;
+              setSelected(null); setArrived(false); setChecking(false);
+            }
           }
         }
         previous = next;
@@ -91,6 +97,8 @@ export default function Collaborators() {
   const completed = tasks.filter(t => done.includes(t.key));
   const open = useMemo(() => walkingOrder(tasks.filter(t => !done.includes(t.key)), from), [tasks, done, from]);
   const active = open.find(t => t.key === selected) ?? open[0];
+  const activeId = active?.key ?? null;
+  useEffect(() => { activeKey.current = activeId; }, [activeId]);
   useEffect(() => { preloadProductImages(tasks.map(t => t.area.rawName)); }, [tasks]);
   const pick = (t: Task) => { cancelDemo(); setSelected(t.key); setArrived(false); setTab("route"); window.scrollTo({ top: 0, behavior: "smooth" }); };
   const simulate = () => {
