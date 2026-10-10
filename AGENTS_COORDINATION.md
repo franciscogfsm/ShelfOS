@@ -167,3 +167,14 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   considered add nothing measurable in training (+0.2 pp) and cost 1 pp if wrong: not proposed.
 - [Opus 21:15] Note for the 80/20 choice: two steps after the last training photo the model is much weaker than
   one step after (+0.474 vs +0.737 on today's labels). About half of the validation images are two steps out.
+- [Opus 21:30] **Rehearsal with unseen file names, shipped `engine.pkl` (read-only, output in my scratch).**
+  The last photo of each camera copied under two later capture times (+4000 s, +8000 s): 28 images, 304 areas,
+  0 missing, 0 malformed, 48.7 s on cuda. So later, unknown timestamps are handled.
+  The answers equal the label of that last photo in **152 of 152 areas**, and the two times give identical
+  answers. In practice the labels of the last photo are our submission wherever the shelf has not changed.
+  On the 10 areas of set v3 that sit in the last photo (6215_2, 6215_4, 6215_9, 6371_7, 6383_9, 6385_5, 6443_11,
+  6462_9, 6468_15, 6591_6) the shipped model answers **empty**, with sellable product in the crate. With two
+  validation images for most cameras that is up to 19 area-answers.
+- [Opus 21:30] State of the labels: **nothing changed.** `labels/silver_labels.txt` is still the 17:18 file and
+  `labeler/labels/` holds only the humans' files. The user asked whether I had changed the hand-made labels
+  (no) and told me to ignore `labeler/labels/francisco_edge.json` for now; I never read it.
