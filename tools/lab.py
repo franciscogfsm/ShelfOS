@@ -114,7 +114,19 @@ def mem1(self, glob, f, R):
     return np.hstack([glob, (f - self.occ_mu) / self.occ_sd * OCC_SCALE, (R - self.mem_mu) / self.mem_sd * 1.0])
 
 
+def mem(**kw):
+    return type("M", (AreaMemory,), kw)
+
+
 VARIANTS = {
+    "pca64": variant(mem(PCA_DIM=64)),
+    "pca128": variant(mem(PCA_DIM=128)),
+    "pca256": variant(mem(PCA_DIM=256)),
+    "refs4": variant(mem(MAX_REFS=4)),
+    "refs6": variant(mem(MAX_REFS=6)),
+    "pca128+refs6": variant(mem(PCA_DIM=128, MAX_REFS=6)),
+    "C=10": variant(C=10.0),
+    "C=30": variant(C=30.0),
     "engine": Engine,
     "no-memory": variant(design=no_memory),
     "no-glob": variant(design=no_glob),

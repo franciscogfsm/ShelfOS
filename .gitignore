@@ -8,6 +8,9 @@ outputs/
 web/public/frames/
 web/public/data/
 
+# held open by a running tools/label_review.py; unreadable while locked
+labels/review/*.lock
+
 __pycache__/
 *.pyc
 .DS_Store

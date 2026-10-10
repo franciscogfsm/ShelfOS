@@ -40,11 +40,11 @@ class Area:
         full = cv2.contourArea(self.quad.astype(np.float32))
         return float(self.mask(shape).astype(bool).sum() / max(full, 1.0))
 
-    def warp(self, image: np.ndarray, size: tuple[int, int] = (224, 224), pad: float = 0.0):
-        """Perspective-rectify the quad to size (w, h). Returns (crop, valid_mask).
+    def warp_plan(self, shape: tuple[int, int], size: tuple[int, int] = (224, 224), pad: float = 0.0):
+        """(perspective matrix, valid mask) that rectify this quad out of an image of the given shape.
 
-        Pixels that come from outside the image (negative coordinates) are
-        flagged invalid in the mask instead of being treated as black shelf.
+        Pixels that come from outside the image (negative coordinates) are flagged invalid
+        in the mask instead of being treated as black shelf.
         """
         w, h = size
         q = self.quad.astype(np.float32)
@@ -53,10 +53,14 @@ class Area:
             q = c + (q - c) * (1 + pad)
         dst = np.array([[0, 0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]], np.float32)
         M = cv2.getPerspectiveTransform(q, dst)
-        crop = cv2.warpPerspective(image, M, (w, h), flags=cv2.INTER_LINEAR)
-        ones = np.full(image.shape[:2], 255, np.uint8)
+        ones = np.full(shape[:2], 255, np.uint8)
         valid = cv2.warpPerspective(ones, M, (w, h), flags=cv2.INTER_NEAREST)
-        return crop, valid > 0
+        return M, valid > 0
+
+    def warp(self, image: np.ndarray, size: tuple[int, int] = (224, 224), pad: float = 0.0):
+        """Perspective-rectify the quad to size (w, h). Returns (crop, valid_mask)."""
+        M, valid = self.warp_plan(image.shape, size, pad)
+        return cv2.warpPerspective(image, M, size, flags=cv2.INTER_LINEAR), valid
 
     def rect_size(self, max_side: int = 224) -> tuple[int, int]:
         """Output size that keeps the quad's approximate aspect ratio."""

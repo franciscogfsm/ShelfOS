@@ -22,10 +22,15 @@ COLOR_WEIGHT = 0.35
 def patch_colors(thumbs: np.ndarray) -> np.ndarray:
     """Mean and spread of Lab colour per patch, [N, GRID*GRID, 6]. Local, context-free evidence."""
     n, h, w, _ = thumbs.shape
-    lab = np.stack([cv2.cvtColor(t, cv2.COLOR_BGR2LAB) for t in thumbs]).astype(np.float32) / 255
-    ph, pw = h // GRID, w // GRID
-    blocks = lab[:, : ph * GRID, : pw * GRID].reshape(n, GRID, ph, GRID, pw, 3)
-    return np.concatenate([blocks.mean((2, 4)), blocks.std((2, 4))], -1).reshape(n, GRID * GRID, 6)
+    hh, ww = h // GRID * GRID, w // GRID * GRID
+    out = np.empty((n, GRID * GRID, 6), np.float32)
+    for i, t in enumerate(thumbs):
+        lab = cv2.cvtColor(t, cv2.COLOR_BGR2LAB)[:hh, :ww].astype(np.float32) / 255
+        mean = cv2.resize(lab, (GRID, GRID), interpolation=cv2.INTER_AREA)  # block mean
+        sq = cv2.resize(lab * lab, (GRID, GRID), interpolation=cv2.INTER_AREA)
+        out[i, :, :3] = mean.reshape(-1, 3)
+        out[i, :, 3:] = np.sqrt(np.maximum(sq - mean * mean, 0)).reshape(-1, 3)
+    return out
 
 
 def patch_tokens(patches: np.ndarray, thumbs: np.ndarray) -> np.ndarray:
@@ -69,8 +74,8 @@ class PatchOccupancy:
 
     def maps(self, tokens: np.ndarray) -> np.ndarray:
         """[N, P, D'] -> product probability maps [N, GRID, GRID]."""
-        n = len(tokens)
-        return self.clf.predict_proba(tokens.reshape(-1, tokens.shape[-1]))[:, 1].reshape(n, GRID, GRID)
+        z = tokens.reshape(-1, tokens.shape[-1]) @ self.clf.coef_[0].astype(np.float32) + np.float32(self.clf.intercept_[0])
+        return (1 / (1 + np.exp(-z))).reshape(len(tokens), GRID, GRID)
 
 
 def load_background_rects(path, area: np.ndarray, t: np.ndarray, tokens: np.ndarray, exclude: np.ndarray | None = None) -> np.ndarray:

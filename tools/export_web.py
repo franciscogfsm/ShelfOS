@@ -1,6 +1,9 @@
-"""Bundle predictions, planogram geometry and frames for the ShelfOS web app.
+"""Bundle predictions, planogram geometry and frames into a snapshot for the ShelfOS web app.
+
+The app shows this snapshot when it is opened without the inference server (a static demo).
 
 usage: python tools/export_web.py <details.json> <planogram.json> <images_root> <web/public>
+       details.json: {camera: {image file: {area_id: per-area dict of Engine.predict}}}, e.g. models/reference_day.json
 """
 import json
 import shutil
@@ -41,6 +44,7 @@ def main():
                 {
                     "file": f.name,
                     "ts": int(f.stem),
+                    "origin": "reference",
                     "areas": {
                         aid: {
                             "ok": p["planogram_compliant"],
@@ -49,6 +53,8 @@ def main():
                             "pOk": round(p["p_compliant"], 3),
                             "occ": round(p["occupancy"], 3),
                             "map": [[round(v, 1) for v in row] for row in p["occupancy_map"]],
+                            "looks": p.get("looks_like", []),
+                            "source": p.get("source", "image"),
                         }
                         for aid, p in pred.items()
                     },
@@ -67,7 +73,10 @@ def main():
         )
     out = Path(public) / "data" / "store.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps({"store": "Continente Bom Dia S. Romão, Leiria", "section": "Frutas e Legumes", "width": 1280, "height": 720, "cameras": cams}), encoding="utf-8")
+    products = {a.product_id: {"name": pretty(a.product_name), "rawName": a.product_name} for cam_areas in areas.values() for a in cam_areas}
+    store = {"store": "Continente Bom Dia S. Romão, Leiria", "section": "Frutas e Legumes", "width": 1280, "height": 720,
+             "emptyCompliant": True, "products": products, "cameras": cams, "run": None}
+    out.write_text(json.dumps(store), encoding="utf-8")
     print(f"{out}: {len(cams)} cameras, {sum(len(c['frames']) for c in cams)} frames, {out.stat().st_size / 1e6:.1f} MB")
 
 

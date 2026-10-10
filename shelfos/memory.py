@@ -18,15 +18,49 @@ def _norm(x):
 class AreaMemory:
     """Labelled crops of the reference day, grouped by planogram area."""
 
+    PCA_DIM: int | None = None  # compress patch tokens to this many principal components (None = raw tokens)
+    MAX_REFS: int | None = None  # compare with at most this many of the area's most recent full frames
+    mean = basis = None
+
     def __init__(self, glob, patches, occ_mean, stock, area, fname=None, t=None):
         self.fname = None if fname is None else np.asarray(fname).astype(str)
         self.t = None if t is None else np.asarray(t).astype(int)
         self.X = glob.astype(np.float32)
-        self.P = patches.astype(np.float16)  # L2-normalised patch tokens [N, 196, D]
         self.occ = occ_mean.astype(np.float32)
         self.y = stock.astype(int)
         self.area = np.asarray(area).astype(str)
         self.rows = {a: np.where(self.area == a)[0] for a in np.unique(self.area)}
+        if self.PCA_DIM:
+            rng = np.random.default_rng(0)
+            flat = patches.reshape(-1, patches.shape[-1])
+            sample = flat[rng.choice(len(flat), min(len(flat), 60000), replace=False)].astype(np.float32)
+            self.mean = sample.mean(0)
+            self.basis = np.linalg.svd(sample - self.mean, full_matrices=False)[2][: self.PCA_DIM].T.copy()
+            self.P = np.concatenate([self.project(patches[i : i + 256]) for i in range(0, len(patches), 256)])
+        else:
+            self.P = patches.astype(np.float16)  # L2-normalised patch tokens [N, 196, D]
+
+    def project(self, patches) -> np.ndarray:
+        """Patch tokens in the space the memory compares them in (unit length)."""
+        p = patches.astype(np.float32)
+        if self.basis is not None:
+            p = _norm((p - self.mean) @ self.basis)
+        return p
+
+    def remember(self, glob, patches, occ_mean, stock, area, fname=None, t=None) -> None:
+        """Add crops whose level is now known (or trusted) to the memory."""
+        n0 = len(self.y)
+        self.X = np.concatenate([self.X, glob.astype(np.float32)])
+        self.P = np.concatenate([self.P, self.project(patches).astype(self.P.dtype)])
+        self.occ = np.concatenate([self.occ, np.asarray(occ_mean, np.float32)])
+        self.y = np.concatenate([self.y, np.asarray(stock, int)])
+        self.area = np.concatenate([self.area, np.asarray(area).astype(str)])
+        if self.fname is not None:
+            self.fname = np.concatenate([self.fname, np.broadcast_to(np.asarray("" if fname is None else fname).astype(str), (len(glob),))])
+        if self.t is not None:
+            self.t = np.concatenate([self.t, np.broadcast_to(np.asarray(self.t.max() + 1 if t is None else t), (len(glob),)).astype(int)])
+        for i, a in enumerate(np.asarray(area).astype(str)):
+            self.rows[a] = np.append(self.rows.get(a, np.zeros(0, int)), n0 + i).astype(int)
 
     def rows_of(self, area, fname) -> np.ndarray:
         """Memory row of each (area, image file) pair, -1 when that crop is not memorised."""
@@ -58,13 +92,15 @@ class AreaMemory:
                 continue
             full, emp = pool[self.y[pool] == 2], pool[self.y[pool] == 0]
             ref = full if len(full) else pool
-            Pq = patches[q].astype(np.float32)
+            if self.MAX_REFS and len(ref) > self.MAX_REFS and self.t is not None:
+                ref = ref[np.argsort(self.t[ref])][-self.MAX_REFS :]
+            Pq = self.project(patches[q])
             is_self = self_row[q][:, None] == ref[None, :]
             if len(ref) < 2:
                 is_self[:] = False
             w = (~is_self).astype(np.float32)
             mu = (w @ self.X[ref]) / w.sum(1, keepdims=True)
-            sims = np.einsum("kpd,rpd->krp", Pq, self.P[ref].astype(np.float32))
+            sims = np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[ref], np.float32))
             sims[is_self] = -1
             sim_full = sims.max(1)
             out[q, 0] = sim_full.mean(1)
@@ -73,7 +109,7 @@ class AreaMemory:
             out[q, 3] = np.sum(glob[q] * _norm(mu), 1)
             emp_self = self_row[q][:, None] == emp[None, :]
             if len(emp) >= 2 or (len(emp) == 1 and not emp_self.any()):
-                se = np.einsum("kpd,rpd->krp", Pq, self.P[emp].astype(np.float32))
+                se = np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[emp], np.float32))
                 se[emp_self] = -1
                 sim_emp = se.max(1)
                 out[q, 4] = sim_emp.mean(1)

@@ -6,9 +6,10 @@ import { AreaDetail, AreaList, Badges, CameraStage, Crop, DayStrip, FrameView, K
 import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task, clock, confidence, duration, frameAt, since, statusOf, tally, tasksAt, timeline, withFrame } from "./lib";
 import { IDLE, RunState, RunView } from "./run";
 
-type View = "wall" | "camera" | "run";
+type View = "tasks" | "wall" | "camera" | "run";
 type Tab = "tasks" | "products";
-const VIEWS: [View, string][] = [["wall", "Store wall"], ["camera", "Camera"], ["run", "Test images"]];
+// "tasks" is a view of its own on a phone; on a wide screen the work queue is always on the right
+const VIEWS: [View, string][] = [["tasks", "Tasks"], ["wall", "Store wall"], ["camera", "Camera"], ["run", "Test images"]];
 const message = (e: unknown) => (e instanceof Error ? e.message : String(e));
 
 export default function Page() {
@@ -45,7 +46,7 @@ export default function Page() {
         setAreaId(q.get("area"));
         setTs(Number(q.get("ts")) || timeline({ ...s, cameras: cams }).latest);
         const v = q.get("view") as View | null;
-        setView(!cams.length ? "run" : v && VIEWS.some(([id]) => id === v) ? v : "wall");
+        setView(!cams.length ? "run" : v && VIEWS.some(([id]) => id === v) ? v : window.innerWidth < 1024 ? "tasks" : "wall");
         if (s.run) setRun({ ...IDLE, phase: "done", images: s.run.images, areas: s.run.areas, ms: s.run.ms });
         if (s.live) loadHealth().then(setHealth);
       })
@@ -231,6 +232,7 @@ export default function Page() {
   if (!store) return <div className="h-full grid place-items-center text-muted text-sm">Loading shelf state…</div>;
 
   const blank = store.cameras.length === 0;
+  const shown = view === "tasks" ? "wall" : view; // what the main pane shows on a wide screen
   const cam = store.cameras.find((c) => c.id === camId) ?? store.cameras[0];
   const frame = cam && frameAt(cam, ts);
   const counts = Object.fromEntries(ORDER.map((s) => [s, tasks.filter((t) => t.status === s).length])) as Record<Status, number>;
@@ -260,9 +262,9 @@ export default function Page() {
     });
 
   return (
-    <div className={`h-full grid min-w-[1120px] ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
+    <div className={`h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
       {/* ── top bar ───────────────────────────────────────────── */}
-      <header className="flex items-center gap-6 px-6 h-14 border-b border-line bg-panel/80 backdrop-blur">
+      <header className="flex flex-wrap items-center gap-x-6 gap-y-2 px-4 lg:px-6 py-2.5 lg:py-0 lg:h-14 border-b border-line bg-panel/80 backdrop-blur">
         <div className="flex items-center gap-3">
           <Logo />
           <span className="text-[17px] font-semibold tracking-tight">
@@ -272,12 +274,12 @@ export default function Page() {
             {store.store} · {store.section}
           </span>
         </div>
-        <div className="flex rounded-lg border border-line p-0.5 text-xs">
+        <div className="order-last lg:order-none flex w-full lg:w-auto rounded-lg border border-line p-0.5 text-xs">
           {VIEWS.filter(([v]) => !blank || v === "run").map(([v, name]) => (
             <button
               key={v}
               onClick={() => setView(v)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${view === v ? (v === "run" ? "bg-accent/15 text-accent" : "bg-raised text-white") : v === "run" ? "text-accent hover:bg-accent/10" : "text-muted hover:text-white"}`}
+              className={`flex flex-1 lg:flex-none items-center justify-center gap-1.5 px-3 py-1.5 rounded-md whitespace-nowrap transition-colors ${v === "tasks" ? "lg:hidden" : ""} ${view === v ? (v === "run" ? "bg-accent/15 text-accent" : "bg-raised text-white") : v === "wall" && view === "tasks" ? "text-muted lg:bg-raised lg:text-white" : v === "run" ? "text-accent hover:bg-accent/10" : "text-muted hover:text-white"}`}
             >
               {v === "run" && (
                 <svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8V1.5m0 0L3.5 4M6 1.5 8.5 4M1.5 8v1.5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V8" /></svg>
@@ -288,7 +290,7 @@ export default function Page() {
         </div>
         <div className="flex-1" />
         {!blank && (
-          <div className="flex gap-1.5">
+          <div className="hidden md:flex gap-1.5">
             {ORDER.map((s) => (
               <button
                 key={s}
@@ -298,7 +300,7 @@ export default function Page() {
               >
                 <span className="size-2 rounded-full" style={{ background: STATUS[s].color, boxShadow: `0 0 10px ${STATUS[s].color}` }} />
                 <span className="font-mono tabular-nums text-sm">{counts[s]}</span>
-                <span className="text-muted">{STATUS[s].label}</span>
+                <span className="hidden xl:inline text-muted">{STATUS[s].label}</span>
               </button>
             ))}
           </div>
@@ -307,7 +309,7 @@ export default function Page() {
 
       {/* ── the day ───────────────────────────────────────────── */}
       {!blank && (
-        <div className="flex items-center gap-4 px-6 py-2.5 border-b border-line bg-panel/40">
+        <div className="flex items-center gap-3 lg:gap-4 px-4 lg:px-6 py-2.5 border-b border-line bg-panel/40">
           <button onClick={togglePlay} aria-label={playingNow ? "Pause" : "Play the day"} className="size-9 shrink-0 grid place-items-center rounded-full border border-line hover:border-ok/60 hover:text-ok transition-colors">
             {playingNow ? (
               <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><rect x="1.5" y="1" width="3" height="10" rx="1" /><rect x="7.5" y="1" width="3" height="10" rx="1" /></svg>
@@ -315,21 +317,21 @@ export default function Page() {
               <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 1.2v9.6a.6.6 0 0 0 .9.5l8-4.8a.6.6 0 0 0 0-1L3.4.7a.6.6 0 0 0-.9.5Z" /></svg>
             )}
           </button>
-          <div className="w-[92px] shrink-0">
-            <div className="font-mono text-2xl leading-none tabular-nums tracking-tight">{clock(ts)}</div>
+          <div className="w-[76px] lg:w-[92px] shrink-0">
+            <div className="font-mono text-xl lg:text-2xl leading-none tabular-nums tracking-tight">{clock(ts)}</div>
             <div className={`mt-1 text-[10px] uppercase tracking-[0.14em] ${isLive ? "text-ok" : "text-muted"}`}>{isLive ? "● Latest" : "History"}</div>
           </div>
           <DayStrip store={store} ts={ts} line={line} onChange={scrub} />
-          <button onClick={() => scrub(line.latest)} disabled={isLive} className="shrink-0 text-xs rounded-lg border border-line px-3 py-2 text-muted enabled:hover:text-white enabled:hover:border-white/25 disabled:opacity-40">
+          <button onClick={() => scrub(line.latest)} disabled={isLive} className="hidden sm:block shrink-0 text-xs rounded-lg border border-line px-3 py-2 text-muted enabled:hover:text-white enabled:hover:border-white/25 disabled:opacity-40">
             Jump to latest
           </button>
         </div>
       )}
 
-      <div className={`grid min-h-0 ${blank ? "" : "grid-cols-[1fr_384px]"}`}>
+      <div className={`grid min-h-0 ${blank ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
         {/* ── main ─────────────────────────────────────────────── */}
-        <main className="min-h-0 overflow-y-auto p-5">
-          {view === "run" || blank ? (
+        <main className={`min-h-0 min-w-0 overflow-y-auto p-4 lg:p-5 ${view === "tasks" && !blank ? "hidden lg:block" : ""}`}>
+          {shown === "run" || blank ? (
             <RunView
               store={store}
               health={health}
@@ -345,15 +347,15 @@ export default function Page() {
               onScore={doScore}
               onReset={clearRun}
             />
-          ) : view === "wall" ? (
+          ) : shown === "wall" ? (
             <div className="flex flex-col gap-5">
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-3">
                 <Kpi label="On the shelf" value={`${Math.round(((total - counts.empty) / total) * 100)}%`} sub={`${total - counts.empty} of ${total} areas have product`} tone={counts.empty ? "empty" : "ok"} />
                 <Kpi label="Fully stocked" value={`${Math.round((tasks.filter((t) => t.pred.level === "full").length / total) * 100)}%`} sub={`${counts.low} running low`} tone={counts.low ? "low" : "ok"} />
                 <Kpi label="Planogram match" value={`${Math.round(((total - counts.wrong) / total) * 100)}%`} sub={counts.wrong ? `${counts.wrong} holding the wrong product` : "everything in its place"} tone={counts.wrong ? "wrong" : "ok"} />
                 <Kpi label="To do now" value={String(open.length)} sub={done.size ? `${done.size} done this shift` : "open tasks across the store"} tone={open.length ? "accent" : "ok"} />
               </div>
-              <div className="grid grid-cols-2 2xl:grid-cols-3 gap-4">
+              <div className="grid sm:grid-cols-2 2xl:grid-cols-3 gap-4">
                 {store.cameras.map((c) => {
                   const f = frameAt(c, ts);
                   const n = tally(c, f);
@@ -369,12 +371,12 @@ export default function Page() {
                       className="group relative text-left rounded-xl overflow-hidden border border-line bg-black transition-all hover:border-white/30 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-20px_rgba(47,224,160,0.35)]"
                     >
                       <FrameView store={store} cam={c} frame={f} filter={filter} compact />
-                      <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2.5 bg-gradient-to-b from-black/80 to-transparent">
-                        <span className="flex items-center gap-2 font-mono text-[11px]">
+                      <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2 bg-gradient-to-b from-black/70 to-transparent">
+                        <span className="flex items-center gap-2 rounded-md bg-black/60 px-2 py-1 font-mono text-[11px] backdrop-blur-sm">
                           <span className="size-1.5 rounded-full" style={{ background: STATUS[worst].color, boxShadow: `0 0 8px ${STATUS[worst].color}` }} />
                           CAM {c.id}
-                          <span className="text-white/50">{clock(f.ts)}</span>
-                          {f.origin === "run" && <span className="rounded bg-accent/15 px-1.5 py-0.5 text-[10px] text-accent">tested</span>}
+                          <span className="text-white/60">{clock(f.ts)}</span>
+                          {f.origin === "run" && <span className="text-accent">tested</span>}
                         </span>
                         <Badges n={n} />
                       </div>
@@ -427,7 +429,7 @@ export default function Page() {
 
         {/* ── work queue ───────────────────────────────────────── */}
         {!blank && (
-          <aside className="border-l border-line min-h-0 flex flex-col bg-panel">
+          <aside className={`${view === "tasks" ? "flex" : "hidden"} lg:flex border-l border-line min-h-0 flex-col bg-panel`}>
             <div className="px-5 pt-4 border-b border-line">
               <div className="flex items-end justify-between">
                 <div>
@@ -475,7 +477,7 @@ export default function Page() {
                         {group.map((t) => {
                           const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
                           return (
-                            <div key={t.key} className={`group flex items-center gap-3 pl-5 pr-3 py-2.5 border-b border-line/50 transition-colors ${t.area.id === areaId && view === "camera" ? "bg-raised" : "hover:bg-raised/60"}`}>
+                            <div key={t.key} className={`group flex items-center gap-3 pl-5 pr-3 py-2.5 border-b border-line/50 transition-colors ${t.area.id === areaId && shown === "camera" ? "bg-raised" : "hover:bg-raised/60"}`}>
                               <button onClick={() => focus(t)} className="flex items-center gap-3 min-w-0 flex-1 text-left">
                                 <div className="relative shrink-0">
                                   <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="w-14 h-14 rounded-lg" />
@@ -515,7 +517,7 @@ export default function Page() {
               )}
             </div>
             <div className="px-5 py-2.5 border-t border-line text-[10px] text-muted font-mono flex justify-between">
-              <span>← → hour · space play · esc wall</span>
+              <span className="hidden lg:inline">← → hour · space play · esc wall</span>
               <span>
                 {store.cameras.length} cams · {total} areas
               </span>

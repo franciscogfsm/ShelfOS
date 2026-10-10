@@ -51,12 +51,15 @@ class ShelfService:
         self.engine.empty_compliant = empty_compliant
         self.embedder = Embedder(self.engine.model_name or MODEL_NAME, device=device, size=self.engine.crop_size)
         self.embedder.warmup()
+        fh, fw = self.engine.frame_size[1], self.engine.frame_size[0]
+        self.hidden = {cam: [i for i, a in enumerate(areas) if a.visible_fraction((fh, fw)) < MIN_VISIBLE] for cam, areas in self.areas.items()}
         self.reference_images = Path(reference_images)
         self.reference: dict = json.loads(Path(reference_path).read_text(encoding="utf-8")) if reference_path and Path(reference_path).is_file() else {}
         self.run_dir = Path(run_dir)
         self.run: dict[str, dict[str, dict]] = {}
         self.lock = threading.Lock()
         self.model_lock = threading.Lock()
+        self._reference_frames: dict = {}  # policy -> {camera: {file: frame json}}, built once
         self._load_run()
         self.load_seconds = time.time() - t0
 
@@ -96,10 +99,6 @@ class ShelfService:
     def _fit_frame(self, image: np.ndarray, warnings: list[str]) -> np.ndarray:
         """The planogram is in the pixel grid of the reference frames; bring any other size onto it."""
         w, h = self.engine.frame_size
-        if image.ndim == 2:
-            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-        if image.shape[2] == 4:
-            image = cv2.cvtColor(image, cv2.COLOR_BGRA2BGR)
         ih, iw = image.shape[:2]
         if (iw, ih) != (w, h):
             if abs(iw / ih - w / h) > 0.02:
@@ -113,9 +112,9 @@ class ShelfService:
         areas = self.areas[camera]
         crops = [self.embedder.crop(image, a) for a in areas]
         with self.model_lock:
-            glob, patches = self.embedder.embed(crops)
+            glob, patches = self.embedder.embed(crops, compact=False)
         details = self.engine.predict(glob, patches, thumbs_of(crops), areas, fname=file_name)
-        hidden = [i for i, a in enumerate(areas) if a.visible_fraction(image.shape) < MIN_VISIBLE]
+        hidden = self.hidden.get(camera)
         if hidden:
             memory = self.engine.fallback([areas[i] for i in hidden])
             for i, d in zip(hidden, memory):
@@ -129,7 +128,7 @@ class ShelfService:
         image = None
         if data:
             try:
-                image = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_UNCHANGED)
+                image = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)  # 8-bit BGR whatever the file holds
             except cv2.error:
                 image = None
         camera, source, warnings = self.resolve_camera(rel_path, image)
@@ -260,6 +259,13 @@ class ShelfService:
         return {"file": record["file"], "ts": record["ts"], "origin": origin, "ms": record.get("ms"), "cameraSource": record.get("cameraSource"),
                 "warnings": record.get("warnings", []), "areas": {aid: self._area_json(d) for aid, d in record["areas"].items()}}
 
+    def _reference(self, cam: str) -> dict:
+        cache = self._reference_frames.setdefault(self.empty_compliant, {})
+        if cam not in cache:
+            cache[cam] = {fname: self._frame_json({"file": fname, "ts": timestamp_of(fname), "areas": per_area}, "reference")
+                          for fname, per_area in self.reference.get(cam, {}).items() if timestamp_of(fname) is not None}
+        return cache[cam]
+
     def store(self) -> dict:
         products, cameras = {}, []
         with self.lock:
@@ -267,11 +273,7 @@ class ShelfService:
         for cam, areas in self.areas.items():
             for a in areas:
                 products[a.product_id] = {"name": display_name(a.product_name), "rawName": a.product_name}
-            frames = {}
-            for fname, per_area in self.reference.get(cam, {}).items():
-                ts = timestamp_of(fname)
-                if ts is not None:
-                    frames[fname] = self._frame_json({"file": fname, "ts": ts, "areas": per_area}, "reference")
+            frames = dict(self._reference(cam))
             for fname, record in run.get(cam, {}).items():
                 frames[fname] = self._frame_json(record, "run")
             if not frames:

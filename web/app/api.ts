@@ -1,4 +1,4 @@
-import { Frame, Store } from "./lib";
+import { AreaPred, Frame, Store } from "./lib";
 
 /** Where the inference server lives. Same origin when the server hosts the app; NEXT_PUBLIC_API
  *  (or ?api=http://localhost:PORT while developing) when the app runs under `next dev`. */
@@ -20,7 +20,7 @@ export interface Health {
 }
 
 export type RunEvent =
-  | { type: "frame"; camera: string; file: string; ms: number; cameraSource: "folder" | "auto" | null; warnings: string[]; frame: Frame }
+  | { type: "frame"; camera: string; file: string; ms: number; cameraSource: Frame["cameraSource"]; warnings: string[]; frame: Frame }
   | { type: "skip"; file: string; reason: string }
   | { type: "done"; images: number; areas: number; ms: number }
   | { type: "error"; message?: string; detail?: string };
@@ -29,9 +29,9 @@ export interface Mistake {
   camera: string;
   file: string;
   area: string;
-  field: "id" | "stock";
+  field: "id" | "stock" | "missing";
   predicted: string | number | boolean | null;
-  truth: string | number | boolean;
+  truth: string | number | boolean | object;
   points: number;
 }
 export interface Score {
@@ -61,12 +61,24 @@ async function fail(res: Response): Promise<never> {
   throw new Error(text.slice(0, 300) || `The server answered ${res.status}`);
 }
 
+/** What the screen calls compliant is what the output file says: the server sends that verdict
+ *  (it weighs in the chance that the slot is empty) next to the raw product match. */
+function tidy(frame: Frame): Frame {
+  for (const p of Object.values(frame.areas) as (AreaPred & { official?: { planogram_compliant?: boolean } })[])
+    if (typeof p.official?.planogram_compliant === "boolean") p.ok = p.official.planogram_compliant;
+  return frame;
+}
+
 /** The live store from the inference server, or the bundled snapshot when no server answers. */
 export async function loadStore(): Promise<Store> {
   const base = apiBase();
   try {
     const r = await fetch(`${base}/api/store`, { cache: "no-store" });
-    if (r.ok && (r.headers.get("content-type") ?? "").includes("json")) return { ...(await r.json()), base, live: true };
+    if (r.ok && (r.headers.get("content-type") ?? "").includes("json")) {
+      const s: Store = await r.json();
+      for (const c of s.cameras) c.frames.forEach(tidy);
+      return { ...s, base, live: true };
+    }
   } catch {}
   const r = await fetch("/data/store.json");
   if (!r.ok) throw new Error("no shelf data");
@@ -97,6 +109,7 @@ async function stream(res: Response, onEvent: (e: RunEvent) => void) {
       return;
     }
     if (e.type === "error") throw new Error(e.message ?? e.detail ?? "The server stopped the run");
+    if (e.type === "frame") tidy(e.frame);
     onEvent(e);
   };
   for (;;) {

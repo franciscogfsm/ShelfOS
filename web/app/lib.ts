@@ -27,7 +27,8 @@ export interface Frame {
   /** "reference": the day ShelfOS learned from. "run": an image tested through the app. */
   origin?: "reference" | "run";
   ms?: number | null;
-  cameraSource?: "folder" | "auto" | null;
+  /** how the camera was found: its folder, an id in the file name, or the picture itself */
+  cameraSource?: "folder" | "name" | "auto" | null;
   warnings?: string[];
 }
 export interface Camera {

@@ -42,18 +42,24 @@ class Embedder:
         self.model = load_backbone(model_name).to(self.device)
         self.n_prefix = getattr(self.model, "num_prefix_tokens", 1)
         self.half = self.device == "cuda"  # half precision on GPU: 3x faster, cosine to fp32 > 0.99999
+        self._plans: dict = {}  # the cameras are fixed, so every area's rectification is computed once
         if self.device == "cpu":
             torch.set_num_threads(max(1, (torch.get_num_threads() or 4)))
 
     def crop(self, image: np.ndarray, area: Area) -> np.ndarray:
         """Rectified BGR crop; pixels outside the camera image are filled with neutral grey."""
-        crop, valid = area.warp(image, (self.size, self.size), pad=PAD)
-        crop[~valid] = 124
+        key = (area.area_id, image.shape[0], image.shape[1])
+        plan = self._plans.get(key)
+        if plan is None:
+            plan = self._plans[key] = area.warp_plan(image.shape, (self.size, self.size), PAD)
+        crop = cv2.warpPerspective(image, plan[0], (self.size, self.size), flags=cv2.INTER_LINEAR)
+        crop[~plan[1]] = 124
         return crop
 
     @torch.inference_mode()
-    def embed(self, crops: list[np.ndarray], batch: int = 64) -> tuple[np.ndarray, np.ndarray]:
-        """Return (global [N, 2D] = CLS ++ mean patch, patches [N, P, D]) L2-normalised."""
+    def embed(self, crops: list[np.ndarray], batch: int = 64, compact: bool = True) -> tuple[np.ndarray, np.ndarray]:
+        """Return (global [N, 2D] = CLS ++ mean patch, patches [N, P, D]) L2-normalised.
+        compact: patches as float16 (for the stored bank); float32 is quicker to use right away."""
         glob, patches = [], []
         norm = torch.nn.functional.normalize
         for i in range(0, len(crops), batch):
@@ -67,7 +73,8 @@ class Embedder:
             if side > GRID:  # larger inputs: pool the token grid back to GRID x GRID
                 pt = torch.nn.functional.adaptive_avg_pool2d(pt.transpose(1, 2).reshape(len(pt), -1, side, side), GRID).flatten(2).transpose(1, 2)
             glob.append(torch.cat([norm(cls, dim=-1), norm(pt.mean(1), dim=-1)], -1).cpu().numpy())
-            patches.append(norm(pt, dim=-1).cpu().numpy().astype(np.float16))
+            p = norm(pt, dim=-1).cpu().numpy()
+            patches.append(p.astype(np.float16) if compact else p)
         return np.concatenate(glob), np.concatenate(patches)
 
     def warmup(self) -> None:

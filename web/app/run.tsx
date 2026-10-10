@@ -24,8 +24,8 @@ export interface RunState {
 export const IDLE: RunState = { phase: "idle", expected: null, images: 0, areas: 0, ms: null, startedAt: 0, skipped: [], order: [] };
 
 const LEVEL_NAME: Record<string, string> = { "0": "empty", "0.5": "half", "1": "full" };
-const say = (m: Mistake, v: Mistake["predicted"]) =>
-  v === null || v === undefined ? "nothing" : m.field === "id" ? (v === true || v === "true" ? "compliant" : "not compliant") : LEVEL_NAME[String(v)] ?? String(v);
+const say = (m: Mistake, v: Mistake["predicted"] | Mistake["truth"]) =>
+  v === null || v === undefined || typeof v === "object" ? "nothing" : m.field === "id" ? (v === true || v === "true" ? "compliant" : "not compliant") : LEVEL_NAME[String(v)] ?? String(v);
 
 export function RunView({
   store, health, run, score, scoreError, onFiles, onFolder, onCancel, onOpen, onFocus, onPolicy, onScore, onReset,
@@ -60,7 +60,7 @@ export function RunView({
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-end justify-between gap-6">
+      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3">
         <div className="min-w-0">
           <div className="text-[10px] uppercase tracking-[0.14em] text-accent">Test run</div>
           <h1 className="mt-1 text-2xl font-medium tracking-tight">Try ShelfOS on images it has never seen</h1>
@@ -91,12 +91,12 @@ export function RunView({
 
       {hasRun && (
         <section className="rounded-xl border border-line bg-panel overflow-hidden">
-          <div className="flex items-stretch">
+          <div className="flex flex-wrap items-stretch">
             <Stat label="Images" value={String(images)} sub={running && run.expected ? `of ${run.expected}` : `${new Set(frames.map((x) => x.cam.id)).size} cameras`} />
             <Stat label="Planogram areas" value={String(areas)} sub="none missing from the file" />
             <Stat label="Total time" value={total === null ? "–" : millis(total)} sub={health ? `on ${health.device === "cuda" ? "the GPU" : health.device}` : "inference"} live={running} />
             <Stat label="Per image" value={perImage === null ? "–" : millis(perImage)} sub="crop, embed, decide" />
-            <div className="flex-1 flex items-center justify-end gap-3 px-5 border-l border-line">
+            <div className="flex-1 flex items-center justify-end gap-3 px-5 py-3">
               {running ? (
                 <button onClick={onCancel} className="rounded-lg border border-line px-4 py-2.5 text-sm text-muted hover:text-white hover:border-white/25">
                   Stop
@@ -120,7 +120,7 @@ export function RunView({
             />
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-5 py-3 text-xs">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
               {ORDER.map((s) => (
                 <span key={s} className="flex items-center gap-1.5">
                   <span className="size-2 rounded-full" style={{ background: STATUS[s].color }} />
@@ -158,7 +158,7 @@ export function RunView({
           <summary className="cursor-pointer text-muted">
             {run.skipped.length} file{run.skipped.length === 1 ? "" : "s"} left out
           </summary>
-          <ul className="mt-2 grid grid-cols-2 gap-x-6 gap-y-1 font-mono text-[11px]">
+          <ul className="mt-2 grid sm:grid-cols-2 gap-x-6 gap-y-1 font-mono text-[11px]">
             {run.skipped.slice(0, 60).map((s, i) => (
               <li key={i} className="truncate">
                 <span className="text-white/80">{s.file}</span> <span className="text-muted">· {s.reason}</span>
@@ -169,7 +169,7 @@ export function RunView({
       )}
 
       {frames.length > 0 && (
-        <div className="grid grid-cols-2 2xl:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 2xl:grid-cols-3 gap-4">
           {frames.map(({ cam, frame }) => (
             <button
               key={`${cam.id}/${frame.file}`}
@@ -177,15 +177,15 @@ export function RunView({
               className="arrive group relative text-left rounded-xl overflow-hidden border border-line bg-black transition-all hover:border-white/30 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_-20px_rgba(34,211,238,0.4)]"
             >
               <FrameView store={store} cam={cam} frame={frame} compact />
-              <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2.5 bg-gradient-to-b from-black/80 to-transparent">
-                <span className="flex items-center gap-2 font-mono text-[11px]">
+              <div className="absolute inset-x-0 top-0 flex items-center justify-between p-2 bg-gradient-to-b from-black/70 to-transparent">
+                <span className="flex items-center gap-2 rounded-md bg-black/60 px-2 py-1 font-mono text-[11px] backdrop-blur-sm">
                   <span className="size-1.5 rounded-full bg-accent shadow-[0_0_8px_#22d3ee]" />
                   CAM {cam.id}
-                  <span className="text-white/50">{clock(frame.ts)}</span>
+                  <span className="text-white/60">{clock(frame.ts)}</span>
                 </span>
                 <Badges n={tally(cam, frame)} />
               </div>
-              <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 px-2.5 pb-2 pt-6 bg-gradient-to-t from-black/85 to-transparent font-mono text-[10px]">
+              <div className="absolute inset-x-0 bottom-0 flex items-center gap-2 px-2.5 pb-2 pt-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent font-mono text-[10px]">
                 <span className="truncate text-white/70">{frame.file}</span>
                 {frame.cameraSource === "auto" && <span className="shrink-0 rounded bg-accent/15 px-1.5 py-0.5 text-accent">camera recognised</span>}
                 {!!frame.warnings?.length && (
@@ -236,7 +236,7 @@ function ServerChip({ live, health }: { live: boolean; health: Health | null }) 
 
 function Stat({ label, value, sub, live }: { label: string; value: string; sub: string; live?: boolean }) {
   return (
-    <div className="px-5 py-4 border-r border-line last:border-r-0 min-w-[128px]">
+    <div className="px-5 py-4 border-r border-line min-w-[128px]">
       <div className="text-[10px] uppercase tracking-[0.14em] text-muted">{label}</div>
       <div className={`mt-1 font-mono text-[28px] leading-none tracking-tight tabular-nums ${live ? "text-accent" : ""}`}>{value}</div>
       <div className="mt-1.5 text-[11px] text-muted whitespace-nowrap">{sub}</div>
@@ -301,15 +301,15 @@ function Dropzone({ compact, busy, onFiles, onFolder }: { compact: boolean; busy
   );
   if (compact)
     return (
-      <div className="flex items-center gap-3 rounded-xl border border-dashed border-line px-4 py-3">
+      <div className="flex flex-wrap items-center gap-3 rounded-xl border border-dashed border-line px-4 py-3">
         {inputs}
         <span className="text-xs text-muted shrink-0">Drop more images anywhere, or</span>
         {buttons}
-        <div className="flex-1 min-w-0">{byPath}</div>
+        <div className="flex-1 min-w-[260px]">{byPath}</div>
       </div>
     );
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-dashed border-accent/40 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.10),transparent_60%)] px-8 py-10">
+    <div className="relative overflow-hidden rounded-2xl border border-dashed border-accent/40 bg-[radial-gradient(ellipse_at_top,rgba(34,211,238,0.10),transparent_60%)] px-5 sm:px-8 py-10">
       {inputs}
       <div className="mx-auto max-w-xl text-center">
         <div className="mx-auto size-12 grid place-items-center rounded-2xl border border-accent/40 bg-accent/10 text-accent">
@@ -319,7 +319,7 @@ function Dropzone({ compact, busy, onFiles, onFolder }: { compact: boolean; busy
         <div className="mt-4 flex justify-center gap-2">{buttons}</div>
         <div className="mt-4">{byPath}</div>
       </div>
-      <ul className="mx-auto mt-8 grid max-w-3xl grid-cols-3 gap-6 text-xs text-muted leading-relaxed">
+      <ul className="mx-auto mt-8 grid max-w-3xl sm:grid-cols-3 gap-6 text-xs text-muted leading-relaxed">
         <li>
           <div className="text-white mb-1">One folder per camera</div>
           <span className="font-mono text-[11px]">6215/1751052241.jpg</span>: the folder names the camera, the file name is the capture time.
@@ -362,8 +362,8 @@ function ScorePanel({
   );
   if (!score)
     return (
-      <section className="flex items-center gap-4 rounded-xl border border-line bg-panel px-5 py-3.5">
-        <div className="min-w-0 flex-1">
+      <section className="flex flex-wrap items-center gap-4 rounded-xl border border-line bg-panel px-5 py-3.5">
+        <div className="min-w-[240px] flex-1">
           <div className="text-sm">Have the ground truth? Score this run with the official rules</div>
           <div className="text-xs text-muted">
             {error ? <span className="text-empty">{error}</span> : "+1 per correct answer, −2 for a wrong identification or a stock level below the shelf, −3 for a stock level above it."}
@@ -394,8 +394,8 @@ function ScorePanel({
   const tone = STATUS[pct >= 70 ? "ok" : pct >= 40 ? "low" : "empty"].color;
   return (
     <section className="rounded-xl border border-line bg-panel overflow-hidden">
-      <div className="grid grid-cols-[auto_1fr]">
-        <div className="px-6 py-5 border-r border-line">
+      <div className="grid lg:grid-cols-[auto_1fr]">
+        <div className="px-6 py-5 lg:border-r border-line">
           <div className="text-[10px] uppercase tracking-[0.14em] text-muted">Official score</div>
           <div className="mt-1 font-mono tabular-nums tracking-tight">
             <span className="text-5xl" style={{ color: tone }}>{score.score}</span>
@@ -439,7 +439,7 @@ function ScorePanel({
           <summary className="cursor-pointer px-6 py-2.5 text-xs text-muted hover:text-white">
             {score.mistakes.length} answer{score.mistakes.length === 1 ? "" : "s"} that lost points
           </summary>
-          <div className="grid grid-cols-2 2xl:grid-cols-3 gap-px bg-line/60 border-t border-line/60">
+          <div className="grid sm:grid-cols-2 2xl:grid-cols-3 gap-px bg-line/60 border-t border-line/60">
             {score.mistakes.slice(0, 90).map((m, i) => {
               const hit = find(m);
               return (
@@ -448,7 +448,13 @@ function ScorePanel({
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-xs">{hit?.area.product ?? m.area}</span>
                     <span className="block truncate text-[11px] text-muted">
-                      {m.field === "id" ? "Planogram" : "Stock"}: said <span className="text-white">{say(m, m.predicted)}</span>, was <span className="text-white">{say(m, m.truth)}</span>
+                      {m.field === "missing" ? (
+                        "Missing from the output"
+                      ) : (
+                        <>
+                          {m.field === "id" ? "Planogram" : "Stock"}: said <span className="text-white">{say(m, m.predicted)}</span>, was <span className="text-white">{say(m, m.truth)}</span>
+                        </>
+                      )}
                     </span>
                   </span>
                   <span className="shrink-0 font-mono text-[11px] text-muted">{m.area}</span>

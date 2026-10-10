@@ -81,7 +81,7 @@ export function CameraStage({
           <span className="text-muted">· {STATUS[statusOf(hp)].label}</span>
         </div>
       )}
-      <div className="absolute left-3 bottom-3 flex gap-3 rounded-md bg-black/70 px-2.5 py-1.5 text-[10px] text-white/80 backdrop-blur">
+      <div className="absolute left-3 bottom-3 hidden sm:flex gap-3 rounded-md bg-black/70 px-2.5 py-1.5 text-[10px] text-white/80 backdrop-blur">
         {ORDER.map((s) => (
           <span key={s} className="flex items-center gap-1.5">
             <span className="size-2 rounded-sm" style={{ background: STATUS[s].color }} />
@@ -131,7 +131,7 @@ export function Badges({ n }: { n: Record<Status, number> }) {
           </span>
         ) : null,
       )}
-      {!any && <span className="rounded px-1.5 py-0.5 text-[10px] font-medium bg-ok/15 text-ok">all compliant</span>}
+      {!any && <span className="rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-medium text-ok backdrop-blur-sm">all compliant</span>}
     </span>
   );
 }
@@ -178,8 +178,8 @@ export function DayStrip({ store, ts, line, onChange }: { store: Store; ts: numb
         <span className="absolute -top-0.5 -left-[4px] size-[9px] rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]" />
       </div>
       <div className="absolute inset-x-0 top-9 h-px bg-line" />
-      {hours.map((t) => (
-        <span key={t} className="absolute top-[40px] -translate-x-1/2 text-[9px] font-mono text-muted" style={{ left: `${pos(t)}%` }}>
+      {hours.map((t, i) => (
+        <span key={t} className={`absolute top-[40px] -translate-x-1/2 text-[9px] font-mono text-muted ${i % 3 ? "hidden md:inline" : ""}`} style={{ left: `${pos(t)}%` }}>
           {clock(t).slice(0, 2)}h
         </span>
       ))}
@@ -204,7 +204,9 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
   const [showMap, setShowMap] = useState(false);
   const root = useRef<HTMLElement>(null);
   // on a small screen the explanation opens below the image: bring it into view
-  useEffect(() => root.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), []);
+  useEffect(() => {
+    root.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, []);
   // the frame where this area looked best today, as a visual reference
   const best = useMemo(() => {
     let top = cam.frames[0];
@@ -219,7 +221,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
   const hasMap = p.map.length > 0;
   const looks = (p.looks ?? []).filter(([id]) => id !== area.productId).slice(0, 2);
   return (
-    <section ref={root} className="rounded-xl border border-line bg-panel px-5 pb-5 pt-3 grid grid-cols-[minmax(0,300px)_1fr] gap-x-6 gap-y-3 2xl:grid-cols-1">
+    <section ref={root} className="rounded-xl border border-line bg-panel px-5 pb-5 pt-3 grid md:grid-cols-[minmax(0,300px)_1fr] gap-x-6 gap-y-3 2xl:grid-cols-1">
       <div className="col-span-full flex items-center justify-between">
         <span className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · slot {area.id.split("_")[1]}
@@ -287,7 +289,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-6 2xl:grid-cols-1 2xl:gap-4">
+        <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4 2xl:grid-cols-1">
           <div>
             <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">Stock level</div>
             {(["Empty", "Half", "Full"] as const).map((name, i) => {
@@ -307,9 +309,9 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
             <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">Planogram match</div>
             <div className="flex items-center gap-2 text-xs">
               <div className="flex-1 h-1.5 rounded bg-line overflow-hidden">
-                <div className="h-full rounded transition-[width] duration-300" style={{ width: `${p.pOk * 100}%`, background: p.ok ? STATUS.ok.color : STATUS.wrong.color }} />
+                <div className="h-full rounded transition-[width] duration-300" style={{ width: `${p.level === "empty" ? 0 : p.pOk * 100}%`, background: p.ok ? STATUS.ok.color : STATUS.wrong.color }} />
               </div>
-              <span className="font-mono tabular-nums w-9 text-right text-muted">{Math.round(p.pOk * 100)}%</span>
+              <span className="font-mono tabular-nums w-9 text-right text-muted">{p.level === "empty" ? "–" : `${Math.round(p.pOk * 100)}%`}</span>
             </div>
             <p className="mt-2 text-xs text-muted leading-relaxed">
               {p.level === "empty"
@@ -377,7 +379,7 @@ export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; 
           {rows.length} planogram areas · {todo ? <span style={{ color: STATUS[rows[0].s].color }}>{todo} need attention</span> : <span className="text-ok">all compliant</span>}
         </div>
       </div>
-      <div className="grid grid-cols-3 2xl:grid-cols-1">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-1">
         {rows.map(({ a, p, s }) => (
           <button key={a.id} onClick={() => onSelect(a.id)} className="flex items-center gap-2.5 px-4 py-2 text-left border-b border-line/50 hover:bg-raised/60 transition-colors" title="See why ShelfOS made this call">
             <span className="size-2 shrink-0 rounded-full" style={{ background: STATUS[s].color, boxShadow: s === "ok" ? undefined : `0 0 8px ${STATUS[s].color}` }} />
