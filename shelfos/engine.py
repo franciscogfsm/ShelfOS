@@ -50,6 +50,24 @@ def capture_times(fname, n: int):
     return out
 
 
+def hour_features(fname, n: int) -> np.ndarray:
+    """[n, 2] time-of-day prior from the capture time: hour of day (Lisbon, centred on 13h, in units of
+    6h) and an 'evening' ramp from 17h on. On the reference day the share of full areas falls from 90%
+    mid-morning to 73% after 18h and the share of empties rises; the same day-cycle is expected on the
+    validation day. Unknown capture time -> zeros (the mid-day prior)."""
+    out = np.zeros((n, 2), np.float32)
+    times = capture_times(fname, n)
+    if times is None:
+        return out
+    for i, t in enumerate(times):
+        if t is None:
+            continue
+        h = (t % 86400) / 3600 + 1  # UTC+1 (Lisbon summer time is a 1h shift either way; what matters is the cycle)
+        out[i, 0] = np.clip((h - 13) / 6, -1.5, 1.5)
+        out[i, 1] = np.clip((h - 17) / 3, 0, 1.5)
+    return out
+
+
 def p_identity(pred: dict, empty_compliant: bool = True) -> float:
     """P(planogram_compliant is annotated true), integrating over the stock uncertainty: with
     probability P(empty) there is nothing to identify and the convention for empty areas decides,
@@ -84,6 +102,7 @@ class Engine:
     memory_cls = AreaMemory  # not dataclass fields: swapped by experiments
     STOCK_C = 1.0
     RECENCY_W = 0.0
+    HOUR_SCALE = 0.5  # weight of the time-of-day prior in the design matrix (0 = off)
 
     # ---- training -------------------------------------------------------------------------
     @classmethod
@@ -108,7 +127,8 @@ class Engine:
             t = bank["t"].astype(float)
             last = np.array([t[bank["camera"] == c].max() for c in bank["camera"]])
             sw = sw * (1.0 + cls.RECENCY_W * (t[m] / np.maximum(last[m], 1.0)))
-        e.stock_clf = LogisticRegression(C=cls.STOCK_C, max_iter=3000).fit(e._design(X[m], f[m], R), y[m], sample_weight=sw)
+        H = hour_features(bank["fname"][m], int(m.sum()))
+        e.stock_clf = LogisticRegression(C=cls.STOCK_C, max_iter=3000).fit(e._design(X[m], f[m], R, H), y[m], sample_weight=sw)
         e.comply = ComplianceModel().fit(X, area, product, c, y >= 1, weight=np.where(cs, 1.0, 0.5))
         e.last_seen = cls._last_seen(area, bank["t"], y, c, e.comply.prior)
         return e
@@ -127,9 +147,11 @@ class Engine:
             out[str(a)] = ((p / p.sum()).tolist(), float(np.mean(ci)) if ci else float(prior))
         return out
 
-    def _design(self, glob, f, R):
-        """Stock-level feature matrix: appearance ++ occupancy summaries ++ area-relative memory features."""
-        return np.hstack([glob, (f - self.occ_mu) / self.occ_sd * OCC_SCALE, (R - self.mem_mu) / self.mem_sd * MEM_SCALE])
+    def _design(self, glob, f, R, H=None):
+        """Stock-level feature matrix: appearance ++ occupancy summaries ++ area-relative memory features
+        ++ time-of-day prior."""
+        H = np.zeros((len(glob), 2), np.float32) if H is None else H
+        return np.hstack([glob, (f - self.occ_mu) / self.occ_sd * OCC_SCALE, (R - self.mem_mu) / self.mem_sd * MEM_SCALE, H * self.HOUR_SCALE])
 
     # ---- inference ------------------------------------------------------------------------
     def predict(self, glob, patches, thumbs, areas: list[Area], fname=None) -> list[dict]:
@@ -145,7 +167,7 @@ class Engine:
         f = occupancy_features(maps)
         R = self.memory.features(glob, patches, f[:, 0], area, self_row, t_query=capture_times(fname, len(area)))
         probs = np.zeros((len(glob), 3))
-        probs[:, self.stock_clf.classes_] = self.stock_clf.predict_proba(self._design(glob, f, R))
+        probs[:, self.stock_clf.classes_] = self.stock_clf.predict_proba(self._design(glob, f, R, hour_features(fname, len(area))))
         novelty = R[:, NOVEL] if R.shape[1] > NOVEL else np.zeros(len(glob))
         probs = self._obstruction_guard(probs, novelty)
         level = decide_stock(probs)

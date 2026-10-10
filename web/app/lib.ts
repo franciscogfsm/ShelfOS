@@ -65,7 +65,7 @@ export const STATUS: Record<Status, { label: string; action: string; hint: strin
   empty: { label: "Empty", action: "Restock now", hint: "Nothing on the shelf", color: "#ff6b7a", glyph: "!", rank: 0 },
   wrong: { label: "Wrong product", action: "Fix placement", hint: "Holding another product", color: "#a996ff", glyph: "⇄", rank: 1 },
   low: { label: "Low", action: "Restock soon", hint: "About half left", color: "#f5b84a", glyph: "↓", rank: 2 },
-  ok: { label: "Compliant", action: "No action", hint: "Full and in place", color: "#e4e4e7", glyph: "✓", rank: 3 },
+  ok: { label: "Compliant", action: "No action", hint: "Full and in place", color: "#3ddc97", glyph: "✓", rank: 3 },
 };
 export const ORDER: Status[] = ["empty", "wrong", "low", "ok"];
 export const ISSUES: Status[] = ["empty", "wrong", "low"];

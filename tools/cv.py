@@ -48,7 +48,7 @@ def evaluate(bank, labels, rects, split, empty_compliant=True, engine_cls=Engine
         e.empty_compliant = empty_compliant
         idx = np.where(te)[0]
         areas = [SimpleNamespace(area_id=str(bank["area"][i]), product_id=str(bank["product"][i])) for i in idx]
-        out = e.predict(bank["glob"][idx], bank["patches"][idx], bank["thumbs"][idx], areas)
+        out = e.predict(bank["glob"][idx], bank["patches"][idx], bank["thumbs"][idx], areas, fname=bank["fname"][idx])
         for i, d in zip(idx, out):
             probs[i], p_ok[i], level[i] = d["stock_probs"], p_identity(d, empty_compliant), LEVELS.index(d["stock_level"])
         tested |= te

@@ -43,8 +43,8 @@ occupancy.PatchOccupancy.fit = _memo_fit
 class SimMemory(AreaMemory):
     """+ global similarity to the area's nearest full / half / empty frame."""
 
-    def features(self, glob, patches, occ_mean, area, self_row=None):
-        base = super().features(glob, patches, occ_mean, area, self_row)
+    def features(self, glob, patches, occ_mean, area, self_row=None, t_query=None):
+        base = self._base_features(glob, patches, occ_mean, area, self_row)
         n = len(glob)
         extra = np.zeros((n, 7), np.float32)
         area = np.asarray(area).astype(str)
@@ -72,8 +72,8 @@ class SimMemory(AreaMemory):
 class PrevMemory(AreaMemory):
     """+ the level of the latest earlier frame of the area and how similar the crop still is to it."""
 
-    def features(self, glob, patches, occ_mean, area, self_row=None):
-        base = super().features(glob, patches, occ_mean, area, self_row)
+    def features(self, glob, patches, occ_mean, area, self_row=None, t_query=None):
+        base = self._base_features(glob, patches, occ_mean, area, self_row)
         n = len(glob)
         extra = np.zeros((n, 4), np.float32)
         area = np.asarray(area).astype(str)
@@ -99,6 +99,13 @@ class PrevMemory(AreaMemory):
 _INNER = np.array([r * 14 + c for r in range(1, 13) for c in range(1, 13)])
 
 
+class BaseMemory(AreaMemory):
+    """The 11 base features only: the engine as it was before the temporal change features."""
+
+    def features(self, glob, patches, occ_mean, area, self_row=None, t_query=None):
+        return self._base_features(glob, patches, occ_mean, area, self_row)
+
+
 class ChangeMemory(AreaMemory):
     """+ patch-for-patch change against the area's latest earlier frame (the cameras are fixed, so an
     unchanged patch means an unchanged shelf). Features: share of unchanged inner patches, that
@@ -106,8 +113,8 @@ class ChangeMemory(AreaMemory):
 
     CHANGE_SIM = 0.7
 
-    def features(self, glob, patches, occ_mean, area, self_row=None):
-        base = super().features(glob, patches, occ_mean, area, self_row)
+    def features(self, glob, patches, occ_mean, area, self_row=None, t_query=None):
+        base = self._base_features(glob, patches, occ_mean, area, self_row)
         n = len(glob)
         extra = np.zeros((n, 7), np.float32)
         area = np.asarray(area).astype(str)
@@ -135,8 +142,8 @@ class ChangeMemory(AreaMemory):
 class Change2Memory(ChangeMemory):
     """Same, against the two latest earlier frames (the nearer one weighs double)."""
 
-    def features(self, glob, patches, occ_mean, area, self_row=None):
-        base = AreaMemory.features(self, glob, patches, occ_mean, area, self_row)
+    def features(self, glob, patches, occ_mean, area, self_row=None, t_query=None):
+        base = self._base_features(glob, patches, occ_mean, area, self_row)
         n = len(glob)
         extra = np.zeros((n, 7), np.float32)
         area = np.asarray(area).astype(str)
@@ -270,6 +277,9 @@ VARIANTS = {
     "C=10": variant(C=10.0),
     "C=30": variant(C=30.0),
     "engine": Engine,
+    "base": variant(BaseMemory),
+    "no-hour": type("NoHour", (Engine,), {"HOUR_SCALE": 0.0}),
+    "hour1": type("Hour1", (Engine,), {"HOUR_SCALE": 1.0}),
     "no-memory": variant(design=no_memory),
     "no-glob": variant(design=no_glob),
     "mem-scale-1": variant(design=mem1),

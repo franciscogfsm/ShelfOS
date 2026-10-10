@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
 import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, bbox, centroid, clock, duration, frameAt, frameSrc, points, productName, since, statusOf } from "./lib";
 
@@ -28,7 +29,7 @@ export const FrameView = memo(function FrameView({
   }, [visible]);
   return (
     <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className="frame-view block w-full h-auto select-none" data-loaded={loaded}>
-      <rect width={w} height={h} fill="#101012" />
+      <rect width={w} height={h} fill="none" />
       {visible && <image className="frame-image" href={frameSrc(store, cam, frame)} width={w} height={h} onLoad={() => setLoaded(true)} />}
       {!compact && <rect width={w} height={h} fill={`url(#${vignette})`} pointerEvents="none" />}
       <defs>
@@ -114,25 +115,96 @@ export function CameraStage({
 export const Crop = memo(function Crop({ store, cam, frame, area, className }: { store: Store; cam: Camera; frame: Frame; area: AreaDef; className?: string }) {
   const b = bbox(area.quad, store.width, store.height);
   return (
-    <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} preserveAspectRatio="xMidYMid slice" className={className}>
+    <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} preserveAspectRatio="xMidYMid slice" className={`crop ${className ?? ""}`}>
       <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} />
     </svg>
   );
 });
 
-export const Kpi = memo(function Kpi({ label, value, sub, tone }: { label: string; value: string; sub: string; tone: Status | "accent" }) {
+/** One headline number, a ring for how far it is from perfect, and how it moved over the day. */
+export const Kpi = memo(function Kpi({
+  label, value, sub, tone, share, trend, at, children,
+}: { label: string; value: string; sub: string; tone: Status | "accent"; share?: number; trend?: number[]; at?: number; children?: React.ReactNode }) {
   const color = tone === "accent" ? ACCENT : STATUS[tone].color;
+  const fill = useId();
+  const lo = trend ? Math.min(...trend) : 0;
+  const span = trend ? Math.max(1e-6, Math.max(...trend) - lo) : 1;
+  // Leave room for the marker's radius and halo at both vertical extremes.
+  const y = (v: number) => 24 - ((v - lo) / span) * 16;
+  const pts = trend?.map((v, i) => `${((i / (trend.length - 1)) * 100).toFixed(2)},${y(v).toFixed(2)}`).join(" ");
+  const now = trend && at !== undefined ? trend[Math.round(at * (trend.length - 1))] : undefined;
   return (
     <div className="metric-card glass-card relative overflow-hidden">
-      <div className="text-[10px] uppercase tracking-[0.14em] text-muted">{label}</div>
-      <div className="metric-value mt-1 text-[34px] leading-none tracking-tight tabular-nums">
-        <span key={value} className="metric-number">{value}</span>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.14em] text-muted"><span className="size-1.5 rounded-full" style={{ background: color }} />{label}</div>
+          <div className="metric-value leading-none tabular-nums"><Count text={value} /></div>
+          <div className="text-xs text-muted truncate">{sub}</div>
+        </div>
+        {share !== undefined && (
+          <svg className="metric-ring" viewBox="0 0 44 44" aria-hidden="true">
+            <circle cx="22" cy="22" r="18" fill="none" stroke="#ffffff14" strokeWidth="4" />
+            <circle cx="22" cy="22" r="18" fill="none" stroke={color} strokeWidth="4" strokeLinecap="round" pathLength={100} strokeDasharray={`${Math.max(0.01, share * 100)} 100`} transform="rotate(-90 22 22)" />
+          </svg>
+        )}
+        {children}
       </div>
-      <div className="mt-1.5 text-xs text-muted truncate">{sub}</div>
-      <div className="metric-rule" style={{ background: color }} />
+      {pts && (
+        <div className="metric-spark" title="Over the day">
+          <svg viewBox="0 0 100 32" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id={fill} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stopColor={color} stopOpacity="0.28" />
+                <stop offset="1" stopColor={color} stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polygon points={`0,32 ${pts} 100,32`} fill={`url(#${fill})`} />
+            <polyline points={pts} fill="none" stroke={color} strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+          </svg>
+          {now !== undefined && at !== undefined && <i style={{ left: `calc(${at * 100}% + ${10 - at * 20}px)`, top: `${(y(now) / 32) * 100}%`, background: color }} />}
+        </div>
+      )}
     </div>
   );
 });
+
+const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+/** One column of an odometer: the ten digits stacked, slid so the right one shows. */
+function Digit({ d, delay }: { d: number; delay: number }) {
+  const [at, setAt] = useState(0);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setAt(d));
+    return () => cancelAnimationFrame(id);
+  }, [d]);
+  return (
+    <span className="roll-digit">
+      <span style={{ transform: `translateY(${-at * 10}%)`, transitionDelay: `${delay}ms` }}>
+        {DIGITS.map((n) => <span key={n}>{n}</span>)}
+      </span>
+    </span>
+  );
+}
+
+/** A number whose digits roll into place like an odometer, and roll on when the value changes. */
+export function CountUp({ value }: { value: number }) {
+  const digits = String(Math.max(0, Math.round(value))).split("");
+  return (
+    <>
+      <span className="sr-only">{value}</span>
+      <span className="roll" aria-hidden="true">
+        {/* keyed by place from the right, so the units column stays the units column */}
+        {digits.map((d, i) => <Digit key={digits.length - i} d={Number(d)} delay={i * 55} />)}
+      </span>
+    </>
+  );
+}
+
+/** Text that starts with a number ("93%"): the number counts up, the rest stays. */
+function Count({ text }: { text: string }) {
+  const m = /^(\d+)(.*)$/.exec(text);
+  return m ? <><CountUp value={Number(m[1])} />{m[2]}</> : <>{text}</>;
+}
 
 /** Small count badges for one camera frame: how many areas need each action. */
 export function Badges({ n }: { n: Record<Status, number> }) {

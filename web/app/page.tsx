@@ -3,14 +3,15 @@
 import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Health, RunEvent, Score, Upload, analyzeFiles, analyzeFolder, fromDrop, loadHealth, loadStore, resetRun, scoreAgainst, setPolicy, sort } from "./api";
-import { AreaDetail, AreaList, Badges, CameraStage, Crop, DayStrip, FrameView, Kpi } from "./components";
+import { AreaDetail, AreaList, Badges, CameraStage, CountUp, Crop, DayStrip, FrameView, Kpi } from "./components";
 import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task, clock, confidence, duration, frameAt, since, statusOf, tally, tasksAt, timeline, withFrame } from "./lib";
 import { IDLE, RunState, RunView } from "./run";
 import Loading from "./loading";
+import { Search } from "./search";
+import { ProductImage, preloadProductImages } from "./product-image";
 
 type View = "tasks" | "wall" | "camera" | "run";
 type Tab = "tasks" | "products";
-// "tasks" is a view of its own on a phone; on a wide screen the work queue is always on the right
 const VIEWS: [View, string][] = [["tasks", "Tasks"], ["wall", "Store wall"], ["camera", "Camera"], ["run", "Test images"]];
 const NAV_ICON: Record<View, React.ReactNode> = {
   tasks: <path d="M4 6.5 5.5 8 8 5m3 1.5h9M4 12.5l1.5 1.5L8 11m3 1.5h9M4 18.5 5.5 20 8 17m3 1.5h9" />,
@@ -38,12 +39,30 @@ export default function Page() {
   const [scoreError, setScoreError] = useState<string | null>(null);
   const [truth, setTruth] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [searching, setSearching] = useState(false);
   const abort = useRef<AbortController | null>(null);
 
   // cameras that have at least one image; a camera with none has nothing to show yet
   const store = useMemo(() => (raw ? { ...raw, cameras: raw.cameras.filter((c) => c.frames.length) } : null), [raw]);
   const line = useMemo(() => (store ? timeline(store) : { min: 0, max: 1, latest: 1 }), [store]);
   const tasks = useMemo(() => (store ? tasksAt(store, ts) : []), [store, ts]);
+  useEffect(() => {
+    preloadProductImages(tasks.map((task) => task.area.rawName || task.area.product));
+  }, [tasks]);
+  // the four headline numbers at 40 moments of the day, for the small charts under them
+  const trend = useMemo(() => {
+    const out = { shelf: [] as number[], full: [] as number[], match: [] as number[], todo: [] as number[] };
+    if (!store?.cameras.length) return out;
+    for (let i = 0; i < 40; i++) {
+      const all = tasksAt(store, i === 39 ? line.latest : line.min + ((line.max - line.min) * i) / 39);
+      const n = all.length || 1;
+      out.shelf.push(all.filter((t) => t.status !== "empty").length / n);
+      out.full.push(all.filter((t) => t.pred.level === "full").length / n);
+      out.match.push(all.filter((t) => t.status !== "wrong").length / n);
+      out.todo.push(all.filter((t) => t.status !== "ok").length);
+    }
+    return out;
+  }, [store, line.min, line.max, line.latest]);
 
   useEffect(() => {
     if (!notice) return;
@@ -89,8 +108,16 @@ export default function Page() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        return setSearching((s) => !s);
+      }
       const tag = (e.target as HTMLElement).tagName;
       if (tag === "INPUT" || tag === "TEXTAREA") return;
+      if (e.key === "/") {
+        e.preventDefault();
+        return setSearching(true);
+      }
       if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
         const dir = e.key === "ArrowLeft" ? -1 : 1;
         setPlaying(false);
@@ -248,13 +275,17 @@ export default function Page() {
 
   const blank = store.cameras.length === 0;
   const [place, town] = store.store.split(/,\s*(?=[^,]*$)/);
-  const shown = view === "tasks" ? "wall" : view; // what the main pane shows on a wide screen
+  const shown = view;
   const cam = store.cameras.find((c) => c.id === camId) ?? store.cameras[0];
   const frame = cam && frameAt(cam, ts);
   const counts = Object.fromEntries(ORDER.map((s) => [s, tasks.filter((t) => t.status === s).length])) as Record<Status, number>;
   const open = tasks.filter((t) => t.status !== "ok" && !done.has(t.key));
   const queue = open.filter((t) => filter === "all" || t.status === filter);
   const total = tasks.length || 1;
+  const shelf = (total - counts.empty) / total;
+  const full = tasks.filter((t) => t.pred.level === "full").length / total;
+  const match = (total - counts.wrong) / total;
+  const dayAt = Math.min(1, Math.max(0, (Math.min(ts, line.max) - line.min) / Math.max(1, line.max - line.min)));
   const selected = areaId && cam ? cam.areas.find((a) => a.id === areaId) : undefined;
 
   const openFrame = (c: Camera, f: Frame, area: string | null = null) => {
@@ -269,6 +300,16 @@ export default function Page() {
     setAreaId(t.area.id);
     setView("camera");
   };
+  const openCamera = (id: string) => {
+    setCamId(id);
+    setAreaId(null);
+    setView("camera");
+  };
+  const showStatus = (s: Status) => {
+    setTab("tasks");
+    setFilter(s);
+    setView("tasks");
+  };
   const toggleDone = (key: string) => {
     const task = tasks.find((t) => t.key === key);
     if (task && !done.has(key)) setNotice({ key, product: task.area.product });
@@ -281,7 +322,7 @@ export default function Page() {
   };
 
   return (
-    <div className={`app-shell h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
+    <div className={`app-shell app-enter h-full grid ${blank ? "grid-rows-[auto_1fr]" : "grid-rows-[auto_auto_1fr]"}`}>
       {/* ── top bar ───────────────────────────────────────────── */}
       <header className="app-header flex flex-wrap items-center gap-x-6 gap-y-3 px-4 lg:px-6 py-3 lg:py-0 lg:h-[76px]">
         <div className="store-id flex min-w-0 items-center gap-3 lg:flex-1">
@@ -297,20 +338,27 @@ export default function Page() {
               key={v}
               aria-pressed={view === v}
               onClick={() => setView(v)}
-              className={`nav-item flex-1 lg:flex-none ${v === "tasks" ? "lg:hidden" : ""} ${v === "wall" && view === "tasks" ? "nav-item-wide" : ""}`}
+              className="nav-item flex-1 lg:flex-none"
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{NAV_ICON[v]}</svg>
               {name}
             </button>
           ))}
         </nav>
-        <div className="flex lg:flex-1 justify-end">
+        <div className="flex lg:flex-1 items-center justify-end gap-2.5">
+          {!blank && (
+            <button onClick={() => setSearching(true)} className="search-trigger glass" aria-label="Search" title="Search (Ctrl K)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /></svg>
+              <span>Search</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+          )}
           {!blank && (
             <div className="status-pills glass hidden md:flex">
               {ORDER.map((s) => (
                 <button key={s} aria-pressed={filter === s} title={STATUS[s].label} onClick={() => setFilter(filter === s ? "all" : s)} style={{ color: STATUS[s].color }}>
                   <span className="size-1.5 rounded-full bg-current" />
-                  <span className="font-mono tabular-nums text-[13px] text-white/90">{counts[s]}</span>
+                  <span className="font-mono tabular-nums text-[13px] text-white/90"><CountUp value={counts[s]} /></span>
                   <span className="hidden 2xl:inline text-[11px] text-muted">{STATUS[s].label}</span>
                 </button>
               ))}
@@ -340,9 +388,9 @@ export default function Page() {
         </div>
       )}
 
-      <div className={`grid min-h-0 ${blank ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
+      <div className={`grid min-h-0 ${blank || view === "tasks" ? "" : "lg:grid-cols-[minmax(0,1fr)_384px]"}`}>
         {/* ── main ─────────────────────────────────────────────── */}
-        <main className={`workspace min-h-0 min-w-0 overflow-y-auto p-4 lg:p-7 ${view === "tasks" && !blank ? "hidden lg:block" : ""}`}>
+        <main className="workspace min-h-0 min-w-0 overflow-y-auto p-4 lg:p-7">
           <div key={shown} className="view-enter">
           {shown === "run" || blank ? (
             <RunView
@@ -360,6 +408,73 @@ export default function Page() {
               onScore={doScore}
               onReset={clearRun}
             />
+          ) : shown === "tasks" ? (
+            <div className="tasks-page flex flex-col gap-5">
+              <section className="overview-heading">
+                <div>
+                  <div className="eyebrow">TASKS · {clock(ts)}</div>
+                  <h1>{open.length ? <><CountUp value={open.length} /> <span>to do</span></> : <>All done. <span>Shelves are in shape.</span></>}</h1>
+                  <p>Tap a task to see the shelf. Tick it when it is done.</p>
+                </div>
+                <div className="shift-progress glass-card">
+                  <div className="flex items-baseline justify-between gap-6 text-xs"><span className="text-muted">Done this shift</span><span className="font-mono tabular-nums"><CountUp value={done.size} /> / {done.size + open.length}</span></div>
+                  <div className="shift-bar"><span style={{ width: `${(done.size / Math.max(1, done.size + open.length)) * 100}%` }} /></div>
+                  {done.size > 0 && <button onClick={() => { setDone(new Set()); setNotice(null); }} className="mt-2 text-[11px] text-muted hover:text-white">Reset</button>}
+                </div>
+              </section>
+              <div className="filter-row">
+                <button aria-pressed={tab === "tasks" && filter === "all"} onClick={() => { setTab("tasks"); setFilter("all"); }}>All <span>{open.length}</span></button>
+                {ISSUES.map((s) => (
+                  <button key={s} aria-pressed={tab === "tasks" && filter === s} onClick={() => { setTab("tasks"); setFilter(s); }}>
+                    <i style={{ background: STATUS[s].color }} />{STATUS[s].action} <span>{open.filter((t) => t.status === s).length}</span>
+                  </button>
+                ))}
+                <button aria-pressed={tab === "products"} onClick={() => setTab("products")}>Stock by product</button>
+              </div>
+              {tab === "products" ? (
+                <div className="glass-card overflow-hidden"><Products tasks={tasks} onPick={focus} /></div>
+              ) : (
+                <>
+                  {ISSUES.map((s) => {
+                    const group = queue.filter((t) => t.status === s);
+                    if (!group.length) return null;
+                    return (
+                      <section key={s} className="flex flex-col gap-3">
+                        <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.14em] text-white/85">
+                          <span className="size-1.5 rounded-full" style={{ background: STATUS[s].color }} />
+                          {STATUS[s].action}
+                          <span className="font-mono text-muted normal-case tracking-normal">{group.length}</span>
+                        </div>
+                        <div className="task-grid">
+                          {group.map((t, i) => {
+                            const held = Math.max(ts, t.frame.ts) - since(t.cam, t.area.id, t.frame);
+                            return (
+                              <div key={t.key} className="task-card glass-card" style={{ "--i": Math.min(i, 12) } as React.CSSProperties}>
+                                <button onClick={() => focus(t)} className="flex min-w-0 flex-1 items-center gap-3.5 text-left">
+                                  <Crop store={store} cam={t.cam} frame={t.frame} area={t.area} className="size-[68px] shrink-0 rounded-2xl" />
+                                  <div className="min-w-0 flex-1">
+                                    <div className="truncate text-[15px] font-medium">{t.area.product}</div>
+                                    <div className="mt-0.5 flex items-center gap-1.5 text-xs" style={{ color: STATUS[s].color }}>
+                                      {STATUS[s].hint}
+                                      {held >= 60 && <span className="text-muted">· for {duration(held)}</span>}
+                                    </div>
+                                    <div className="mt-1 text-[11px] text-muted font-mono">cam {t.cam.id} · slot {t.area.id.split("_")[1]}</div>
+                                  </div>
+                                </button>
+                                <button onClick={() => toggleDone(t.key)} aria-label={`Mark ${t.area.product} done`} title="Mark done" className="task-done">
+                                  <svg width="16" height="16" viewBox="0 0 13 13" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="m2.5 7 2.8 2.8 5.2-6" /></svg>
+                                </button>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </section>
+                    );
+                  })}
+                  {queue.length === 0 && <div className="glass-card px-5 py-14 text-center text-sm text-muted">Nothing to do in this view.</div>}
+                </>
+              )}
+            </div>
           ) : shown === "wall" ? (
             <div className="flex flex-col gap-5">
               <section className="overview-heading">
@@ -371,10 +486,16 @@ export default function Page() {
                 <div className="snapshot-chip glass"><span className="status-beacon" />{isLive ? "Latest snapshot" : "Historical snapshot"}<span className="font-mono">{clock(ts)}</span></div>
               </section>
               <div className="metrics-grid grid grid-cols-2 xl:grid-cols-4 gap-3">
-                <Kpi label="On the shelf" value={`${Math.round(((total - counts.empty) / total) * 100)}%`} sub={`${total - counts.empty} of ${total} areas have product`} tone={counts.empty ? "empty" : "ok"} />
-                <Kpi label="Fully stocked" value={`${Math.round((tasks.filter((t) => t.pred.level === "full").length / total) * 100)}%`} sub={`${counts.low} running low`} tone={counts.low ? "low" : "ok"} />
-                <Kpi label="Planogram match" value={`${Math.round(((total - counts.wrong) / total) * 100)}%`} sub={counts.wrong ? `${counts.wrong} holding the wrong product` : "everything in its place"} tone={counts.wrong ? "wrong" : "ok"} />
-                <Kpi label="To do now" value={String(open.length)} sub={done.size ? `${done.size} done this shift` : "open tasks across the store"} tone={open.length ? "accent" : "ok"} />
+                <Kpi label="On the shelf" value={`${Math.round(shelf * 100)}%`} share={shelf} trend={trend.shelf} at={dayAt} sub={counts.empty ? `${counts.empty} of ${total} areas are empty` : `all ${total} areas have product`} tone={counts.empty ? "empty" : "ok"} />
+                <Kpi label="Fully stocked" value={`${Math.round(full * 100)}%`} share={full} trend={trend.full} at={dayAt} sub={counts.low ? `${counts.low} running low` : "nothing running low"} tone={counts.low ? "low" : "ok"} />
+                <Kpi label="Planogram match" value={`${Math.round(match * 100)}%`} share={match} trend={trend.match} at={dayAt} sub={counts.wrong ? `${counts.wrong} holding the wrong product` : "everything in its place"} tone={counts.wrong ? "wrong" : "ok"} />
+                <Kpi label="To do now" value={String(open.length)} trend={trend.todo} at={dayAt} sub={done.size ? `${done.size} done this shift` : "open tasks across the store"} tone="accent">
+                  <button onClick={() => setView("tasks")} className="metric-mix" title="Open tasks">
+                    {ISSUES.map((s) => (
+                      <span key={s}><i style={{ background: STATUS[s].color }} />{open.filter((t) => t.status === s).length}</span>
+                    ))}
+                  </button>
+                </Kpi>
               </div>
               <div className="section-heading"><div><span className="eyebrow">VISUAL MONITORING</span><h2>Store wall <span>{store.cameras.length.toString().padStart(2, "0")}</span></h2></div><span className="text-xs text-muted">Select a camera to inspect <span aria-hidden="true">↗</span></span></div>
               <div className="camera-grid grid sm:grid-cols-2 2xl:grid-cols-3 gap-4">
@@ -451,8 +572,8 @@ export default function Page() {
         </main>
 
         {/* ── work queue ───────────────────────────────────────── */}
-        {!blank && (
-          <aside className={`task-panel glass-card ${view === "tasks" ? "flex" : "hidden"} lg:flex min-h-0 flex-col`}>
+        {!blank && view !== "tasks" && (
+          <aside className="task-panel glass-card hidden lg:flex min-h-0 flex-col">
             <div className="px-5 pt-4 border-b border-line">
               <div className="flex items-end justify-between">
                 <div>
@@ -460,7 +581,7 @@ export default function Page() {
                   <div className="mt-1 text-xl font-medium tracking-tight">
                     {open.length ? (
                       <>
-                        {open.length} <span className="text-muted">task{open.length === 1 ? "" : "s"} to tackle</span>
+                        <CountUp value={open.length} /> <span className="text-muted">task{open.length === 1 ? "" : "s"} to tackle</span>
                       </>
                     ) : (
                       <span>All shelves compliant</span>
@@ -550,6 +671,7 @@ export default function Page() {
         )}
       </div>
 
+      {searching && <Search store={store} tasks={tasks} line={line} playing={playingNow} onClose={() => setSearching(false)} onTask={focus} onCamera={openCamera} onView={setView} onTime={scrub} onFilter={showStatus} onPlay={togglePlay} />}
       {notice && (
         <div className="completion-toast" role="status">
           <span className="toast-check" aria-hidden="true">✓</span>
@@ -587,7 +709,9 @@ function Products({ tasks, onPick }: { tasks: Task[]; onPick: (t: Task) => void 
         const color = r.stock <= 0.01 ? STATUS.empty.color : r.stock < 0.75 ? STATUS.low.color : STATUS.ok.color;
         const worst = r.ts[0];
         return (
-          <button key={worst.area.productId} onClick={() => onPick(worst)} className="w-full text-left px-5 py-2.5 border-b border-line/50 hover:bg-raised/60 transition-colors">
+          <button key={worst.area.productId} onClick={() => onPick(worst)} className="product-row w-full text-left px-5 py-2.5 border-b border-line/50 hover:bg-raised/60 transition-colors">
+            <ProductImage name={worst.area.rawName || r.name} />
+            <div className="min-w-0 flex-1">
             <div className="flex items-baseline justify-between gap-3">
               <span className="truncate text-sm">{r.name}</span>
               <span className="font-mono text-xs tabular-nums" style={{ color }}>
@@ -606,6 +730,7 @@ function Products({ tasks, onPick }: { tasks: Task[]; onPick: (t: Task) => void 
             </div>
             <div className="mt-1 text-[10px] text-muted font-mono">
               {r.ts.length} slot{r.ts.length === 1 ? "" : "s"} · cam {[...new Set(r.ts.map((t) => t.cam.id))].join(", ")}
+            </div>
             </div>
           </button>
         );
