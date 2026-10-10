@@ -59,13 +59,39 @@ class ComplianceModel:
             out[i] = (s_exp, s_oth, s_exp - s_oth, s_ok, s_bad, s_ok - s_bad)
         return out
 
-    def fit(self, X, area, product, comply, stocked, weight=None):
-        """comply in {-1 unknown, 0 other product, 1 expected product}; stocked = not empty."""
+    def fit(self, X, area, product, comply, stocked, weight=None, swap: tuple = (0, 0.0, 0.85), seed: int = 0):
+        """comply in {-1 unknown, 0 other product, 1 expected product}; stocked = not empty.
+
+        swap = (k, w, max_sim): hard negatives for 'wrong product'. The reference day has few non-compliant
+        frames and they are subtle variety swaps, so without help the head learns that looking like another
+        catalogue product does not matter. For every compliant stocked crop, k real crops of a clearly
+        different product (prototype similarity < max_sim) are presented as if they sat in this area, labelled
+        non-compliant with weight w. k = 0 disables."""
         self._build(X, area, product, comply, stocked)
         m = (comply >= 0) & stocked
         F = self._feats(X[m], area[m], product[m], known=np.ones(m.sum(), bool))
-        self.prior = float(comply[m].mean())
-        self.clf = LogisticRegression(C=self.C, class_weight="balanced", max_iter=1000).fit(F, comply[m], sample_weight=None if weight is None else weight[m])
+        y = comply[m]
+        w = np.ones(m.sum()) if weight is None else weight[m]
+        self.prior = float(y.mean())
+        k, sw, max_sim = swap
+        if k and len(self._names) > 1:
+            rng = np.random.default_rng(seed)
+            pos = np.where(m & (comply == 1))[0]
+            proto_sim = self._P @ self._P.T
+            prod = np.asarray(product).astype(str)
+            donors = {p: np.where(m & (comply == 1) & (prod != p) & np.isin(prod, [q for q in self._names if proto_sim[self._names.index(p), self._names.index(q)] < max_sim]))[0]
+                      for p in self._names}
+            Xs, As, Ps = [], [], []
+            for i in pos:
+                pool = donors.get(str(prod[i]))
+                if pool is None or not len(pool):
+                    continue
+                for j in rng.choice(pool, size=min(k, len(pool)), replace=False):
+                    Xs.append(X[j]); As.append(area[i]); Ps.append(prod[i])
+            if Xs:
+                Fs = self._feats(np.stack(Xs), np.array(As), np.array(Ps), known=None)
+                F, y, w = np.vstack([F, Fs]), np.r_[y, np.zeros(len(Fs), int)], np.r_[w, np.full(len(Fs), sw)]
+        self.clf = LogisticRegression(C=self.C, class_weight="balanced", max_iter=1000).fit(F, y, sample_weight=w)
         return self
 
     def predict(self, X, area, product, known: np.ndarray | None = None) -> np.ndarray:

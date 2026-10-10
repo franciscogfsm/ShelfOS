@@ -1,0 +1,218 @@
+[
+  {
+    "id": "existing_6215_5fc95501",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6215_ad536415",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6371_4c6d32e9",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6373_17674f13",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6376_4b27d3d4",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6383_a1abca47",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6385_2c343650",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6386_b84bb638",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6443_26b6206a",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6462_41a9628f",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6468_6677235b",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6491_ac43d56a",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6591_c17d8229",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6594_c8928aac",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "existing_6781_424d889f",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "controlled_depletion",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "controlled_packaging_only",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "controlled_wrong_product",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "controlled_occluded",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "pineapple_empty",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "pineapple_half",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "pineapple_full",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "pineapple_packaging",
+    "reason": "Previous images have only partial area review; excluded from the complete-label benchmark."
+  },
+  {
+    "id": "bulk_6215_single_item",
+    "reason": "Single-item empty/half boundary needs mentor adjudication; provisional annotation not scored."
+  },
+  {
+    "id": "bulk_6215_hand_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6215_shopper_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6376_single_item",
+    "reason": "Single-item empty/half boundary needs mentor adjudication; provisional annotation not scored."
+  },
+  {
+    "id": "bulk_6376_hand_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6376_shopper_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6383_empty",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_single_item",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_sparse_scattered",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_sparse_clustered",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_half_stock",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_nearly_full",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_full_stock",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_wrong_bananas",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_wrong_similar",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_mixed_products",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_packaging_empty",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_hand_occlusion",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_shopper_occlusion",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_shadow",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_glare",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6383_degraded_cctv",
+    "reason": "Planogram areas are behind a closed roller blind; stock/compliance cannot be observed."
+  },
+  {
+    "id": "bulk_6443_single_item",
+    "reason": "Single-item empty/half boundary needs mentor adjudication; provisional annotation not scored."
+  },
+  {
+    "id": "bulk_6443_hand_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6443_shopper_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6491_single_item",
+    "reason": "Single-item empty/half boundary needs mentor adjudication; provisional annotation not scored."
+  },
+  {
+    "id": "bulk_6491_hand_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6491_shopper_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6594_single_item",
+    "reason": "Single-item empty/half boundary needs mentor adjudication; provisional annotation not scored."
+  },
+  {
+    "id": "bulk_6594_hand_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  },
+  {
+    "id": "bulk_6594_shopper_occlusion",
+    "reason": "Hidden quantity cannot be verified from the generated output."
+  }
+]

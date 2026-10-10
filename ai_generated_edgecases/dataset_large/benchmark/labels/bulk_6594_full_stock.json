@@ -1,0 +1,111 @@
+{
+  "image": "ai_generated_edgecases/dataset_large/images/test/full_stock/bulk_6594_full_stock.png",
+  "camera": "6594",
+  "labels": {
+    "6594_1": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "ABÓBORA HOKAIDO R0 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_2": {
+      "stock_level": "half",
+      "planogram_compliant": false,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BATATA VERMELHA EMB:. 5 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_3": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BATATA VERMELHA CNT EMB. 3KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_4": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CEBOLA NOVA CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_5": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CEBOLA CNT EMB. 1.5 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_6": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CEBOLA NOVA CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_7": {
+      "stock_level": "empty",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "ALHO SECO CNT 250GR",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_8": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "ALHO SECO KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_9": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "ALHO SECO CNT 250GR",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_10": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CEBOLA ROXA CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_11": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CEBOLA ROXA CNT 1KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_12": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CEBOLINHA FRANCESA CNT 500G",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6594_13": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "full_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CEBOLA DOCE CNT EMB 1 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    }
+  },
+  "authority": "local visual review; not official and no independent human adjudication"
+}

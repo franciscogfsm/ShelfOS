@@ -1,0 +1,87 @@
+{
+  "image": "ai_generated_edgecases/dataset_large/images/test/sparse_scattered/bulk_6491_sparse_scattered.png",
+  "camera": "6491",
+  "labels": {
+    "6491_1": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "ALPERCE CNT CAL. 45/55 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_2": {
+      "stock_level": "empty",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "ALPERCE CNT CAL. 45/55 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_3": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "PESSEGO PARAGUAYO R0 A/AA/AAA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_4": {
+      "stock_level": "empty",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "PESSEGO R0 A/AA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_5": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "NECTARINA R0 A/AA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_6": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "PESSEGO R0 A/AA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_7": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "NECTARINA R0 A/AA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_8": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "PESSEGO R0 A/AA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_9": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "PESSEGO PARAGUAYO R0 A/AA/AAA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6491_10": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "sparse_scattered",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "PESSEGO R0 A/AA KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    }
+  },
+  "authority": "local visual review; not official and no independent human adjudication"
+}

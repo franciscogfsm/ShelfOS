@@ -1,0 +1,87 @@
+{
+  "image": "ai_generated_edgecases/dataset_large/images/test/half_stock/bulk_6215_half_stock.png",
+  "camera": "6215",
+  "labels": {
+    "6215_1": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA DA MADEIRA CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_2": {
+      "stock_level": "empty",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA CAT I CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_3": {
+      "stock_level": "full",
+      "planogram_compliant": false,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA CAT I CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_4": {
+      "stock_level": "empty",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA CAT I CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_5": {
+      "stock_level": "full",
+      "planogram_compliant": false,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA CAT I CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_6": {
+      "stock_level": "empty",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA CAT I CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_7": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITRINOS DO ALGARVE IGP LARANJA 70/95 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_8": {
+      "stock_level": "empty",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA CAT I CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_9": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITRINOS DO ALGARVE IGP LARANJA 70/95 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6215_10": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "half_stock",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "BANANA DA MADEIRA CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    }
+  },
+  "authority": "local visual review; not official and no independent human adjudication"
+}

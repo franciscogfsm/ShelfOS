@@ -319,6 +319,10 @@ VARIANTS = {
     "pair": PairEngine,
     "pair-w1": type("P1", (PairEngine,), {"PAIR_W": 1.0}),
     "pair-w025": type("P025", (PairEngine,), {"PAIR_W": 0.25}),
+    "logreg": eng(STOCK_HEAD="logreg", GLOB_DIM=None),  # the stock head before the trees
+    "swap1-w03": eng(COMPLY_SWAP=(1, 0.3, 0.85)),
+    "swap2-w05": eng(COMPLY_SWAP=(2, 0.5, 0.85)),
+    "swap1-w1": eng(COMPLY_SWAP=(1, 1.0, 0.85)),
     "glob32": eng(GLOB_DIM=32),
     "glob64": eng(GLOB_DIM=64),
     "glob128": eng(GLOB_DIM=128),

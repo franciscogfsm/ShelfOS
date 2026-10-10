@@ -6,6 +6,9 @@
   "test_images": 115,
   "train_references": 4,
   "new_generated": 96,
+  "complete_benchmark_images": 65,
+  "complete_benchmark_areas": 806,
+  "excluded_from_complete_benchmark": 54,
   "scenarios": {
     "mixed_existing": 14,
     "occlusion": 2,

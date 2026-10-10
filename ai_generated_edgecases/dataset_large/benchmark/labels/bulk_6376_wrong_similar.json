@@ -1,0 +1,135 @@
+{
+  "image": "ai_generated_edgecases/dataset_large/images/test/wrong_similar/bulk_6376_wrong_similar.png",
+  "camera": "6376",
+  "labels": {
+    "6376_1": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "LIMÃO CNT 60/75 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_2": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "MELOA GALIA INTEIRA CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_3": {
+      "stock_level": "half",
+      "planogram_compliant": false,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "KIWI GOLD ZESPRI 500 G",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_4": {
+      "stock_level": "half",
+      "planogram_compliant": false,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "KIWI ZESPRI 500 GR",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_5": {
+      "stock_level": "half",
+      "planogram_compliant": false,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "KIWI CNT BIO 400 G",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_6": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "LIMA CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_7": {
+      "stock_level": "half",
+      "planogram_compliant": false,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITRINOS ALGARVE IGP LARANJA 6/7/8 3KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_8": {
+      "stock_level": "half",
+      "planogram_compliant": false,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITRINOS ALGARVE IGP LARANJA 6/7/8 3KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_9": {
+      "stock_level": "half",
+      "planogram_compliant": false,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITRINOS ALGARVE IGP LARANJA 6/7/8 3KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_10": {
+      "stock_level": "full",
+      "planogram_compliant": false,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "KIWI ZESPRI KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_11": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITRINOS DO ALGARVE IGP LARANJA 70/95 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_12": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CLEMENTINA CAL 60/75 CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_13": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITR ALGARVE IGP LARANJA 3/4/5 1.5 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_14": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CLEMENTINA CAL 60/75 CNT KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_15": {
+      "stock_level": "half",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITRINOS DO ALGARVE IGP LARANJA 70/95 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    },
+    "6376_16": {
+      "stock_level": "full",
+      "planogram_compliant": true,
+      "scenario": "wrong_similar",
+      "note": "Codex local visual review of rectified area; not official ground truth.",
+      "expected_product": "CITR ALGARVE IGP LARANJA 3/4/5 1.5 KG",
+      "review_method": "Codex visual inspection of full-frame and all planogram-rectified crop grids, independently of model predictions"
+    }
+  },
+  "authority": "local visual review; not official and no independent human adjudication"
+}
