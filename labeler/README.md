@@ -35,7 +35,14 @@ Escolhe o nível **mais próximo** de quanto da área está ocupado com produto:
 | ~25% a ~75% | **meio** |
 | mais de ~75% (parece acabado de repor) | **cheio** |
 
-Dá a tua melhor estimativa honesta. **Não puxes o stock para baixo aqui**: isso é feito depois, na decisão do modelo. Ainda não sabemos como a Sensei definiu os limites (pergunta Q5 aos mentores); se responderem, muda-se aqui.
+**Resposta dos organizadores (10 Out), que manda sobre as percentagens acima:**
+
+> The "easiest" way to see it is: would someone be willing to buy the remaining products (if not is empty)? Would a staff take the time to replenish the shelf (if not is half empty)? In case of doubt it is better to under estimate rather than over estimate.
+
+- **vazio**: ninguém compraria o que resta (restos, um ou dois itens soltos).
+- **meio**: ainda se vende, mas um funcionário iria repor.
+- **cheio**: um funcionário não se daria ao trabalho de repor.
+- **Na dúvida entre dois níveis, escolhe o mais baixo.** As etiquetas oficiais são feitas assim, por isso as nossas também têm de ser (antes dizíamos o contrário aqui).
 
 ## Ficheiros (cada pessoa tem os seus, sem conflitos no git)
 - `labels/<nome>.json`: o teu progresso (podes fechar e voltar quando quiseres).

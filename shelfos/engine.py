@@ -109,7 +109,7 @@ class Engine:
     GLOB_DIM: int | None = 32  # compress the appearance embedding to this many components in the stock head
     OCC_SCALE = OCC_SCALE
     MEM_SCALE = MEM_SCALE
-    OCC_C = 0.1  # inverse regularisation of the patch product/background classifier
+    OCC_C = 0.2  # inverse regularisation of the patch product/background classifier (CV: late +0.618->+0.655, fwd +0.748->+0.766)
     STOCK_C = 1.0
     RECENCY_W = 0.0
     HOUR_SCALE = 0.5  # weight of the time-of-day prior in the design matrix (0 = off)
