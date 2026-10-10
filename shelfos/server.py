@@ -63,7 +63,7 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
     @app.post('/api/assistant/chat')
     async def assistant_chat(request: Request):
         raw = await request.body()
-        if len(raw) > 48000:
+        if len(raw) > 400000:  # 20 messages of 6000 characters fit; older builds of the app also send their cards back
             raise HTTPException(413, 'Conversation is too long.')
         try:
             body = json.loads(raw)

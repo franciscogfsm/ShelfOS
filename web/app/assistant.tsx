@@ -103,7 +103,8 @@ export function ShelfAssistant({ store, timestamp, camera, area, completed, onAr
     let answer = "", done = false; let cards: AreaCard[] = []; let widgets: WidgetData | undefined;
     try {
       const response = await fetch(`${store.base || apiBase()}/api/assistant/chat`, { method: "POST", headers: { "Content-Type": "application/json" }, signal: abort.signal,
-        body: JSON.stringify({ messages: history, selection: { timestamp, camera, area, completedTasks: [...completed] } }) });
+        // role and content only: the cards of earlier replies are large and the server does not read them
+        body: JSON.stringify({ messages: history.map(({ role, content }) => ({ role, content })), selection: { timestamp, camera, area, completedTasks: [...completed] } }) });
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
         throw Error(typeof data.detail === "string" ? data.detail : "Could not connect. Please try again.");
