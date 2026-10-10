@@ -13,7 +13,7 @@ from .assistant import DEFAULT_MODEL, config
 from .counting import CountError, ModelResponseError, ask_model, crop_for
 
 CACHE_PATH = Path('runs/ripeness.json')
-VERSION = 3
+VERSION = 4
 STAGES = ('green', 'turning', 'ripe', 'very_ripe')
 STATES = {'green', 'turning', 'ripe', 'very_ripe', 'mixed', 'unclear', 'no_bananas'}
 EVIDENCE = {'green_peel', 'yellow_peel', 'brown_spots', 'extensive_browning',
@@ -33,7 +33,14 @@ Return a short JSON object only:
  "quality":"clear|limited|poor","evidence":["green_peel|yellow_peel|brown_spots|extensive_browning|mixed_colours|occluded|poor_lighting"]}
 Estimate how many individually visible BANANAS belong to EACH stage. Count each visible banana once,
 not each bunch or peel pixel. Ignore labels, crate colours, neighbours and hidden bananas.
-green: predominantly green peel; turning: green-yellow peel; ripe: predominantly yellow, possibly small brown spots.
+Judge the MAIN BODY of each banana peel, not its stem or tip. Green stems and small green tips are
+normal on a banana whose main peel is yellow; they must NOT by themselves make it turning or green.
+green: the main peel body is predominantly green (colour stages 1-2).
+turning: substantial green remains across the main body alongside yellow (colour stages 3-4).
+ripe: the main peel body is yellow, including yellow bananas with only green tips/stems (colour
+stage 5), fully yellow bananas (stage 6), and yellow bananas with a few small brown speckles.
+Do not mistake shadows, green crates or reflections for green peel. Do not mistake isolated bruises
+or the black blossom tip for general over-ripeness. If a colour cast prevents judging the main peel, choose unclear.
 very_ripe requires extensive visible brown/black peel across the bananas, not a few spots or isolated bruises.
 The shelf stage MUST follow the majority: one yellow/brown banana must not override many green ones.
 Choose a stage only if more than half the visible bananas belong to it; otherwise use mixed.

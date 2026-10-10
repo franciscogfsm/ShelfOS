@@ -117,10 +117,8 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   models and restart the backend, as the user asked. Until then the 21:40 models and the 21:37 labels stand.
 
 ## Running now
-- Opus [23:00]: late-fold CV on `cache/bank_tta.npz` (CPU, lite features, about 5 min, scratch outputs only), to
-  build a view-only page for the user. Reads labels and models, writes nothing in the repo. Removed when done.
-- Opus: the backend on :8000 is another session's (pid 41024, started 22:51). I started none since 21:51.
-  Restart it after any retrain: `ShelfService` reads the model once at start.
+- Nothing heavy. User set one final call: 6215_2 t11 (18:35) half -> empty. Both models retrained at 23:25 (lite 40s, full 153s). `outputs/decisoes` shows the new calls. The :8000 server still has the previous model in memory until it is restarted.
+- The backend on :8000 is another session's (pid 41024, started 22:51). Restart it after any retrain: `ShelfService` reads the model once at start.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
@@ -245,3 +243,4 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
 - [Codex] Counting speed: memory-backed disk cache, exact source/geometry cache invalidation, same-area requests share one in-flight call, OpenRouter latency routing, precount --workers 1-4 (default 3). Nine tests pass. Backend now pid 22252; logs runs/count-fast-backend.stdout.log / stderr.log. No external count calls or model/label changes.
 - [Codex] Added optional visual banana-ripeness check in shelfos/ripeness.py and POST /api/ripeness, isolated from stock/official output. Uses cropped snapshot via OpenRouter, cautious appearance states, review advice, separate runs/ripeness.json cache, max 500 output tokens. Twelve tests and web build pass. Backend :8000 now pid 19932, logs runs/ripeness-backend.stdout.log / stderr.log.
 - [Codex] Banana ripeness v3 follows an estimated strict majority (>50%) of individually visible bananas; a minority does not force mixed. Example real 6468_12 latest: 6 green / 1 ripe -> Mostly green (2094 ms). 15 tests and build pass. Backend :8000 pid 41024, logs runs/ripeness-majority-backend.stdout.log / stderr.log. Stock engine/labels unchanged.
+- [Codex] Ripeness v4 assesses main peel body, ignoring isolated green tips/stems and isolated bruises. Real checks: 6215_4 at 11:49 -> Mostly ripe (10 ripe / 1 turning, 1904 ms); 6468_12 latest remains Mostly green (6 green / 1 turning). 15 tests pass. Backend :8000 pid 42760, logs runs/ripeness-v4-backend.stdout.log / stderr.log. No engine/stock/labels changes.

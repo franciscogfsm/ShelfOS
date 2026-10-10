@@ -120,9 +120,6 @@ export function CameraStage({
           </span>
         ))}
       </div>
-      {!!frame.warnings?.length && (
-        <div className="glass-chip absolute right-3 bottom-3 max-w-[60%] text-low">⚠ {frame.warnings.join(" · ")}</div>
-      )}
     </div>
     {at && children && (
       <div className="area-slot" data-side={1 - x1 >= x0 ? "right" : "left"} style={{ "--x0": x0, "--x1": x1, "--cy": (at.y + at.h / 2) / store.height } as React.CSSProperties}>
@@ -351,9 +348,14 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
         <span className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · slot {area.id.split("_")[1]}
         </span>
+        <div className="flex items-center gap-3">
+        {store.live && /banana/i.test(area.rawName) && (
+          <BananaRipeness key={`${area.id}/${frame.file}`} camera={cam.id} frame={frame.file} area={area.id} available={!!policy?.configured && s !== "wrong"} />
+        )}
         <button onClick={onClose} aria-label="Close" title="Back to all areas (Esc)" className="-mr-2 size-8 grid place-items-center rounded-full text-muted hover:text-white hover:bg-raised">
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="m1.5 1.5 8 8m0-8-8 8" /></svg>
         </button>
+        </div>
       </div>
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
@@ -451,9 +453,6 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
               </>
             )}
           </div>
-        )}
-        {store.live && /banana/i.test(area.rawName) && (
-          <BananaRipeness key={`${area.id}/${frame.file}`} camera={cam.id} frame={frame.file} area={area.id} available={!!policy?.configured && s !== "wrong"} />
         )}
       </div>
 
@@ -560,26 +559,21 @@ function BananaRipeness({ camera, frame, area, available }: { camera: string; fr
   const check = () => {
     setResult(null); setError(null); setAttempt(value => value + 1);
   };
+  const total = Object.values(result?.stage_counts ?? {}).reduce((sum, value) => sum + value, 0);
+  const score = result && !['unclear', 'no_bananas'].includes(result.state) && total > 0
+    ? Math.round((result.stage_counts?.ripe ?? 0) / total * 100) : null;
   return (
-    <div className="banana-check col-span-2" aria-busy={busy}>
-      <div className="banana-check-head"><span>Banana ripeness</span><small>Visual · beta</small></div>
-      {result ? (
-        <div role="status" className="banana-result">
-          <div className="banana-result-title"><i data-state={result.state} /><strong>{result.label}</strong>{result.review && <span>Review shelf</span>}</div>
-          <p>{result.action}</p>
-          {!['unclear', 'no_bananas'].includes(result.state) && <small className="banana-check-note">Based on the majority of visible bananas.</small>}
-          {result.quality === "limited" && <small className="banana-check-note">Limited visibility · estimated from visible peels.</small>}
-        </div>
-      ) : (
-        <button className="banana-check-button" onClick={check} disabled={!available || busy}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /></svg>
-          {busy ? "Checking peel appearance…" : error ? "Retry visual check" : "Check ripeness"}
-          {busy && <i className="banana-check-pulse" />}
-        </button>
+    <span className="banana-status" aria-busy={busy}>
+      {error ? <button onClick={check} title={error}>Retry ripeness check</button> : (
+        <span role="status" data-state={result?.state} title={result ? `Score = estimated share of visible bananas at the ripe stage, not confidence or food safety. ${result.quality === "limited" ? "Limited visibility. " : ""}${result.action} Check quality in person.` : "Visual banana ripeness check"}>
+          <small className="banana-status-caption">{score !== null ? "Ripe bananas · estimated" : "Banana ripeness"}</small>
+          <span className="banana-status-line">
+            <span>{result?.label ?? (busy ? "Checking…" : "Unavailable")}</span>
+            {score !== null && <strong>{score}<small>/100</small></strong>}
+          </span>
+        </span>
       )}
-      <small className="banana-check-note">{!available ? "Needs connected AI and a matching banana shelf." : "Peel appearance only · check quality in person."}</small>
-      {error && <p role="alert" className="banana-check-error">{error}</p>}
-    </div>
+    </span>
   );
 }
 

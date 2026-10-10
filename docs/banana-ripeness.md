@@ -12,6 +12,10 @@ must be in one stage to display **Mostly green / Mostly ripening / Mostly ripe /
 A minority of differently coloured bananas does not change the majority. Without a majority,
 the result is **Mixed ripeness**. These stage counts are visual estimates, not verified inventory counts.
 
+The larger top-right indicator uses amber for green/ripening bananas, green for ripe bananas,
+and red for very ripe bananas. Its **/100** score is the estimated percentage of visible bananas
+at the ripe stage (`ripe / total * 100`), not model confidence, a freshness grade or a food safety score.
+
 This does not establish freshness, spoilage, food safety, age or expiry. Review quality in person.
 It has not been validated against human ripeness annotations.
 
@@ -24,5 +28,12 @@ prompt version invalidate the result. Identical simultaneous requests share one 
 `shelfos/ripeness.py` and `POST /api/ripeness` are separate from stock inference. They do not
 train a model, update labels, write `predictions.json` or alter `ShelfService` predictions.
 Slots holding a wrong product are refused. Existing stock/API inference remains unchanged.
+
+Colour interpretation evaluates the main peel body, rather than letting green stems or small
+green tips dominate a yellow banana. The visual stages distinguish green (1-2), green/yellow
+body (3-4), and yellow body with green tips / fully yellow (5-6), following the colour stages
+described in [this banana surface study](https://pmc.ncbi.nlm.nih.gov/articles/PMC6133831/).
+Isolated bruises, shadows and black blossom tips do not establish general over-ripeness.
+This is still experimental; two checked snapshots do not establish overall accuracy.
 
 Verification: `python -m unittest tools.test_ripeness tools.test_counting`.

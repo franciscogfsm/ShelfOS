@@ -135,6 +135,7 @@ export async function loadHealth(): Promise<Health | null> {
 }
 
 export interface RipenessResult {
+  stage_counts?: Record<"green" | "turning" | "ripe" | "very_ripe", number>;
   state: "green" | "turning" | "ripe" | "very_ripe" | "mixed" | "unclear" | "no_bananas";
   label: string;
   action: string;
