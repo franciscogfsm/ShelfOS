@@ -8,10 +8,13 @@
     POST /api/score                       body = annotations.json -> official score breakdown
     POST /api/policy                      {"emptyCompliant": bool}
     POST /api/reset                       forget the run
+    GET  /api/count/policy                which products the "Count units" button may count
+    POST /api/count                       {"camera","file","area"} -> visible units with boxes (vision model, on demand)
     GET  /frames/{camera}/{file}          camera image
 """
 from __future__ import annotations
 
+import asyncio
 import json
 from pathlib import Path
 
@@ -84,6 +87,42 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
         context = context_of(service.store(), selection)
         return StreamingResponse(_ndjson(stream_chat(messages, context, key, config('OPENROUTER_MODEL', DEFAULT_MODEL))),
             media_type='application/x-ndjson', headers={'Cache-Control': 'no-store', 'X-Accel-Buffering': 'no'})
+
+    # ---- unit counting: on demand, outside the prediction path (shelfos/counting.py) -------------
+    @app.get('/api/count/policy')
+    def count_policy():
+        from .counting import policy
+        return policy(service.areas, configured=bool(config('OPENROUTER_API_KEY')))
+
+    @app.post('/api/count')
+    async def count(request: Request):
+        from .counting import CountError, count_area, countable
+        from .engine import official
+        try:
+            body = json.loads(await request.body())
+            camera, file, area_id = (str(body[k]) for k in ('camera', 'file', 'area'))
+        except (ValueError, KeyError, TypeError):
+            raise HTTPException(400, 'Send {"camera", "file", "area"}.')
+        area = next((a for a in service.areas.get(camera, []) if a.area_id == area_id), None)
+        path = service.frame_path(camera, file)
+        if area is None or path is None:
+            raise HTTPException(404, 'No such area or frame.')
+        if not countable(area.product_name):
+            raise HTTPException(422, 'Not countable from this camera.')
+        with service.lock:
+            d = service.run.get(camera, {}).get(Path(file).name, {}).get('areas', {}).get(area_id)
+        d = d or service.reference.get(camera, {}).get(Path(file).name, {}).get(area_id)
+        if d:
+            o = official(d, service.empty_compliant)
+            if not o['planogram_compliant'] and o['stock_level'] != 'empty':
+                raise HTTPException(409, 'This slot holds another product.')
+        key = config('OPENROUTER_API_KEY')
+        if not key:
+            raise HTTPException(503, 'Set OPENROUTER_API_KEY in the project .env file to count units.')
+        try:
+            return await asyncio.to_thread(count_area, path, camera, file, area, key)
+        except CountError as e:
+            raise HTTPException(502, str(e))
 
     @app.post("/api/analyze")
     async def analyze(files: list[UploadFile] = File(...), paths: list[str] = Form(default=[])):

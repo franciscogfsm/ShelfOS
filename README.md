@@ -10,20 +10,33 @@ Read this before changing how an answer is decided or how an image is labelled. 
 questions are closed; do not reopen them.
 
 **An empty area is `planogram_compliant: true`.** The organisers answered this on
-10 Oct 2026 (it was question Q3 in `STEP1_PLAN.md`). What we take from the answer:
+10 Oct 2026 (it was question Q3 in `docs/arquivo/STEP1_PLAN.md`). What we take from the answer:
 
 - `planogram_compliant: false` is only for an area where a product other than the expected
   one is present.
 - A missing product is recorded in the stock fields alone: `stock_level: "empty"`,
   `stock_value: 0`.
 - When labelling, an empty area is compliant and needs no "unsure" mark. In the labelling
-  guide (`STEP1_PLAN.md`, B3) the rule "empty area: compliant true, plus `u`" is now just
+  guide (`docs/arquivo/STEP1_PLAN.md`, B3) the rule "empty area: compliant true, plus `u`" is now just
   "empty area: compliant true". Rule 10 in `labeler/docs/regras.md` says the same.
 
 The code already answers this way: `empty_compliant` is true by default in the engine, the
 service, the command line and the cross-validation. The `--empty-noncompliant` switch and
 the matching switch in the app are left over from before the answer. Leave them off for
 anything that is submitted.
+
+**Evaluation images come with their timestamp, but the answer must come from the image.**
+Asked whether the model may learn from earlier moments of the day, the organisers answered
+on 10 Oct 2026 (question Q6): "You will get the timestamp but the model should learn from
+the image itself and not necessarily the time of day." On Discord they also wrote: "You
+should only consider information from the image under analysis." What we take from it:
+
+- Each answer in `predictions.json` is read from its own image, never from earlier test
+  captures: `Engine.ONLINE` (remember each predicted frame for the next one) stays `False`.
+- The time-of-day prior (`Engine.HOUR_SCALE`, 0.5 today) is under review as a rules risk.
+  See `AGENTS_COORDINATION.md`; Fable owns that change.
+- The app may use the timestamps to order captures and look across the day, as the sell-down
+  pace in `web/app/forecast.ts` does, as long as none of it reaches `predictions.json`.
 
 ## Run it
 
@@ -56,6 +69,16 @@ To score a prediction file against an annotation file with the official rules, d
 ```
 python -c "import json,sys; from shelfos.scoring import score_submission as s; print(s(json.load(open(sys.argv[1])), json.load(open(sys.argv[2]))))" predictions.json annotations.json
 ```
+
+**Count units.** In an area's detail, **Count units** boxes every unit of the expected product
+the camera can see and says "≈ 9 items visible · 2 partly hidden". Units under the top layer
+are not visible and are not guessed.
+- How it counts: a vision model behind OpenRouter (`shelfos/counting.py`, the same
+  `OPENROUTER_API_KEY` as the assistant), on demand only.
+- It is separate from the engine. It uses no GPU and never touches `predictions.json`.
+- It counts only the product groups that passed the hand-count test: `python tools/count_eval.py`
+  against `labels/unit_counts.txt`, pass mark in `Plano.md`.
+- `python tools/precount.py` caches the reference day, so the demo needs no network.
 
 ## What it does with awkward input
 
@@ -151,4 +174,10 @@ tools/cv.py         cross-validation of the shipped engine against our labels
 tools/selftest.py   edge-case drill
 labeler/            label review tool (standalone, see labeler/README.md)
 labels/             our labels for the reference day
+edgecase_labeler/   label tool for the AI-generated edge cases
+ai_generated_edgecases/  synthetic stress tests and their reviewed labels
+Plano.md            current plan: the four UI ideas
+docs/DEPLOY.md      deploying the container (Hugging Face Spaces, Fly.io, ...)
+docs/Sensei - JunctionX Lisbon 2026.txt   the challenge brief
+docs/arquivo/       superseded documents, kept for reference
 ```

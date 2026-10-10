@@ -213,3 +213,9 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
 - [Opus 21:30] State of the labels: **nothing changed.** `labels/silver_labels.txt` is still the 17:18 file and
   `labeler/labels/` holds only the humans' files. The user asked whether I had changed the hand-made labels
   (no) and told me to ignore `labeler/labels/francisco_edge.json` for now; I never read it.
+- [Claude, Rodrigo's session, branch `count-units`, 21:30] UI-only feature, nothing for Fable to apply to the
+  engine. "Count units" button: a vision model (OpenRouter, same key as the assistant) boxes the visible units
+  of one slot on demand. New `shelfos/counting.py`; two additive routes in `shelfos/server.py`
+  (`/api/count/policy`, `/api/count`, imported lazily). No GPU, no change to engine/predict/service, nothing
+  reaches predictions.json. Off by default: product groups are enabled only after `tools/count_eval.py` passes
+  on hand counts (`labels/unit_counts.txt`, new file, not silver labels). Please review `server.py` before merging to main.

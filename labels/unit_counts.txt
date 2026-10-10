@@ -1,0 +1,39 @@
+# Hand counts of visible units per area, for the "Count units" button test (tools/count_eval.py).
+# Counted by eye (Claude) on the masked, enlarged crop the vision model receives (shelfos.counting.crop_for);
+# a person on the team should confirm before the numbers are quoted. NOT used by the engine.
+# visible = every unit of the expected product at least partly visible inside the slot; partial = how many of those
+# are less than about half visible. Units of another product inside the slot are not counted (see note).
+# Left out because a person cannot count them reliably from the camera: broccoli and cauliflower (one mass),
+# pineapples (crowns overlap), plantains and bananas (rows and overlapping hands: no bunch area qualified),
+# vine tomatoes (bunch boundaries unclear), near-empty slivers (6376 kiwi, 6443_3).
+# format: area_id | frame | visible | partial | group | note
+6371_1 | 1751025172.jpg | 4 | 0 | large |
+6371_2 | 1751025172.jpg | 3 | 0 | large |
+6371_3 | 1751025172.jpg | 1 | 0 | large | near empty
+6371_4 | 1751025172.jpg | 3 | 0 | large |
+6371_5 | 1751025172.jpg | 2 | 0 | large |
+6371_6 | 1751025172.jpg | 4 | 1 | large |
+6371_7 | 1751025172.jpg | 5 | 0 | large |
+6371_8 | 1751025172.jpg | 6 | 0 | large | yellow melons of the next crate inside the quad: must not count
+6371_9 | 1751025172.jpg | 5 | 2 | large | two cut by the slot edge
+6386_2 | 1751024835.jpg | 10 | 1 | large | +-1
+6386_3 | 1751024835.jpg | 7 | 2 | large | +-1
+6386_6 | 1751024835.jpg | 8 | 2 | large | +-1
+6468_9 | 1751026188.jpg | 4 | 0 | large | one in the box above
+6468_10 | 1751026188.jpg | 6 | 0 | large |
+6383_1 | 1751025309.jpg | 4 | 1 | large | lettuce in bags
+6383_2 | 1751025309.jpg | 12 | 2 | medium | lettuce of the next slot inside the quad: must not count; +-1
+6383_3 | 1751025309.jpg | 16 | 4 | medium | +-2
+6383_5 | 1751025309.jpg | 7 | 2 | medium | +-1
+6443_6 | 1751024371.jpg | 18 | 2 | medium | +-2
+6462_2 | 1751024395.jpg | 19 | 3 | medium | netted fruit of the next slot inside the quad: must not count; +-2
+6462_3 | 1751024395.jpg | 12 | 2 | medium | +-1
+6468_14 | 1751026188.jpg | 4 | 1 | medium | half
+6462_1 | 1751024395.jpg | 3 | 0 | pack | near empty
+6443_4 | 1751024371.jpg | 6 | 1 | pack |
+6443_7 | 1751024371.jpg | 12 | 0 | pack | +-1
+6443_12 | 1751024371.jpg | 6 | 1 | pack | loose tomatoes of the shelf above inside the quad: must not count
+6462_8 | 1751024395.jpg | 7 | 2 | pack | +-1
+6781_4 | 1751025662.jpg | 3 | 0 | pack |
+6781_5 | 1751025662.jpg | 2 | 0 | pack |
+6781_6 | 1751025662.jpg | 3 | 1 | pack |
