@@ -1,0 +1,8 @@
+{
+  "name": "shelfos",
+  "private": true,
+  "scripts": {
+    "dev": "node web/scripts/dev.mjs",
+    "build": "npm --prefix web run build"
+  }
+}

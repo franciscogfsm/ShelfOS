@@ -21,6 +21,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from .service import ShelfService
+from .assistant import DEFAULT_MODEL, config, context_of, stream_chat
 
 NO_UI = """<!doctype html><meta charset="utf-8"><title>ShelfOS</title>
 <body style="background:#05070a;color:#e6edf3;font:15px system-ui;padding:48px;line-height:1.6">
@@ -51,6 +52,38 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
     @app.get("/api/store")
     def store():
         return JSONResponse(service.store(), headers={"Cache-Control": "no-store"})
+
+    @app.get('/api/assistant')
+    def assistant_status():
+        return dict(configured=bool(config('OPENROUTER_API_KEY')), model=config('OPENROUTER_MODEL', DEFAULT_MODEL))
+
+    @app.post('/api/assistant/chat')
+    async def assistant_chat(request: Request):
+        raw = await request.body()
+        if len(raw) > 48000:
+            raise HTTPException(413, 'Conversation is too long.')
+        try:
+            body = json.loads(raw)
+            messages = body['messages']
+            if not isinstance(messages, list) or not 1 <= len(messages) <= 20:
+                raise ValueError()
+            if any(not isinstance(m, dict) or m.get('role') not in ('user', 'assistant') or
+                   not isinstance(m.get('content'), str) or not 0 < len(m['content']) <= 6000 for m in messages):
+                raise ValueError()
+            if messages[-1]['role'] != 'user':
+                raise ValueError()
+            selection = body.get('selection', {})
+            if not isinstance(selection, dict) or not isinstance(selection.get('completedTasks', []), list):
+                raise ValueError()
+            messages = [dict(role=m['role'], content=m['content']) for m in messages]
+        except (ValueError, KeyError, TypeError):
+            raise HTTPException(400, 'Invalid conversation.')
+        key = config('OPENROUTER_API_KEY')
+        if not key:
+            raise HTTPException(503, 'Set OPENROUTER_API_KEY in the project .env file to connect ShelfOS AI.')
+        context = context_of(service.store(), selection)
+        return StreamingResponse(_ndjson(stream_chat(messages, context, key, config('OPENROUTER_MODEL', DEFAULT_MODEL))),
+            media_type='application/x-ndjson', headers={'Cache-Control': 'no-store', 'X-Accel-Buffering': 'no'})
 
     @app.post("/api/analyze")
     async def analyze(files: list[UploadFile] = File(...), paths: list[str] = Form(default=[])):

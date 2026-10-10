@@ -11,6 +11,7 @@ import { Search } from "./search";
 import { Analytics } from "./analytics";
 import { ThemeToggle } from "./theme";
 import { ProductImage, preloadProductImages } from "./product-image";
+import { ShelfAssistant } from "./assistant";
 
 type View = "tasks" | "wall" | "camera" | "analytics" | "run";
 type Tab = "tasks" | "products";
@@ -342,6 +343,7 @@ export default function Page() {
               {name}
             </button>
           ))}
+          <ShelfAssistant store={store} timestamp={ts} camera={camId} area={areaId} completed={done} onArea={(camera, area) => { setCamId(camera); setAreaId(area); setView("camera"); }} />
         </nav>
         <div className="flex lg:flex-1 items-center justify-end gap-2.5">
           {!blank && (

@@ -26,6 +26,12 @@ def main():
         e.crop_size = int(bank["size"]) if "size" in bank else CROP
         e.tta = bool(bank["tta"]) if "tta" in bank else False
         e.cameras, e.frame_size = prod.cameras, prod.frame_size
+        if type(e) is not Engine:  # lab variants are local subclasses, which pickle cannot find by name
+            if e.memory is not None and type(e.memory).__module__ == "tools.lab":
+                raise SystemExit(f"{name}: custom memory class cannot be saved as a production engine")
+            for attr in ("OCC_SCALE", "MEM_SCALE", "HOUR_SCALE", "ONLINE", "ONLINE_MIN_CONF"):  # predict-time knobs
+                setattr(e, attr, getattr(type(e), attr))
+            e.__class__ = Engine
         out = ROOT / "models" / "edgecases" / f"{name}.pkl"
         e.save(out)
         print(f"saved {out}", flush=True)
