@@ -117,8 +117,8 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   models and restart the backend, as the user asked. Until then the 21:40 models and the 21:37 labels stand.
 
 ## Running now
-- Nothing heavy. User set one final call: 6215_2 t11 (18:35) half -> empty. Both models retrained at 23:25 (lite 40s, full 153s). `outputs/decisoes` shows the new calls. The :8000 server still has the previous model in memory until it is restarted.
-- The backend on :8000 is another session's (pid 41024, started 22:51). Restart it after any retrain: `ShelfService` reads the model once at start.
+- Nothing heavy until the advisor page submits. `outputs/build_decisoes.py` on http://127.0.0.1:8777 shows only the end-of-day photos where the hidden-fold model disagrees with the label, so an answer changes what the model learns. When every photo has an answer, that page writes `labels/silver_labels.txt` and trains `engine_lite.pkl` and `engine.pkl` by itself (about 3 minutes). Do not start another train or cv while that request runs.
+- After that train, restart the :8000 backend. `ShelfService` reads the model once at start.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be

@@ -4,8 +4,6 @@
   Open by double-clicking. No build step, no network.
 
   PLACEHOLDERS TO FILL IN (all at the top of the <script> at the end of this file):
-    RESULTS.stock      stock level correct, in percent (null shows a dash)
-    RESULTS.product    right product, in percent       (null shows a dash)
     COST_PER_STORE     text for the cost slot on the "Cost" slide (null shows the marked slot)
     COST_NOTE          the line next to it; it says the figure is an estimate
     TEAM_NAME, TEAM    team name and member names for the closing slide
@@ -134,6 +132,18 @@ h2.sm { font-size: calc(var(--u) * 3); }
 .slide.in .rv { opacity: 1; translate: 0 0; filter: none; }
 .metric-card.rv { transition: opacity 900ms var(--ease-out), translate 900ms var(--ease-out), filter 900ms var(--ease-out), transform 450ms var(--ease-out), box-shadow 450ms; transition-delay: calc(var(--i, 0) * 75ms + 120ms), calc(var(--i, 0) * 75ms + 120ms), calc(var(--i, 0) * 75ms + 120ms), 0s, 0s; }
 .slide.settled .rv { transition-delay: 0s; }
+/* Off-screen slides reset immediately, ready to replay in either direction. */
+.slide:not(.in) .rv,
+.slide:not(.in) .tile,
+.slide:not(.in) .edge,
+.slide:not(.in) .bars .bar,
+.slide:not(.in) .bars .mark,
+.slide:not(.in) .attack .sheet,
+.slide:not(.in) .attack .shotwrap,
+.slide:not(.in) .attack .area,
+.slide:not(.in) .attack .pin,
+.slide:not(.in) .glass-chip,
+.slide:not(.in) .checks path { transition: none; }
 
 /* ── chrome: pill, progress, counter ────────────────────────────────────────── */
 .topbar { position: fixed; z-index: 50; top: 18px; left: 50%; translate: -50% 0; opacity: var(--chrome, 0); }
@@ -233,6 +243,60 @@ body.on-intro .topbar { pointer-events: none; }
 /* ── 4 answer ───────────────────────────────────────────────────────────────── */
 .hero-shot { height: calc(var(--u) * 25.5); aspect-ratio: 16 / 9; margin-top: calc(var(--u) * 1.9); border-radius: 26px; }
 .hero-shot .layer { inset: -5% 0; }
+.answer-stage { position: relative; width: calc(var(--u) * 78); max-width: 100%; height: calc(var(--u) * 27); margin-top: calc(var(--u) * 1.8); overflow: hidden; text-align: left; border-radius: calc(var(--u) * 1.4); }
+.answer-stage .layer { position: absolute; inset: 0; padding: calc(var(--u) * 1.3); }
+.answer-bar { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font: calc(var(--u) * .72) var(--mono); letter-spacing: .08em; }
+.answer-bar-sub { color: var(--dim); letter-spacing: 0; }
+.answer-live { display: flex; align-items: center; gap: calc(var(--u) * .5); color: var(--ink-2); }
+.answer-live i { width: calc(var(--u) * .3); height: calc(var(--u) * .3); border-radius: 50%; background: var(--ink); }
+.answer-wall { position: absolute; left: calc(var(--u) * 1.3); top: calc(var(--u) * 3.5); bottom: calc(var(--u) * 3.1); width: calc(100% - var(--u) * 2.6); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, 1fr); gap: calc(var(--u) * .7); }
+.answer-camera { position: relative; overflow: hidden; border: 1px solid rgb(var(--fg) / .09); border-radius: calc(var(--u) * .7); background: rgb(var(--fg) / .025); opacity: 0; }
+.answer-camera svg { display: block; width: 100%; height: 100%; padding: calc(var(--u) * 1.4) calc(var(--u) * .8) calc(var(--u) * .5); }
+.answer-camera .q { vector-effect: non-scaling-stroke; fill: transparent; stroke: rgb(var(--fg) / .17); stroke-width: 1.1; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.answer-camera .q-empty { --state:var(--empty); }
+.answer-camera .q-wrong { --state:var(--wrong); }
+.answer-camera .q-low { --state:var(--low); }
+.answer-camera .q-ok { --state:var(--ink); }
+.answer-cam-label { position: absolute; top: calc(var(--u) * .5); left: calc(var(--u) * .65); color: var(--dim); font: calc(var(--u) * .65) var(--mono); }
+.answer-cam-label::before { content: ""; display: inline-block; width: calc(var(--u) * .23); height: calc(var(--u) * .23); background: var(--muted); border-radius: 50%; margin-right: calc(var(--u) * .35); }
+.answer-camera::after { content: ""; position: absolute; left: 0; right: 0; top: -25%; height: 25%; opacity: 0; background: linear-gradient(transparent, rgb(var(--fg) / .04)); border-bottom: 1px solid rgb(var(--fg) / .55); pointer-events: none; }
+.answer-link { position: absolute; top: 50%; left: 66.8%; width: calc(var(--u) * 1.5); opacity: 0; color: var(--dim); }
+.answer-link svg, .answer-task svg { width: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.answer-actions { position: absolute; top: calc(var(--u) * 4); right: calc(var(--u) * 1.3); width: 27%; opacity: 0; }
+.answer-actions .eyebrow { font-size: calc(var(--u) * .65); }
+.answer-actions h3 { font-size: calc(var(--u) * 2.1); letter-spacing: -.045em; font-weight: 550; margin: calc(var(--u) * .5) 0 calc(var(--u) * 1.2); }
+.answer-actions h3 span { color: var(--dim); }
+.answer-task { display: flex; align-items: center; gap: calc(var(--u) * .6); padding: calc(var(--u) * .85) 0; border-top: 1px solid rgb(var(--fg) / .1); opacity: 0; }
+.answer-task-dot { flex: none; width: calc(var(--u) * .35); height: calc(var(--u) * .35); background: var(--c); border-radius: 50%; box-shadow: 0 0 calc(var(--u) * .7) color-mix(in srgb, var(--c) 25%, transparent); }
+.answer-task div { flex: 1; min-width: 0; }
+.answer-task b { display: block; font-size: calc(var(--u) * .96); font-weight: 550; letter-spacing: -.025em; }
+.answer-task div > span { display: block; margin-top: calc(var(--u) * .25); font-size: calc(var(--u) * .65); color: var(--muted); }
+.answer-task svg { width: calc(var(--u) * .75); color: var(--dim); flex: none; }
+.answer-action-note { margin-top: calc(var(--u) * .75); color: var(--dim); font-size: calc(var(--u) * .65); }
+.answer-stage-foot { position: absolute; bottom: calc(var(--u) * 1.15); left: calc(var(--u) * 1.3); right: calc(var(--u) * 1.3); display: flex; justify-content: space-between; font: calc(var(--u) * .6) var(--mono); color: var(--dim); }
+.answer-phases { display: flex; align-items: center; gap: calc(var(--u) * 1.5); margin-top: calc(var(--u) * 1.25); font-size: calc(var(--u) * 1.5); font-weight: 550; letter-spacing: -.04em; }
+.answer-phases span { opacity: .25; }
+.answer-phases i { font: calc(var(--u) * .65) var(--mono); font-style: normal; color: var(--dim); margin-right: calc(var(--u) * .45); }
+.answer-phases > b { font-size: calc(var(--u) * 1); font-weight: 400; color: var(--faint); }
+.answer-slide.in .answer-camera { animation: camera-arrive 800ms var(--ease-out) both; animation-delay: calc(350ms + var(--cam) * 75ms); }
+.answer-slide.in .answer-camera::after { animation: camera-scan 1400ms cubic-bezier(.4,0,.2,1) both; animation-delay: calc(800ms + var(--cam) * 75ms); }
+.answer-slide.in .answer-camera .q { animation: area-trace 1100ms var(--ease-out) both; animation-delay: calc(1050ms + var(--cam) * 75ms + var(--area) * 30ms); }
+.answer-slide.in .answer-wall { animation: wall-to-actions 1000ms var(--ease-out) 2350ms both; }
+.answer-slide.in .answer-actions, .answer-slide.in .answer-link { animation: action-arrive 950ms var(--ease-out) 2700ms both; }
+.answer-slide.in .answer-task { animation: action-arrive 850ms var(--ease-out) both; animation-delay: calc(2950ms + var(--task) * 150ms); }
+.answer-slide.in .answer-phases span { animation: phase-ready 650ms var(--ease-out) both; animation-delay: calc(450ms + var(--phase) * 1250ms); }
+@keyframes camera-arrive { from { opacity: 0; transform: translateY(18px) scale(.95); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes camera-scan { 0% { top: -25%; opacity: 0; } 12%, 75% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+@keyframes area-trace { 0% { stroke-dashoffset: 1; fill: transparent; } 55% { fill: transparent; } 100% { stroke-dashoffset: 0; stroke: var(--state); fill: color-mix(in srgb, var(--state) 9%, transparent); } }
+@keyframes wall-to-actions { from { width: calc(100% - var(--u) * 2.6); } to { width: 64%; } }
+@keyframes action-arrive { from { opacity: 0; transform: translateX(24px); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes phase-ready { from { opacity: .25; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .answer-slide .answer-camera, .answer-slide .answer-actions, .answer-slide .answer-link, .answer-slide .answer-task, .answer-slide .answer-phases span { opacity: 1; animation: none !important; }
+  .answer-slide .answer-wall { width: 64%; animation: none !important; }
+  .answer-slide .answer-camera .q { stroke-dashoffset: 0; stroke: var(--state); fill: color-mix(in srgb, var(--state) 9%, transparent); animation: none !important; }
+  .answer-slide .answer-camera::after { animation: none !important; }
+}
 .legend { display: flex; gap: calc(var(--u) * 2.2); margin-top: calc(var(--u) * 1.1); font-size: calc(var(--u) * 1.05); color: var(--muted); }
 .legend span { display: flex; align-items: center; gap: calc(var(--u) * .6); }
 .three { display: flex; gap: calc(var(--u) * 1.6); margin-top: calc(var(--u) * 1.1); font-size: calc(var(--u) * 1.6); font-weight: 600; letter-spacing: -.04em; }
@@ -326,6 +390,30 @@ body.on-intro .topbar { pointer-events: none; }
 .tiles.wide { grid-template-columns: repeat(8, 1fr); margin-top: calc(var(--u) * 2.6); }
 .tiles.wide .tile { aspect-ratio: 5 / 4; }
 .tiles.wide .tile b { font-size: calc(var(--u) * 1.05); line-height: 1.15; }
+/* Scenario slide: photographic evidence, with color reserved for small accents. */
+.scenario-intro { margin-top: calc(var(--u) * .8); }
+.scenario-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 1.2); margin-top: calc(var(--u) * 1.8); }
+.scenario-panel { overflow: hidden; border-radius: calc(var(--u) * 1.2); }
+.scenario-photo { position: relative; height: calc(var(--u) * 12); overflow: hidden; background: var(--well); }
+.scenario-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease-out); }
+.scenario-panel:hover .scenario-photo img { transform: scale(1.035); }
+.scenario-photo::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(transparent, #09090bbd); pointer-events: none; }
+.scenario-photo-label { position: absolute; bottom: calc(var(--u) * .9); left: calc(var(--u) * 1.2); z-index: 1; font-size: calc(var(--u) * .95); font-weight: 500; color: #fff; }
+.scenario-image-tag { position: absolute; top: calc(var(--u) * .7); right: calc(var(--u) * .7); padding: calc(var(--u) * .25) calc(var(--u) * .45); border: 1px solid #ffffff29; border-radius: 5px; color: #fff; background: #09090b80; backdrop-filter: blur(10px); font: calc(var(--u) * .6) var(--mono); }
+.scenario-content { padding: calc(var(--u) * 1.15); }
+.scenario-category { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font: calc(var(--u) * .7) var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.scenario-category > span:first-child { color: var(--accent); }
+.scenario-category > span:first-child::before { content: ""; display: inline-block; width: calc(var(--u) * .35); height: calc(var(--u) * .35); margin-right: calc(var(--u) * .45); border-radius: 50%; background: currentColor; vertical-align: middle; }
+.scenario-content h3 { margin-top: calc(var(--u) * .6); font-size: calc(var(--u) * 1.6); font-weight: 550; letter-spacing: -.045em; }
+.scenario-content ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--u) * .6) calc(var(--u) * .9); margin-top: calc(var(--u) * 1); min-height: calc(var(--u) * 4.8); align-content: start; }
+.scenario-content li { color: var(--muted); font-size: calc(var(--u) * .86); line-height: 1.35; padding-left: calc(var(--u) * .6); border-left: 1px solid rgb(var(--fg) / .15); }
+.scenario-footer { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 2); margin-top: calc(var(--u) * 1.5); padding-top: calc(var(--u) * 1.2); border-top: 1px solid rgb(var(--fg) / .1); }
+.scenario-stats { display: flex; gap: calc(var(--u) * 2); }
+.scenario-stats > span { display: flex; align-items: baseline; gap: calc(var(--u) * .45); font-size: calc(var(--u) * .85); color: var(--muted); }
+.scenario-stats b { font-size: calc(var(--u) * 1.5); font-weight: 550; letter-spacing: -.04em; color: var(--ink); }
+.scenario-footer p { font-size: calc(var(--u) * .72); color: var(--dim); }
+.scenario-footer p span { margin: 0 calc(var(--u) * .4); }
+:root[data-theme="light"] .scenario-category > span:first-child { color: color-mix(in srgb, var(--accent) 65%, #09090b); }
 .split { grid-template-columns: 38fr 62fr; }
 /* the attack: every generated image scrolls by, one is picked, and the model's answers land on it */
 .attack { position: relative; overflow: hidden; aspect-ratio: 1024 / 572; border-radius: 22px; background-color: rgb(var(--pitc) / .5);
@@ -370,16 +458,6 @@ body.on-intro .topbar { pointer-events: none; }
 .more p { font-size: calc(var(--u) * 1); line-height: 1.4; color: var(--muted); }
 kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15em .55em; border-radius: 7px; border: 1px solid rgb(var(--fg) / calc(.16 * var(--k))); }
 
-/* ── 12 results ─────────────────────────────────────────────────────────────── */
-.results { display: grid; grid-template-columns: 1fr 1fr; margin-top: calc(var(--u) * 2.6); max-width: calc(var(--u) * 66); }
-.results > div + div { padding-left: calc(var(--u) * 4); border-left: 1px solid rgb(var(--fg) / calc(.1 * var(--k))); }
-.results .num { display: block; font-size: calc(var(--u) * 10.5); }
-.results .num.none { font-weight: 300; color: var(--dim); }
-.results .num small { font-size: .4em; color: var(--muted); margin-left: .06em; }
-.results p, .caveat { font-size: calc(var(--u) * 1.15); line-height: 1.5; }
-.results p { margin-top: calc(var(--u) * 1); font-weight: 500; color: var(--ink); }
-.caveat { margin-top: calc(var(--u) * 2); max-width: calc(var(--u) * 54); color: var(--muted); }
-
 /* ── 13 close ───────────────────────────────────────────────────────────────── */
 .close .wordmark { font-size: calc(var(--u) * 11); }
 .close .tag { margin-top: calc(var(--u) * 1.2); font-size: calc(var(--u) * 1.7); font-weight: 500; letter-spacing: -.035em; }
@@ -423,7 +501,6 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
     <button class="nav-item" data-sec="robust">Robust</button>
     <button class="nav-item" data-sec="product">Product</button>
     <button class="nav-item" data-sec="cost">Cost</button>
-    <button class="nav-item" data-sec="results">Results</button>
     <button class="nav-item" data-sec="conclusions">Conclusions</button>
     <button class="nav-item theme-btn" id="themeBtn" aria-label="Switch theme" title="Switch theme (T)">
       <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
@@ -481,12 +558,25 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
   </section>
 
   <!-- 4 ─ our answer -->
-  <section class="slide center" data-sec="answer">
+  <section class="slide center answer-slide" data-sec="answer">
     <p class="eyebrow rv">Our answer</p>
     <h2 class="rv">ShelfOS turns every camera frame<br><span>into a to-do list.</span></h2>
-    <figure class="shot hero-shot glass-card rv rise-lg" id="hero" data-shot="wall" data-ph="wall"></figure>
-    <p class="legend rv" data-gap="3"><span><i data-badge="empty"></i>Empty</span><span><i data-badge="wrong"></i>Wrong product</span><span><i data-badge="low"></i>Running low</span><span><i data-badge="ok"></i>Fine</span></p>
-    <p class="three"><span class="rv" data-gap="2">See.</span><span class="rv" data-gap="2">Decide.</span><span class="rv" data-gap="2">Act.</span></p>
+    <div class="answer-stage glass-card rv" id="hero">
+      <div class="layer">
+        <div class="answer-bar"><span>STORE WALL <span class="answer-bar-sub">/ 6 camera views</span></span><span class="answer-live"><i></i> ShelfOS</span></div>
+        <div class="answer-wall" id="answerWall"></div>
+        <div class="answer-link" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></div>
+        <aside class="answer-actions" aria-label="Example tasks from shelf analysis">
+          <p class="eyebrow">Your next moves</p><h3>See it. <span>Fix it.</span></h3>
+          <div class="answer-task" style="--task:0;--c:var(--empty)"><span class="answer-task-dot"></span><div><b>Restock bananas</b><span>Empty · Camera 6215</span></div><svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+          <div class="answer-task" style="--task:1;--c:var(--wrong)"><span class="answer-task-dot"></span><div><b>Check the product</b><span>Wrong place · Camera 6468</span></div><svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+          <div class="answer-task" style="--task:2;--c:var(--low)"><span class="answer-task-dot"></span><div><b>Top up tomatoes</b><span>Running low · Camera 6443</span></div><svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+          <p class="answer-action-note">A clear action. A precise location.</p>
+        </aside>
+        <div class="answer-stage-foot"><span class="answer-scan-status">Camera frame → shelf state → action</span><span>Illustrative workflow</span></div>
+      </div>
+    </div>
+    <div class="answer-phases" aria-label="See, decide, act"><span style="--phase:0"><i>01</i>See.</span><b aria-hidden="true">→</b><span style="--phase:1"><i>02</i>Decide.</span><b aria-hidden="true">→</b><span style="--phase:2"><i>03</i>Act.</span></div>
   </section>
 
   <!-- 5 ─ how it works -->
@@ -563,12 +653,15 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
   </section>
 
   <!-- 9 ─ the scenarios -->
-  <section class="slide" data-sec="data">
+  <section class="slide scenario-slide" data-sec="data">
     <p class="eyebrow rv">The test set we made</p>
-    <h2 class="sm rv">Sixteen ways <span>to fool a shelf camera.</span></h2>
-    <div class="tiles wide" id="tiles"></div>
-    <p class="legend key rv" data-gap="10"><span><i data-badge="empty"></i>Empty</span><span><i data-badge="low"></i>Low stock</span><span><i data-badge="wrong"></i>Wrong product</span><span><i data-badge="ok"></i>Full</span><span><i class="plain"></i>Hard to see</span></p>
-    <p class="eyebrow tally rv">16 scenarios &nbsp;·&nbsp; 6 cameras &nbsp;·&nbsp; 119 images in our review tool</p>
+    <h2 class="rv">Real shelves. <span>Unreal challenges.</span></h2>
+    <p class="lead scenario-intro rv">We changed the stock, swapped the products and challenged the view.</p>
+    <div class="scenario-grid" id="tiles"></div>
+    <div class="scenario-footer rv">
+      <div class="scenario-stats"><span><b>16</b> scenarios</span><span><b>6</b> cameras</span><span><b>119</b> review images</span></div>
+      <p>Synthetic stress tests <span>·</span> reviewed in our labeling tool</p>
+    </div>
   </section>
 
   <!-- 10 ─ built not to fail -->
@@ -611,18 +704,7 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
     <div class="slot rv" data-gap="2" id="costSlot"><p class="eyebrow">Cost per store<br>Estimated</p><b id="costValue">—</b><span class="mono" id="costNote">[cost per store: to be filled in by the team]</span></div>
   </section>
 
-  <!-- 13 ─ results -->
-  <section class="slide" data-sec="results">
-    <p class="eyebrow rv">Results</p>
-    <h2 class="rv">Measured <span>honestly.</span></h2>
-    <div class="results">
-      <div class="rv" data-gap="2"><span class="num none" id="resStock">—</span><p>Stock level correct</p></div>
-      <div class="rv"><span class="num none" id="resProduct">—</span><p>Right product</p></div>
-    </div>
-    <p class="caveat rv">Cross-validation against our own labels, on frames the model did not train on. The official score is the hidden validation set.</p>
-  </section>
-
-  <!-- 14 ─ conclusions -->
+  <!-- 13 ─ conclusions -->
   <section class="slide" data-sec="conclusions">
     <p class="eyebrow rv">Conclusions &nbsp;·&nbsp; why ShelfOS should win</p>
     <h2 class="rv">More than the challenge asked. <span>A whole ecosystem.</span></h2>
@@ -634,7 +716,7 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
     <div class="verdict glass-card rv" data-gap="3"><b>What makes it stand out</b><span>The challenge asked for predictions. We built everything around them: tasks, store wall, day replay, analytics, search and an assistant.</span></div>
   </section>
 
-  <!-- 15 ─ close -->
+  <!-- 14 ─ close -->
   <section class="slide center close" data-sec="">
     <p class="wordmark rv">Shelf<b>OS</b></p>
     <p class="tag rv" data-gap="3">Fresh eyes <span>on fresh produce!</span></p>
@@ -647,11 +729,10 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
 </main>
 
 <div class="progress" aria-hidden="true"><i id="bar"></i></div>
-<div class="counter" id="counter" aria-hidden="true">01 / 15</div>
+<div class="counter" id="counter" aria-hidden="true">01 / 14</div>
 
 <script>
 /* ── fill these in ─────────────────────────────────────────────────────────── */
-const RESULTS = { stock: null, product: null };  // percent, e.g. { stock: 87.5, product: 91 }; null shows a dash
 const COST_PER_STORE = "~10 € / month";          // null shows the marked slot
 const COST_NOTE = "A ~300 € box drawing 15 W inside the store, ~2 € of electricity a month, over 3 years. Estimated for a Jetson Orin Nano, not yet tested.";
 const TEAM_NAME = "Premium Reels";
@@ -685,13 +766,6 @@ function toggleTheme() {
 $("#themeBtn").addEventListener("click", (e) => { toggleTheme(); e.currentTarget.blur(); });
 
 /* placeholders */
-const pct = (el, v) => {
-  if (v == null) return;
-  el.classList.remove("none");
-  const dec = Number.isInteger(v) ? 0 : 1;
-  el.innerHTML = `<span data-count="${v}" data-dec="${dec}">${v.toFixed(dec)}</span><small>%</small>`;
-};
-pct($("#resStock"), RESULTS.stock); pct($("#resProduct"), RESULTS.product);
 if (COST_PER_STORE) { $("#costValue").textContent = COST_PER_STORE; $("#costNote").textContent = COST_NOTE; $("#costNote").className = "note"; }
 if (TEAM_NAME) $("#teamName").textContent = TEAM_NAME;
 if (TEAM.length) $("#team").textContent = TEAM.join("  ·  ");
@@ -715,6 +789,14 @@ function quads(cols, rows, w, h, seed, map = (x, y) => [x, y], mix = [.07, .13, 
   $("#quads").innerHTML = quads(8, 4, 1920, 1080, 11, persp, [.2, .4, .6]).map((q, n) =>
     `<polygon class="${q.cls}" points="${q.pts}" style="--n:${n % 13};--dx:${((r() - .5) * 110).toFixed(0)}px;--dy:${((r() - .5) * 90).toFixed(0)}px"/>`).join("");
 }
+
+/* The answer slide: trace each shelf area, then turn observations into tasks. */
+$("#answerWall").innerHTML = ["6215", "6371", "6468", "6383", "6443", "6594"].map((camera, n) => {
+  const areas = quads(4, 2, 320, 170, 3 + n * 7, (x, y) => [x + (y / 170 - .4) * (x - 160) * .12, y]);
+  const focus = { "6215": "empty", "6468": "wrong", "6443": "low" }[camera];
+  if (focus) areas[0].cls = `q-${focus}`;
+  return `<div class="answer-camera" style="--cam:${n}"><span class="answer-cam-label">CAM ${camera}</span><svg viewBox="-20 -15 360 200" aria-hidden="true">${areas.map((q, a) => `<polygon class="q ${q.cls}" points="${q.pts}" pathLength="1" style="--area:${a}"/>`).join("")}</svg></div>`;
+}).join("");
 
 /* drawn stand-ins behind every picture */
 const wallSVG = (cols, rows, seed) => {
@@ -841,11 +923,13 @@ $("#attackSvg").innerHTML = ATTACK.map(([k, p], n) => `<g class="area" style="--
 
 /* edge-case scenarios */
 $("#tiles").innerHTML = [
-  ["Empty", "empty"], ["Single item", "low"], ["Sparse, scattered", "low"], ["Sparse, clustered", "low"],
-  ["Half stock", "low"], ["Nearly full", ""], ["Full stock", ""], ["Bananas instead", "wrong"],
-  ["Look-alike product", "wrong"], ["Mixed products", "wrong"], ["Packaging only", "empty"], ["Hand in the way", "-"],
-  ["Shopper in the way", "-"], ["Shadow", "-"], ["Glare", "-"], ["Degraded CCTV", "-"],
-].map(([name, c], n) => `<div class="tile metric-card${c === "-" ? " plain" : ""}" style="--f:${n}${c && c !== "-" ? `;--tone:var(--${c})` : ""}">${c === "-" ? "<span></span>" : badge(c || "ok")}<b>${name}</b></div>`).join("");
+  { title: "How much is left?", category: "Stock", tone: "low", image: "stock", example: "Half stock", items: ["Empty", "Single item", "Sparse · scattered", "Sparse · clustered", "Half stock", "Nearly full", "Full stock", "Packaging only"] },
+  { title: "Is it the right product?", category: "Product", tone: "wrong", image: "product", example: "Bananas in a tomato display", items: ["Bananas instead", "Look-alike product", "Mixed products"] },
+  { title: "Can we still see it?", category: "Visibility", tone: "ink", image: "visibility", example: "A shopper blocks the shelf", items: ["Hand in the way", "Shopper in the way", "Shadow", "Glare", "Degraded CCTV"] },
+].map((group, n) => `<article class="scenario-panel glass-card rv" style="--accent:var(--${group.tone});--i:${n + 3}">
+  <div class="scenario-photo"><img src="assets/scenario-${group.image}.png" alt="Synthetic shelf test: ${group.example}" width="1672" height="941"><span class="scenario-photo-label">${group.example}</span><span class="scenario-image-tag">AI-generated</span></div>
+  <div class="scenario-content"><div class="scenario-category"><span>${group.category}</span><span>${String(n + 1).padStart(2, "0")}</span></div><h3>${group.title}</h3><ul>${group.items.map(item => `<li>${item}</li>`).join("")}</ul></div>
+</article>`).join("");
 $$("[data-badge]").forEach((el) => (el.outerHTML = badge(el.dataset.badge)));
 
 /* what the app survives */
@@ -894,7 +978,7 @@ function runCounts(slide) {
   });
 }
 
-/* slides animate when they arrive, and replay only when approached again from above */
+/* Replay every time a slide arrives, regardless of navigation direction. */
 let current = 0;
 const howIdx = slides.indexOf($("#how"));
 function enter(slide) {
@@ -905,13 +989,13 @@ function enter(slide) {
 }
 function leave(slide) {
   clearTimeout(slide._settle);
+  $$("[data-count]", slide).forEach((el) => cancelAnimationFrame(el._raf));
   slide.classList.remove("in", "settled");
 }
 const io = new IntersectionObserver((entries) => entries.forEach((e) => {
-  const idx = slides.indexOf(e.target);
   if (e.intersectionRatio >= .55) enter(e.target);
-  else if (!e.isIntersecting && idx > current) leave(e.target);
-}), { root: deck, threshold: [0, .55] });
+  else if (e.intersectionRatio <= .05) leave(e.target);
+}), { root: deck, threshold: [0, .05, .55] });
 slides.forEach((s) => io.observe(s));
 
 /* navigation */
@@ -952,7 +1036,7 @@ function onScroll() {
   bar.style.transform = `scaleX(${top / Math.max(1, deck.scrollHeight - vh)})`;
 
   /* slow parallax on the hero picture */
-  if (!REDUCED) {
+  if (!REDUCED && hero.parentElement.classList.contains("hero-shot")) {
     const r = hero.parentElement.getBoundingClientRect(), off = r.top + r.height / 2 - innerHeight / 2;
     if (Math.abs(off) < innerHeight) hero.style.translate = `0 ${(off * -.045).toFixed(1)}px`;
   }
