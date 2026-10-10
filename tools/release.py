@@ -57,17 +57,23 @@ def main():
     ap.add_argument("--engine", default="models/engine.pkl", help="engine to ship (models/engine_lite.pkl = ViT-B only, ~4x faster on CPU)")
     ap.add_argument("--reference", default=None, help="reference_day json matching --engine (default: derived from the engine name)")
     a = ap.parse_args()
-    out = ROOT / a.out
-    if out.exists():
-        shutil.rmtree(out)
-    out.mkdir(parents=True)
-
     engine_path = ROOT / a.engine
     if not engine_path.exists():
         sys.exit(f"{a.engine} is missing: run `python -m shelfos.train --bank cache/<bank>.npz --out {a.engine}` first")
     reference_path = ROOT / (a.reference or ("models/reference_day_lite.json" if engine_path.stem.endswith("_lite") else "models/reference_day.json"))
     if not reference_path.exists():
         sys.exit(f"{reference_path.relative_to(ROOT)} is missing: it is written by shelfos.train together with the engine")
+
+    # the output folder is deleted and rebuilt: only ever an earlier release, never the project or anything else
+    out = (ROOT / a.out).resolve()
+    if out == ROOT or out in ROOT.parents:
+        sys.exit(f"--out {a.out} is the project itself (or a folder above it): choose a folder of its own, such as release")
+    if out.is_dir() and any(out.iterdir()) and not (out / "models" / "backbone").is_dir():
+        sys.exit(f"{out} is not empty and is not an earlier release: not deleting it")
+    if out.exists():
+        shutil.rmtree(out)
+    out.mkdir(parents=True)
+
     with open(engine_path, "rb") as fh:
         engine = pickle.load(fh)
     from shelfos.features import split_names
