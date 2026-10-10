@@ -1,0 +1,393 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, bbox, centroid, clock, duration, frameAt, frameSrc, points, productName, since, statusOf } from "./lib";
+
+/** Camera image with the planogram areas drawn on it. */
+export function FrameView({
+  store, cam, frame, filter = "all", compact = false, areaId, hover, onHover, onSelect,
+}: {
+  store: Store; cam: Camera; frame: Frame; filter?: Status | "all"; compact?: boolean;
+  areaId?: string | null; hover?: string | null; onHover?: (id: string | null) => void; onSelect?: (id: string) => void;
+}) {
+  const { width: w, height: h } = store;
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} className="block w-full h-auto select-none bg-black">
+      <image href={frameSrc(store, cam, frame)} width={w} height={h} />
+      {!compact && <rect width={w} height={h} fill="url(#vignette)" pointerEvents="none" />}
+      <defs>
+        <radialGradient id="vignette" cx="50%" cy="50%" r="75%">
+          <stop offset="60%" stopColor="#000" stopOpacity="0" />
+          <stop offset="100%" stopColor="#000" stopOpacity="0.45" />
+        </radialGradient>
+      </defs>
+      {cam.areas.map((a) => {
+        const p = frame.areas[a.id];
+        if (!p) return null;
+        const s = statusOf(p);
+        const active = a.id === areaId || a.id === hover;
+        const dim = filter !== "all" && filter !== s;
+        const quiet = s === "ok";
+        const [cx, cy] = centroid(a.quad, w, h);
+        return (
+          <g key={a.id} opacity={dim ? 0.18 : 1} className="transition-opacity">
+            <polygon
+              points={points(a.quad)}
+              fill={STATUS[s].color}
+              fillOpacity={active ? 0.25 : quiet ? 0 : 0.13}
+              stroke={STATUS[s].color}
+              strokeWidth={active ? 4.5 : quiet ? (compact ? 1.5 : 1.25) : compact ? 4 : 2.75}
+              strokeOpacity={quiet && !active ? 0.5 : 1}
+              strokeDasharray={p.source === "memory" ? "10 7" : undefined}
+              strokeLinejoin="round"
+              className={`${onSelect ? "cursor-pointer" : ""} ${s === "empty" && !active ? "pulse" : ""}`}
+              onMouseEnter={onHover && (() => onHover(a.id))}
+              onMouseLeave={onHover && (() => onHover(null))}
+              onClick={onSelect && (() => onSelect(a.id))}
+            />
+            {!quiet && !compact && (
+              <g pointerEvents="none">
+                <circle cx={cx} cy={cy} r={13} fill="#05070a" fillOpacity={0.85} stroke={STATUS[s].color} strokeWidth={2} />
+                <text x={cx} y={cy + 5.5} textAnchor="middle" fontSize={16} fontWeight={700} fill={STATUS[s].color}>
+                  {STATUS[s].glyph}
+                </text>
+              </g>
+            )}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+export function CameraStage({
+  store, cam, frame, areaId, filter, onSelect,
+}: { store: Store; cam: Camera; frame: Frame; areaId: string | null; filter: Status | "all"; onSelect: (id: string | null) => void }) {
+  const [hover, setHover] = useState<string | null>(null);
+  const hovered = hover ? cam.areas.find((a) => a.id === hover) : undefined;
+  const hp = hovered && frame.areas[hovered.id];
+  return (
+    <div className="relative rounded-xl overflow-hidden border border-line bg-black shadow-[0_30px_80px_-40px_rgba(34,211,238,0.25)]">
+      <FrameView store={store} cam={cam} frame={frame} filter={filter} areaId={areaId} hover={hover} onHover={setHover} onSelect={(id) => onSelect(id === areaId ? null : id)} />
+      <div className="absolute left-3 top-3 flex items-center gap-2 rounded-md bg-black/70 px-2.5 py-1 text-[11px] font-mono backdrop-blur">
+        <span className="size-1.5 rounded-full" style={{ background: frame.origin === "run" ? ACCENT : STATUS.ok.color, boxShadow: `0 0 8px ${frame.origin === "run" ? ACCENT : STATUS.ok.color}` }} />
+        CAM {cam.id} · {clock(frame.ts)}
+        {frame.origin === "run" && <span className="text-accent">· tested image</span>}
+      </div>
+      {hovered && hp && (
+        <div className="absolute right-3 top-3 flex items-center gap-2 rounded-md bg-black/80 px-3 py-1.5 text-xs backdrop-blur">
+          <span className="size-2 rounded-full" style={{ background: STATUS[statusOf(hp)].color }} />
+          <span>{hovered.product}</span>
+          <span className="text-muted">· {STATUS[statusOf(hp)].label}</span>
+        </div>
+      )}
+      <div className="absolute left-3 bottom-3 flex gap-3 rounded-md bg-black/70 px-2.5 py-1.5 text-[10px] text-white/80 backdrop-blur">
+        {ORDER.map((s) => (
+          <span key={s} className="flex items-center gap-1.5">
+            <span className="size-2 rounded-sm" style={{ background: STATUS[s].color }} />
+            {STATUS[s].label}
+          </span>
+        ))}
+      </div>
+      {!!frame.warnings?.length && (
+        <div className="absolute right-3 bottom-3 max-w-[60%] rounded-md bg-black/80 px-2.5 py-1.5 text-[11px] text-low backdrop-blur">⚠ {frame.warnings.join(" · ")}</div>
+      )}
+    </div>
+  );
+}
+
+export function Crop({ store, cam, frame, area, className }: { store: Store; cam: Camera; frame: Frame; area: AreaDef; className?: string }) {
+  const b = bbox(area.quad, store.width, store.height);
+  return (
+    <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} preserveAspectRatio="xMidYMid slice" className={className}>
+      <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} />
+    </svg>
+  );
+}
+
+export function Kpi({ label, value, sub, tone }: { label: string; value: string; sub: string; tone: Status | "accent" }) {
+  const color = tone === "accent" ? ACCENT : STATUS[tone].color;
+  return (
+    <div className="relative overflow-hidden rounded-xl border border-line bg-panel px-4 py-3.5">
+      <div className="absolute -right-8 -top-10 size-28 rounded-full blur-2xl opacity-25" style={{ background: color }} />
+      <div className="text-[10px] uppercase tracking-[0.14em] text-muted">{label}</div>
+      <div className="mt-1 font-mono text-[34px] leading-none tracking-tight tabular-nums" style={{ color }}>
+        {value}
+      </div>
+      <div className="mt-1.5 text-xs text-muted truncate">{sub}</div>
+    </div>
+  );
+}
+
+/** Small count badges for one camera frame: how many areas need each action. */
+export function Badges({ n }: { n: Record<Status, number> }) {
+  const any = ISSUES.some((s) => n[s]);
+  return (
+    <span className="flex gap-1">
+      {ISSUES.map((s) =>
+        n[s] ? (
+          <span key={s} className="rounded px-1.5 py-0.5 text-[10px] font-mono font-medium text-black" style={{ background: STATUS[s].color }} title={`${n[s]} ${STATUS[s].label.toLowerCase()}`}>
+            {n[s]} {STATUS[s].glyph}
+          </span>
+        ) : null,
+      )}
+      {!any && <span className="rounded px-1.5 py-0.5 text-[10px] font-medium bg-ok/15 text-ok">all compliant</span>}
+    </span>
+  );
+}
+
+/** The whole day at a glance: open issues over time, with the scrubber on top. */
+export function DayStrip({ store, ts, line, onChange }: { store: Store; ts: number; line: { min: number; max: number; latest: number }; onChange: (ts: number) => void }) {
+  const N = 84;
+  const bins = useMemo(() => {
+    const out: { t: number; n: Record<Status, number> }[] = [];
+    for (let i = 0; i < N; i++) {
+      const t = i === N - 1 ? line.latest : line.min + ((line.max - line.min) * i) / (N - 1);
+      const n: Record<Status, number> = { empty: 0, wrong: 0, low: 0, ok: 0 };
+      for (const cam of store.cameras) {
+        const f = frameAt(cam, t);
+        for (const a of cam.areas) if (f.areas[a.id]) n[statusOf(f.areas[a.id])]++;
+      }
+      out.push({ t: line.min + ((line.max - line.min) * i) / (N - 1), n });
+    }
+    return out;
+  }, [store, line.min, line.max, line.latest]);
+  const peak = Math.max(1, ...bins.map((b) => b.n.empty + b.n.wrong + b.n.low));
+  const hours = useMemo(() => {
+    const out: number[] = [];
+    for (let t = Math.ceil(line.min / 3600) * 3600; t <= line.max; t += 3600) out.push(t);
+    return out;
+  }, [line.min, line.max]);
+  const tested = useMemo(() => store.cameras.flatMap((c) => c.frames.filter((f) => f.origin === "run").map((f) => f.ts)), [store]);
+  const pos = (t: number) => Math.min(100, Math.max(0, ((t - line.min) / Math.max(1, line.max - line.min)) * 100));
+  return (
+    <div className="relative flex-1 h-[52px] min-w-0">
+      <div className="absolute inset-x-0 top-0 h-9 flex items-end gap-px">
+        {bins.map((b, i) => (
+          <div key={i} className="flex-1 flex flex-col-reverse" style={{ opacity: b.t <= ts ? 1 : 0.28 }}>
+            {ISSUES.map((s) => (
+              <span key={s} style={{ height: `${(b.n[s] / peak) * 36}px`, background: STATUS[s].color }} />
+            ))}
+          </div>
+        ))}
+      </div>
+      {tested.map((t, i) => (
+        <span key={i} className="absolute top-[35px] h-[5px] w-[2px] -translate-x-1/2 rounded-full pointer-events-none" style={{ left: `${pos(t)}%`, background: ACCENT }} />
+      ))}
+      <div className="absolute top-0 h-9 w-px bg-white/90 pointer-events-none" style={{ left: `${pos(ts)}%` }}>
+        <span className="absolute -top-0.5 -left-[4px] size-[9px] rounded-full bg-white shadow-[0_0_12px_rgba(255,255,255,0.8)]" />
+      </div>
+      <div className="absolute inset-x-0 top-9 h-px bg-line" />
+      {hours.map((t) => (
+        <span key={t} className="absolute top-[40px] -translate-x-1/2 text-[9px] font-mono text-muted" style={{ left: `${pos(t)}%` }}>
+          {clock(t).slice(0, 2)}h
+        </span>
+      ))}
+      <input
+        aria-label="Time of day"
+        className="scrub absolute inset-x-0 top-0 h-9 opacity-0"
+        type="range"
+        min={line.min}
+        max={line.max}
+        step={60}
+        value={Math.min(ts, line.max)}
+        onChange={(e) => onChange(Number(e.target.value) >= line.max ? line.latest : Number(e.target.value))}
+      />
+    </div>
+  );
+}
+
+export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store: Store; cam: Camera; frame: Frame; area: AreaDef; onPick: (ts: number) => void; onClose: () => void }) {
+  const p = frame.areas[area.id];
+  const s = statusOf(p);
+  const b = bbox(area.quad, store.width, store.height);
+  const [showMap, setShowMap] = useState(false);
+  const root = useRef<HTMLElement>(null);
+  // on a small screen the explanation opens below the image: bring it into view
+  useEffect(() => root.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), []);
+  // the frame where this area looked best today, as a visual reference
+  const best = useMemo(() => {
+    let top = cam.frames[0];
+    for (const f of cam.frames) {
+      const q = f.areas[area.id];
+      const r = top.areas[area.id];
+      if (q && q.ok && q.level === "full" && (!r || !(r.ok && r.level === "full") || q.occ > r.occ)) top = f;
+    }
+    return top;
+  }, [cam, area.id]);
+  const started = since(cam, area.id, frame);
+  const hasMap = p.map.length > 0;
+  const looks = (p.looks ?? []).filter(([id]) => id !== area.productId).slice(0, 2);
+  return (
+    <section ref={root} className="rounded-xl border border-line bg-panel px-5 pb-5 pt-3 grid grid-cols-[minmax(0,300px)_1fr] gap-x-6 gap-y-3 2xl:grid-cols-1">
+      <div className="col-span-full flex items-center justify-between">
+        <span className="text-[10px] uppercase tracking-[0.14em] text-muted">
+          Camera {cam.id} · slot {area.id.split("_")[1]}
+        </span>
+        <button onClick={onClose} aria-label="Close" title="Back to all areas (Esc)" className="-mr-2 size-7 grid place-items-center rounded-full text-muted hover:text-white hover:bg-raised">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="m1.5 1.5 8 8m0-8-8 8" /></svg>
+        </button>
+      </div>
+      <div className="grid grid-cols-2 gap-2 self-start">
+        <figure>
+          <div className="relative">
+            <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} className="w-full aspect-square rounded-lg bg-black" preserveAspectRatio="xMidYMid slice">
+              <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} />
+              <polygon points={points(area.quad)} fill="none" stroke={STATUS[s].color} strokeWidth={Math.max(b.w, b.h) / 90} strokeLinejoin="round" />
+            </svg>
+            {showMap && hasMap && (
+              <div className="absolute inset-[9%] grid rounded overflow-hidden mix-blend-screen" style={{ gridTemplateColumns: `repeat(${p.map.length}, 1fr)` }}>
+                {p.map.flat().map((v, i) => (
+                  <span key={i} style={{ background: `rgba(47,224,160,${v * 0.75})` }} />
+                ))}
+              </div>
+            )}
+          </div>
+          <figcaption className="mt-1.5 text-[10px] uppercase tracking-[0.12em] text-muted">Now · {clock(frame.ts)}</figcaption>
+        </figure>
+        <figure>
+          <button onClick={() => onPick(best.ts)} className="block w-full" title="Jump to this moment">
+            <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} className="w-full aspect-square rounded-lg bg-black opacity-90 hover:opacity-100" preserveAspectRatio="xMidYMid slice">
+              <image href={frameSrc(store, cam, best)} width={store.width} height={store.height} />
+            </svg>
+          </button>
+          <figcaption className="mt-1.5 text-[10px] uppercase tracking-[0.12em] text-muted">At its best · {clock(best.ts)}</figcaption>
+        </figure>
+        {hasMap && (
+          <button onClick={() => setShowMap(!showMap)} className={`col-span-2 mt-1 rounded-md border px-2.5 py-1.5 text-[11px] transition-colors ${showMap ? "border-ok/60 text-ok bg-ok/10" : "border-line text-muted hover:text-white"}`}>
+            {showMap ? "Hide" : "Show"} what ShelfOS sees as product
+          </button>
+        )}
+      </div>
+
+      <div className="min-w-0 flex flex-col gap-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap" style={{ color: STATUS[s].color }}>
+              <span className="size-4 grid place-items-center rounded-full text-[10px] font-bold text-black" style={{ background: STATUS[s].color }}>
+                {STATUS[s].glyph}
+              </span>
+              {STATUS[s].label} · {STATUS[s].action}
+            </div>
+            <h2 className="mt-1 text-2xl 2xl:text-xl font-medium tracking-tight truncate">{area.product}</h2>
+            <div className="text-[11px] text-muted font-mono truncate">
+              {area.rawName} · #{area.productId}
+            </div>
+            {s !== "ok" && frame.ts > started && <div className="mt-1 text-[11px] text-muted">Like this for {duration(frame.ts - started)}</div>}
+          </div>
+          <div className="text-right shrink-0">
+            <div className="text-[10px] uppercase tracking-[0.14em] text-muted whitespace-nowrap">Shelf covered</div>
+            <div className="font-mono text-3xl 2xl:text-2xl tabular-nums tracking-tight">{hasMap ? `${Math.round(p.occ * 100)}%` : "–"}</div>
+          </div>
+        </div>
+
+        {p.source === "memory" && (
+          <div className="rounded-md border border-low/40 bg-low/10 px-3 py-2 text-xs text-low">
+            This image could not be read here. The answer is the last known state of the slot, so the output file is still complete.
+          </div>
+        )}
+
+        <div className="grid grid-cols-2 gap-6 2xl:grid-cols-1 2xl:gap-4">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">Stock level</div>
+            {(["Empty", "Half", "Full"] as const).map((name, i) => {
+              const on = p.level === name.toLowerCase();
+              return (
+                <div key={name} className="flex items-center gap-2 text-xs mb-1.5">
+                  <span className={`w-10 ${on ? "text-white font-medium" : "text-muted"}`}>{name}</span>
+                  <div className="flex-1 h-1.5 rounded bg-line overflow-hidden">
+                    <div className="h-full rounded transition-[width] duration-300" style={{ width: `${p.probs[i] * 100}%`, background: on ? STATUS[s === "wrong" ? (p.level === "half" ? "low" : "ok") : s].color : "#3b4754" }} />
+                  </div>
+                  <span className="font-mono tabular-nums w-9 text-right text-muted">{Math.round(p.probs[i] * 100)}%</span>
+                </div>
+              );
+            })}
+          </div>
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">Planogram match</div>
+            <div className="flex items-center gap-2 text-xs">
+              <div className="flex-1 h-1.5 rounded bg-line overflow-hidden">
+                <div className="h-full rounded transition-[width] duration-300" style={{ width: `${p.pOk * 100}%`, background: p.ok ? STATUS.ok.color : STATUS.wrong.color }} />
+              </div>
+              <span className="font-mono tabular-nums w-9 text-right text-muted">{Math.round(p.pOk * 100)}%</span>
+            </div>
+            <p className="mt-2 text-xs text-muted leading-relaxed">
+              {p.level === "empty"
+                ? `Nothing on the shelf to compare with the planogram. Reported as ${p.ok ? "compliant" : "not compliant"}.`
+                : p.ok
+                  ? `Looks like ${area.product}, as planned.`
+                  : `Does not look like ${area.product}.`}
+              {!p.ok && p.level !== "empty" && looks.length > 0 && (
+                <>
+                  {" "}
+                  Looks most like{" "}
+                  {looks.map(([id, sim], i) => (
+                    <span key={id}>
+                      {i > 0 && " or "}
+                      <span className="text-white">{productName(store, id)}</span> <span className="font-mono text-[10px]">{Math.round(sim * 100)}%</span>
+                    </span>
+                  ))}
+                  .
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div className="text-[10px] uppercase tracking-[0.14em] text-muted mb-2">This slot today</div>
+          <div className="flex gap-1">
+            {cam.frames.map((f) => {
+              const q = f.areas[area.id];
+              if (!q) return null;
+              const st = statusOf(q);
+              const current = f.file === frame.file;
+              return (
+                <button key={f.file} onClick={() => onPick(f.ts)} className="flex-1 group" title={`${clock(f.ts)} · ${STATUS[st].label}${f.origin === "run" ? " · tested image" : ""}`}>
+                  <div className={`h-10 rounded-sm flex items-end overflow-hidden bg-line ${current ? "ring-1 ring-white/70" : ""}`}>
+                    <div className="w-full transition-[height]" style={{ height: `${Math.max(6, (q.map.length ? q.occ : LEVEL_FILL[q.level]) * 100)}%`, background: STATUS[st].color, opacity: current ? 1 : 0.55 }} />
+                  </div>
+                  <div className={`mt-1 text-[9px] font-mono text-center ${f.origin === "run" ? "text-accent" : current ? "text-white" : "text-muted group-hover:text-white"}`}>{clock(f.ts).slice(0, 2)}h</div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const LEVEL_FILL = { empty: 0.06, half: 0.5, full: 1 };
+
+/** Every planogram area of one camera image, worst first: the way in when nothing is selected. */
+export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; onSelect: (id: string) => void }) {
+  const rows = cam.areas
+    .filter((a) => frame.areas[a.id])
+    .map((a) => ({ a, p: frame.areas[a.id], s: statusOf(frame.areas[a.id]) }))
+    .sort((x, y) => STATUS[x.s].rank - STATUS[y.s].rank || x.a.id.localeCompare(y.a.id, undefined, { numeric: true }));
+  const todo = rows.filter((r) => r.s !== "ok").length;
+  return (
+    <section className="rounded-xl border border-line bg-panel overflow-hidden">
+      <div className="px-4 py-3 border-b border-line">
+        <div className="text-[10px] uppercase tracking-[0.14em] text-muted">
+          Camera {cam.id} · {clock(frame.ts)}
+        </div>
+        <div className="mt-0.5 text-sm">
+          {rows.length} planogram areas · {todo ? <span style={{ color: STATUS[rows[0].s].color }}>{todo} need attention</span> : <span className="text-ok">all compliant</span>}
+        </div>
+      </div>
+      <div className="grid grid-cols-3 2xl:grid-cols-1">
+        {rows.map(({ a, p, s }) => (
+          <button key={a.id} onClick={() => onSelect(a.id)} className="flex items-center gap-2.5 px-4 py-2 text-left border-b border-line/50 hover:bg-raised/60 transition-colors" title="See why ShelfOS made this call">
+            <span className="size-2 shrink-0 rounded-full" style={{ background: STATUS[s].color, boxShadow: s === "ok" ? undefined : `0 0 8px ${STATUS[s].color}` }} />
+            <span className={`min-w-0 flex-1 truncate text-xs ${s === "ok" ? "text-white/70" : ""}`}>{a.product}</span>
+            <span className="shrink-0 text-[10px] font-mono" style={{ color: s === "ok" ? undefined : STATUS[s].color }}>
+              {s === "ok" ? <span className="text-muted">{p.level}</span> : STATUS[s].label.toLowerCase()}
+            </span>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}

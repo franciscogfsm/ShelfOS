@@ -1,0 +1,13 @@
+# challenge data and anything derived from it stays local
+data/
+new_dataset_hackathon_junctionx_10_oct_2026_v2/
+__MACOSX/
+cache/
+models/
+outputs/
+web/public/frames/
+web/public/data/
+
+__pycache__/
+*.pyc
+.DS_Store
