@@ -96,6 +96,34 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   - So the retrain is worth +2.1 pp on late if the new labels are right and costs 0.2 pp if the old ones were.
     OOF saved as `cache/oof_tta_labelsold.npz` / `cache/oof_tta_labelsnew.npz`. bank_bl not run (2 GB RAM free).
 
+- [Claude, Francisco's session, branch `audit-fixes`, 11 Oct 00:55] **Code audit, fixes on a branch for a pull request,
+  at the user's explicit request. Nothing is on `main`.** `engine.py`, rects, `models/`, labels, `cv.py`, `lab.py` and
+  `rehearsal.py` untouched; what I found there is under "Proposals". Six commits:
+  - `run.py --images`: relative `--images` / `--out` are taken from where the command was typed (run.py chdirs to the
+    repo first); a path that does not exist exits before anything is trained or written; an empty result no longer
+    overwrites the output with `{}`; only `engine.pkl` is required (a missing `reference_day.json` used to retrain
+    over it); the file is checked with `shelfos.validate` after writing (printed, not fatal).
+  - `service.py`: an image whose analysis raises is answered from `Engine.fallback` (the path already used for an
+    unreadable image) and the run goes on; unreadable zip members, a failed frame copy and a failed `run.json`
+    write no longer raise; `.jpe .jfif .tif .tiff .jp2` are images; a folder such as `cam_6215` names its camera
+    when the exact folder name and the file name do not. `validate.py` mirrors the last two.
+  - `service.py`: a `run.json` older than the engine file is not loaded (the 17:46 run noted above would be dropped
+    at the next start); `/api/health` now has `engine` and `engineTime`.
+  - `server.py`: `/api/analyze-folder` only from loopback (403 with `--lan` or in the container; uploads unaffected);
+    400 where bad bodies gave 500; policy changes only on a real boolean; run frames served `no-cache`; assistant
+    body limit 48,000 -> 400,000 bytes (the app also stopped posting its cards back: the 4th question of a chat
+    used to fail with "Conversation is too long.").
+  - `run.py` app start: exits if the port is taken, before loading the model; warns when `web/out` is older than
+    `web/app`. `tools/release.py`: checks before deleting, and refuses `--out` that is the project or not a release.
+  - `web/`: scrubber right end reaches the last capture, overlapping runs, analytics fixed <= raised, staff page
+    state after a camera confirmation, frame images stretched like the server does, store timeout 30 s.
+  - **This machine has no model** (`models/` holds only `backbone/`, no `cache/`, nothing on :8000), so nothing was
+    predicted. Checked with stubs (60 checks), the 18 unit tests, `tsc`, `eslint` and `npm run build`.
+  - **To do on the machine that has the model, before merging:** `run.py --images <abs folder> --out <abs file>` on
+    `main` and on the branch, the two files must be byte-identical; `tools/selftest.py`; `tools/rehearsal.py --zip`;
+    one run from another directory with a relative folder. Then `npm run build` in `web/` (`web/out` there dates
+    from 10 Oct 19:58: no Count units, `/colaboradores` is a 404) and restart the backend.
+
 ## Running now
 - Opus: app backend on :8000 restarted 21:51 at the user's request (pid 7316, `python -u run.py --no-browser`,
   log in my scratchpad). It holds the models retrained at 21:40. Leave it running; restart it after any retrain.
@@ -219,3 +247,26 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   (`/api/count/policy`, `/api/count`, imported lazily). No GPU, no change to engine/predict/service, nothing
   reaches predictions.json. Off by default: product groups are enabled only after `tools/count_eval.py` passes
   on hand counts (`labels/unit_counts.txt`, new file, not silver labels). Please review `server.py` before merging to main.
+- [Claude, Francisco's session, 11 Oct 00:55] From a read-only audit; nothing was run, none of these files was
+  touched. For Fable to decide:
+  - Memory time: `AreaMemory.t` is the frame index (`bank.py:25-28`, `engine.py:134`) but `t_query` is a Unix time
+    (`engine.py:203`), so `self.t[pool] < tq` (`memory.py:136`) is always true for a crop that is not in memory.
+    Validation is unaffected (it is later than everything). `cv.py --split lofo` is affected: a held-out frame is
+    described from later frames of its area. late/fwd are not touched. Suggest: keep as is and stop quoting lofo.
+  - `memory.py:141` sorts by |t - tq| and line 142 re-sorts by time, so first-frame training rows are described
+    from the last two frames of the day, not the nearest two. Changing it changes the features of those rows:
+    retrain + CV, your call. Not the causal-memory study, which stays rejected.
+  - `OCC_SCALE`, `MEM_SCALE`, `HOUR_SCALE`, `OBSTRUCT`, `ONLINE` are read from source at inference (`engine.py:184`,
+    `195`, `260`), not from the pickle. A pkl fitted under other values loads without complaint. Suggest copying
+    them onto the instance in `fit` and reading them through getattr with today's values as default.
+  - `tools/rehearsal.py:35` scores against `labeler/output/merged_annotations.json`, which here is older than the
+    19 relabels of 21:37: re-merge with `revisao` first. Line 95 divides by `s['max']` (0 if no frame has truth).
+  - `tools/cv.py:58` lets a comply label win over "empty is compliant"; `tools/edgecase_train.py:71` does the
+    opposite. Four crops are E with a sure F: 6376_5 t5-7, 6383_7 t12. At most 1 id answer in late, 4 in fwd.
+    Suggest `truth_id = np.where(y == 0, int(empty_compliant), c)`. Measured facts were taken with the current line.
+  - `tools/lab.py:6` documents `--split late,fwd`; only `--split=late,fwd` is parsed (427-430), the other form
+    raises KeyError.
+  - Pins: `requirements.txt` has only `>=` bounds and `engine.pkl` pickles sklearn and numpy objects. Please post
+    `pip freeze` for scikit-learn, numpy, torch, timm and opencv from the training machine so they can be pinned.
+  - Labeler: `--apply rodrigo francisco` as written in `README.md:157` and `labeler/README.md:62` now stops on
+    conflicts; `revisao` has to come first, as noted above. The two READMEs still show the old command.
