@@ -30,6 +30,9 @@ BACKUPS = HERE / "backups"  # gitignored
 LABELS = HERE / "labels"  # progresso de cada pessoa (commit)
 OUTPUT = HERE / "output"  # ficheiros no formato oficial (commit)
 
+# Divisão do trabalho: câmaras ordenadas, 7 primeiras para um, 7 últimas para o outro.
+TEAM = {"rodrigo": 0, "francisco": 1}
+
 LEVELS = {"empty": 0, "half": 0.5, "full": 1}
 SILVER_STOCK = {"E": "empty", "H": "half", "F": "full"}
 
@@ -136,11 +139,29 @@ def default_label():
     return {"stock": "half", "compliant": True, "unsure": True, "unknown": False}
 
 
+def assigned_cameras(name: str, cameras: list[str], override: str | None) -> list[str]:
+    """--cameras ganha; senão a metade do TEAM; nomes desconhecidos veem todas."""
+    if override:
+        if override == "all":
+            return cameras
+        wanted = [c.strip() for c in override.split(",")]
+        unknown = set(wanted) - set(cameras)
+        if unknown:
+            raise SystemExit(f"câmaras desconhecidas: {sorted(unknown)}")
+        return [c for c in cameras if c in wanted]
+    half = len(cameras) // 2
+    part = TEAM.get(name.lower())
+    if part is None:
+        return cameras
+    return cameras[:half] if part == 0 else cameras[half:]
+
+
 class Store:
-    def __init__(self, name: str, prefill: Path | None):
+    def __init__(self, name: str, prefill: Path | None, cameras: str | None = None):
         ensure_images()
         self.name = name
         self.planogram = load_planogram()
+        self.cameras = assigned_cameras(name, sorted(self.planogram), cameras)
         self.frames = list_frames(self.planogram)
         self.silver = read_silver()
         if prefill:
@@ -175,6 +196,7 @@ class Store:
                     "areas": [dict(a, state=self.area_state(cam, a["area_id"])) for a in areas],
                 }
                 for cam, areas in self.planogram.items()
+                if cam in self.cameras
             ],
         }
 
@@ -347,6 +369,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--name", help="o teu nome (cada pessoa tem o seu ficheiro)")
     ap.add_argument("--prefill", type=Path, help="JSON no formato oficial para pré-preencher (em vez do silver)")
+    ap.add_argument("--cameras", help="ex.: 6215,6371 ou 'all' (por defeito: a tua metade, ver TEAM)")
     ap.add_argument("--port", type=int, default=8765)
     ap.add_argument("--merge", nargs="+", metavar="NOME", help="junta labels/<nome>.json de várias pessoas")
     ap.add_argument("--apply", nargs="+", metavar="NOME", help="escreve as áreas revistas em labels/silver_labels.txt")
@@ -358,8 +381,10 @@ def main():
         return apply(args.apply)
     if not args.name:
         ap.error("--name é obrigatório")
-    store = Store(args.name, args.prefill)
+    store = Store(args.name, args.prefill, args.cameras)
     print(store.export())
+    n_areas = sum(len(store.planogram[c]) for c in store.cameras)
+    print(f"{args.name}: {len(store.cameras)} câmaras ({', '.join(store.cameras)}), {n_areas} áreas")
     print(f"pré-preenchido com: {store.prefill_source}")
     print(f"abre http://localhost:{args.port}  (Ctrl+C para sair; tudo é guardado a cada tecla)", flush=True)
     ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(store)).serve_forever()
