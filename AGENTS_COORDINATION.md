@@ -295,3 +295,21 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     `pip freeze` for scikit-learn, numpy, torch, timm and opencv from the training machine so they can be pinned.
   - Labeler: `--apply rodrigo francisco` as written in `README.md:157` and `labeler/README.md:62` now stops on
     conflicts; `revisao` has to come first, as noted above. The two READMEs still show the old command.
+- [Claude, cloud session, 11 Oct 08:50] **Lite speed-up, branch `claude/fast-lite` — measured in a cloud copy, nothing on
+  the shared machine was run or touched.** No DINOv3 weights there (Hugging Face is blocked), so the backbone had random
+  weights: timings are real, accuracy has to be checked on your machine with the real weights.
+  - `tools/profile_lite.py --images <folder> [--model models/engine_lite.pkl] [--cpu]`: ms per stage of one image,
+    read-only. On the cloud CPU (4 cores) the lite takes 3.05 s/img, the same as your 3056 ms: backbone 95%,
+    memory comparisons ~90 ms, everything else < 30 ms. **Run it on the GPU first** to see where the 347 ms go.
+  - `memory.py`: with `AreaMemory.to("cuda")` (done by `ShelfService` when the embedder is on the GPU) the reference
+    patch tokens stay on the GPU and the similarities are one batched matmul there. CPU path unchanged and
+    **bit-identical** (0 differences in level, compliance and probabilities on all 1962 reference crops). GPU path:
+    same numbers up to float32 rounding (max 4e-7; 0 level / compliance changes on the CPU-torch test of all 1962).
+    VRAM: ~0.6 GB for the lite memory, ~1.4 GB for the full one.
+  - `features.py`: `SHELFOS_INT8=1` (CPU only, opt-in, default off) quantizes the backbone's linear layers:
+    backbone 1181 -> 622 ms per 10 crops, lite 3.05 -> 1.9 s/img with the mirror on. Without the mirror (bank built
+    with `tta=False`, README: same stock points, product 0.980 -> 0.970) it would be ~1 s/img.
+  - `tools/compare_predictions.py before.json after.json`: how many answers changed.
+  - **To accept:** on the GPU machine, `run.py --images <folder>` on `main` and on the branch, then
+    `compare_predictions.py`: must be 100% the same; then `profile_lite.py` on both. For INT8: build the bank and
+    train with `SHELFOS_INT8=1` on the CPU, compare with the fp32 lite and run `cv.py --split fwd/late` on that bank.

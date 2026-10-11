@@ -7,6 +7,7 @@ shelf has changed without having to know the product, the crate or the liner.
 from __future__ import annotations
 
 import numpy as np
+import torch
 
 N_BASE = 11
 N_CHANGE = 7
@@ -49,6 +50,34 @@ class AreaMemory:
             self.P = np.concatenate([self.project(patches[i : i + 256]) for i in range(0, len(patches), 256)])
         else:
             self.P = patches.astype(np.float16)  # L2-normalised patch tokens [N, 196, D]
+
+    def __getstate__(self):
+        return {k: v for k, v in self.__dict__.items() if k != "_tP"}  # the tensor copy is rebuilt on demand
+
+    def to(self, device) -> "AreaMemory":
+        """Compare patches on this torch device ('cuda' keeps the memory's patch tokens on the GPU)."""
+        self.device = str(device)
+        self.__dict__.pop("_tP", None)
+        return self
+
+    def _tokens(self) -> torch.Tensor:
+        """self.P as a tensor on self.device, built once (and again after remember/forget)."""
+        cached = self.__dict__.get("_tP")
+        if cached is None or cached[0] is not self.P:
+            dev = getattr(self, "device", "cpu")
+            cached = self._tP = (self.P, torch.from_numpy(np.ascontiguousarray(self.P)).to(dev))
+        return cached[1]
+
+    def _sims(self, Pq: np.ndarray, rows) -> np.ndarray:
+        """Cosine similarity of aligned patches, [k, P, D] queries x memory rows -> [k, len(rows), P] (float32).
+        On the CPU this is the original einsum on float32 copies. With .to("cuda") the memory's tokens stay
+        on the GPU and this is one batched matmul there (same numbers up to float32 rounding, about 4e-7)."""
+        if getattr(self, "device", "cpu") == "cpu":
+            return np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[rows], np.float32))
+        T = self._tokens()
+        q = torch.from_numpy(np.ascontiguousarray(Pq, np.float32)).to(T.device)
+        r = T[torch.as_tensor(np.array(rows, np.int64), device=T.device)].float()
+        return torch.bmm(q.transpose(0, 1), r.permute(1, 2, 0)).permute(1, 2, 0).cpu().numpy()
 
     def project(self, patches) -> np.ndarray:
         """Patch tokens in the space the memory compares them in (unit length)."""
@@ -142,8 +171,9 @@ class AreaMemory:
             js = prev[np.argsort(self.t[prev])][-CHANGE_REFS:][::-1]
             ws = np.array([2.0, 1.0][: len(js)])
             ws /= ws.sum()
-            for w, j in zip(ws, js):
-                sim = np.einsum("pd,pd->p", Pq[i], np.asarray(self.P[j], np.float32))[_INNER]
+            sims = self._sims(Pq[i : i + 1], js)[0]
+            for w, j, sim in zip(ws, js, sims):
+                sim = sim[_INNER]
                 same = float((sim > CHANGE_SIM).mean())
                 out[i, 0] += w * same
                 out[i, 1] += w * float(sim.mean())
@@ -173,7 +203,7 @@ class AreaMemory:
                 is_self[:] = False
             w = (~is_self).astype(np.float32)
             mu = (w @ self.X[ref]) / w.sum(1, keepdims=True)
-            sims = np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[ref], np.float32))
+            sims = self._sims(Pq, ref)
             sims[is_self] = -1
             sim_full = sims.max(1)
             out[q, 0] = sim_full.mean(1)
@@ -183,7 +213,7 @@ class AreaMemory:
             emp_self = self_row[q][:, None] == emp[None, :]
             sim_emp = None
             if len(emp) >= 2 or (len(emp) == 1 and not emp_self.any()):
-                se = np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[emp], np.float32))
+                se = self._sims(Pq, emp)
                 se[emp_self] = -1
                 sim_emp = se.max(1)
                 out[q, 4] = sim_emp.mean(1)
@@ -199,7 +229,7 @@ class AreaMemory:
             rest = pool[~np.isin(pool, ref) & ~np.isin(pool, emp)]
             best = sim_full if sim_emp is None else np.maximum(sim_full, sim_emp)
             if len(rest):
-                sr = np.einsum("kpd,rpd->krp", Pq, np.asarray(self.P[rest], np.float32))
+                sr = self._sims(Pq, rest)
                 sr[self_row[q][:, None] == rest[None, :]] = -1
                 best = np.maximum(best, sr.max(1))
             out[q, NOVEL] = (best[:, _INNER] < NOVEL_SIM).mean(1)

@@ -61,6 +61,8 @@ class ShelfService:
         self.engine.empty_compliant = empty_compliant
         self.embedder = Embedder(self.engine.model_name or MODEL_NAME, device=device, size=self.engine.crop_size, tta=getattr(self.engine, "tta", False))
         self.embedder.warmup()
+        if self.embedder.device != "cpu":  # compare patches with the reference day on the GPU too
+            self.engine.memory.to(self.embedder.device)
         fh, fw = self.engine.frame_size[1], self.engine.frame_size[0]
         self.hidden = {cam: [i for i, a in enumerate(areas) if a.visible_fraction((fh, fw)) < MIN_VISIBLE] for cam, areas in self.areas.items()}
         self.reference_images = Path(reference_images)
