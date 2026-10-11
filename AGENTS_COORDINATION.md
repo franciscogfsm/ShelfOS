@@ -147,6 +147,12 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
 ## Running now
 - Nothing heavy until the advisor page submits. `outputs/build_decisoes.py` on http://127.0.0.1:8777 shows only the end-of-day photos where the hidden-fold model disagrees with the label, so an answer changes what the model learns. When every photo has an answer, that page writes `labels/silver_labels.txt` and trains `engine_lite.pkl` and `engine.pkl` by itself (about 3 minutes). Do not start another train or cv while that request runs.
 - After that train, restart the :8000 backend. `ShelfService` reads the model once at start.
+- [Opus, 11 Oct 09:45] State found this morning: the advisor page submitted once at 23:21 on 10 Oct (one photo,
+  6215_2 t11 H -> E; both models retrained 23:22-23:24); nothing listens on :8777 or :8000 now.
+  **Experiments running, one process at a time, scripts and outputs in my scratchpad, no production file touched:**
+  (1) cv late+fwd on `bank_tta` / `bank.npz` with the 23:21 labels, plus blob-count features from the occupancy map;
+  (2) photometric robustness of the late-holdout engine; (3) cheaper backbones / crop sizes (banks kept in scratch).
+  RAM is at 1.7 GB free, so please do not start a train or cv until this line is gone.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
