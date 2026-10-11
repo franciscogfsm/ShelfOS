@@ -124,6 +124,37 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
         except CountError as e:
             raise HTTPException(502, str(e))
 
+    @app.post('/api/ripeness')
+    async def ripeness(request: Request):
+        from .ripeness import assess_bananas, is_banana
+        from .counting import CountError
+        from .engine import official
+        try:
+            body = await request.json()
+            camera, file, area_id = (str(body[k]) for k in ('camera', 'file', 'area'))
+        except (ValueError, KeyError, TypeError):
+            raise HTTPException(400, 'Send {"camera","file","area"}.')
+        area = next((a for a in service.areas.get(camera, []) if a.area_id == area_id), None)
+        path = service.frame_path(camera, file)
+        if area is None or path is None:
+            raise HTTPException(404, 'No such area or frame.')
+        if not is_banana(area.product_name):
+            raise HTTPException(422, 'Visual ripeness is available for bananas only.')
+        with service.lock:
+            prediction = service.run.get(camera, {}).get(Path(file).name, {}).get('areas', {}).get(area_id)
+        prediction = prediction or service.reference.get(camera, {}).get(Path(file).name, {}).get(area_id)
+        if prediction:
+            output = official(prediction, service.empty_compliant)
+            if not output['planogram_compliant'] and output['stock_level'] != 'empty':
+                raise HTTPException(409, 'This slot holds another product; banana ripeness cannot be assessed.')
+        key = config('OPENROUTER_API_KEY')
+        if not key:
+            raise HTTPException(503, 'Set OPENROUTER_API_KEY to enable the visual check.')
+        try:
+            return await asyncio.to_thread(assess_bananas, path, area, key)
+        except CountError as e:
+            raise HTTPException(502, str(e))
+
     @app.post("/api/analyze")
     async def analyze(files: list[UploadFile] = File(...), paths: list[str] = Form(default=[])):
         items = []

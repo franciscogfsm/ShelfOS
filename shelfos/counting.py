@@ -4,16 +4,20 @@ Separate from the engine on purpose: no GPU, nothing here is imported by the pre
 nothing here reaches predictions.json. It answers "how many units can the camera see", never "how
 many are there": units under the top layer are not visible and are not guessed.
 
-Only product groups that passed the hand-count test (tools/count_eval.py, pass mark in Plano.md)
-are counted. SHELFOS_COUNT_GROUPS=large,pack (env or .env) enables groups for trying them out.
+By default only product groups that passed the hand-count test (tools/count_eval.py, pass mark in
+Plano.md) are counted. SHELFOS_COUNT_GROUPS=large,pack enables groups for trying them out;
+SHELFOS_COUNT_GROUPS=all opts every product, including bulk produce, into experimental counting.
+The vision model may still decline when individual units cannot be distinguished.
 """
 import base64
+import hashlib
 import json
 import re
 import threading
 import time
 import urllib.error
 import urllib.request
+from concurrent.futures import Future
 from pathlib import Path
 
 import cv2
@@ -42,10 +46,16 @@ UNIT = {"pack": "pack", "bunch": "bunch", "large": "item", "medium": "item"}
 _UNIT_TEXT = {"pack": "sealed pack, bag, net or punnet", "bunch": "bunch (a hand of bananas, or a vine of tomatoes)", "item": "single fruit or vegetable"}
 
 _lock = threading.Lock()
+_inflight: dict[str, Future] = {}
+_memory_cache: dict[str, tuple[tuple[int, int], dict]] = {}
 
 
 class CountError(Exception):
     """A count that could not be made; the message is shown to staff as is."""
+
+
+class ModelResponseError(CountError):
+    """Malformed or incomplete model response; callers may retry with a larger budget."""
 
 
 def group_of(product_name: str) -> str | None:
@@ -70,6 +80,8 @@ def enabled_groups() -> frozenset[str]:
 def countable(product_name: str) -> str | None:
     """The group of a product if counting is switched on for it, else None."""
     g = group_of(product_name)
+    if "all" in enabled_groups():
+        return g or "medium"  # experimental bulk counting: the model may still decline an ambiguous image
     return g if g in enabled_groups() else None
 
 
@@ -160,10 +172,13 @@ def prompt_for(product_name: str, unit: str) -> str:
     )
 
 
-def ask_model(jpeg: bytes, prompt: str, key: str, model: str) -> dict:
+def ask_model(jpeg: bytes, prompt: str, key: str, model: str, *, max_tokens: int = 4000, reasoning: dict | None = None) -> dict:
     image = "data:image/jpeg;base64," + base64.b64encode(jpeg).decode("ascii")
-    body = dict(model=model, temperature=0, max_tokens=4000, response_format={"type": "json_object"},
+    body = dict(model=model, temperature=0, max_tokens=max_tokens, response_format={"type": "json_object"},
+                provider={"sort": "latency"},
                 messages=[dict(role="user", content=[dict(type="text", text=prompt), dict(type="image_url", image_url=dict(url=image))])])
+    if reasoning is not None:
+        body['reasoning'] = reasoning
     request = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode("utf-8"),
                                      headers={"Authorization": "Bearer " + key, "Content-Type": "application/json", "X-OpenRouter-Title": "ShelfOS"})
     try:
@@ -176,32 +191,79 @@ def ask_model(jpeg: bytes, prompt: str, key: str, model: str) -> dict:
         raise CountError("Could not reach OpenRouter. Please try again.") from e
     try:
         text = reply["choices"][0]["message"]["content"]
+        if isinstance(text, list):
+            text = ''.join(part.get('text', '') for part in text if isinstance(part, dict) and part.get('type') == 'text')
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError('Empty model response')
         text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
-        out = json.loads(text)
+        try:
+            out = json.loads(text)
+        except ValueError:
+            # Some providers wrap a complete JSON object in a short preamble or a code block.
+            out, _ = json.JSONDecoder().raw_decode(text[text.index('{'):])
         if not isinstance(out, dict) or not isinstance(out.get("items", []), list):
             raise ValueError
         return out
     except (KeyError, IndexError, TypeError, ValueError) as e:
-        raise CountError("The vision model gave an answer ShelfOS could not read. Please retry.") from e
+        raise ModelResponseError("The vision model gave an answer ShelfOS could not read. Please retry.") from e
 
 
 # ---- cache + entry point -------------------------------------------------------------------
 def _cache_read(path: Path) -> dict:
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        stamp = (path.stat().st_mtime_ns, path.stat().st_size)
+        name = str(path.resolve())
+        if name in _memory_cache and _memory_cache[name][0] == stamp:
+            return _memory_cache[name][1]
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            return {}
+        _memory_cache[name] = (stamp, data)
+        return data
     except (OSError, ValueError):
         return {}
 
 
 def count_area(image_path: str | Path, camera: str, file: str, area, key: str, model: str | None = None,
                cache_path: Path | None = CACHE_PATH) -> dict:
-    """Count the visible units of `area` (a planogram Area) in one frame. Cached per frame, area, model and prompt."""
+    """Reuse exact-image results and share simultaneous requests for the same slot."""
+    model = model or config("OPENROUTER_COUNT_MODEL", config("OPENROUTER_MODEL", DEFAULT_MODEL))
+    path = Path(image_path)
+    try:
+        stat = path.stat()
+    except OSError as e:
+        raise CountError("The image could not be read.") from e
+    identity = [str(path.resolve()), stat.st_mtime_ns, stat.st_size, area.product_name,
+                np.asarray(area.quad).tolist()]
+    fingerprint = hashlib.sha256(json.dumps(identity).encode()).hexdigest()[:24]
+    ck = f"{camera}/{Path(file).name}/{area.area_id}/{model}/{PROMPT_VERSION}/{fingerprint}"
+    flight_key = ck + '/' + (str(cache_path.resolve()) if cache_path is not None else 'uncached')
+    with _lock:
+        existing = _inflight.get(flight_key)
+        if existing is None:
+            future = Future()
+            _inflight[flight_key] = future
+    if existing is not None:
+        return dict(existing.result())
+    try:
+        result = _count_area(path, area, key, model, cache_path, ck)
+        future.set_result(result)
+        return result
+    except BaseException as e:
+        future.set_exception(e)
+        raise
+    finally:
+        with _lock:
+            _inflight.pop(flight_key, None)
+
+
+def _count_area(image_path: Path, area, key: str, model: str, cache_path: Path | None, ck: str) -> dict:
     group = group_of(area.product_name)
+    if group is None and "all" in enabled_groups():
+        group = "medium"
     if group is None:
         raise CountError("Sold loose in bulk: single units cannot be told apart from the camera.")
     unit = UNIT[group]
-    model = model or config("OPENROUTER_COUNT_MODEL", config("OPENROUTER_MODEL", DEFAULT_MODEL))
-    ck = f"{camera}/{Path(file).name}/{area.area_id}/{model}/{PROMPT_VERSION}"
     if cache_path is not None:
         with _lock:
             hit = _cache_read(cache_path).get(ck)
@@ -229,5 +291,9 @@ def count_area(image_path: str | Path, camera: str, file: str, area, key: str, m
             cache = _cache_read(cache_path)
             cache[ck] = result
             cache_path.parent.mkdir(parents=True, exist_ok=True)
-            cache_path.write_text(json.dumps(cache), encoding="utf-8")
+            temporary = cache_path.with_suffix(cache_path.suffix + '.tmp')
+            temporary.write_text(json.dumps(cache), encoding="utf-8")
+            temporary.replace(cache_path)
+            stat = cache_path.stat()
+            _memory_cache[str(cache_path.resolve())] = ((stat.st_mtime_ns, stat.st_size), cache)
     return {**result, "cached": False}

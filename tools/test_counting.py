@@ -3,6 +3,9 @@ import io
 import json
 import tempfile
 import unittest
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -10,7 +13,7 @@ from unittest.mock import patch
 import cv2
 import numpy as np
 
-from shelfos.counting import CountError, clean_boxes, count_area, crop_for, group_of
+from shelfos.counting import CountError, ModelResponseError, ask_model, clean_boxes, count_area, countable, crop_for, group_of
 
 QUAD = np.array([[100, 100], [300, 100], [300, 200], [100, 200]], np.float32)
 AREA = SimpleNamespace(area_id='c_1', product_id='1', product_name='TOMATE REDONDO CNT KG', quad=QUAD)
@@ -21,6 +24,60 @@ def reply(payload):
 
 
 class CountingTests(unittest.TestCase):
+    def test_wrapped_json_and_empty_response(self):
+        for content in ['Here is the result:\n```json\n{"state":"ripe"}\n```',
+                        [{'type': 'text', 'text': '{"state":"ripe"}'}]]:
+            response = io.BytesIO(json.dumps({'choices': [{'message': {'content': content}}]}).encode())
+            with patch('urllib.request.urlopen', return_value=response):
+                self.assertEqual(ask_model(b'image', 'prompt', 'k', 'm')['state'], 'ripe')
+        response = io.BytesIO(json.dumps({'choices': [{'message': {'content': None}}]}).encode())
+        with patch('urllib.request.urlopen', return_value=response), self.assertRaises(ModelResponseError):
+            ask_model(b'image', 'prompt', 'k', 'm')
+
+    def test_parallel_requests_share_one_call_and_changed_image_recounts(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / 'f.jpg'
+            cv2.imwrite(str(path), np.full((720, 1280, 3), 200, np.uint8))
+            cache = Path(d) / 'counts.json'
+            barrier = threading.Barrier(6)
+            def ask(*args):
+                time.sleep(.1)
+                return {'items': [], 'countable': True}
+            def run(_):
+                barrier.wait()
+                return count_area(path, 'c', 'f.jpg', AREA, 'k', 'm', cache_path=cache)
+            with patch('shelfos.counting.ask_model', side_effect=ask) as model:
+                with ThreadPoolExecutor(max_workers=6) as pool:
+                    results = list(pool.map(run, range(6)))
+                self.assertEqual(model.call_count, 1)
+                self.assertTrue(all(r['count'] == 0 for r in results))
+                with patch('pathlib.Path.read_text', side_effect=AssertionError('warm cache should not read disk')):
+                    self.assertTrue(count_area(path, 'c', 'f.jpg', AREA, 'k', 'm', cache_path=cache)['cached'])
+                cv2.imwrite(str(path), np.full((720, 1280, 3), 120, np.uint8))
+                self.assertFalse(count_area(path, 'c', 'f.jpg', AREA, 'k', 'm', cache_path=cache)['cached'])
+                self.assertEqual(model.call_count, 2)
+
+    def test_failed_request_can_be_retried(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / 'f.jpg'
+            cv2.imwrite(str(path), np.full((720, 1280, 3), 200, np.uint8))
+            with patch('shelfos.counting.ask_model', side_effect=[CountError('offline'), {'items': []}]):
+                with self.assertRaises(CountError):
+                    count_area(path, 'c', 'f.jpg', AREA, 'k', 'm', cache_path=None)
+                self.assertEqual(count_area(path, 'c', 'f.jpg', AREA, 'k', 'm', cache_path=None)['count'], 0)
+
+    def test_all_products_opt_in(self):
+        with patch('shelfos.counting.enabled_groups', return_value=frozenset({'all'})):
+            self.assertEqual(countable('BANANA CAT I CNT KG'), 'bunch')
+            self.assertEqual(countable('FEIJÃO VERDE CNT KG'), 'medium')
+            with tempfile.TemporaryDirectory() as d:
+                path = Path(d) / 'f.jpg'
+                cv2.imwrite(str(path), np.full((720, 1280, 3), 200, np.uint8))
+                bulk = SimpleNamespace(**{**AREA.__dict__, 'product_name': 'FEIJÃO VERDE CNT KG'})
+                with patch('shelfos.counting.ask_model', return_value={'items': [], 'countable': True}):
+                    result = count_area(path, 'c', 'f.jpg', bulk, 'k', 'm', cache_path=None)
+                self.assertEqual(result['unit'], 'item')
+
     def test_groups(self):
         self.assertEqual(group_of('MACA FUJI CNT CAL. 73/85 KG IMP'), 'medium')  # a calibre, not a pack
         self.assertEqual(group_of('TOMATE CHERRY VERMELHO CNT 250GR'), 'pack')
@@ -71,7 +128,7 @@ class CountingTests(unittest.TestCase):
             self.assertEqual((first['count'], first['cached'], second['cached']), (1, False, True))
             self.assertNotIn('private-key', req.call_args.args[0].data.decode())
             bulk = SimpleNamespace(**{**AREA.__dict__, 'product_name': 'FEIJÃO VERDE CNT KG'})
-            with self.assertRaises(CountError):
+            with patch('shelfos.counting.enabled_groups', return_value=frozenset()), self.assertRaises(CountError):
                 count_area(path, 'c', 'f.jpg', bulk, 'k', 'm', cache_path=None)
 
     def test_unreadable_answer_and_not_countable(self):

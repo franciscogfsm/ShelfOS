@@ -95,6 +95,26 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   - train new / truth old: late +0.602 (b11 a22) 79.1%, fwd +0.753 (b28 a54) 85.6%
   - So the retrain is worth +2.1 pp on late if the new labels are right and costs 0.2 pp if the old ones were.
     OOF saved as `cache/oof_tta_labelsold.npz` / `cache/oof_tta_labelsnew.npz`. bank_bl not run (2 GB RAM free).
+- [Opus 22:40] **Labels are final as of 21:37: the user looked at my remaining proposals and declined all of them.**
+  Shown on a local page with crops: empty -> half for 6215_4 t6,10,11, 6591_6 t11,12, 6215_8 t7, 6491_7 t11;
+  full -> half for 6591_5 t12, 6591_2 t12, 6443_9 t10,11, 6491_8 t12. Answer: none. Nothing was changed, no
+  retrain. Do not propose these again. (For the record, on the late fold the engine trained without the last two
+  photos disagrees with our label on 15 of 152 last-photo areas; list from `cache/oof_tta_labelsnew.npz`.)
+- [Opus 22:55] Looked at all 25 late-fold stock disagreements (279 of 304 agree; fwd 1146 of 1216; lite features,
+  new labels). 17 sit on the half/full line with a quarter to a third missing (label F / model H: 6215_10 x2,
+  6443_9 x2, 6491_8, 6591_2, 6591_5, 6591_9; label H / model F: 6215_7 x2, 6373_11 x2, 6376_8, 6376_15, 6594_4,
+  6383_5, 6386_5). 5 sit on the empty/half line (6591_6 x2, 6491_7, 6215_2, 6215_8). 3 are clear misses:
+  6376_3 emptied, 6376_16 restocked, 6468_8 hidden by a pineapple leaf, all answered half. Our labels are not
+  consistent on those lines (pear tray 6373_11 = H and peach tray 6491_8 = F with about the same missing; one
+  banana bunch in 6215_8 = H at 12:59 and E at 14:08), so the late number cannot reach 100% by model changes.
+- [Opus 22:53] The user wants the labels to follow the team's own table (`labeler/README.md`: under ~25% occupied
+  empty, 25-75% half, over 75% full; "a pile with 4 or 5 pieces left is empty"), not "sellable = half". I looked at
+  about 55 candidate crops and put the 20 that break the table on a local page for the user to decide: full -> half
+  6591_5 t12, 6591_2 t12, 6443_9 t10,11, 6491_8 t12, 6383_1 t10, 6468_3 t0,1; half -> empty 6383_9 t12, 6462_9 t12
+  (both moved the other way at 21:37), 6591_5 t3; and the nine one-bunch banana photos of 6215_2/_4/_8/_9, which
+  are mixed today and where the table (empty) and the brief's example (6215_2 = half at 20:24) disagree.
+  **Nothing is applied yet.** When the user exports, I apply through `labeler/app.py --apply revisao`, retrain both
+  models and restart the backend, as the user asked. Until then the 21:40 models and the 21:37 labels stand.
 
 - [Claude, Francisco's session, branch `audit-fixes`, 11 Oct 00:55] **Code audit, fixes on a branch for a pull request,
   at the user's explicit request. Nothing is on `main`.** `engine.py`, rects, `models/`, labels, `cv.py`, `lab.py` and
@@ -125,9 +145,8 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     from 10 Oct 19:58: no Count units, `/colaboradores` is a 404) and restart the backend.
 
 ## Running now
-- Opus: app backend on :8000 restarted 21:51 at the user's request (pid 7316, `python -u run.py --no-browser`,
-  log in my scratchpad). It holds the models retrained at 21:40. Leave it running; restart it after any retrain.
-  Nothing else of mine is running.
+- Nothing heavy until the advisor page submits. `outputs/build_decisoes.py` on http://127.0.0.1:8777 shows only the end-of-day photos where the hidden-fold model disagrees with the label, so an answer changes what the model learns. When every photo has an answer, that page writes `labels/silver_labels.txt` and trains `engine_lite.pkl` and `engine.pkl` by itself (about 3 minutes). Do not start another train or cv while that request runs.
+- After that train, restart the :8000 backend. `ShelfService` reads the model once at start.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
@@ -247,6 +266,12 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   (`/api/count/policy`, `/api/count`, imported lazily). No GPU, no change to engine/predict/service, nothing
   reaches predictions.json. Off by default: product groups are enabled only after `tools/count_eval.py` passes
   on hand counts (`labels/unit_counts.txt`, new file, not silver labels). Please review `server.py` before merging to main.
+`n- [Codex] Backend :8000 restarted for merged count-units routes (pid 38616, python -u run.py --no-browser). Logs: runs/count-backend.stdout.log / stderr.log. Counting policy configured, 16 large products enabled experimentally via .env; no counting API requests made. Static web/out refreshed with visible counting availability explanations.
+- [Codex] At user request, SHELFOS_COUNT_GROUPS=all enables experimental counting for every product, including bunches and bulk produce. Backend :8000 now pid 26132 (python -u run.py --no-browser), logs runs/count-all-backend.stdout.log / stderr.log. Seven counting tests pass; static UI rebuilt. Wrong-product areas remain excluded; model may decline indistinguishable units. No external count requests made.
+- [Codex] Counting speed: memory-backed disk cache, exact source/geometry cache invalidation, same-area requests share one in-flight call, OpenRouter latency routing, precount --workers 1-4 (default 3). Nine tests pass. Backend now pid 22252; logs runs/count-fast-backend.stdout.log / stderr.log. No external count calls or model/label changes.
+- [Codex] Added optional visual banana-ripeness check in shelfos/ripeness.py and POST /api/ripeness, isolated from stock/official output. Uses cropped snapshot via OpenRouter, cautious appearance states, review advice, separate runs/ripeness.json cache, max 500 output tokens. Twelve tests and web build pass. Backend :8000 now pid 19932, logs runs/ripeness-backend.stdout.log / stderr.log.
+- [Codex] Banana ripeness v3 follows an estimated strict majority (>50%) of individually visible bananas; a minority does not force mixed. Example real 6468_12 latest: 6 green / 1 ripe -> Mostly green (2094 ms). 15 tests and build pass. Backend :8000 pid 41024, logs runs/ripeness-majority-backend.stdout.log / stderr.log. Stock engine/labels unchanged.
+- [Codex] Ripeness v4 assesses main peel body, ignoring isolated green tips/stems and isolated bruises. Real checks: 6215_4 at 11:49 -> Mostly ripe (10 ripe / 1 turning, 1904 ms); 6468_12 latest remains Mostly green (6 green / 1 turning). 15 tests pass. Backend :8000 pid 42760, logs runs/ripeness-v4-backend.stdout.log / stderr.log. No engine/stock/labels changes.
 - [Claude, Francisco's session, 11 Oct 00:55] From a read-only audit; nothing was run, none of these files was
   touched. For Fable to decide:
   - Memory time: `AreaMemory.t` is the frame index (`bank.py:25-28`, `engine.py:134`) but `t_query` is a Unix time

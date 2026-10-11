@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
-import { CountPolicy, UnitCount, countArea, countPolicy } from "./api";
+import { CountPolicy, UnitCount, RipenessResult, countArea, countPolicy, checkRipeness } from "./api";
 import { paceOf } from "./forecast";
 import { ACCENT, AreaDef, Camera, Frame, ISSUES, ORDER, STATUS, Status, Store, bbox, centroid, clock, duration, frameAt, frameSrc, points, productName, since, statusOf } from "./lib";
 
@@ -120,9 +120,6 @@ export function CameraStage({
           </span>
         ))}
       </div>
-      {!!frame.warnings?.length && (
-        <div className="glass-chip absolute right-3 bottom-3 max-w-[60%] text-low">⚠ {frame.warnings.join(" · ")}</div>
-      )}
     </div>
     {at && children && (
       <div className="area-slot" data-side={1 - x1 >= x0 ? "right" : "left"} style={{ "--x0": x0, "--x1": x1, "--cy": (at.y + at.h / 2) / store.height } as React.CSSProperties}>
@@ -352,9 +349,14 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
         <span className="text-[10px] uppercase tracking-[0.14em] text-muted">
           Camera {cam.id} · slot {area.id.split("_")[1]}
         </span>
+        <div className="flex items-center gap-3">
+        {store.live && /banana/i.test(area.rawName) && (
+          <BananaRipeness key={`${area.id}/${frame.file}`} camera={cam.id} frame={frame.file} area={area.id} available={!!policy?.configured && s !== "wrong"} />
+        )}
         <button onClick={onClose} aria-label="Close" title="Back to all areas (Esc)" className="-mr-2 size-8 grid place-items-center rounded-full text-muted hover:text-white hover:bg-raised">
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><path d="m1.5 1.5 8 8m0-8-8 8" /></svg>
         </button>
+        </div>
       </div>
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
@@ -417,10 +419,19 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
             {showMap ? "Hide" : "Show"} what ShelfOS sees as product
           </button>
         )}
-        {store.live && policy?.configured && s !== "wrong" && (
+        {store.live && (
           <div className="col-span-2 text-[11px]">
-            {!unit ? (
-              <p className="text-muted">Not countable from this camera.</p>
+            {!policy?.configured || !unit || s === "wrong" ? (
+              <div>
+                <button disabled className="w-full rounded-md border border-line px-2.5 py-1.5 text-muted opacity-60">Count units</button>
+                <p className="mt-1 text-muted">
+                  {!policy ? "Counting is unavailable. Restart the updated backend and reload."
+                    : !policy.configured ? "Add OPENROUTER_API_KEY to the server .env to enable counting."
+                    : s === "wrong" ? "Counting is unavailable when the shelf holds the wrong product."
+                    : /banana|cacho/i.test(area.rawName) ? "Banana bunch counting has not been validated yet."
+                    : "Counting has not been enabled for this product group."}
+                </p>
+              </div>
             ) : tally?.result ? (
               <div>
                 <div className="text-sm font-medium">
@@ -438,6 +449,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
                 <button onClick={count} disabled={tally?.busy} className="w-full rounded-md border border-line px-2.5 py-1.5 text-muted transition-colors hover:text-white disabled:opacity-60">
                   {tally?.busy ? "Counting…" : "Count units"}
                 </button>
+                <p className="mt-1 text-muted">Experimental · visible units only.</p>
                 {tally?.error && <p className="mt-1" style={{ color: STATUS.empty.color }}>{tally.error}</p>}
               </>
             )}
@@ -531,6 +543,41 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
 
 const LEVEL_FILL = { empty: 0.06, half: 0.5, full: 1 };
 
+function BananaRipeness({ camera, frame, area, available }: { camera: string; frame: string; area: string; available: boolean }) {
+  const [result, setResult] = useState<RipenessResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [attempt, setAttempt] = useState(0);
+  const busy = available && !result && !error;
+  useEffect(() => {
+    if (!available) return;
+    let active = true;
+    checkRipeness(camera, frame, area).then(
+      value => { if (active) setResult(value); },
+      e => { if (active) setError(e instanceof Error ? e.message : "Could not assess this image."); },
+    );
+    return () => { active = false; };
+  }, [camera, frame, area, available, attempt]);
+  const check = () => {
+    setResult(null); setError(null); setAttempt(value => value + 1);
+  };
+  const total = Object.values(result?.stage_counts ?? {}).reduce((sum, value) => sum + value, 0);
+  const score = result && !['unclear', 'no_bananas'].includes(result.state) && total > 0
+    ? Math.round((result.stage_counts?.ripe ?? 0) / total * 100) : null;
+  return (
+    <span className="banana-status" aria-busy={busy}>
+      {error ? <button onClick={check} title={error}>Retry ripeness check</button> : (
+        <span role="status" data-state={result?.state} title={result ? `Score = estimated share of visible bananas at the ripe stage, not confidence or food safety. ${result.quality === "limited" ? "Limited visibility. " : ""}${result.action} Check quality in person.` : "Visual banana ripeness check"}>
+          <small className="banana-status-caption">{score !== null ? "Ripe bananas · estimated" : "Banana ripeness"}</small>
+          <span className="banana-status-line">
+            <span>{result?.label ?? (busy ? "Checking…" : "Unavailable")}</span>
+            {score !== null && <strong>{score}<small>/100</small></strong>}
+          </span>
+        </span>
+      )}
+    </span>
+  );
+}
+
 /** Every planogram area of one camera image, worst first: the way in when nothing is selected. */
 export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; onSelect: (id: string) => void }) {
   const rows = cam.areas
@@ -549,15 +596,17 @@ export function AreaList({ cam, frame, onSelect }: { cam: Camera; frame: Frame; 
         </div>
         <div className="plan-legend">
           {ORDER.filter((s) => counts[s] > 0).map((s) => (
-            <span key={s} style={{ color: STATUS[s].color }}>{counts[s]} {STATUS[s].label}</span>
+            <span key={s}><i style={{ background: STATUS[s].color }} />{counts[s]} {STATUS[s].label}</span>
           ))}
         </div>
       </header>
       <div className="plan-list">
         {rows.map(({ a, s }) => (
           <button key={a.id} type="button" onClick={() => onSelect(a.id)} className="plan-row" style={{ "--tone": STATUS[s].color } as React.CSSProperties}>
-            <strong>{a.product}</strong>
-            <span>slot {a.id.split("_")[1]}<em>{STATUS[s].label}</em></span>
+            <i className="plan-dot" aria-hidden="true" />
+            <span className="plan-product"><strong>{a.product}</strong><small>Slot {a.id.split("_")[1]}</small></span>
+            <span className="plan-state">{STATUS[s].label}</span>
+            <svg className="plan-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
           </button>
         ))}
       </div>
