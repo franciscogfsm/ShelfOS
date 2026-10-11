@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { apiBase } from "./api";
+import { apiBase, STATIC_DEMO } from "./api";
 import { clock, frameAt, statusOf, STATUS, Status, Store } from "./lib";
 import { ProductImage } from "./product-image";
 
@@ -75,6 +75,7 @@ export function ShelfAssistant({ store, timestamp, camera, area, completed, onAr
     const abort = new AbortController();
     let retry: ReturnType<typeof setTimeout>;
     const check = async () => {
+      if (STATIC_DEMO) { setConnection("offline"); return; }
       try {
         const r = await fetch(`${store.base || apiBase()}/api/assistant`, { signal: AbortSignal.any([abort.signal, AbortSignal.timeout(3500)]), cache: "no-store" });
         if (!r.ok) throw Error();

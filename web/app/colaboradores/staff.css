@@ -35,7 +35,7 @@
 .staff-tabs .nav-item { flex:1; flex-direction:row; font-size:13px; padding-inline:10px; min-height:42px; }
 .staff-next { padding:18px; animation:card-in 520ms var(--ease-out) both; }
 .staff-product h2 { font-weight:600; letter-spacing:-.04em; }
-.staff-map { margin-top:14px; padding:18px; }
+.staff-map { margin-top:14px; padding:18px; overflow:hidden; }
 .staff-map-heading { padding-top:0; align-items:center; }
 .staff-map-heading h2 { font-size:18px; }
 .staff-map-demo { gap:5px; padding:7px 10px; font-size:9px; }
@@ -58,7 +58,7 @@
 .staff-app button:focus-visible,.staff-app a:focus-visible { outline-color:var(--muted); }
 
 /* Isometric supermarket: lightweight vector geometry, shared neutral palette. */
-.staff-map > .staff-isometric { height:auto; max-height:none; aspect-ratio:4 / 3; margin:12px auto 6px; }
+.staff-map > .staff-isometric { height:auto; max-height:none; aspect-ratio:4 / 3; margin:12px auto 6px; overflow:hidden; }
 .iso-floor { fill:var(--well); stroke:rgb(var(--fg) / calc(.16 * var(--k))); stroke-width:.8; }
 .iso-floor-edge { fill:rgb(var(--fg) / calc(.09 * var(--k))); }
 .iso-section { fill:rgb(var(--fg) / calc(.035 * var(--k))); stroke:rgb(var(--fg) / calc(.08 * var(--k))); stroke-dasharray:3 4; }

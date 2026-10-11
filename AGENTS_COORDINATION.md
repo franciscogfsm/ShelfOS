@@ -145,14 +145,15 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     from 10 Oct 19:58: no Count units, `/colaboradores` is a 404) and restart the backend.
 
 ## Running now
-- Nothing heavy until the advisor page submits. `outputs/build_decisoes.py` on http://127.0.0.1:8777 shows only the end-of-day photos where the hidden-fold model disagrees with the label, so an answer changes what the model learns. When every photo has an answer, that page writes `labels/silver_labels.txt` and trains `engine_lite.pkl` and `engine.pkl` by itself (about 3 minutes). Do not start another train or cv while that request runs.
-- After that train, restart the :8000 backend. `ShelfService` reads the model once at start.
-- [Opus, 11 Oct 09:45] State found this morning: the advisor page submitted once at 23:21 on 10 Oct (one photo,
-  6215_2 t11 H -> E; both models retrained 23:22-23:24); nothing listens on :8777 or :8000 now.
-  **Experiments running, one process at a time, scripts and outputs in my scratchpad, no production file touched:**
-  (1) cv late+fwd on `bank_tta` / `bank.npz` with the 23:21 labels, plus blob-count features from the occupancy map;
-  (2) photometric robustness of the late-holdout engine; (3) cheaper backbones / crop sizes (banks kept in scratch).
-  RAM is at 1.7 GB free, so please do not start a train or cv until this line is gone.
+- Advisor vote applied at 10:56. Two labels changed: `6376_15` t11 half -> full, `6491_8` t12 full -> half. The other six votes matched the label. Backup `labeler/backups/silver_labels-20261011-105638.txt`. Both models retrained (lite 64s, full 169s, 234s total). New calls match those labels. Nothing heavy running.
+- The :8000 backend still has the previous model in memory. Restart it so `ShelfService` loads the new `engine.pkl`.
+- [Opus, 11 Oct 10:45] The two lines above are out of date: the advisor page submitted once at 23:21 on 10 Oct (one
+  photo, 6215_2 t11 H -> E; both models retrained 23:22-23:24) and nothing listens on :8777 or :8000 now.
+  My experiments of this morning are finished (results at the end of "Proposals").
+- [Opus, 11 Oct 10:50] The user wants the single best model decided, not a tie. **Running cv again from my
+  scratchpad, one process at a time** (a second held-out split and a few more feature extractors, banks in scratch);
+  nothing in production is touched. A backend started by another session answers on :8000 since 10:24 (`engine.pkl`).
+  Please hold other train / cv jobs until this line is gone; RAM is at 2.3 GB free.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
@@ -331,3 +332,60 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     by up to 0.44): the quantised features are not the fp32 features. It is only usable with a bank built and a model
     trained under the same setting, and that has not been cross-validated. Speed here: 2.5-3.1 s -> 2.0 s per image
     (14 threads), so about 1.3-1.5x, not 2x.
+- [Opus, 11 Oct 10:45] **Study on the labels of 23:21 (the ones the installed models were trained on). Nothing in
+  production was changed.** Same engine code, same folds, one bank per feature extractor; "vs lite" counts points
+  answer by answer against `bank_tta`. % of max = stock + product. Logs `cache/opus11_*.log`, held-out predictions
+  `cache/oof_opus11_*.npz`; scripts and scratch banks in my scratchpad. These replace the "Measured facts" at the top,
+  which were taken on the labels before 21:37.
+
+  | feature extractor, views of each crop | late (n=304) | fwd (n=1216) | vs lite, late / fwd | GPU ms per image | CPU s per image |
+  |---|---|---|---|---|---|
+  | ViT-B + ViT-L, mirror: `engine.pkl`, shipped | +0.717, 84.9% | +0.797, 87.6% | -1 / +1 | 400-470 | not run |
+  | ViT-B, mirror: `engine_lite.pkl` | +0.720, 85.0% | +0.796, 87.7% | | 142-180 | 2.1-3.7 |
+  | ViT-B, no mirror (`bank.npz`) | +0.661, 82.1% | +0.768, 86.3% | -18 / -34 | | |
+  | ViT-B, 4 views | +0.737, 85.4% | +0.791, 87.8% | +5 / -6 | | |
+  | ViT-B, 160 px crops, mirror | +0.714, 84.7% | +0.782, 87.1% | -2 / -17 | | |
+  | ViT-S, mirror | +0.688, 83.4% | +0.787, 87.5% | -10 / -11 | 165 | 1.3 |
+  | ViT-S, 4 views (crop, mirror, both upside down) | +0.776, 87.8% | +0.804, 88.6% | +17 / +10 | 170-217 | 1.4-1.6 |
+  | ViT-S, 8 views | +0.766, 87.3% | +0.808, 88.8% | +14 / +14 | | |
+
+  "vs lite" is in stock points. Noise: two extractors of the same quality differ by about 15 points on late and 25 on
+  fwd (10-19 and 31-57 answers move, about half each way). Times are per image through `ShelfService` on this laptop on mains power and vary 20% on the GPU
+  and 40% on the CPU from run to run; the ranges are what I saw. The lite row run again with the code now on `main`
+  equals the run before the merge (0 answers, 0 probabilities differ).
+  1. **Full is not better than lite on these labels** (late -1 point, fwd +1) and takes 2.8x the time. On the 96
+     reviewed synthetic edge cases (1136 areas) full is ahead: 46.5% of max, ViT-S 4 views 45.0%, ViT-S mirror 44.9%,
+     lite 44.3%; the difference is the product answer under packaging and shoppers (1084 right against 1064 for lite).
+  2. **ViT-S with 4 views is the best row on both splits and halves the CPU time of lite; on this GPU it is no faster
+     than lite** (four small forward calls: backbone stage 110-137 ms against 98). Checked end to end in a scratch
+     copy of `main`: patch `cache/opus11_tta4.patch` (`features.py` +17 -7, `bank.py`, `train.py`,
+     `tools/build_bank.py`; `git apply --check` passes on `6dc1f57`). With the patch, `engine_lite.pkl` and
+     `engine.pkl` give the same 608 answers and probabilities as without it. A ViT-S 4-view engine built with
+     `build_bank` + `train` passes `tools/selftest.py` (ALL GOOD) and answers the last two photos of every camera
+     under later names like our label in 303 of 304 areas (lite and full: 304).
+  3. **Blob counts from the occupancy map: no effect.** Eight connected-component features at threshold 0.5 move 0 of
+     1520 held-out answers; at three thresholds 4 move, 2 right and 2 wrong. The trees do use them (probabilities
+     change by up to 0.17). Dropped.
+  4. **Robustness** (late-holdout engine; the last two photos altered and answered again; clean = 85.0%).
+     Brightness +-30%, gamma, contrast, colour temperature, saturation, noise, JPEG 40, half resolution: 83.2-86.5%,
+     0 to 8 of 304 answers move. The reference day itself changes 0.8% in brightness from one photo to the next and
+     4-6% over the open day. Blur sigma 2: 18 move. **A shifted camera is the weak point: 4 px moves 11 answers (10
+     down), 8 px 28 (26 down), 16 px 70 (65 down), 63.5%.** Installed lite under later names: 0 stock answers move
+     for light and colour (1-2 product answers at a 15% colour shift); 1 / 4 / 46 for 4 / 8 / 16 px. ViT-S 4 views: 85.0-89.0% for light and colour, 85.7 / 80.9 / 70.2% for the
+     three shifts. On the reference day no camera moved (parts of every frame stay within 0.5 px all day; phase
+     correlation outside the planogram areas, checked on known shifts); in 6373 pieces of furniture sit 3 to 7 px
+     apart at different hours. No change proposed.
+  5. `SHELFOS_INT8`: int8 features have cosine 0.38 (global) and 0.46 (patches) to the fp32 ones for ViT-B, 0.42 and
+     0.52 for ViT-S. Suggest removing the switch.
+  6. Averaging the saved probabilities of two extractors gains at most +19 / +22 points (ViT-S 4 views + ViT-B 4
+     views, 2.5x the cost of lite); a softer or sharper decision (T 0.5 to 3) changes 0 to 5 points. Not proposed.
+
+  **For the user to pick, Fable to apply:**
+  - (a) No new code: ship lite. In `run.py`: `BANK = cache/bank_tta.npz`, `MODEL = models/engine_lite.pkl`,
+    `REFERENCE = models/reference_day_lite.json`, `BACKBONES` = ViT-B alone. Same score on real frames as full, 2.8x
+    less time per image.
+  - (b) ViT-S 4 views: `git apply cache/opus11_tta4.patch`, then
+    `python tools/build_bank.py data/planogram.json data/images cache/bank_s4.npz vit_small_patch16_dinov3.lvd1689m 224 --tta4`
+    (the first run downloads 82 MB into `models/backbone/`) and
+    `python -m shelfos.train --bank cache/bank_s4.npz --out models/engine_s4.pkl --reference models/reference_day_s4.json`;
+    point `run.py` at those; `tools/selftest.py`, `tools/rehearsal.py --zip`, restart the backend.

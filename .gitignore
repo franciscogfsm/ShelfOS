@@ -22,3 +22,4 @@ release/
 
 # build output from running Next.js at the repo root by mistake (the app lives in web/)
 /.next/
+web/.next-vercel-demo/

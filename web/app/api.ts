@@ -1,5 +1,7 @@
 import { AreaPred, Frame, Store } from "./lib";
 
+export const STATIC_DEMO = process.env.NEXT_PUBLIC_DEMO === "true";
+
 /** Where the inference server lives. Same origin when the server hosts the app; NEXT_PUBLIC_API
  *  (or ?api=http://localhost:PORT while developing) when the app runs under `next dev`. */
 export function apiBase(): string {
@@ -71,6 +73,11 @@ function tidy(frame: Frame): Frame {
 
 /** The live store from the inference server, or the bundled snapshot when no server answers. */
 export async function loadStore(): Promise<Store> {
+  if (STATIC_DEMO) {
+    const r = await fetch("/data/store.json");
+    if (!r.ok) throw new Error("no shelf data");
+    return { ...(await r.json()), base: "", live: false };
+  }
   const base = apiBase();
   try {
     const r = await fetch(`${base}/api/store`, { cache: "no-store", signal: AbortSignal.timeout(30000) }); // the body is a few MB: a server that is down still fails at once
@@ -126,6 +133,7 @@ export async function countArea(camera: string, file: string, area: string): Pro
 }
 
 export async function loadHealth(): Promise<Health | null> {
+  if (STATIC_DEMO) return null;
   try {
     const r = await fetch(`${apiBase()}/api/health`, { cache: "no-store" });
     return r.ok ? await r.json() : null;

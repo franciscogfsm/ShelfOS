@@ -550,7 +550,11 @@ body.on-intro .topbar { pointer-events: none; }
 .learn-packet { fill: var(--ink); opacity: 0; }
 .learn-step { position: relative; text-align: center; }
 .learn-visual { position: relative; height: calc(var(--u) * 19); display: flex; align-items: center; justify-content: center; }
-.learn-photos img { position: absolute; width: 66%; height: 65%; object-fit: cover; border: 1px solid rgb(var(--fg) / .18); border-radius: calc(var(--u) * .7); box-shadow: 0 12px 36px -12px #0009; transform: translateX(var(--x)) rotate(var(--angle)); opacity: 0; }
+.pile-stack { position: absolute; inset: 0; }
+.pile { position: absolute; left: 50%; top: 48%; width: 70%; height: 64%; margin: 0; overflow: hidden; border-radius: calc(var(--u) * .75); border: 1px solid rgb(255 255 255 / .22); box-shadow: 0 18px 40px -20px #000; transform: translate(-50%, -50%) rotate(calc((var(--i) - 1) * 9deg)) translateX(calc((var(--i) - 1) * 10%)); }
+.pile img { position: relative; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 1; }
+.pile-crop { position: absolute; left: var(--crop-x); top: var(--crop-y); width: var(--crop-w); height: var(--crop-h); display: grid; place-items: center; border: 2px solid #fff; border-radius: 7px; box-shadow: 0 0 0 1px #000a, 0 0 22px rgb(255 255 255 / .28); opacity: 0; }
+.pile-crop svg { position: static; width: 42%; height: 42%; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 1px 1px #000); }
 .learn-review { position: absolute; z-index: 2; bottom: 11%; display: flex; align-items: center; gap: calc(var(--u) * .45); color: var(--ink); padding: calc(var(--u) * .45) calc(var(--u) * .7); background: var(--bg); border: 1px solid rgb(var(--fg) / .12); border-radius: 999px; font-size: calc(var(--u) * .72); opacity: 0; }
 .learn-review svg { width: calc(var(--u) * .9); fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .learn-copy { opacity: 0; }
@@ -558,46 +562,77 @@ body.on-intro .topbar { pointer-events: none; }
 .learn-copy h3 { font-size: calc(var(--u) * 2); font-weight: 550; letter-spacing: -.045em; margin-top: calc(var(--u) * .6); }
 .learn-copy > p:last-child { font-size: calc(var(--u) * .95); color: var(--muted); margin-top: calc(var(--u) * .5); }
 .learn-copy b { color: var(--ink); font-weight: 600; }
-.learn-eye > svg, .learn-tree > svg { width: 84%; height: 100%; overflow: visible; color: var(--ink); }
-.learn-eye-outline { fill: none; stroke: currentColor; stroke-width: 1.3; stroke-dasharray: 1; stroke-dashoffset: 1; }
-.learn-orbit { fill: none; stroke: currentColor; stroke-opacity: .13; stroke-dasharray: 2 14; transform-origin: 160px 120px; }
-.learn-iris { fill: none; stroke: currentColor; stroke-width: 1; opacity: 0; transform-origin: 160px 120px; }
-.learn-iris-halo { opacity: 0; }
-.learn-pupil { fill: currentColor; opacity: 0; }
+.learn-core > svg, .learn-tree > svg { width: 92%; height: 100%; overflow: visible; color: var(--ink); }
+.vit-ring { fill: none; stroke: currentColor; stroke-opacity: .14; stroke-dasharray: 1.5 10; transform-origin: 160px 112px; }
+.vit-frame { fill: none; stroke: currentColor; stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .7; }
+.vit-cell { fill: transparent; stroke: currentColor; stroke-width: 1.15; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.vit-cell.on { fill: currentColor; }
+.vit-beam { fill: currentColor; opacity: 0; }
 .learn-frozen { position: absolute; top: 10%; right: 14%; display: flex; align-items: center; gap: calc(var(--u) * .35); font: calc(var(--u) * .7) var(--mono); color: var(--muted); opacity: 0; }
 .learn-frozen svg { width: calc(var(--u) * 1.1); fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
-.learn-branches { fill: none; stroke: rgb(var(--fg) / .3); stroke-width: 1.4; }
-.learn-branches path { stroke-dasharray: 1; stroke-dashoffset: 1; }
-.learn-junctions { fill: var(--bg); stroke: var(--ink); stroke-width: 1.2; opacity: 0; }
-.learn-leaves circle { fill: var(--c); opacity: 0; transform-box: fill-box; transform-origin: center; }
-.learn-outcomes { position: absolute; bottom: 3%; display: flex; gap: calc(var(--u) * 1.1); font: calc(var(--u) * .65) var(--mono); opacity: 0; }
-.learn-outcomes span { color: var(--c); }
+.dec-branch { fill: none; stroke: rgb(var(--fg) / .28); stroke-width: 1.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.dec-root { fill: var(--bg); stroke: var(--ink); stroke-width: 1.4; opacity: 0; }
+.dec-dot { fill: var(--c); transform-box: fill-box; transform-origin: center; }
+.dec-halo, .dec-dot, .dec-label { opacity: 0; }
+.dec-halo { fill: none; stroke: var(--c); stroke-width: 1.4; transform-box: fill-box; transform-origin: center; }
+.dec-label { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; text-anchor: middle; fill: var(--c); }
+.dec-spark { fill: var(--ink); opacity: 0; }
 .learning-takeaway { margin-top: calc(var(--u) * 2.2); text-align: center; font-size: calc(var(--u) * 1.5); font-weight: 500; letter-spacing: -.025em; color: var(--dim); }
 .learning-takeaway span { color: var(--ink); }
-.learning-slide.in .learn-photos img { animation: learn-photo 1200ms var(--ease-out) both; animation-delay: calc(350ms + var(--photo) * 170ms); }
+.learning-slide.in .pile { animation: shot-cycle 8.4s cubic-bezier(.45, 0, .2, 1) infinite; animation-delay: calc(var(--i) * -2.8s); }
+.learning-slide.in .pile-crop { animation: crop-show 8.4s ease-out infinite; animation-delay: calc(var(--i) * -2.8s); }
 .learning-slide.in .learn-review { animation: learn-reveal 850ms var(--ease-out) 1100ms both; }
 .learning-slide.in .learn-copy { animation: learn-reveal 900ms var(--ease-out) both; animation-delay: calc(550ms + var(--step) * 650ms); }
 .learning-slide.in .learn-link { animation: learn-draw 1100ms var(--ease-out) both; animation-delay: var(--delay); }
 .learning-slide.in .learn-packet { animation: learn-packet 2600ms cubic-bezier(.4,0,.2,1) infinite; animation-delay: var(--delay); }
-.learning-slide.in .learn-eye-outline { animation: learn-draw 1600ms var(--ease-out) 900ms both; }
-.learning-slide.in .learn-orbit { animation: learn-orbit 28s linear infinite; }
-.learning-slide.in .learn-iris { animation: learn-focus 1300ms var(--ease-out) 1150ms both; }
-.learning-slide.in .learn-iris-halo, .learning-slide.in .learn-pupil, .learning-slide.in .learn-frozen { animation: learn-reveal 1000ms var(--ease-out) 1600ms both; }
-.learning-slide.in .learn-branches path { animation: learn-draw 1700ms var(--ease-out) 2000ms both; }
-.learning-slide.in .learn-junctions { animation: learn-reveal 900ms var(--ease-out) 2200ms both; }
-.learning-slide.in .learn-leaves circle { animation: learn-leaf 900ms var(--ease-spring) both; animation-delay: calc(2850ms + var(--leaf) * 120ms); }
-.learning-slide.in .learn-outcomes { animation: learn-reveal 900ms var(--ease-out) 3250ms both; }
-@keyframes learn-photo { from { opacity: 0; transform: translateX(0) translateY(35px) rotate(0) scale(.8); filter: blur(8px); } to { opacity: 1; transform: translateX(var(--x)) rotate(var(--angle)); filter: none; } }
+.learning-slide.in .vit-ring { animation: learn-orbit 36s linear infinite; }
+.learning-slide.in .vit-frame { animation: learn-draw 1400ms var(--ease-out) 1700ms both; }
+.learning-slide.in .vit-cell { animation: vit-pop 680ms var(--ease-spring) both; animation-delay: calc(780ms + var(--i) * 70ms); }
+.learning-slide.in .vit-cell.on { animation: vit-pop 680ms var(--ease-spring) both, vit-live 2.6s ease-in-out calc(2400ms + var(--i) * 90ms) infinite; animation-delay: calc(780ms + var(--i) * 70ms), calc(2400ms + var(--i) * 90ms); }
+.learning-slide.in .vit-beam { animation: vit-scan 3.2s cubic-bezier(.4,0,.2,1) 1.5s infinite; }
+.learning-slide.in .learn-frozen { animation: learn-reveal 1000ms var(--ease-out) 1900ms both; }
+.learning-slide.in .dec-branch { animation: learn-draw 900ms var(--ease-out) 1900ms both, dec-glow 4.8s linear 2800ms infinite; }
+.learning-slide.in .dec-branch.b1 { animation-delay: 1900ms, 4400ms; }
+.learning-slide.in .dec-branch.b2 { animation-delay: 1900ms, 6000ms; }
+.learning-slide.in .dec-root { animation: learn-reveal 700ms var(--ease-out) 1700ms both, dec-tick 4.8s ease-out 2800ms infinite; }
+.learning-slide.in .dec-dot { animation: learn-leaf 700ms var(--ease-spring) 2300ms both; }
+.learning-slide.in .dec-halo { animation: dec-bloom 4.8s ease-out 2800ms infinite; }
+.learning-slide.in .dec-out.n1 .dec-halo, .learning-slide.in .dec-out.n1 .dec-label { animation-delay: 4400ms; }
+.learning-slide.in .dec-out.n2 .dec-halo, .learning-slide.in .dec-out.n2 .dec-label { animation-delay: 6000ms; }
+.learning-slide.in .dec-label { animation: dec-word 4.8s ease-in-out 2800ms infinite; }
+.learning-slide.in .dec-spark { animation: dec-run 4.8s cubic-bezier(.45,0,.2,1) 2800ms infinite; }
+.learning-slide.in .dec-spark.s1 { animation-delay: 4400ms; }
+.learning-slide.in .dec-spark.s2 { animation-delay: 6000ms; }
+@keyframes shot-cycle {
+  0%, 100% { transform: translate(-64%, -42%) rotate(-10deg) scale(.84); z-index: 1; filter: brightness(.62); }
+  8%, 30% { transform: translate(-50%, -58%) rotate(0deg) scale(1); z-index: 5; filter: none; }
+  40% { transform: translate(-32%, -44%) rotate(9deg) scale(.84); z-index: 2; filter: brightness(.62); }
+}
+@keyframes crop-show {
+  0%, 12% { opacity: 0; transform: scale(1.18); }
+  18%, 28% { opacity: 1; transform: none; }
+  36%, 100% { opacity: 0; }
+}
 @keyframes learn-reveal { from { opacity: 0; transform: translateY(12px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
 @keyframes learn-draw { to { stroke-dashoffset: 0; } }
-@keyframes learn-focus { from { opacity: 0; transform: scale(1.4) rotate(-35deg); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes vit-pop { 0% { opacity: 0; transform: scale(.2); } 70% { opacity: 1; transform: scale(1.06); } 100% { opacity: var(--o, .38); transform: scale(1); } }
+@keyframes vit-live { 0%, 100% { opacity: 1; } 50% { opacity: .28; } }
+@keyframes vit-scan { 0% { opacity: 0; transform: translateX(0); } 10% { opacity: .9; } 46% { opacity: .9; transform: translateX(232px); } 62%, 100% { opacity: 0; transform: translateX(246px); } }
 @keyframes learn-orbit { to { transform: rotate(360deg); } }
 @keyframes learn-leaf { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+@keyframes dec-glow { 0%, 10% { stroke: rgb(var(--fg) / .28); } 24%, 36% { stroke: var(--c); } 48%, 100% { stroke: rgb(var(--fg) / .28); } }
+@keyframes dec-bloom { 0%, 16% { opacity: 0; transform: scale(.45); } 28% { opacity: 1; transform: scale(1); } 42% { opacity: .35; transform: scale(1.15); } 54%, 100% { opacity: 0; transform: scale(1.35); } }
+@keyframes dec-word { 0%, 16% { opacity: .4; } 28%, 40% { opacity: 1; } 54%, 100% { opacity: .4; } }
+@keyframes dec-tick { 0%, 70%, 100% { stroke-width: 1.4; } 8%, 28%, 48% { stroke-width: 2.4; } }
+@keyframes dec-run { 0%, 3% { offset-distance: 0%; opacity: 0; } 10% { opacity: 1; } 27% { offset-distance: 100%; opacity: 1; } 36%, 100% { offset-distance: 100%; opacity: 0; } }
 @keyframes learn-packet { 0%, 15% { opacity: 0; transform: translateX(0); } 30%, 65% { opacity: .85; } 80%, 100% { opacity: 0; transform: translateX(var(--travel)); } }
 @media (prefers-reduced-motion: reduce) {
   .learning-slide * { animation: none !important; }
-  .learning-slide .learn-photos img, .learning-slide .learn-review, .learning-slide .learn-copy, .learning-slide .learn-iris, .learning-slide .learn-iris-halo, .learning-slide .learn-pupil, .learning-slide .learn-frozen, .learning-slide .learn-junctions, .learning-slide .learn-leaves circle, .learning-slide .learn-outcomes { opacity: 1; }
-  .learning-slide .learn-link, .learning-slide .learn-eye-outline, .learning-slide .learn-branches path { stroke-dashoffset: 0; }
+  .learning-slide .pile, .learning-slide .pile-crop, .learning-slide .learn-review, .learning-slide .learn-copy, .learning-slide .vit-cell, .learning-slide .learn-frozen, .learning-slide .dec-root, .learning-slide .dec-dot, .learning-slide .dec-label { opacity: 1; }
+  .learning-slide .vit-cell { --o: .38; }
+  .learning-slide .vit-cell.on { --o: 1; fill: currentColor; }
+  .learning-slide .learn-link, .learning-slide .vit-frame, .learning-slide .dec-branch { stroke-dashoffset: 0; }
+  .learning-slide .vit-beam, .learning-slide .dec-spark, .learning-slide .dec-halo { display: none; }
   .learning-slide .learn-packet { display: none; }
 }
 /* ── 8 generative ai as the attacker ────────────────────────────────────────── */
@@ -875,10 +910,15 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
 .duel-foot { margin-top: calc(var(--u) * 1.8); }
 
 /* ── 13 close ───────────────────────────────────────────────────────────────── */
-.close .wordmark { font-size: calc(var(--u) * 11); }
-.close .tag { margin-top: calc(var(--u) * 1.2); font-size: calc(var(--u) * 1.7); font-weight: 500; letter-spacing: -.035em; }
+.close .wordmark { font-size: calc(var(--u) * 8.4); }
+.close .tag { margin-top: calc(var(--u) * .8); font-size: calc(var(--u) * 1.7); font-weight: 500; letter-spacing: -.035em; }
 .close .tag span { color: var(--dim); }
-.close .team-name { margin-top: calc(var(--u) * 2.6); font-size: calc(var(--u) * 1.7); font-weight: 600; letter-spacing: -.04em; }
+.staff-qr { display: inline-flex; align-items: center; gap: calc(var(--u) * 1.3); margin-top: calc(var(--u) * 1.5); padding: calc(var(--u) * .55); padding-right: calc(var(--u) * 1.7); border-radius: calc(var(--u) * 1.15); background: #fff; color: #09090b; text-decoration: none; text-align: left; box-shadow: 0 28px 70px -32px #000; }
+.staff-qr img { width: calc(var(--u) * 12.5); height: calc(var(--u) * 12.5); display: block; border-radius: calc(var(--u) * .45); }
+.staff-qr b { display: block; font-size: calc(var(--u) * 1.85); font-weight: 650; letter-spacing: -.045em; }
+.staff-qr em { display: block; margin-top: .4em; max-width: calc(var(--u) * 16); font-style: normal; font-size: calc(var(--u) * 1.05); line-height: 1.35; color: #3f3f46; }
+:root[data-theme="light"] .staff-qr { border: 1px solid #09090b14; box-shadow: 0 22px 50px -28px #09090b47; }
+.close .team-name { margin-top: calc(var(--u) * 1.5); font-size: calc(var(--u) * 1.7); font-weight: 600; letter-spacing: -.04em; }
 .close .team { margin-top: calc(var(--u) * .5); font-size: calc(var(--u) * 1.2); color: var(--muted); }
 .close .eyebrow { margin-top: calc(var(--u) * 1.6); }
 .btn { display: inline-flex; align-items: center; gap: .7em; margin-top: calc(var(--u) * 2.6); height: calc(var(--u) * 3.1); min-height: 44px; padding: 0 calc(var(--u) * 1.7); border-radius: 999px; font-size: calc(var(--u) * 1.02); font-weight: 500; color: var(--ink); text-decoration: none; }
@@ -1035,7 +1075,7 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
   <!-- 5 ─ how it works -->
   <section class="slide" data-sec="how" id="how">
     <p class="eyebrow rv">How it works</p>
-    <h2 class="sm rv">A frozen eye. A small brain. <span>A long memory.</span></h2>
+    <h2 class="sm rv">A frozen model. A small brain. <span>A long memory.</span></h2>
     <div class="dia" id="dia"><svg viewBox="0 0 1500 560" aria-hidden="true"></svg></div>
     <p class="dia-cap rv" id="diaCap" style="--i:22"><span></span></p>
   </section>
@@ -1047,19 +1087,19 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
     <div class="learning-scene">
       <svg class="learning-connectors" viewBox="0 0 1200 340" preserveAspectRatio="none" aria-hidden="true"><path class="learn-link" pathLength="1" style="--delay:850ms" d="M310 170h160m-8-6 8 6-8 6"/><path class="learn-link" pathLength="1" style="--delay:1900ms" d="M730 170h145m-8-6 8 6-8 6"/><circle class="learn-packet" cx="310" cy="170" r="3" style="--delay:1200ms;--travel:160px"/><circle class="learn-packet" cx="730" cy="170" r="3" style="--delay:2200ms;--travel:145px"/></svg>
       <article class="learn-step" style="--step:0">
-        <div class="learn-visual learn-photos"><img src="assets/learn-produce.jpg" alt="Real produce shelf camera photo" style="--photo:0;--angle:-13deg;--x:-16%"><img src="assets/learn-tomatoes.jpg" alt="Real tomato shelf camera photo" style="--photo:1;--angle:10deg;--x:17%"><img src="assets/learn-bananas.jpg" alt="Real banana shelf camera photo" style="--photo:2;--angle:-2deg;--x:0%"><span class="learn-review"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Human-reviewed</span></div>
+        <div class="learn-visual learn-photos"><div class="pile-stack"><figure class="pile" style="--i:0;--crop-x:46%;--crop-y:2%;--crop-w:46%;--crop-h:30%"><img src="assets/learn-produce.jpg" alt="Real produce shelf camera photo"><i class="pile-crop"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></i></figure><figure class="pile" style="--i:1;--crop-x:16%;--crop-y:6%;--crop-w:62%;--crop-h:24%"><img src="assets/learn-tomatoes.jpg" alt="Real tomato shelf camera photo"><i class="pile-crop"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></i></figure><figure class="pile" style="--i:2;--crop-x:40%;--crop-y:14%;--crop-w:36%;--crop-h:20%"><img src="assets/learn-bananas.jpg" alt="Real banana shelf camera photo"><i class="pile-crop"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></i></figure></div><span class="learn-review"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg> Human-reviewed</span></div>
         <div class="learn-copy"><p class="eyebrow">01 · The examples</p><h3>Real shelf photos.</h3><p><b data-count="1950">1,950</b> crops labelled by us</p></div>
       </article>
       <article class="learn-step" style="--step:1">
-        <div class="learn-visual learn-eye"><svg viewBox="0 0 320 240" aria-hidden="true"><defs><radialGradient id="learnIris"><stop stop-color="currentColor" stop-opacity=".14"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></radialGradient></defs><circle class="learn-orbit" cx="160" cy="120" r="98"/><path class="learn-eye-outline" pathLength="1" d="M24 120Q160-12 296 120Q160 252 24 120Z"/><circle class="learn-iris-halo" cx="160" cy="120" r="62" fill="url(#learnIris)"/><g class="learn-iris"><circle cx="160" cy="120" r="42"/><circle cx="160" cy="120" r="30" stroke-dasharray="2 7"/><circle cx="160" cy="120" r="14"/><path d="M160 70v9m0 82v9m-50-50h9m82 0h9"/></g><circle class="learn-pupil" cx="160" cy="120" r="5"/></svg><span class="learn-frozen"><svg viewBox="0 0 24 24"><rect x="6" y="10" width="12" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></svg> Frozen</span></div>
-        <div class="learn-copy"><p class="eyebrow">02 · The eye</p><h3>Our vision model.</h3><p>Pretrained. No fine-tuning.</p></div>
+        <div class="learn-visual learn-core"><svg viewBox="0 0 320 240" aria-hidden="true"><circle class="vit-ring" cx="160" cy="112" r="108"/><circle class="vit-ring" cx="160" cy="112" r="78" style="animation-direction:reverse"/><rect class="vit-frame" x="44" y="18" width="232" height="188" rx="26" pathLength="1"/><g class="vit-grid"><rect class="vit-cell" style="--i:5" x="52" y="28" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="96" y="28" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:2;--o:1" x="140" y="28" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="184" y="28" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:5" x="228" y="28" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="52" y="72" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:1;--o:1" x="96" y="72" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:0;--o:1" x="140" y="72" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:1;--o:1" x="184" y="72" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="228" y="72" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="52" y="116" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:1;--o:1" x="96" y="116" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:0;--o:1" x="140" y="116" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:1;--o:1" x="184" y="116" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="228" y="116" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:5" x="52" y="160" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="96" y="160" width="32" height="32" rx="7"/><rect class="vit-cell on" style="--i:2;--o:1" x="140" y="160" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:4" x="184" y="160" width="32" height="32" rx="7"/><rect class="vit-cell" style="--i:5" x="228" y="160" width="32" height="32" rx="7"/></g><rect class="vit-beam" x="36" y="22" width="14" height="180" rx="7"/></svg></div>
+        <div class="learn-copy"><p class="eyebrow">02 · The backbone</p><h3>Our vision model.</h3><p>Pretrained. No fine-tuning.</p></div>
       </article>
       <article class="learn-step" style="--step:2">
-        <div class="learn-visual learn-tree"><svg viewBox="0 0 320 240" aria-hidden="true"><g class="learn-branches"><path pathLength="1" d="M160 40v35m0 0h-75v45m75-45h75v45M85 120v30H45v42m40-42h40v42M235 120v30h-40v42m40-42h40v42"/></g><g class="learn-junctions"><circle cx="160" cy="40" r="9"/><circle cx="85" cy="120" r="7"/><circle cx="235" cy="120" r="7"/></g><g class="learn-leaves"><circle cx="45" cy="192" r="7" style="--leaf:0;--c:var(--empty)"/><circle cx="125" cy="192" r="7" style="--leaf:1;--c:var(--low)"/><circle cx="195" cy="192" r="7" style="--leaf:2;--c:var(--low)"/><circle cx="275" cy="192" r="7" style="--leaf:3;--c:var(--ink)"/></g></svg><div class="learn-outcomes"><span style="--c:var(--empty)">Empty</span><span style="--c:var(--low)">Half</span><span style="--c:var(--ink)">Full</span></div></div>
+        <div class="learn-visual learn-tree"><svg viewBox="0 0 320 240" aria-hidden="true"><path class="dec-branch b0" style="--c:var(--empty)" pathLength="1" d="M160 52 V88 L58 156"/><path class="dec-branch b1" style="--c:var(--low)" pathLength="1" d="M160 52 V88 L160 156"/><path class="dec-branch b2" style="--c:var(--ink)" pathLength="1" d="M160 52 V88 L262 156"/><circle class="dec-root" cx="160" cy="40" r="10"/><g class="dec-out n0" style="--c:var(--empty)"><circle class="dec-halo" cx="58" cy="168" r="18"/><circle class="dec-dot" cx="58" cy="168" r="7"/><text class="dec-label" x="58" y="206">Empty</text></g><g class="dec-out n1" style="--c:var(--low)"><circle class="dec-halo" cx="160" cy="168" r="18"/><circle class="dec-dot" cx="160" cy="168" r="7"/><text class="dec-label" x="160" y="206">Half</text></g><g class="dec-out n2" style="--c:var(--ink)"><circle class="dec-halo" cx="262" cy="168" r="18"/><circle class="dec-dot" cx="262" cy="168" r="7"/><text class="dec-label" x="262" y="206">Full</text></g><circle class="dec-spark s0" r="4.5" style="offset-path:path('M160 52 V88 L58 168')"/><circle class="dec-spark s1" r="4.5" style="offset-path:path('M160 52 V88 L160 168')"/><circle class="dec-spark s2" r="4.5" style="offset-path:path('M160 52 V88 L262 168')"/></svg></div>
         <div class="learn-copy"><p class="eyebrow">03 · The decision</p><h3>Small classifiers.</h3><p><b>~1 min</b> to retrain on a laptop</p></div>
       </article>
     </div>
-    <p class="learning-takeaway rv" style="--i:8">The eye stays frozen. <span>Only the small layer learns.</span></p>
+    <p class="learning-takeaway rv" style="--i:8">The backbone stays frozen. <span>Only the small layer learns.</span></p>
   </section>
 
   <!-- 8 ─ generative ai, used to attack it -->
@@ -1254,6 +1294,7 @@ kbd { font-family: var(--mono); font-size: .9em; color: var(--ink); padding: .15
   <section class="slide center close" data-sec="">
     <p class="wordmark rv">Shelf<b>OS</b></p>
     <p class="tag rv" data-gap="3">Fresh eyes <span>on fresh produce!</span></p>
+    <a class="staff-qr rv" data-gap="2" href="https://shelfos-demo.vercel.app/colaboradores" target="_blank" rel="noopener"><img src="assets/staff-qr.svg" alt="QR code for the collaborator app" width="360" height="360"><span><b>Staff phone</b><em>Scan. You're on the shift.</em></span></a>
     <p class="team-name rv" data-gap="3" id="teamName">[team]</p>
     <p class="team rv" id="team">[names]</p>
     <p class="eyebrow rv">JunctionX Lisbon 2026 &nbsp;·&nbsp; Sensei challenge</p>
