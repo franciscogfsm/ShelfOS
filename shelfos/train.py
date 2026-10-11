@@ -3,6 +3,10 @@
 usage: python -m shelfos.train [--bank cache/bank.npz] [--labels labels/silver_labels.txt]
        [--rects labels/background_rects.txt] [--images data/images] [--planogram data/planogram.json]
        [--out models/engine.pkl] [--reference models/reference_day.json]
+
+Shelf Lite ordinal retrain:
+    python -m shelfos.train --bank cache/bank_tta.npz --stock-head ordinal
+        --out models/engine_lite.pkl --reference models/reference_day_lite.json
 """
 from __future__ import annotations
 
@@ -20,10 +24,10 @@ from .planogram import list_images, load_planogram, read_image
 
 
 def train(bank_path="cache/bank.npz", labels="labels/silver_labels.txt", rects="labels/background_rects.txt",
-          images="data/images", planogram="data/planogram.json", out="models/engine.pkl", reference="models/reference_day.json") -> Engine:
+          images="data/images", planogram="data/planogram.json", out="models/engine.pkl", reference="models/reference_day.json", stock_head=None) -> Engine:
     t0 = time.time()
     bank = dict(np.load(bank_path))
-    engine = Engine.fit(bank, labels, rects)
+    engine = Engine.fit(bank, labels, rects, stock_head=stock_head)
     engine.model_name = str(bank["model"]) if "model" in bank else MODEL_NAME
     engine.crop_size = int(bank["size"]) if "size" in bank else CROP
     engine.tta = bool(bank["tta"]) if "tta" in bank else False
@@ -59,8 +63,10 @@ def main():
     ap.add_argument("--planogram", default="data/planogram.json")
     ap.add_argument("--out", default="models/engine.pkl")
     ap.add_argument("--reference", default="models/reference_day.json")
+    ap.add_argument("--stock-head", choices=["ordinal"], default=None,
+                    help="opt in to the measured ordinal Shelf Lite head; omit for the existing head")
     a = ap.parse_args()
-    train(a.bank, a.labels, a.rects, a.images, a.planogram, a.out, a.reference)
+    train(a.bank, a.labels, a.rects, a.images, a.planogram, a.out, a.reference, a.stock_head)
 
 
 if __name__ == "__main__":

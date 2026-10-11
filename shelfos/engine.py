@@ -118,8 +118,10 @@ class Engine:
 
     # ---- training -------------------------------------------------------------------------
     @classmethod
-    def fit(cls, bank, labels_path, rects_path, rows: np.ndarray | None = None) -> "Engine":
+    def fit(cls, bank, labels_path, rects_path, rows: np.ndarray | None = None, *, stock_head: str | None = None) -> "Engine":
         """rows: boolean mask of the bank rows the engine may learn from (default: all)."""
+        if stock_head not in (None, "ordinal"):
+            raise ValueError(f"Unknown stock head: {stock_head}")
         y, ys, c, cs = bank_labels(bank, labels_path)
         n = len(y)
         rows = np.ones(n, bool) if rows is None else np.asarray(rows, bool)
@@ -143,7 +145,13 @@ class Engine:
         if cls.GLOB_DIM:
             e.glob_mean = X[m].mean(0)
             e.glob_basis = np.linalg.svd(X[m] - e.glob_mean, full_matrices=False)[2][: cls.GLOB_DIM].T.copy()
-        e.stock_clf = cls.make_stock_clf().fit(e._design(X[m], f[m], R, H), y[m], sample_weight=sw)
+        if stock_head == "ordinal":
+            from .stock_head import OrdinalStockHead
+            classifier = OrdinalStockHead()
+        else:
+            classifier = cls.make_stock_clf()
+        e.stock_head_name = stock_head or cls.STOCK_HEAD
+        e.stock_clf = classifier.fit(e._design(X[m], f[m], R, H), y[m], sample_weight=sw)
         e.comply = ComplianceModel().fit(X, area, product, c, y >= 1, weight=np.where(cs, 1.0, 0.5), swap=cls.COMPLY_SWAP)
         e.last_seen = cls._last_seen(area, bank["t"], y, c, e.comply.prior)
         return e

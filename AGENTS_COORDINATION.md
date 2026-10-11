@@ -512,3 +512,22 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     format check is what counts; the score line misleads. (2) `release/` is the build of 10 Oct and still has the
     old switch: run `python tools/release.py` before it is used again. (3) The app on :8000 needs a restart (old
     code, model of 23:24).
+
+- [Codex, 11 Oct] Finished: isolated CPU comparison of spatial occupancy features on bank_tta, frozen label/rect copies in outputs/review/spatial-study. No heavy job remains. User confirmed A=empty, B=half, C=half (all match existing labels); production models and engine unchanged.
+
+- [Codex, 11 Oct] Spatial feature candidate rejected: development 751/769 -> 753/769 (+7 stock points), reserved late 281/304 -> 280/304 (-4 stock points). Existing Engine unchanged. Fixed split masks, label snapshot and per-photo predictions: outputs/review/spatial-study. Same-day retrospective test, not evidence for a new day. User confirmations persisted in outputs/review/clarification/cases.json; all three match current silver labels.
+
+- [Codex, 11 Oct] Finished: one CPU cross-fitted stock-head experiment; outputs/review/spatial-study/crossfit.py. Production files read-only, frozen labels, frame-grouped inner splits.
+
+- [Codex, 11 Oct] Cross-fit blend rejected: 4 forward folds total baseline and candidate both 1148/1216 stock correct, 971 stock points. Development +3 was not reproduced across forward evaluation. Human-confirmed B regresses in development. No production changes. No job running. Reports: outputs/review/spatial-study/crossfit-decision.json.
+
+
+- [Codex, 11 Oct] Finished: hierarchical and cumulative stock head comparisons, one CPU job; outputs/review/spatial-study/ordinal.py. Frozen labels and rects; production unchanged.
+
+- [Codex, 11 Oct] Ordinal trials complete; no job running. Cumulative Lite: 1151/1216 correct, 28 below, 37 above, +984 points vs current Lite 1148/27/41/+971. Full candidate regresses 1149 -> 1147 correct (+972 -> +967). Lite development ties accuracy and increases above by one; gain CI includes zero. No production changes; candidate retained only for research. Reproducible report: outputs/review/spatial-study/REPORT.md.
+
+- [Codex, 11 Oct] User explicitly requested applying the measured cumulative/ordinal Lite candidate. Completed: staged Lite retrain only, with backup in outputs/review/lite-ordinal-install/backup. New opt-in ordinal head; existing Full training default unchanged. No patch-memory experiment started.
+
+- [Codex, 11 Oct] Applied ordinal Lite at explicit user request. models/engine_lite.pkl + reference_day_lite.json installed after staged real-image selftest ALL GOOD (14 cameras, input formats, fallback, zip, official scoring). 1950/1950 training-label matches; held-out result remains 1151/1216 with 37 over. Full model/reference hashes unchanged. Previous Lite backed up in outputs/review/lite-ordinal-install/backup; installation.json records hashes and provenance. Backend restarted PID 36432, localhost:8000 health ready/cuda. Source supports opt-in `python -m shelfos.train --bank cache/bank_tta.npz --stock-head ordinal --out models/engine_lite.pkl --reference models/reference_day_lite.json`. Broader held-out improvement goal remains unfinished; this is the user-selected candidate.
+
+- [Codex, 11 Oct] Running now: one CPU class-specific patch-reference memory experiment, outputs/review/spatial-study/reference_memory.py. Installed ordinal Lite/Full unchanged; localhost remains running.

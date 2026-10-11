@@ -35,7 +35,7 @@ BANK, MODEL, REFERENCE = Path("cache/bank_bl.npz"), Path("models/engine.pkl"), P
 PLANOGRAM, IMAGES = Path("data/planogram.json"), Path("data/images")
 # Shipped configuration: DINOv3 ViT-B + ViT-L ensemble with mirror TTA (best in cross-validation).
 # A lighter ViT-B-only engine for CPU-only hosts is trained with
-#   python -m shelfos.train --bank cache/bank_tta.npz --out models/engine_lite.pkl --reference models/reference_day_lite.json
+#   python -m shelfos.train --bank cache/bank_tta.npz --stock-head ordinal --out models/engine_lite.pkl --reference models/reference_day_lite.json
 BACKBONES = "vit_base_patch16_dinov3.lvd1689m+vit_large_patch16_dinov3.lvd1689m"
 
 
