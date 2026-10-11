@@ -31,7 +31,8 @@ export function StoreMap({ task, from, tasks }: { task?: Task; from: typeof ENTR
     { x:515,y:30,w:245,d:50,name:"LACTICÍNIOS" },
   ];
   return <><div className="staff-map-zoom filter-row" aria-label="Escala do mapa"><button aria-pressed={!focused} onClick={()=>setFocused(false)}>Loja inteira</button><button aria-pressed={focused} onClick={()=>setFocused(true)}>Ver destino</button></div>
-  <svg className={`staff-isometric ${focused ? "is-focused" : ""}`} viewBox={focused ? "92 152 230 178" : "0 0 520 370"} role="img" aria-label={target ? `Mapa isométrico de um supermercado grande: percurso até à zona ${target.zone}, módulo ${target.bay}` : "Mapa de demonstração do supermercado"}>
+  <div className={`staff-map-viewport ${focused ? "is-focused" : ""}`}>
+  <svg className="staff-isometric" width="520" height="370" preserveAspectRatio="xMidYMid meet" viewBox={focused ? "92 152 230 178" : "0 0 520 370"} role="img" aria-label={target ? `Mapa isométrico de um supermercado grande: percurso até à zona ${target.zone}, módulo ${target.bay}` : "Mapa de demonstração do supermercado"}>
     <defs><filter id="staff-map-shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="9" stdDeviation="8" floodOpacity=".13" /></filter></defs>
     <g filter="url(#staff-map-shadow)"><polygon className="iso-floor-edge" points={[point(0,650),point(800,650),point(800,650,-9),point(0,650,-9)].join(" ")} /><polygon className="iso-floor" points={[point(0,0),point(800,0),point(800,650),point(0,650)].join(" ")} /></g>
     {[140,240,550].map(y=><path key={y} className="iso-floor-line" d={`M${point(0,y)} L${point(800,y)}`} />)}
@@ -52,5 +53,5 @@ export function StoreMap({ task, from, tasks }: { task?: Task; from: typeof ENTR
     <circle cx={start[0]} cy={start[1]} r="9" className="floor-you-halo" /><circle cx={start[0]} cy={start[1]} r="4" className="floor-you" />
     {end && <><path className="iso-pin-stem" d={`M${end[0]},${end[1]-5} v-15`} /><circle cx={end[0]} cy={end[1]-22} r="12" className="iso-pin" /><text x={end[0]} y={end[1]-18} textAnchor="middle" className="iso-pin-label">{target?.zone}{target?.bay}</text></>}
     <text x={project(400,650)[0]} y={project(400,650)[1]+20} textAnchor="middle" className="iso-context-label">ENTRADA</text>
-  </svg></>;
+  </svg></div></>;
 }

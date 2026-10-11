@@ -58,7 +58,9 @@
 .staff-app button:focus-visible,.staff-app a:focus-visible { outline-color:var(--muted); }
 
 /* Isometric supermarket: lightweight vector geometry, shared neutral palette. */
-.staff-map > .staff-isometric { height:auto; max-height:none; aspect-ratio:4 / 3; margin:12px auto 6px; overflow:hidden; }
+.staff-map-viewport { position:relative; width:100%; min-width:0; aspect-ratio:520 / 370; margin:12px 0 6px; overflow:hidden; isolation:isolate; contain:paint; border-radius:12px; }
+.staff-map-viewport.is-focused { aspect-ratio:230 / 178; }
+.staff-map-viewport > .staff-isometric { position:absolute; inset:0; display:block; width:100%; height:100%; max-width:100%; max-height:100%; margin:0; overflow:hidden; }
 .iso-floor { fill:var(--well); stroke:rgb(var(--fg) / calc(.16 * var(--k))); stroke-width:.8; }
 .iso-floor-edge { fill:rgb(var(--fg) / calc(.09 * var(--k))); }
 .iso-section { fill:rgb(var(--fg) / calc(.035 * var(--k))); stroke:rgb(var(--fg) / calc(.08 * var(--k))); stroke-dasharray:3 4; }
@@ -84,7 +86,6 @@
 .staff-demo-action > svg { width:15px; height:15px; }.staff-demo-action > small { font-size:7px; letter-spacing:.6px; }.staff-demo-action:disabled { color:var(--muted); cursor:wait; }
 @keyframes staff-scan { to { transform:rotate(360deg); } }
 .staff-map-zoom { margin-top:14px; margin-inline:0; padding-inline:0; gap:6px; }.staff-map-zoom button { min-height:32px; font-size:10px; padding-inline:12px; }
-.staff-isometric.is-focused { aspect-ratio:230 / 178; }
 .staff-mode { display:flex; align-items:center; justify-content:space-between; gap:10px; margin:-4px 2px 16px; font-size:9px; color:var(--muted); }.staff-mode > span { display:flex; gap:6px; align-items:center; }.staff-mode i { width:4px; height:4px; border-radius:50%; background:var(--ink); }.staff-mode button { min-height:32px; font-size:9px; cursor:pointer; text-decoration:underline; text-underline-offset:3px; flex-shrink:0; }
 .staff-live-status { display:flex; align-items:center; gap:6px; font-size:11px; white-space:nowrap; }.staff-live-status i { width:5px; height:5px; background:var(--ink); border-radius:50%; animation:staff-beacon 1.2s infinite; }.staff-live-status small { font-size:7px; letter-spacing:.8px; color:var(--dim); }.staff-live-status.is-confirmed { color:#3ddc97; }.staff-live-status.is-confirmed i { background:#3ddc97; animation:none; }
 .staff-auto-check:has(.is-confirmed) { color:#3ddc97; }
