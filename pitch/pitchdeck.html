@@ -714,30 +714,30 @@ body.on-intro .topbar { pointer-events: none; }
 .product-slide .shot[data-ph="tasks"] .d-low { transform-box: fill-box; transform-origin: center; }
 .product-slide .shot[data-ph="analytics"] .bar { transform-box: fill-box; transform-origin: center bottom; }
 .shot[data-ph="camera"]::after, .shot[data-ph="wall"]::after { content: ""; position: absolute; z-index: 2; top: 6%; bottom: 6%; width: 20%; border-radius: 99px; pointer-events: none; background: linear-gradient(90deg, transparent, rgb(255 255 255 / .5), transparent); opacity: 0; }
-.product-slide.in .feats .feat { animation: card-turn 18s ease-in-out infinite; }
-.product-slide.in .feats .feat:nth-child(2) { animation-delay: 3s; }
-.product-slide.in .feats .feat:nth-child(3) { animation-delay: 6s; }
-.product-slide.in .feats .feat:nth-child(4) { animation-delay: 9s; }
-.product-slide.in .feats .feat:nth-child(5) { animation-delay: 12s; }
-.product-slide.in .feats .feat:nth-child(6) { animation-delay: 15s; }
-.product-slide.in .feat-ai::before { animation: ai-ring 18s ease-in-out infinite; }
+.product-slide.in .feats .feat { animation: card-turn 12s ease-in-out infinite; }
+.product-slide.in .feats .feat:nth-child(2) { animation-delay: 2s; }
+.product-slide.in .feats .feat:nth-child(3) { animation-delay: 4s; }
+.product-slide.in .feats .feat:nth-child(4) { animation-delay: 6s; }
+.product-slide.in .feats .feat:nth-child(5) { animation-delay: 8s; }
+.product-slide.in .feats .feat:nth-child(6) { animation-delay: 10s; }
+.product-slide.in .feat-ai::before { animation: ai-ring 12s ease-in-out infinite; }
 .product-slide.in .shot[data-ph="tasks"] .d-empty,
 .product-slide.in .shot[data-ph="tasks"] .d-wrong,
-.product-slide.in .shot[data-ph="tasks"] .d-low { animation: dot-live 18s ease-in-out infinite; animation-delay: calc(var(--row) * .55s); }
+.product-slide.in .shot[data-ph="tasks"] .d-low { animation: dot-live 12s ease-in-out infinite; animation-delay: calc(var(--row) * .32s); }
 .product-slide.in .shot[data-ph="wall"] .q-empty,
 .product-slide.in .shot[data-ph="wall"] .q-wrong,
-.product-slide.in .shot[data-ph="wall"] .q-low { animation: wall-glow 18s ease-in-out infinite; animation-delay: calc(var(--n, 0) * 40ms); }
+.product-slide.in .shot[data-ph="wall"] .q-low { animation: wall-glow 12s ease-in-out infinite; animation-delay: calc(var(--n, 0) * 40ms); }
 .product-slide.in .shot[data-ph="camera"] .q-empty,
 .product-slide.in .shot[data-ph="camera"] .q-wrong,
-.product-slide.in .shot[data-ph="camera"] .q-low { animation: camera-glow 18s ease-in-out infinite; animation-delay: calc(var(--n, 0) * 50ms); }
-.product-slide.in .shot[data-ph="wall"]::after { animation: wall-scan 18s ease-in-out infinite; }
-.product-slide.in .shot[data-ph="camera"]::after { animation: camera-scan 18s ease-in-out infinite; }
-.product-slide.in .shot[data-ph="analytics"] .bar { animation: bar-wave 18s ease-in-out infinite; animation-delay: calc(var(--b) * 70ms); }
-.product-slide.in .spark { animation: spark-draw 18s ease-in-out infinite; }
-.product-slide.in .shot[data-ph="replay"] .tile { transform-box: fill-box; transform-origin: center; animation: play-pulse 18s ease-in-out infinite; }
-.product-slide.in .ai-turn:first-child { animation: ai-slot 18s ease-out infinite; }
-.product-slide.in .ai-turn:first-child .ai-bubble.bot span { animation: ai-type 18s steps(22, end) infinite; }
-.product-slide.in .ai-note { animation: ai-note 18s ease-out infinite; }
+.product-slide.in .shot[data-ph="camera"] .q-low { animation: camera-glow 12s ease-in-out infinite; animation-delay: calc(var(--n, 0) * 50ms); }
+.product-slide.in .shot[data-ph="wall"]::after { animation: wall-scan 12s ease-in-out infinite; }
+.product-slide.in .shot[data-ph="camera"]::after { animation: camera-scan 12s ease-in-out infinite; }
+.product-slide.in .shot[data-ph="analytics"] .bar { animation: bar-wave 12s ease-in-out infinite; animation-delay: calc(var(--b) * 70ms); }
+.product-slide.in .spark { animation: spark-draw 12s ease-in-out infinite; }
+.product-slide.in .shot[data-ph="replay"] .tile { transform-box: fill-box; transform-origin: center; animation: play-pulse 12s ease-in-out infinite; }
+.product-slide.in .ai-turn:first-child { animation: ai-slot 12s ease-out infinite; }
+.product-slide.in .ai-turn:first-child .ai-bubble.bot span { animation: ai-type 12s steps(22, end) infinite; }
+.product-slide.in .ai-note { animation: ai-note 12s ease-out infinite; }
 .more kbd { display: inline-block; }
 .product-slide.in .more kbd { animation: keytap 2.8s ease-in-out 1.4s infinite; }
 @keyframes card-turn { 0%, 12% { transform: translateY(-4px); } 16%, 100% { transform: none; } }
@@ -1371,10 +1371,10 @@ const wallSVG = (cols, rows, seed) => {
 const PH = {
   wall: () => wallSVG(3, 2, 3),
   camera: () => wallSVG(1, 1, 21),
-  tasks: () => `<svg class="ph" viewBox="0 0 320 200"><rect class="task-hl" x="20" y="18" width="280" height="38" rx="12"><animate attributeName="y" values="18;58;98;138;138" keyTimes="0;0.04;0.08;0.13;1" dur="18s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.015;0.14;0.17;1" dur="18s" repeatCount="indefinite"/></rect>${["empty", "wrong", "low", "low"].map((c, i) =>
+  tasks: () => `<svg class="ph" viewBox="0 0 320 200"><rect class="task-hl" x="20" y="18" width="280" height="38" rx="12"><animate attributeName="y" values="18;58;98;138;138" keyTimes="0;0.04;0.08;0.13;1" dur="12s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.015;0.14;0.17;1" dur="12s" repeatCount="indefinite"/></rect>${["empty", "wrong", "low", "low"].map((c, i) =>
     `<g class="task-row" style="--row:${i}"><rect class="tile" x="28" y="${24 + i * 40}" width="264" height="30" rx="10"/><circle class="d-${c}" style="--row:${i}" cx="46" cy="${39 + i * 40}" r="4"/><rect class="bar hi" x="62" y="${35 + i * 40}" width="${[92, 74, 104, 66][i]}" height="7" rx="3.5"/><rect class="bar" x="236" y="${35 + i * 40}" width="40" height="7" rx="3.5"/></g>`).join("")}</svg>`,
   replay: () => `<svg class="ph" viewBox="0 0 320 200"><circle class="tile" cx="58" cy="100" r="22"/><path class="bar hi" d="M52 90v20l16-10z"/><path class="ln" d="M100 100h192"/>${Array.from({ length: 13 }, (_, i) =>
-    `<path class="ln" d="M${100 + i * 16} ${i % 4 ? 95 : 90}v${i % 4 ? 10 : 20}"/>`).join("")}<rect class="bar hi" y="76" width="4" height="48" rx="2"><animate attributeName="x" values="100;100;288;288" keyTimes="0;0.5;0.66;1" dur="18s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .2 1;.45 0 .2 1;.45 0 .2 1"/></rect></svg>`,
+    `<path class="ln" d="M${100 + i * 16} ${i % 4 ? 95 : 90}v${i % 4 ? 10 : 20}"/>`).join("")}<rect class="bar hi" y="76" width="4" height="48" rx="2"><animate attributeName="x" values="100;100;288;288" keyTimes="0;0.5;0.66;1" dur="12s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .2 1;.45 0 .2 1;.45 0 .2 1"/></rect></svg>`,
   analytics: () => `<svg class="ph" viewBox="0 0 320 200"><path class="spark" pathLength="1" d="M30 92c26-8 34-40 60-34s30 30 56 22 30-44 58-40 34 24 86 6"/>${[40, 62, 34, 78, 52, 88, 46, 70, 30, 58].map((h, i) =>
     `<rect class="bar${i === 5 ? " hi" : ""}" style="--b:${i}" x="${32 + i * 26.5}" y="${176 - h * .62}" width="15" height="${h * .62}" rx="4"/>`).join("")}</svg>`,
   test: () => `<svg class="ph" viewBox="0 0 320 200"><rect class="ln" x="52" y="34" width="216" height="132" rx="16" stroke-dasharray="5 6"/><path class="ln" d="M160 122V78m-16 16 16-16 16 16"/><rect class="bar" x="118" y="138" width="84" height="7" rx="3.5"/></svg>`,
