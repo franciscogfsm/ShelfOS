@@ -150,6 +150,7 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   No model, label, app or deployment file touched; one line added to the Layout list in `README.md`.
 
 ## Running now
+- [index, 11 Oct 12:09] Full model retrained on the 11:59 labels: `models/engine.pkl` and `models/reference_day.json`, 1950 crops, 122s. Index of every area is going up on http://127.0.0.1:8791. No other train is running.
 - Advisor vote applied at 10:56. Two labels changed: `6376_15` t11 half -> full, `6491_8` t12 full -> half. The other six votes matched the label. Backup `labeler/backups/silver_labels-20261011-105638.txt`. Both models retrained (lite 64s, full 169s, 234s total). New calls match those labels. Nothing heavy running.
 - The :8000 backend still has the previous model in memory. Restart it so `ShelfService` loads the new `engine.pkl`.
 - [Opus, 11 Oct 11:10] My cv runs of 10:50-11:05 are finished: nothing of mine is running, no need to hold jobs for
@@ -161,42 +162,35 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   can be moved). The change is in commit `171858e`; what it is and how it was tested is at the end of "Proposals".
   `web/out` was rebuilt at 11:36. **The app on :8000 (pid 32428, started 10:24) still runs the old Python code and
   the model of 23:24: it needs a restart** to get both. I did not stop it: it belongs to the `npm run dev` session.
-- [Opus, experiments window, 11 Oct 11:27] **Labelling page for the user on http://127.0.0.1:8790**
-  (`outputs/casos_limite.py`, list in `outputs/casos_limite.json`, both under the gitignored `outputs/`). The user
-  asked for it: the 141 photos in 67 areas where a held-out answer (fwd + odd, lite and ViT-S 4 views, labels of
-  10:56) is off the label (label half / model full 63, full / half 55, empty / half 17, half / empty 6). The user
-  picks the level; each choice is saved to `labeler/labels/limite.json` in the labeler's format. The page reads
-  images and the silver file, never writes the silver file, no GPU, no training.
-  **When the user says they are done, at their explicit request** ("depois deve atualizar os silver labels ... e
-  depois retrain do modelo e comparar"): `python labeler/app.py --apply limite` (backup in `labeler/backups/`),
-  retrain of both models, comparison with the labels. I will wait for the 11:20 line above to be gone before the
-  retrain and write here when it starts. **Later applies must list `limite` first** (`--apply limite revisao ...`).
-  Please do not run another `--apply` while this line is here.
-- [Opus, experiments window, 11 Oct 11:38] **The user finished and told me to apply, retrain and test now ("faz isso
-  rápido").** `labeler/app.py --apply limite` ran at 11:37:58: **8 photos in 8 areas changed** (half -> full:
-  6215_2 t5, 6376_1 t10, 6376_2 t6, 6383_1 t6, 6385_2 t12, 6591_3 t4; full -> half: 6468_3 t10; half -> empty:
-  6462_9 t12). The other 133 photos on the page were confirmed as labelled. Backup
-  `labeler/backups/silver_labels-20261011-113758.txt`.
-  **Both models are retrained on those labels and are NOT installed** (`shelfos.train`, usual arguments: lite 41 s,
-  finished 11:39; full finished 11:40; 1950 labelled crops, 94 prototypes, 14 cameras). The four files are in
-  `%TEMP%\claude\c--Users-marti-OneDrive-Ambiente-de-Trabalho-Hackthon\59fd00f8-b107-4f90-9427-96d7a4f60da3\scratchpad\staging_1138\`
-  (`engine.pkl`, `engine_lite.pkl`, `reference_day.json`, `reference_day_lite.json`). My session is not allowed to
-  write `models/`, so **`models/` still holds the files of 10:57-11:00, trained on the labels before these 8
-  changes.** To install: move the four files over the ones in `models/`, `python tools/selftest.py`, restart the
-  app on :8000. Or retrain in place (`python -m shelfos.train --bank cache/bank_tta.npz --out
-  models/engine_lite.pkl --reference models/reference_day_lite.json`, then the same with `cache/bank_bl.npz`,
-  `models/engine.pkl`, `models/reference_day.json`).
-  **Held-out pass on the new labels, finished 11:45, nothing of mine is running.** Same 2432 answers (fwd + odd):
-  - lite (`bank_tta`): before 2291 right, 50 below, 91 above, +1918; **after 2288 right, 51 below, 93 above,
-    +1907**. The answers of before scored on the new labels: 2289 right, +1915.
-  - ViT-S 4 views: before 2291 / 50 / 91, +1918; after 2279 / 47 / 106, +1867. Before-answers on new labels: 2295,
-    +1936.
-  - So the 8 relabels (6 of them half -> full) gave no gain on held-out photos: lite -11 points, inside the
-    +-90 of the interval measured earlier; ViT-S -51, with 15 more answers above the label. `bank_bl` not run.
-  - Staged lite model on the photos it was trained on: 1950 of 1950 answers equal the label.
-  - 143 photos in 66 areas still have a held-out answer off the label (125 were on the first list, 18 are new):
-    label half / model full 70, full / half 51, empty / half 17, half / empty 5. The page on :8790 now shows this
-    list with the numbers above (`outputs/casos_limite.json`; the first list is `outputs/casos_limite_ronda1.json`).
+- [Opus, experiments window, 11 Oct 12:05] **Labels of 11:59 are the current ones; nothing of mine is running; the
+  hold on `--apply` and cv/train is lifted.** History of this morning's boundary relabel, so nobody repeats it:
+  - 11:38: the user went through the 141 photos where a held-out answer was off the label (page on
+    http://127.0.0.1:8790, `outputs/casos_limite.py`, choices in `labeler/labels/limite.json`) and changed 8 of
+    them, 6 from half to full. Held-out after retraining (same 2432 answers, fwd + odd): lite 2291 -> 2288 right,
+    above the label 91 -> 93, +1918 -> +1907; ViT-S 4 views 2291 -> 2279, above 91 -> 106, +1918 -> +1867. All of
+    the loss was inside the 8 relabelled areas (lite +57 -> +23 points there, ViT-S +50 -> +21).
+  - Cause, seen on the photos: 7 of the 8 changes left two near-identical consecutive photos of one area with
+    different labels (6591_3 t4 full next to t5-t7 half; 6215_2 t5 full, t9 half; 6468_3 t10 half, t11 full), and
+    the engine fitted without a photo then gave the new label to the neighbours. The page showed one photo at a
+    time, which invites exactly that. **A boundary photo should only be relabelled together with its look-alikes.**
+  - 11:59, at the user's request ("antes tava melhor, agora ele está a mandar para cima, fix"): those 7 went back
+    through the labeler (`--apply limite`, backup `labeler/backups/silver_labels-20261011-115914.txt`): 6215_2 t5,
+    6376_1 t10, 6376_2 t6, 6383_1 t6, 6385_2 t12, 6591_3 t4 -> half; 6468_3 t10 -> full. **Kept: 6462_9 t12 empty
+    (was half).** So the label file equals the one of 10:56 except for that one photo.
+  - Held-out on the labels of 11:59, finished 12:01: lite 2290 right, 50 below, 92 above, +1914; ViT-S 4 views
+    2292 / 49 / 91, +1921. No held-out answer differs from the pass on the 10:56 labels (the fit is deterministic);
+    the one-point moves are the relabelled photo itself. 141 photos in 67 areas have a held-out answer off the
+    label (half / full 63, full / half 55, empty / half 18, half / empty 5), 33 of them in every test; all 141 were
+    confirmed by the user in the first round. The page on :8790 shows this list (`outputs/casos_limite.json`;
+    earlier lists in `outputs/casos_limite_ronda1.json` and `_ronda2.json`).
+  - **`models/` was not touched by me and still holds the files of 10:57-11:00.** Against the labels of 11:59 both
+    installed models answer the label on 1949 of 1950 trained-on photos; the one difference is 6462_9 t12 (label
+    empty, model half). Both models retrained on the labels of 11:59 are staged, not installed, in
+    `%TEMP%\claude\c--Users-marti-OneDrive-Ambiente-de-Trabalho-Hackthon\59fd00f8-b107-4f90-9427-96d7a4f60da3\scratchpad\staging_1200\`
+    (`engine.pkl`, `engine_lite.pkl`, `reference_day.json`, `reference_day_lite.json`; staged lite: 1950 of 1950).
+    Installing them only changes that one photo's area. The models trained on the 8 relabels are obsolete and must not
+    be installed; I renamed their folder to `staging_1138_obsolete\` so the copy command I gave the user earlier fails.
+  - Later applies must still list `limite` first (`python labeler/app.py --apply limite revisao ...`).
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be

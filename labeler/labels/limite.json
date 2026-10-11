@@ -2,7 +2,7 @@
  "6215_2": {
   "reviewed": true,
   "base": [
-   "EEFFFHHEFHHE",
+   "EEFFFFHEFHHE",
    "NNTTTTTNTTTT"
   ],
   "frames": {
@@ -37,7 +37,7 @@
     "unknown": false
    },
    "1751021396.jpg": {
-    "stock": "full",
+    "stock": "half",
     "compliant": true,
     "unsure": false,
     "unknown": false
@@ -83,7 +83,7 @@
  "6376_1": {
   "reviewed": true,
   "base": [
-   "HHHFFFFFFFHHH",
+   "HHHFFFFFFFFHH",
    "TTTTTTTTTTTTT"
   ],
   "frames": {
@@ -148,7 +148,7 @@
     "unknown": false
    },
    "1751041136.jpg": {
-    "stock": "full",
+    "stock": "half",
     "compliant": true,
     "unsure": false,
     "unknown": false
@@ -170,7 +170,7 @@
  "6383_1": {
   "reviewed": true,
   "base": [
-   "EEFFFFHHFFFHE",
+   "EEFFFFFHFFFHE",
    "NNTTTTTTTTTTN"
   ],
   "frames": {
@@ -211,7 +211,7 @@
     "unknown": false
    },
    "1751025309.jpg": {
-    "stock": "full",
+    "stock": "half",
     "compliant": true,
     "unsure": false,
     "unknown": false
@@ -257,7 +257,7 @@
  "6385_2": {
   "reviewed": true,
   "base": [
-   "FFFFFFFFFFFFHH",
+   "FFFFFFFFFFFFFH",
    "TTTTTTTTTTTTTT"
   ],
   "frames": {
@@ -334,7 +334,7 @@
     "unknown": false
    },
    "1751047832.jpg": {
-    "stock": "full",
+    "stock": "half",
     "compliant": true,
     "unsure": false,
     "unknown": false
@@ -350,7 +350,7 @@
  "6468_3": {
   "reviewed": true,
   "base": [
-   "FFFFFFFFFHFFF",
+   "FFFFFFFFFHHFF",
    "TTTTTTTTTTTTT"
   ],
   "frames": {
@@ -415,7 +415,7 @@
     "unknown": false
    },
    "1751041038.jpg": {
-    "stock": "half",
+    "stock": "full",
     "compliant": true,
     "unsure": false,
     "unknown": false
@@ -437,7 +437,7 @@
  "6376_2": {
   "reviewed": true,
   "base": [
-   "HHHFFFHHHFFFF",
+   "HHHFFFFHHFFFF",
    "TTTTTTTTTTTTT"
   ],
   "frames": {
@@ -478,7 +478,7 @@
     "unknown": false
    },
    "1751025657.jpg": {
-    "stock": "full",
+    "stock": "half",
     "compliant": true,
     "unsure": false,
     "unknown": false
@@ -611,7 +611,7 @@
  "6591_3": {
   "reviewed": true,
   "base": [
-   "HHHHHHHHHHHHH",
+   "HHHHFHHHHHHHH",
    "TTTTFFFFFFFFF"
   ],
   "frames": {
@@ -640,7 +640,7 @@
     "unknown": false
    },
    "1751017235.jpg": {
-    "stock": "full",
+    "stock": "half",
     "compliant": false,
     "unsure": false,
     "unknown": false
