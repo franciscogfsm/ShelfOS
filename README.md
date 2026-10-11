@@ -175,6 +175,7 @@ labeler/            label review tool (standalone, see labeler/README.md)
 labels/             our labels for the reference day
 edgecase_labeler/   label tool for the AI-generated edge cases
 ai_generated_edgecases/  synthetic stress tests and their reviewed labels
+pitch/film/         demo film generator: edit, renderer, soundtrack, screenshots (see pitch/film/README.md)
 Plano.md            current plan: the four UI ideas
 docs/DEPLOY.md      deploying the container (Hugging Face Spaces, Fly.io, ...)
 docs/Sensei - JunctionX Lisbon 2026.txt   the challenge brief

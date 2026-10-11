@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ShelfOS film, 45 s</title>
+<style>
+  html, body { margin: 0; background: #000; overflow: hidden; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #050506; transform-origin: 0 0; font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif; }
+  #glow { position: absolute; inset: 0; background: radial-gradient(1100px 700px at 50% 38%, rgba(150, 140, 255, .10), transparent 70%); }
+  #world { position: absolute; inset: 0; perspective: 2600px; perspective-origin: 50% 50%; }
+  .node { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; overflow: hidden; }
+  .node img.shot { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+  #desk { width: 1600px; height: 900px; }
+  .phone { width: 430px; height: 932px; border-radius: 58px; box-shadow: 0 0 0 9px #17171a, 0 0 0 10.5px #3b3b42, 0 60px 120px rgba(0, 0, 0, .55); background: #050506; }
+  .piece { position: absolute; background-repeat: no-repeat; background-size: 1600px 900px; will-change: transform, opacity; }
+  .tagline { position: absolute; left: 28px; top: 219px; width: 371.5px; height: 48.4px; }
+  .dot { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: rgba(255, 255, 255, .92); box-shadow: 0 0 0 1px rgba(0, 0, 0, .28), 0 6px 22px rgba(0, 0, 0, .45); opacity: 0; }
+  .ring { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(255, 255, 255, .95), 0 0 0 3px rgba(0, 0, 0, .25); opacity: 0; }
+  .hl { position: absolute; background: #fff; opacity: 0; }
+  #label { position: absolute; left: 64px; bottom: 56px; display: flex; align-items: center; gap: 16px; padding: 14px 26px 15px 22px; border-radius: 999px; background: rgba(12, 12, 14, .86); border: 1px solid rgba(255, 255, 255, .14); box-shadow: 0 18px 50px rgba(0, 0, 0, .5); color: #fff; opacity: 0; }
+  #label b { font: 500 15px/1 Consolas, monospace; letter-spacing: .12em; color: rgba(255, 255, 255, .5); }
+  #label span { font-size: 27px; font-weight: 500; letter-spacing: -.01em; line-height: 1; white-space: nowrap; }
+  #outro { position: absolute; inset: 0; pointer-events: none; }
+  #outro img { position: absolute; left: 50%; opacity: 0; }
+  #mark { width: 640px; margin-left: -320px; top: 400px; }
+  #line { width: 560px; margin-left: -280px; top: 612px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="glow"></div>
+  <div id="world">
+    <div id="desk" class="node"><div id="deskShots"></div></div>
+    <div id="phoneL" class="node phone"></div>
+    <div id="phoneR" class="node phone"></div>
+    <div id="phoneC" class="node phone"></div>
+  </div>
+  <div id="outro"><img id="mark" src="shots45/brand_wordmark_light.png"><img id="line" src="shots45/brand_tagline_light.png"></div>
+  <div id="label"><b></b><span></span></div>
+</div>
+<script>
+const DURATION = 45, SHOTS = 'shots45';
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, u) => a + (b - a) * u;
+const EASE = {
+  lin: (u) => u,
+  io: (u) => (u < .5 ? 8 * u ** 4 : 1 - ((-2 * u + 2) ** 4) / 2),
+  out: (u) => 1 - (1 - u) ** 4,
+  in: (u) => u ** 3,
+};
+const ramp = (t, a, b, ease = 'io') => EASE[ease](clamp((t - a) / (b - a)));
+const two = (i) => String(i).padStart(2, '0');
+// Interpolates an array of {t, ease, ...numbers}. Two keys at the same time make a hard cut.
+function track(keys) {
+  return (t) => {
+    if (t <= keys[0].t) return keys[0];
+    for (let i = keys.length - 1; i >= 0; i--) {
+      if (t < keys[i].t) continue;
+      const a = keys[i], b = keys[i + 1];
+      if (!b) return a;
+      const u = EASE[b.ease ?? 'io']((t - a.t) / (b.t - a.t)), o = {};
+      for (const k in a) if (typeof a[k] === 'number') o[k] = lerp(a[k], b[k], u);
+      return o;
+    }
+  };
+}
+const place = (el, c) => { el.style.transform = `translate(${c.cx}px,${c.cy}px) rotateX(${c.rx}deg) rotateY(${c.ry}deg) scale(${c.z}) translate(${-c.fx}px,${-c.fy}px)`; };
+
+// ── desktop camera: focus point in app pixels (1600 × 900), zoom 1 fills the frame ──
+const K = (t, fx, fy, zoom, ease = 'io', o = {}) => {
+  if (zoom >= 1 && !o.rx && !o.ry && o.cx === undefined) {
+    fx = clamp(fx, 800 / zoom, 1600 - 800 / zoom);
+    fy = clamp(fy, 450 / zoom, 900 - 450 / zoom);
+  }
+  return { t, ease, fx, fy, z: 1.2 * zoom, cx: 960, cy: 540, rx: 0, ry: 0, ...o };
+};
+const LOCK = { cx: 770, cy: 540 };
+const deskCam = track([
+  K(0, 214, 243, 3.3), K(2.5, 214, 243, 3.1, 'lin'),
+  K(3.9, 800, 450, .8, 'io', { rx: 15, ry: -9 }), K(4.4, 800, 450, .806, 'lin', { rx: 14.4, ry: -8.4 }),
+  K(5.2, 800, 450, 1), K(6.0, 800, 450, 1.03, 'lin'),
+  K(9.0, 610, 330, 1.35), K(9.8, 420, 700, 1.5), K(10.0, 420, 700, 1.52, 'lin'), K(10.28, 216, 752, 2.4, 'in'),
+  K(10.28, 500, 560, 1.42), K(11.1, 600, 552, 1.2, 'out'), K(12.0, 600, 552, 1.22, 'lin'),
+  K(12.7, 600, 551, 1.34), K(13.5, 600, 551, 1.36, 'lin'), K(14.1, 520, 560, 1.5), K(15.0, 520, 560, 1.53, 'lin'),
+  K(15.5, 800, 450, 1), K(16.2, 800, 430, 1.18), K(19.6, 800, 440, 1.22, 'lin'),
+  // analytics: wide enough to keep the four numbers, the chart and the shelf mix in frame
+  K(20.0, 800, 450, 1), K(20.8, 800, 500, 1.06), K(23.7, 800, 505, 1.09, 'lin'), K(25.1, 800, 508, 1.1, 'lin'),
+  K(25.5, 800, 450, 1), K(26.2, 608, 430, 1.4), K(27.6, 640, 440, 1.45, 'lin'),
+  K(28.0, 800, 450, 1), K(28.6, 800, 405, 1.32), K(30.1, 800, 405, 1.37, 'lin'),
+  K(30.5, 800, 450, 1), K(31.2, 1150, 400, 1.4), K(34.5, 1150, 405, 1.47, 'lin'), K(35.1, 700, 500, 1.12), K(35.75, 690, 500, 1.14, 'lin'),
+  K(36.0, 800, 450, 1), K(36.9, 800, 450, .9), K(41.0, 800, 450, .9, 'lin'),
+  K(41.7, 800, 450, .6, 'io', { ...LOCK, ry: 14, rx: 3 }), K(43.2, 800, 450, .62, 'lin', { ...LOCK, ry: 12.5, rx: 3 }),
+  K(43.9, 800, 450, .5, 'in', { ...LOCK, ry: 10, rx: 3 }),
+]);
+const deskLook = track([
+  { t: 36.0, o: 1, blur: 0 }, { t: 36.9, o: .13, blur: 16 }, { t: 41.0, o: .13, blur: 16, ease: 'lin' },
+  { t: 41.65, o: 1, blur: 0 }, { t: 43.2, o: 1, blur: 0 }, { t: 43.75, o: 0, blur: 14, ease: 'in' },
+]);
+
+// ── which real screenshot is on screen, and when it changes ──
+const LAG = .06; // the app answers a tap a few frames later
+const LAPSE = [6.1, .165, 17], TYPE = [28.6, .15, 6], THINK = [31.76, .125, 10];
+const CUTS = [
+  [0, 'wall_bare', 0], [4.7, 'wall', 0],
+  ...Array.from({ length: LAPSE[2] }, (_, i) => [LAPSE[0] + i * LAPSE[1], 'lapse' + two(i), .09]),
+  [9.0, 'wall', .2], [10.2, 'camera', .22], [12.0 + LAG, 'area', .24], [13.5 + LAG, 'area_mask', .24],
+  [15.5 + LAG, 'tasks', .28], [17.0 + LAG, 'tasks_done1', .22], [18.0 + LAG, 'tasks_done2', .22], [19.0 + LAG, 'tasks_done3', .22],
+  [20.0 + LAG, 'analytics', .28], [21.5 + LAG, 'analytics_stock', .26], [22.5 + LAG, 'analytics_compliant', .26], [23.5 + LAG, 'analytics_covered', .26],
+  [25.5 + LAG, 'run', .28], [28.0 + LAG, 'search', .24],
+  ...Array.from({ length: TYPE[2] }, (_, i) => [TYPE[0] + i * TYPE[1], 'type' + (i + 1), .05]),
+  // the assistant: a real question, its real "thinking" frames (shortened), the real answer, then the jump it offers
+  [30.5 + LAG, 'ai_open', .26], [31.5 + LAG, 'ai_00', .2],
+  ...Array.from({ length: THINK[2] }, (_, i) => [THINK[0] + i * THINK[1], 'ai_' + two(i + 1), .08]),
+  [33.05, 'ai_answer', .3], [34.5 + LAG, 'ai_jump', .3],
+  [37.5, 'wall', .3], [42.0 + LAG, 'wall_light', .8, [1542, 38]],
+];
+const PHONE_CUTS = [[0, 'm_route', 0], [38.0 + LAG, 'm_watch', .22], [39.0, 'm_analyze', .2], [39.9, 'm_confirmed', .2], [40.7, 'm_next', .25], [42.2, 'ml_next', .6]];
+
+// ── taps: [time, node, element rect in that node's pixels, corner radius] ──
+const NAV = { tasks: [186.7, 18, 98.7, 40], analytics: [527.6, 18, 120.2, 40], run: [649.8, 18, 136.9, 40], ai: [788.7, 18, 55, 40], phone: [873.7, 18, 56, 40], search: [939.7, 18, 149.9, 40], theme: [1508, 18, 68, 40] };
+const DONE = [519, 430.7, 46, 46];
+const TAPS = [
+  [6.0, 'desk', [24, 100, 36, 36], 18], [10.0, 'desk', [28, 618, 376, 267], 20], [12.0, 'desk', [875, 351.5, 306, 60], 12], [13.5, 'desk', [376, 567, 278, 30.5], 6],
+  [15.5, 'desk', NAV.tasks, 20], [17.0, 'desk', DONE, 23], [18.0, 'desk', DONE, 23], [19.0, 'desk', DONE, 23],
+  [20.0, 'desk', NAV.analytics, 20], [21.5, 'desk', [806.3, 572.9, 51.5, 26], 13], [22.5, 'desk', [859.8, 572.9, 73.5, 26], 13], [23.5, 'desk', [935.3, 572.9, 63.7, 26], 13],
+  [25.5, 'desk', NAV.run, 20], [27.0, 'desk', [924.6, 416.8, 242.4, 44], 10], [28.0, 'desk', NAV.search, 20],
+  [30.5, 'desk', NAV.ai, 20], [31.5, 'desk', [1189, 431.2, 364, 43.5], 8], [34.5, 'desk', [1187, 319.5, 368, 80.5], 14],
+  [36.0, 'desk', NAV.phone, 20], [38.0, 'phoneC', [263.3, 859, 137.7, 46], 23], [42.0, 'desk', NAV.theme, 20],
+];
+const LABELS = [[3.2, 'Store wall'], [6.0, 'Day replay'], [10.2, 'Planogram check'], [15.5, 'Tasks'], [20.0, 'Analytics'], [25.5, 'Test images'], [28.0, 'Search'], [30.5, 'ShelfOS AI'], [36.2, 'Team mobile'], [41.9, 'Light & dark'], [43.3, '']];
+const PIECE_AT = (i) => 3.15 + i * .1 + (i > 3 ? .14 : 0);
+// Sound cues the audio script reads back.
+window.CUES = {
+  duration: DURATION, taps: TAPS.map((x) => x[0]), lapse: LAPSE, keys: TYPE, cards: Array.from({ length: 7 }, (_, i) => PIECE_AT(i)),
+  words: [.3, 1.15], whoosh: [2.6, 10.12, 36.15, 41.3, 43.25], views: [15.5, 20.0, 25.5, 28.0, 30.5, 34.5], done: [17.06, 18.06, 19.06],
+  send: 31.5, think: [31.6, 33.0], answer: 33.05, confirm: 39.9, toast: 40.7, flip: 42.06, end: 43.6,
+};
+
+// ── build ──
+const desk = $('desk'), deskShots = $('deskShots');
+const mkShots = (parent, cuts) => cuts.map(([t, name, fade, wipe]) => {
+  const img = new Image(); img.className = 'shot'; img.src = `${SHOTS}/${name}.jpg`; img.style.visibility = 'hidden'; parent.appendChild(img);
+  return { t, fade, wipe, img };
+});
+const deskCuts = mkShots(deskShots, CUTS);
+const phoneCuts = mkShots($('phoneC'), PHONE_CUTS);
+for (const [id, name] of [['phoneL', 'm_tasks'], ['phoneR', 'm_map']]) { const i = new Image(); i.className = 'shot'; i.src = `${SHOTS}/${name}.jpg`; $(id).appendChild(i); }
+// The four numbers and three cameras arrive one by one over the bare page.
+const PIECES = [[28, 326.9, 279.5, 183], [321.5, 326.9, 279.5, 183], [615, 326.9, 279.5, 183], [908.5, 326.9, 279.5, 183], [28, 617.9, 376, 267.5], [420, 617.9, 376, 267.5], [812, 617.9, 376, 267.5]].map(([x, y, w, h], i) => {
+  const pad = 18, el = document.createElement('div'); el.className = 'piece';
+  Object.assign(el.style, { left: x - pad + 'px', top: y - pad + 'px', width: w + pad * 2 + 'px', height: Math.min(h + pad * 2, 900 - y + pad) + 'px', backgroundImage: `url(${SHOTS}/wall.jpg)`, backgroundPosition: `${-(x - pad)}px ${-(y - pad)}px` });
+  desk.appendChild(el); return { el, at: PIECE_AT(i) };
+});
+const SPLIT = 58.2; // "Every shelf." | "In sight."
+const tagA = new Image(), tagB = new Image();
+for (const [im, clip] of [[tagA, `inset(-20% ${100 - SPLIT}% -20% -5%)`], [tagB, `inset(-20% -5% -20% ${SPLIT}%)`]]) { im.className = 'tagline'; im.src = `${SHOTS}/brand_tagline_dark.png`; im.style.clipPath = clip; desk.appendChild(im); }
+const taps = TAPS.map(([t, node, r, rad]) => {
+  const parent = $(node), hl = document.createElement('div'), ring = document.createElement('div'), dot = document.createElement('div');
+  hl.className = 'hl'; ring.className = 'ring'; dot.className = 'dot';
+  Object.assign(hl.style, { left: r[0] + 'px', top: r[1] + 'px', width: r[2] + 'px', height: r[3] + 'px', borderRadius: rad + 'px' });
+  const x = r[0] + r[2] / 2, y = r[1] + r[3] / 2;
+  for (const e of [ring, dot]) { e.style.left = x + 'px'; e.style.top = y + 'px'; }
+  parent.append(hl, ring, dot);
+  return { t, node, hl, ring, dot };
+});
+
+function showCuts(cuts, t) {
+  let cur = 0;
+  for (let i = 0; i < cuts.length; i++) if (t >= cuts[i].t) cur = i;
+  const c = cuts[cur], a = c.fade ? clamp((t - c.t) / c.fade) : 1;
+  cuts.forEach((k, i) => {
+    const on = i === cur || (i === cur - 1 && a < 1);
+    k.img.style.visibility = on ? 'visible' : 'hidden';
+    if (!on) return;
+    if (i === cur && c.wipe) { k.img.style.opacity = 1; k.img.style.clipPath = a < 1 ? `circle(${EASE.out(a) * 1950}px at ${c.wipe[0]}px ${c.wipe[1]}px)` : 'none'; }
+    else k.img.style.opacity = i === cur ? EASE.io(a) : 1;
+  });
+}
+
+const phoneKey = (t, cx, cy, z, fy, rx, ry, o, ease = 'io') => ({ t, ease, cx, cy, z, fx: 215, fy, rx, ry, o });
+const phoneC = track([
+  phoneKey(36.2, 960, 1560, 1.0, 466, 28, -18, 0), phoneKey(37.1, 960, 540, 1.0, 466, 0, 0, 1, 'out'),
+  phoneKey(37.7, 960, 540, 1.42, 552, 0, 0, 1), phoneKey(40.9, 960, 540, 1.48, 556, 0, 0, 1, 'lin'),
+  phoneKey(41.7, 1500, 566, .8, 466, 2, -16, 1), phoneKey(43.2, 1496, 566, .82, 466, 2, -14.5, 1, 'lin'), phoneKey(43.8, 1496, 566, .7, 466, 2, -12, 0, 'in'),
+]);
+const side = (dir, d) => track([
+  phoneKey(36.3 + d, 960 + dir * 300, 1600, .8, 466, 28, dir * -10, 0), phoneKey(37.2 + d, 960 + dir * 470, 580, .82, 466, 0, dir * -24, 1, 'out'),
+  phoneKey(37.22 + d, 960 + dir * 470, 580, .82, 466, 0, dir * -24, 1, 'lin'), phoneKey(37.8, 960 + dir * 640, 560, .92, 466, 0, dir * -30, .42),
+  phoneKey(40.9, 960 + dir * 655, 560, .94, 466, 0, dir * -28, .42, 'lin'), phoneKey(41.4, 960 + dir * 1100, 560, .8, 466, 0, dir * -40, 0),
+]);
+const phoneL = side(-1, 0), phoneR = side(1, .08);
+
+window.seek = (t) => {
+  // stage
+  const light = ramp(t, 42.15, 42.8);
+  const c = Math.round(lerp(5, 243, light));
+  $('stage').style.background = `rgb(${c},${c},${Math.round(lerp(6, 245, light))})`;
+  $('glow').style.opacity = (1 - light) * (.5 + .5 * ramp(t, 2.5, 4.5));
+
+  // desktop
+  const cam = { ...deskCam(t) };
+  let bump = 0;
+  for (const k of taps) if (k.node === 'desk') { const d = t - k.t; if (d > 0 && d < .4) bump += Math.sin(Math.PI * d / .4) * (1 - d / .4); }
+  cam.z *= 1 - .014 * bump;
+  place(desk, cam);
+  const floating = cam.z < 1.199 || Math.abs(cam.rx) + Math.abs(cam.ry) > .01;
+  desk.style.borderRadius = floating ? '20px' : '0';
+  const look = deskLook(t), born = ramp(t, 2.6, 3.4, 'lin');
+  desk.style.opacity = look.o;
+  desk.style.filter = look.blur > .05 ? `blur(${look.blur.toFixed(2)}px)` : 'none';
+  desk.style.boxShadow = floating && born > 0 ? `0 0 0 1px rgba(${light > .5 ? '0,0,0,.10' : '255,255,255,.12'}), 0 80px 160px rgba(0,0,0,${(light > .5 ? .22 : .7) * born})` : 'none';
+  deskShots.style.opacity = born;
+  showCuts(deskCuts, t);
+  for (const p of PIECES) {
+    const u = ramp(t, p.at, p.at + .6, 'out');
+    p.el.style.display = t < 4.7 ? 'block' : 'none';
+    p.el.style.opacity = clamp((t - p.at) / .28);
+    p.el.style.transform = `translateY(${(1 - u) * 46}px) scale(${lerp(.9, 1, u)})`;
+    p.el.style.filter = u < 1 ? `blur(${((1 - u) * 10).toFixed(2)}px)` : 'none';
+  }
+  [[tagA, .3], [tagB, 1.15]].forEach(([im, at]) => {
+    const u = ramp(t, at, at + .8, 'out');
+    im.style.display = t < 3.5 ? 'block' : 'none';
+    im.style.opacity = clamp((t - at) / .4) * (1 - ramp(t, 2.9, 3.4, 'lin'));
+    im.style.transform = `translateY(${(1 - u) * 9}px)`;
+    im.style.filter = u < 1 ? `blur(${((1 - u) * 4).toFixed(2)}px)` : 'none';
+  });
+
+  // phones
+  const pc = phoneC(t); place($('phoneC'), pc); $('phoneC').style.opacity = pc.o; $('phoneC').style.display = t > 36.15 && pc.o > 0 ? 'block' : 'none';
+  showCuts(phoneCuts, t);
+  for (const [id, f] of [['phoneL', phoneL], ['phoneR', phoneR]]) { const p = f(t); place($(id), p); $(id).style.opacity = p.o; $(id).style.display = t > 36.25 && t < 41.4 ? 'block' : 'none'; }
+
+  // taps: the dot lands, the control lights up, a ring leaves
+  for (const k of taps) {
+    const d = t - k.t, z = k.node === 'desk' ? cam.z / 1.2 : pc.z, s = 1.15 / z;
+    const arrive = EASE.out(clamp((d + .34) / .34)), gone = clamp(d / .28);
+    k.dot.style.opacity = d < -.34 || d > .32 ? 0 : arrive * (1 - gone);
+    k.dot.style.transform = `scale(${s * (lerp(1.9, 1, arrive) - .32 * Math.sin(Math.PI * clamp(d / .2)))})`;
+    const r = EASE.out(clamp(d / .65));
+    k.ring.style.opacity = d <= 0 || d > .65 ? 0 : .9 * (1 - r);
+    k.ring.style.transform = `scale(${s * lerp(1, 3.6, r)})`;
+    k.hl.style.opacity = d < -.06 || d > .5 ? 0 : .17 * clamp((d + .06) / .06) * (1 - clamp((d - .05) / .45));
+  }
+
+  // feature label
+  let li = -1; for (let i = 0; i < LABELS.length; i++) if (t >= LABELS[i][0]) li = i;
+  const lab = $('label');
+  if (li < 0) lab.style.opacity = 0;
+  else if (!LABELS[li][1]) lab.style.opacity = 1 - ramp(t, LABELS[li][0], LABELS[li][0] + .3);
+  else {
+    const since = t - LABELS[li][0], inn = EASE.out(clamp(since / .45));
+    lab.children[0].textContent = two(li + 1);
+    lab.children[1].textContent = LABELS[li][1];
+    lab.style.opacity = li === 0 ? inn : clamp(since / .2);
+    lab.style.transform = `translateY(${(1 - inn) * 14}px)`;
+  }
+
+  // closing mark
+  const m = ramp(t, 43.6, 44.3, 'out'), l = ramp(t, 44.05, 44.7, 'out');
+  $('mark').style.opacity = clamp((t - 43.6) / .4); $('mark').style.transform = `scale(${lerp(.9, 1, m)})`; $('mark').style.filter = m < 1 ? `blur(${((1 - m) * 14).toFixed(2)}px)` : 'none';
+  $('line').style.opacity = clamp((t - 44.05) / .4) * .9; $('line').style.transform = `translateY(${(1 - l) * 16}px)`;
+};
+
+window.ready = Promise.all([...document.images].map((i) => i.decode().catch(() => console.log('missing', i.src)))).then(() => { seek(0); return true; });
+
+// Opened by hand: fit the window and play with sound. The renderer passes ?render and drives seek() itself.
+if (!location.search.includes('render')) {
+  const fit = () => { const s = Math.min(innerWidth / 1920, innerHeight / 1080); $('stage').style.transform = `scale(${s})`; };
+  addEventListener('resize', fit); fit();
+  const audio = new Audio('sound45.wav'); audio.loop = true;
+  let t0 = performance.now(), started = false;
+  addEventListener('click', () => { if (!started) { started = true; audio.currentTime = ((performance.now() - t0) / 1000) % DURATION; audio.play().catch(() => {}); } });
+  const loop = () => { seek(started && !audio.paused ? audio.currentTime : ((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+  window.ready.then(loop);
+}
+</script>
+</body>
+</html>

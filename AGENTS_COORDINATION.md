@@ -143,6 +143,11 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     `main` and on the branch, the two files must be byte-identical; `tools/selftest.py`; `tools/rehearsal.py --zip`;
     one run from another directory with a relative folder. Then `npm run build` in `web/` (`web/out` there dates
     from 10 Oct 19:58: no Count units, `/colaboradores` is a 404) and restart the backend.
+- [Opus, film window, 11 Oct 11:55] New untracked folder `pitch/film/` at the user's request ("mete o gerador do
+  vídeo no repo"): the demo film generator moved out of the git-ignored `outputs/motion-demo/film/` (edit, renderer,
+  soundtrack scripts, 138 screenshots; 152 files, 106 MB, largest file 8.6 MB). Not committed: the user commits.
+  Its own `.gitignore` keeps `*.mp4`, `*.zip` and `node_modules/` out (the 4K film is over GitHub's 100 MB limit).
+  No model, label, app or deployment file touched; one line added to the Layout list in `README.md`.
 
 ## Running now
 - Advisor vote applied at 10:56. Two labels changed: `6376_15` t11 half -> full, `6491_8` t12 full -> half. The other six votes matched the label. Backup `labeler/backups/silver_labels-20261011-105638.txt`. Both models retrained (lite 64s, full 169s, 234s total). New calls match those labels. Nothing heavy running.
@@ -151,12 +156,11 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   me (results at the end of "Proposals"). The backend on :8000 (pid 32428, started 10:24) still holds the model from
   before the retrain of 10:57-11:00.
 - [review page, 11 Oct 11:05] Manual check of the model that just trained. Reads `models/reference_day.json` only, no train and no cv. Page on http://127.0.0.1:8788.
-- [Opus, the user's chat window, 11 Oct 11:20] **The user asked me to take the empty-area switch out** (point 3 of
-  the code check below). I am editing `run.py`, `shelfos/predict.py`, `shelfos/service.py`, `shelfos/server.py`,
-  `tools/cv.py` (the command-line option only), `tools/selftest.py` (its last check), `web/app/run.tsx`, `page.tsx`,
-  `api.ts` and the README. Not touched: `shelfos/engine.py`, `models/`, labels, rects. Until about 11:45 I run
-  `shelfos.predict` / `run.py --images` / `tools/selftest.py` / `tools/rehearsal.py --zip` on the GPU (inference
-  only) and one `next build`. Please hold train / cv jobs until this line is gone.
+- [Opus, the user's chat window, 11 Oct 11:45] **The empty-area switch is out, at the user's request; my runs are
+  finished and the GPU is free from my side** (no predict / selftest / rehearsal of mine is running: the model files
+  can be moved). The change is in commit `171858e`; what it is and how it was tested is at the end of "Proposals".
+  `web/out` was rebuilt at 11:36. **The app on :8000 (pid 32428, started 10:24) still runs the old Python code and
+  the model of 23:24: it needs a restart** to get both. I did not stop it: it belongs to the `npm run dev` session.
 - [Opus, experiments window, 11 Oct 11:27] **Labelling page for the user on http://127.0.0.1:8790**
   (`outputs/casos_limite.py`, list in `outputs/casos_limite.json`, both under the gitignored `outputs/`). The user
   asked for it: the 141 photos in 67 areas where a held-out answer (fwd + odd, lite and ViT-S 4 views, labels of
@@ -168,6 +172,31 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   retrain of both models, comparison with the labels. I will wait for the 11:20 line above to be gone before the
   retrain and write here when it starts. **Later applies must list `limite` first** (`--apply limite revisao ...`).
   Please do not run another `--apply` while this line is here.
+- [Opus, experiments window, 11 Oct 11:38] **The user finished and told me to apply, retrain and test now ("faz isso
+  rápido").** `labeler/app.py --apply limite` ran at 11:37:58: **8 photos in 8 areas changed** (half -> full:
+  6215_2 t5, 6376_1 t10, 6376_2 t6, 6383_1 t6, 6385_2 t12, 6591_3 t4; full -> half: 6468_3 t10; half -> empty:
+  6462_9 t12). The other 133 photos on the page were confirmed as labelled. Backup
+  `labeler/backups/silver_labels-20261011-113758.txt`.
+  **Both models are retrained on those labels and are NOT installed** (`shelfos.train`, usual arguments: lite 41 s,
+  finished 11:39; full finished 11:40; 1950 labelled crops, 94 prototypes, 14 cameras). The four files are in
+  `%TEMP%\claude\c--Users-marti-OneDrive-Ambiente-de-Trabalho-Hackthon\59fd00f8-b107-4f90-9427-96d7a4f60da3\scratchpad\staging_1138\`
+  (`engine.pkl`, `engine_lite.pkl`, `reference_day.json`, `reference_day_lite.json`). My session is not allowed to
+  write `models/`, so **`models/` still holds the files of 10:57-11:00, trained on the labels before these 8
+  changes.** To install: move the four files over the ones in `models/`, `python tools/selftest.py`, restart the
+  app on :8000. Or retrain in place (`python -m shelfos.train --bank cache/bank_tta.npz --out
+  models/engine_lite.pkl --reference models/reference_day_lite.json`, then the same with `cache/bank_bl.npz`,
+  `models/engine.pkl`, `models/reference_day.json`).
+  **Held-out pass on the new labels, finished 11:45, nothing of mine is running.** Same 2432 answers (fwd + odd):
+  - lite (`bank_tta`): before 2291 right, 50 below, 91 above, +1918; **after 2288 right, 51 below, 93 above,
+    +1907**. The answers of before scored on the new labels: 2289 right, +1915.
+  - ViT-S 4 views: before 2291 / 50 / 91, +1918; after 2279 / 47 / 106, +1867. Before-answers on new labels: 2295,
+    +1936.
+  - So the 8 relabels (6 of them half -> full) gave no gain on held-out photos: lite -11 points, inside the
+    +-90 of the interval measured earlier; ViT-S -51, with 15 more answers above the label. `bank_bl` not run.
+  - Staged lite model on the photos it was trained on: 1950 of 1950 answers equal the label.
+  - 143 photos in 66 areas still have a held-out answer off the label (125 were on the first list, 18 are new):
+    label half / model full 70, full / half 51, empty / half 17, half / empty 5. The page on :8790 now shows this
+    list with the numbers above (`outputs/casos_limite.json`; the first list is `outputs/casos_limite_ronda1.json`).
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
@@ -428,7 +457,7 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     `POST /api/policy`, `?empty=` on `/api/predictions`) as well as in `run.py`, `shelfos/predict.py` and
     `tools/cv.py`. It is off by default everywhere. Its tooltip still says the brief leaves the question open. 93 of
     our 1950 labelled crops are empty (4.8%); with the switch on each of them goes from +1 to -2, about 7% of the
-    maximum. Suggest taking it off the screen and out of the two commands that write `predictions.json`.
+    maximum. **Done at 11:45 at the user's request: see the last entry of this section.**
   - `tools/edge_manifest_from_labeler.py`: the docstring shows `--out FILE`, the code reads only `--out=FILE`. Run
     in a scratch copy: with the space it stops with an error and writes nothing (`FileNotFoundError`, or
     `AttributeError` when the file exists, because the output path is read as one more input). `--out=FILE` works
@@ -462,3 +491,30 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
     full -> half with a few fruits gone from one corner, five are half -> empty with one to three items left.
   - Scripts and logs in my scratchpad: `p_feats.py`, `q_rules.py`, `out/q_rules.log`, `out/diag_S224t4_*.jpg`.
   Nothing of mine is running.
+- [Opus, the user's chat window, 11 Oct 11:45] **Applied at the user's request: the empty-area switch is gone
+  (commit `171858e`). Nothing in `shelfos/engine.py`, `models/`, labels or rects was touched.**
+  - What changed. `run.py`, `python -m shelfos.predict` and `tools/cv.py` no longer take `--empty-noncompliant`
+    (they stop with "unrecognized arguments"). `ShelfService` takes no `empty_compliant`, has no such property, and
+    sets `engine.empty_compliant = True` on every engine it loads, the lite variant in `server.py` too.
+    `predictions()` and `score()` take no policy. `POST /api/policy` is removed and `?empty=` is ignored. The switch
+    and its tooltip are off the run screen (`run.tsx`, `page.tsx`, `api.ts`); `web/out` was rebuilt at 11:36 from
+    the same sources (the build of 10 Oct 23:39 is saved in my scratchpad, `p3/web_out_backup`). The store and
+    health payloads keep `"emptyCompliant": true` as a constant, for the assistant's context.
+  - What stays, on purpose: `Engine.empty_compliant`, `official(pred, empty_compliant=True)` and `p_identity` in
+    `engine.py` (not mine to edit) and the `empty_compliant=True` argument of `cv.evaluate`. Nothing a person can
+    reach sets them to false any more.
+  - `tools/selftest.py`: its last check flipped the switch, so it is replaced by "an area seen as empty
+    (P(empty) >= 0.5) is reported planogram_compliant true", over every image the selftest analyses.
+  - Tested with the models of 10:57 / 11:00. Same 56 images (the last two photos of every camera, twice) before
+    and after: `predictions.json` byte for byte the same, lite and full (608 areas, 48 answered empty, all
+    compliant). The old switch turned exactly those 48 answers to false. `tools/selftest.py` ALL GOOD (42 empty
+    areas in the new check). `tools/rehearsal.py --zip` REHEARSAL OK (28 images, 304 areas, folder and zip
+    identical). The 27 unit tests pass. Server with the real lite model and a model file loaded as if saved with the
+    switch on: 20 checks pass. The app started through `run.py`'s own `main()` on a spare port with the full model:
+    folder in, `predictions.json` out, equal to the command line's. `next build` and eslint clean.
+  - **For Fable.** (1) `tools/rehearsal.py` scores against `labeler/output/merged_annotations.json` of 10 Oct 17:38:
+    13 of its 304 stock labels on those images differ from the labels of 10:56, so it prints 90.3% where the same
+    answers score 98.5% against the labels the model was trained on (the same before and after my change). Its
+    format check is what counts; the score line misleads. (2) `release/` is the build of 10 Oct and still has the
+    old switch: run `python tools/release.py` before it is used again. (3) The app on :8000 needs a restart (old
+    code, model of 23:24).

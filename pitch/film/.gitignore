@@ -1,0 +1,6 @@
+# rendered films stay local: the 4K file is over GitHub's 100 MB limit per file
+*.mp4
+*.zip
+node_modules/
+# check frames written by `node render.mjs stills|sheet`
+stills*/

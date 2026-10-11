@@ -1,0 +1,8 @@
+{
+  "name": "shelfos-film",
+  "private": true,
+  "description": "Renders the ShelfOS demo film from real screenshots of the app",
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}

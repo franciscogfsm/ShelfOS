@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ShelfOS film</title>
+<style>
+  html, body { margin: 0; background: #000; overflow: hidden; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #050506; transform-origin: 0 0; font-family: "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif; }
+  #glow { position: absolute; inset: 0; background: radial-gradient(1100px 700px at 50% 38%, rgba(150, 140, 255, .10), transparent 70%); }
+  #world { position: absolute; inset: 0; perspective: 2600px; perspective-origin: 50% 50%; }
+  .node { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; overflow: hidden; }
+  .node img.shot { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+  #desk { width: 1600px; height: 900px; }
+  .phone { width: 430px; height: 932px; border-radius: 58px; box-shadow: 0 0 0 9px #17171a, 0 0 0 10.5px #3b3b42, 0 60px 120px rgba(0, 0, 0, .55); background: #050506; }
+  .piece { position: absolute; background-repeat: no-repeat; background-size: 1600px 900px; will-change: transform, opacity; }
+  .tagline { position: absolute; left: 28px; top: 219px; width: 371.5px; height: 48.4px; }
+  .dot { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: rgba(255, 255, 255, .92); box-shadow: 0 0 0 1px rgba(0, 0, 0, .28), 0 6px 22px rgba(0, 0, 0, .45); opacity: 0; }
+  .ring { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(255, 255, 255, .95), 0 0 0 3px rgba(0, 0, 0, .25); opacity: 0; }
+  .hl { position: absolute; background: #fff; opacity: 0; }
+  #label { position: absolute; left: 64px; bottom: 56px; display: flex; align-items: center; gap: 16px; padding: 14px 26px 15px 22px; border-radius: 999px; background: rgba(12, 12, 14, .78); border: 1px solid rgba(255, 255, 255, .14); box-shadow: 0 18px 50px rgba(0, 0, 0, .5); color: #fff; opacity: 0; }
+  #label b { font: 500 15px/1 Consolas, monospace; letter-spacing: .12em; color: rgba(255, 255, 255, .5); }
+  #label span { font-size: 27px; font-weight: 500; letter-spacing: -.01em; line-height: 1; white-space: nowrap; }
+  #outro { position: absolute; inset: 0; pointer-events: none; }
+  #outro img { position: absolute; left: 50%; opacity: 0; }
+  #mark { width: 640px; margin-left: -320px; top: 400px; }
+  #line { width: 560px; margin-left: -280px; top: 612px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="glow"></div>
+  <div id="world">
+    <div id="desk" class="node"><div id="deskShots"></div></div>
+    <div id="phoneL" class="node phone"></div>
+    <div id="phoneR" class="node phone"></div>
+    <div id="phoneC" class="node phone"></div>
+  </div>
+  <div id="outro"><img id="mark" src="shots/brand_wordmark_light.png"><img id="line" src="shots/brand_tagline_light.png"></div>
+  <div id="label"><b></b><span></span></div>
+</div>
+<script>
+const DURATION = 30;
+const $ = (id) => document.getElementById(id);
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, u) => a + (b - a) * u;
+const EASE = {
+  lin: (u) => u,
+  io: (u) => (u < .5 ? 8 * u ** 4 : 1 - ((-2 * u + 2) ** 4) / 2),
+  out: (u) => 1 - (1 - u) ** 4,
+  in: (u) => u ** 3,
+};
+const ramp = (t, a, b, ease = 'io') => EASE[ease](clamp((t - a) / (b - a)));
+// Interpolates an array of {t, ease, ...numbers}. Two keys at the same time make a hard cut.
+function track(keys) {
+  return (t) => {
+    if (t <= keys[0].t) return keys[0];
+    for (let i = keys.length - 1; i >= 0; i--) {
+      if (t < keys[i].t) continue;
+      const a = keys[i], b = keys[i + 1];
+      if (!b) return a;
+      const u = EASE[b.ease ?? 'io']((t - a.t) / (b.t - a.t)), o = {};
+      for (const k in a) if (typeof a[k] === 'number') o[k] = lerp(a[k], b[k], u);
+      return o;
+    }
+  };
+}
+const place = (el, c) => { el.style.transform = `translate(${c.cx}px,${c.cy}px) rotateX(${c.rx}deg) rotateY(${c.ry}deg) scale(${c.z}) translate(${-c.fx}px,${-c.fy}px)`; };
+
+// ── desktop camera: focus point in app pixels (1600 × 900), zoom 1 fills the frame ──
+const K = (t, fx, fy, zoom, ease = 'io', o = {}) => {
+  if (zoom >= 1 && !o.rx && !o.ry && o.cx === undefined) {
+    fx = clamp(fx, 800 / zoom, 1600 - 800 / zoom);
+    fy = clamp(fy, 450 / zoom, 900 - 450 / zoom);
+  }
+  return { t, ease, fx, fy, z: 1.2 * zoom, cx: 960, cy: 540, rx: 0, ry: 0, ...o };
+};
+const deskCam = track([
+  K(0, 214, 243, 3.3), K(1.9, 214, 243, 3.1, 'lin'),
+  K(2.95, 800, 450, .8, 'io', { rx: 15, ry: -9 }), K(3.25, 800, 450, .805, 'lin', { rx: 14.5, ry: -8.5 }),
+  K(3.9, 800, 450, 1), K(4.0, 800, 450, 1),
+  K(6.0, 610, 330, 1.42), K(6.6, 420, 700, 1.6), K(6.78, 420, 700, 1.62, 'lin'), K(7.03, 216, 752, 2.5, 'in'),
+  K(7.03, 500, 560, 1.5), K(7.7, 600, 552, 1.25, 'out'), K(8.0, 600, 552, 1.27, 'lin'),
+  K(8.55, 600, 551, 1.4), K(9.0, 600, 551, 1.42, 'lin'), K(9.5, 520, 560, 1.6), K(9.62, 520, 560, 1.61, 'lin'),
+  K(10.0, 800, 450, 1), K(10.6, 800, 430, 1.22), K(12.6, 800, 440, 1.27, 'lin'),
+  K(13.0, 800, 450, 1), K(13.5, 800, 560, 1.3), K(13.95, 640, 635, 1.7), K(15.3, 650, 635, 1.75, 'lin'),
+  K(15.9, 1150, 635, 1.7), K(16.1, 1150, 635, 1.71, 'lin'),
+  K(16.5, 800, 450, 1), K(17.1, 608, 430, 1.5), K(18.15, 640, 440, 1.57, 'lin'),
+  K(18.5, 800, 450, 1), K(19.0, 800, 405, 1.4), K(19.6, 800, 405, 1.45, 'lin'),
+  K(20.0, 800, 450, 1), K(20.6, 1100, 420, 1.4), K(21.15, 1100, 420, 1.44, 'lin'),
+  K(21.5, 800, 450, 1), K(22.3, 800, 450, .9), K(26.0, 800, 450, .9, 'lin'),
+  K(26.6, 800, 450, .6, 'io', { cx: 770, cy: 540, ry: 14, rx: 3 }), K(28.0, 800, 450, .62, 'lin', { cx: 770, cy: 540, ry: 12.5, rx: 3 }),
+  K(28.7, 800, 450, .5, 'in', { cx: 770, cy: 540, ry: 10, rx: 3 }),
+]);
+const deskLook = track([
+  { t: 21.5, o: 1, blur: 0 }, { t: 22.3, o: .13, blur: 16 }, { t: 26.0, o: .13, blur: 16, ease: 'lin' },
+  { t: 26.55, o: 1, blur: 0 }, { t: 28.0, o: 1, blur: 0 }, { t: 28.55, o: 0, blur: 14, ease: 'in' },
+]);
+
+// ── which real screenshot is on screen, and when it changes ──
+const LAG = .06; // the app answers a tap a few frames later
+const CUTS = [
+  [0, 'wall_bare', 0], [3.5, 'wall', 0],
+  ...Array.from({ length: 17 }, (_, i) => [4.08 + i * .107, 'lapse' + String(i).padStart(2, '0'), .07]),
+  [6.0, 'wall', .16], [7.0 + LAG, 'camera', .26], [8.0 + LAG, 'area', .22], [9.0 + LAG, 'area_mask', .22],
+  [10.0 + LAG, 'tasks', .26], [11.0 + LAG, 'tasks_done1', .2], [11.5 + LAG, 'tasks_done2', .2], [12.0 + LAG, 'tasks_done3', .2],
+  [13.0 + LAG, 'analytics', .26], [14.0 + LAG, 'analytics_stock', .22], [14.5 + LAG, 'analytics_compliant', .22], [15.0 + LAG, 'analytics_covered', .22],
+  [16.5 + LAG, 'run', .26], [18.5 + LAG, 'search', .22], [18.98, 'search_typed', .12], [20.0 + LAG, 'ai', .26],
+  [22.8, 'wall', .3], [26.75 + LAG, 'wall_light', .75, [1542, 38]],
+];
+const PHONE_CUTS = [[0, 'm_route', 0], [23.0 + LAG, 'm_watch', .22], [23.9, 'm_analyze', .2], [24.7, 'm_confirmed', .2], [25.5, 'm_next', .25], [26.9, 'ml_next', .6]];
+
+// ── taps: [time, node, element rect in that node's pixels, corner radius] ──
+const NAV = { tasks: [186.7, 18, 98.7, 40], analytics: [527.6, 18, 120.2, 40], run: [649.8, 18, 136.9, 40], ai: [788.7, 18, 55, 40], phone: [873.7, 18, 56, 40], search: [939.7, 18, 149.9, 40], theme: [1508, 18, 68, 40] };
+const TAPS = [
+  [4.0, 'desk', [24, 100, 36, 36], 18], [6.75, 'desk', [28, 618, 376, 267], 20], [8.0, 'desk', [875, 351.5, 306, 60], 12], [9.0, 'desk', [376, 567, 278, 30.5], 6],
+  [10.0, 'desk', NAV.tasks, 20], [11.0, 'desk', [519, 430.7, 46, 46], 23], [11.5, 'desk', [519, 430.7, 46, 46], 23], [12.0, 'desk', [519, 430.7, 46, 46], 23],
+  [13.0, 'desk', NAV.analytics, 20], [14.0, 'desk', [806.3, 572.9, 51.5, 26], 13], [14.5, 'desk', [859.8, 572.9, 73.5, 26], 13], [15.0, 'desk', [935.3, 572.9, 63.7, 26], 13],
+  [16.5, 'desk', NAV.run, 20], [17.75, 'desk', [924.6, 416.8, 242.4, 44], 10], [18.5, 'desk', NAV.search, 20], [20.0, 'desk', NAV.ai, 20], [21.5, 'desk', NAV.phone, 20],
+  [23.0, 'phoneC', [263.3, 859, 137.7, 46], 23], [26.75, 'desk', NAV.theme, 20],
+];
+const LABELS = [[2.5, 'Store wall'], [4.0, 'Day replay'], [7.0, 'Planogram check'], [10.0, 'Tasks'], [13.0, 'Analytics'], [16.5, 'Test images'], [18.5, 'Search'], [20.0, 'Assistant'], [21.7, 'Team mobile'], [26.7, 'Light & dark'], [28.1, '']];
+// Sound cues the audio script reads back.
+window.CUES = { taps: TAPS.map((x) => x[0]), lapse: [4.08, .107, 17], whoosh: [1.9, 6.9, 21.5, 26.2, 28.0], flip: 26.8, end: 28.3 };
+
+// ── build ──
+const desk = $('desk'), deskShots = $('deskShots');
+const mkShots = (parent, cuts) => cuts.map(([t, name, fade, wipe]) => {
+  const img = new Image(); img.className = 'shot'; img.src = `shots/${name}.jpg`; img.style.visibility = 'hidden'; parent.appendChild(img);
+  return { t, fade, wipe, img };
+});
+const deskCuts = mkShots(deskShots, CUTS);
+const phoneCuts = mkShots($('phoneC'), PHONE_CUTS);
+for (const [id, name] of [['phoneL', 'm_tasks'], ['phoneR', 'm_map']]) { const i = new Image(); i.className = 'shot'; i.src = `shots/${name}.jpg`; $(id).appendChild(i); }
+// The four numbers and three cameras arrive one by one over the bare page.
+const PIECES = [[28, 326.9, 279.5, 183], [321.5, 326.9, 279.5, 183], [615, 326.9, 279.5, 183], [908.5, 326.9, 279.5, 183], [28, 617.9, 376, 267.5], [420, 617.9, 376, 267.5], [812, 617.9, 376, 267.5]].map(([x, y, w, h], i) => {
+  const pad = 18, el = document.createElement('div'); el.className = 'piece';
+  Object.assign(el.style, { left: x - pad + 'px', top: y - pad + 'px', width: w + pad * 2 + 'px', height: Math.min(h + pad * 2, 900 - y + pad) + 'px', backgroundImage: 'url(shots/wall.jpg)', backgroundPosition: `${-(x - pad)}px ${-(y - pad)}px` });
+  desk.appendChild(el); return { el, at: 2.45 + i * .085 + (i > 3 ? .12 : 0) };
+});
+const SPLIT = 58.2; // "Every shelf." | "In sight."
+const tagA = new Image(), tagB = new Image();
+for (const [im, clip] of [[tagA, `inset(-20% ${100 - SPLIT}% -20% -5%)`], [tagB, `inset(-20% -5% -20% ${SPLIT}%)`]]) { im.className = 'tagline'; im.src = 'shots/brand_tagline_dark.png'; im.style.clipPath = clip; desk.appendChild(im); }
+const taps = TAPS.map(([t, node, r, rad]) => {
+  const parent = $(node), hl = document.createElement('div'), ring = document.createElement('div'), dot = document.createElement('div');
+  hl.className = 'hl'; ring.className = 'ring'; dot.className = 'dot';
+  Object.assign(hl.style, { left: r[0] + 'px', top: r[1] + 'px', width: r[2] + 'px', height: r[3] + 'px', borderRadius: rad + 'px' });
+  const x = r[0] + r[2] / 2, y = r[1] + r[3] / 2;
+  for (const e of [ring, dot]) { e.style.left = x + 'px'; e.style.top = y + 'px'; }
+  parent.append(hl, ring, dot);
+  return { t, node, hl, ring, dot };
+});
+
+function showCuts(cuts, t) {
+  let cur = 0;
+  for (let i = 0; i < cuts.length; i++) if (t >= cuts[i].t) cur = i;
+  const c = cuts[cur], a = c.fade ? clamp((t - c.t) / c.fade) : 1;
+  cuts.forEach((k, i) => {
+    const on = i === cur || (i === cur - 1 && a < 1);
+    k.img.style.visibility = on ? 'visible' : 'hidden';
+    if (!on) return;
+    if (i === cur && c.wipe) { k.img.style.opacity = 1; k.img.style.clipPath = a < 1 ? `circle(${EASE.out(a) * 1950}px at ${c.wipe[0]}px ${c.wipe[1]}px)` : 'none'; }
+    else k.img.style.opacity = i === cur ? EASE.io(a) : 1;
+  });
+}
+
+const phoneKey = (t, cx, cy, z, fy, rx, ry, o, ease = 'io') => ({ t, ease, cx, cy, z, fx: 215, fy, rx, ry, o });
+const phoneC = track([
+  phoneKey(21.7, 960, 1560, 1.0, 466, 28, -18, 0), phoneKey(22.5, 960, 540, 1.0, 466, 0, 0, 1, 'out'),
+  phoneKey(23.0, 960, 540, 1.42, 552, 0, 0, 1), phoneKey(25.9, 960, 540, 1.48, 556, 0, 0, 1, 'lin'),
+  phoneKey(26.6, 1500, 566, .8, 466, 2, -16, 1), phoneKey(28.0, 1496, 566, .82, 466, 2, -14.5, 1, 'lin'), phoneKey(28.6, 1496, 566, .7, 466, 2, -12, 0, 'in'),
+]);
+const side = (dir, d) => track([
+  phoneKey(21.8 + d, 960 + dir * 300, 1600, .8, 466, 28, dir * -10, 0), phoneKey(22.6 + d, 960 + dir * 470, 580, .82, 466, 0, dir * -24, 1, 'out'),
+  phoneKey(22.62 + d, 960 + dir * 470, 580, .82, 466, 0, dir * -24, 1, 'lin'), phoneKey(23.1, 960 + dir * 640, 560, .92, 466, 0, dir * -30, .42),
+  phoneKey(25.9, 960 + dir * 655, 560, .94, 466, 0, dir * -28, .42, 'lin'), phoneKey(26.4, 960 + dir * 1100, 560, .8, 466, 0, dir * -40, 0),
+]);
+const phoneL = side(-1, 0), phoneR = side(1, .08);
+
+window.seek = (t) => {
+  // stage
+  const light = ramp(t, 26.85, 27.45);
+  const c = Math.round(lerp(5, 243, light));
+  $('stage').style.background = `rgb(${c},${c},${Math.round(lerp(6, 245, light))})`;
+  $('glow').style.opacity = (1 - light) * (.5 + .5 * ramp(t, 1.9, 3.5));
+
+  // desktop
+  const cam = { ...deskCam(t) };
+  let bump = 0;
+  for (const k of taps) if (k.node === 'desk') { const d = t - k.t; if (d > 0 && d < .4) bump += Math.sin(Math.PI * d / .4) * (1 - d / .4); }
+  cam.z *= 1 - .014 * bump;
+  place(desk, cam);
+  const floating = cam.z < 1.199 || Math.abs(cam.rx) + Math.abs(cam.ry) > .01;
+  desk.style.borderRadius = floating ? '20px' : '0';
+  const look = deskLook(t), born = ramp(t, 1.95, 2.6, 'lin');
+  desk.style.opacity = look.o;
+  desk.style.filter = look.blur > .05 ? `blur(${look.blur.toFixed(2)}px)` : 'none';
+  desk.style.boxShadow = floating && born > 0 ? `0 0 0 1px rgba(${light > .5 ? '0,0,0,.10' : '255,255,255,.12'}), 0 80px 160px rgba(0,0,0,${(light > .5 ? .22 : .7) * born})` : 'none';
+  deskShots.style.opacity = born;
+  showCuts(deskCuts, t);
+  for (const p of PIECES) {
+    const u = ramp(t, p.at, p.at + .55, 'out');
+    p.el.style.display = t < 3.5 ? 'block' : 'none';
+    p.el.style.opacity = clamp((t - p.at) / .25);
+    p.el.style.transform = `translateY(${(1 - u) * 46}px) scale(${lerp(.9, 1, u)})`;
+    p.el.style.filter = u < 1 ? `blur(${((1 - u) * 10).toFixed(2)}px)` : 'none';
+  }
+  [[tagA, .25], [tagB, .95]].forEach(([im, at]) => {
+    const u = ramp(t, at, at + .7, 'out');
+    im.style.display = t < 2.7 ? 'block' : 'none';
+    im.style.opacity = clamp((t - at) / .35) * (1 - ramp(t, 2.2, 2.65, 'lin'));
+    im.style.transform = `translateY(${(1 - u) * 9}px)`;
+    im.style.filter = u < 1 ? `blur(${((1 - u) * 4).toFixed(2)}px)` : 'none';
+  });
+
+  // phones
+  const pc = phoneC(t); place($('phoneC'), pc); $('phoneC').style.opacity = pc.o; $('phoneC').style.display = t > 21.65 && pc.o > 0 ? 'block' : 'none';
+  showCuts(phoneCuts, t);
+  for (const [id, f] of [['phoneL', phoneL], ['phoneR', phoneR]]) { const p = f(t); place($(id), p); $(id).style.opacity = p.o; $(id).style.display = t > 21.75 && t < 26.4 ? 'block' : 'none'; }
+
+  // taps: the dot lands, the control lights up, a ring leaves
+  for (const k of taps) {
+    const d = t - k.t, z = k.node === 'desk' ? cam.z / 1.2 : pc.z, s = 1.15 / z;
+    const arrive = EASE.out(clamp((d + .3) / .3)), gone = clamp(d / .26);
+    k.dot.style.opacity = d < -.3 || d > .3 ? 0 : arrive * (1 - gone);
+    k.dot.style.transform = `scale(${s * (lerp(1.9, 1, arrive) - .32 * Math.sin(Math.PI * clamp(d / .2)))})`;
+    const r = EASE.out(clamp(d / .6));
+    k.ring.style.opacity = d <= 0 || d > .6 ? 0 : .9 * (1 - r);
+    k.ring.style.transform = `scale(${s * lerp(1, 3.6, r)})`;
+    k.hl.style.opacity = d < -.06 || d > .45 ? 0 : .17 * clamp((d + .06) / .06) * (1 - clamp((d - .05) / .4));
+  }
+
+  // feature label
+  let li = -1; for (let i = 0; i < LABELS.length; i++) if (t >= LABELS[i][0]) li = i;
+  const lab = $('label');
+  if (li < 0 || !LABELS[li][1]) { const prev = LABELS[li - 1]; lab.style.opacity = li > 0 && prev ? 1 - ramp(t, LABELS[li][0], LABELS[li][0] + .3) : 0; }
+  else {
+    const since = t - LABELS[li][0], inn = EASE.out(clamp(since / .45));
+    lab.children[0].textContent = String(li + 1).padStart(2, '0');
+    lab.children[1].textContent = LABELS[li][1];
+    lab.style.opacity = li === 0 ? inn : lerp(.0, 1, clamp(since / .2));
+    lab.style.transform = `translateY(${(1 - inn) * 14}px)`;
+  }
+
+  // closing mark
+  const m = ramp(t, 28.4, 29.1, 'out'), l = ramp(t, 28.85, 29.5, 'out');
+  $('mark').style.opacity = clamp((t - 28.4) / .4); $('mark').style.transform = `scale(${lerp(.9, 1, m)})`; $('mark').style.filter = m < 1 ? `blur(${((1 - m) * 14).toFixed(2)}px)` : 'none';
+  $('line').style.opacity = clamp((t - 28.85) / .4) * .9; $('line').style.transform = `translateY(${(1 - l) * 16}px)`;
+};
+
+window.ready = Promise.all([...document.images].map((i) => i.decode().catch(() => console.log('missing', i.src)))).then(() => { seek(0); return true; });
+
+// Opened by hand: fit the window and play with sound. The renderer passes ?render and drives seek() itself.
+if (!location.search.includes('render')) {
+  const fit = () => { const s = Math.min(innerWidth / 1920, innerHeight / 1080); $('stage').style.transform = `scale(${s})`; };
+  addEventListener('resize', fit); fit();
+  const audio = new Audio('sound.wav'); audio.loop = true;
+  let t0 = performance.now(), started = false;
+  addEventListener('click', () => { if (!started) { started = true; audio.currentTime = ((performance.now() - t0) / 1000) % DURATION; audio.play().catch(() => {}); } });
+  const loop = () => { seek(started && !audio.paused ? audio.currentTime : ((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+  window.ready.then(loop);
+}
+</script>
+</body>
+</html>
