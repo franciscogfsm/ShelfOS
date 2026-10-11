@@ -1,12 +1,14 @@
 """Smaller and faster engines, scored the same way as the shipped one: which keeps the quality?
 
 usage: python tools/edge_sweep.py [--variants b-tta,b,b-int8,splus,splus-int8,s,s-int8] [--split late,fwd]
+       python tools/edge_sweep.py --variants bl-tta,bl,bl-int8      (the full engine, quantized)
 
 For every variant: build its bank of the reference day (once, kept in cache/), cross-validate it with
 tools/cv.py's evaluate() on the same labels, rects and folds, and time the backbone on the CPU for one
 image (11 crops, no GPU, the device a shelf-side box would have). Prints one table. A heavy job: run it
 alone (see AGENTS_COORDINATION.md, machine limits). Int8 banks are built on the CPU (a few minutes each).
 
+  bl-tta      ViT-B + ViT-L + mirror (today's engine.pkl)  bl     the same without the mirror
   b-tta       ViT-B + mirror (today's engine_lite)        s      ViT-S/16 (21.6 M parameters)
   b           ViT-B, no mirror                            splus  ViT-S+/16 (28.7 M parameters)
   *-int8      same backbone with int8 linear layers (SHELFOS_INT8=1, CPU)
@@ -27,7 +29,7 @@ from cv import evaluate  # noqa: E402
 
 from shelfos.bank import build_bank  # noqa: E402
 
-BACKBONE = {"b": "vit_base_patch16_dinov3.lvd1689m", "splus": "vit_small_plus_patch16_dinov3.lvd1689m", "s": "vit_small_patch16_dinov3.lvd1689m"}
+BACKBONE = {"bl": "vit_base_patch16_dinov3.lvd1689m+vit_large_patch16_dinov3.lvd1689m", "b": "vit_base_patch16_dinov3.lvd1689m", "splus": "vit_small_plus_patch16_dinov3.lvd1689m", "s": "vit_small_patch16_dinov3.lvd1689m"}
 
 
 def parse(v: str):
