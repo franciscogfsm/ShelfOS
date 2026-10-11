@@ -4,9 +4,8 @@
     GET  /api/store                       the reference day plus the images analysed in this run
     POST /api/analyze                     multipart "files" (+ "paths"): images and/or zips -> NDJSON stream
     POST /api/analyze-folder              {"path": "..."} -> NDJSON stream
-    GET  /api/predictions                 official submission format (?scope=run|all&empty=compliant|noncompliant&download=1)
+    GET  /api/predictions                 official submission format (?scope=run|all&download=1)
     POST /api/score                       body = annotations.json -> official score breakdown
-    POST /api/policy                      {"emptyCompliant": bool}
     POST /api/reset                       forget the run
     GET  /api/count/policy                which products the "Count units" button may count
     POST /api/count                       {"camera","file","area"} -> visible units with boxes (vision model, on demand)
@@ -33,12 +32,6 @@ NO_UI = """<!doctype html><meta charset="utf-8"><title>ShelfOS</title>
 <h1>Shelf<span style="color:#2fe0a0">OS</span> engine is running</h1>
 <p>The web interface has not been built yet. Run <code>npm install &amp;&amp; npm run build</code> inside <code>web/</code> and reload.</p>
 <p>The API is live: <a style="color:#22d3ee" href="/api/health">/api/health</a>, <a style="color:#22d3ee" href="/docs">/docs</a>.</p>"""
-
-
-def _policy(empty: str | None, default: bool) -> bool:
-    if empty is None:
-        return default
-    return empty.lower() in ("compliant", "true", "1", "yes")
 
 
 def _ndjson(events):
@@ -90,7 +83,7 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
             engine, embedder = variants[model]
         selected = copy.copy(service)
         selected.engine, selected.embedder = engine, embedder
-        engine.empty_compliant = service.empty_compliant
+        engine.empty_compliant = True  # as in ShelfService: the organisers' rule, nothing switches it
         w, h = engine.frame_size
         selected.hidden = {cam: [i for i, area in enumerate(areas) if area.visible_fraction((h, w)) < MIN_VISIBLE]
                            for cam, areas in service.areas.items()}
@@ -161,7 +154,7 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
             d = service.run.get(camera, {}).get(Path(file).name, {}).get('areas', {}).get(area_id)
         d = d or service.reference.get(camera, {}).get(Path(file).name, {}).get(area_id)
         if d:
-            o = official(d, service.empty_compliant)
+            o = official(d)
             if not o['planogram_compliant'] and o['stock_level'] != 'empty':
                 raise HTTPException(409, 'This slot holds another product.')
         key = config('OPENROUTER_API_KEY')
@@ -192,7 +185,7 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
             prediction = service.run.get(camera, {}).get(Path(file).name, {}).get('areas', {}).get(area_id)
         prediction = prediction or service.reference.get(camera, {}).get(Path(file).name, {}).get(area_id)
         if prediction:
-            output = official(prediction, service.empty_compliant)
+            output = official(prediction)
             if not output['planogram_compliant'] and output['stock_level'] != 'empty':
                 raise HTTPException(409, 'This slot holds another product; banana ripeness cannot be assessed.')
         key = config('OPENROUTER_API_KEY')
@@ -228,15 +221,15 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
         return StreamingResponse(_ndjson(selected.analyze_folder(path)), media_type="application/x-ndjson", headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
 
     @app.get("/api/predictions")
-    def predictions(scope: str = "run", empty: str | None = None, download: int = 0):
-        body = json.dumps(service.predictions(scope, _policy(empty, service.empty_compliant)), indent=1)
+    def predictions(scope: str = "run", download: int = 0):
+        body = json.dumps(service.predictions(scope), indent=1)
         headers = {"Cache-Control": "no-store"}
         if download:
             headers["Content-Disposition"] = 'attachment; filename="predictions.json"'
         return Response(body, media_type="application/json", headers=headers)
 
     @app.post("/api/score")
-    async def score(request: Request, empty: str | None = None):
+    async def score(request: Request):
         try:
             annotations = json.loads(await request.body())
         except ValueError:
@@ -244,20 +237,9 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
         if not isinstance(annotations, dict) or not all(isinstance(v, dict) for v in annotations.values()):
             raise HTTPException(400, "expected the annotation format {camera: {image: {area: {...}}}}")
         try:
-            return service.score(annotations, _policy(empty, service.empty_compliant))
+            return service.score(annotations)
         except (KeyError, TypeError, ValueError, AttributeError):  # an area without stock_value / planogram_compliant, a list for an object
             raise HTTPException(400, "expected the annotation format {camera: {image: {area: {...}}}}")
-
-    @app.post("/api/policy")
-    async def policy(request: Request):
-        try:
-            value = json.loads(await request.body())["emptyCompliant"]
-        except (ValueError, KeyError, TypeError):
-            value = None
-        if not isinstance(value, bool):  # bool("false") is True: only a real boolean changes the policy
-            raise HTTPException(400, 'Send {"emptyCompliant": true} or {"emptyCompliant": false}.')
-        service.empty_compliant = value
-        return {"emptyCompliant": service.empty_compliant}
 
     @app.post("/api/reset")
     def reset():

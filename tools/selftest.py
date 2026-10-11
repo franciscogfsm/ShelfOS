@@ -85,6 +85,11 @@ def main():
     ev = service.analyze(raw, "9999/1751052241.jpg")
     check("unknown camera folder falls back to the picture", ev["type"] == "frame" and ev["camera"] == cams[0] and ev["cameraSource"] == "auto")
 
+    print("the organisers' rule for empty areas")
+    answers = service.predictions("run")  # everything analysed so far, every camera
+    seen_empty = [(c, i, a) for c, files in service.run.items() for i, record in files.items() for a, d in record["areas"].items() if d["stock_probs"][0] >= 0.5]
+    check("an area seen as empty is reported planogram_compliant true", all(answers[c][i][a]["planogram_compliant"] is True for c, i, a in seen_empty), f"{len(seen_empty)} empty")
+
     print("zip with a wrapping folder and macOS debris")
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w") as z:
@@ -113,10 +118,6 @@ def main():
     truth[cam0][img0]["ghost_area"] = {"planogram_compliant": True, "stock_level": "full", "stock_value": 1.0}
     res = service.score(truth)
     check("an annotated area missing from the output costs 5", res["score"] == 2 * n - 5 and res["missing"] == 1, f"{res['score']}")
-    flipped = service.predictions("run", empty_compliant=not service.empty_compliant)
-    diff = sum(pred[c][i][a]["planogram_compliant"] != flipped[c][i][a]["planogram_compliant"] for c in pred for i in pred[c] for a in pred[c][i])
-    empties = sum(v["stock_level"] == "empty" for c in pred.values() for i in c.values() for v in i.values())
-    check("the empty-area policy only touches (near-)empty areas", diff >= empties, f"{diff} changed, {empties} empty")
 
     service.reset()
     print(f"\n{'ALL GOOD' if not failures else 'FAILED: ' + ', '.join(failures)}")

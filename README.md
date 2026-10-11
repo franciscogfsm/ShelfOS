@@ -20,10 +20,9 @@ questions are closed; do not reopen them.
   guide (`docs/arquivo/STEP1_PLAN.md`, B3) the rule "empty area: compliant true, plus `u`" is now just
   "empty area: compliant true". Rule 10 in `labeler/docs/regras.md` says the same.
 
-The code already answers this way: `empty_compliant` is true by default in the engine, the
-service, the command line and the cross-validation. The `--empty-noncompliant` switch and
-the matching switch in the app are left over from before the answer. Leave them off for
-anything that is submitted.
+The code answers this way and has no switch for it: the command line, the server and the app
+always report an empty area as compliant. The `--empty-noncompliant` option and the switch on
+the results screen were removed on 11 Oct 2026.
 
 **Evaluation images come with their timestamp, but the answer must come from the image.**
 Asked whether the model may learn from earlier moments of the day, the organisers answered

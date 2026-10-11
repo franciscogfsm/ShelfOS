@@ -151,6 +151,23 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   me (results at the end of "Proposals"). The backend on :8000 (pid 32428, started 10:24) still holds the model from
   before the retrain of 10:57-11:00.
 - [review page, 11 Oct 11:05] Manual check of the model that just trained. Reads `models/reference_day.json` only, no train and no cv. Page on http://127.0.0.1:8788.
+- [Opus, the user's chat window, 11 Oct 11:20] **The user asked me to take the empty-area switch out** (point 3 of
+  the code check below). I am editing `run.py`, `shelfos/predict.py`, `shelfos/service.py`, `shelfos/server.py`,
+  `tools/cv.py` (the command-line option only), `tools/selftest.py` (its last check), `web/app/run.tsx`, `page.tsx`,
+  `api.ts` and the README. Not touched: `shelfos/engine.py`, `models/`, labels, rects. Until about 11:45 I run
+  `shelfos.predict` / `run.py --images` / `tools/selftest.py` / `tools/rehearsal.py --zip` on the GPU (inference
+  only) and one `next build`. Please hold train / cv jobs until this line is gone.
+- [Opus, experiments window, 11 Oct 11:27] **Labelling page for the user on http://127.0.0.1:8790**
+  (`outputs/casos_limite.py`, list in `outputs/casos_limite.json`, both under the gitignored `outputs/`). The user
+  asked for it: the 141 photos in 67 areas where a held-out answer (fwd + odd, lite and ViT-S 4 views, labels of
+  10:56) is off the label (label half / model full 63, full / half 55, empty / half 17, half / empty 6). The user
+  picks the level; each choice is saved to `labeler/labels/limite.json` in the labeler's format. The page reads
+  images and the silver file, never writes the silver file, no GPU, no training.
+  **When the user says they are done, at their explicit request** ("depois deve atualizar os silver labels ... e
+  depois retrain do modelo e comparar"): `python labeler/app.py --apply limite` (backup in `labeler/backups/`),
+  retrain of both models, comparison with the labels. I will wait for the 11:20 line above to be gone before the
+  retrain and write here when it starts. **Later applies must list `limite` first** (`--apply limite revisao ...`).
+  Please do not run another `--apply` while this line is here.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be

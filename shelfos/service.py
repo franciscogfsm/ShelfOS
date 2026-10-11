@@ -52,13 +52,13 @@ def _zip_bytes(zf: zipfile.ZipFile, name: str) -> bytes:
 
 class ShelfService:
     def __init__(self, model_path="models/engine.pkl", planogram_path="data/planogram.json", reference_path="models/reference_day.json",
-                 reference_images="data/images", run_dir="runs/latest", device: str | None = None, empty_compliant: bool = True):
+                 reference_images="data/images", run_dir="runs/latest", device: str | None = None):
         t0 = time.time()
         self.areas: dict[str, list[Area]] = load_planogram(planogram_path)
         self.model_path = Path(model_path)
         self.model_time = int(self.model_path.stat().st_mtime)  # of the file loaded now: a retrain needs a restart
         self.engine = Engine.load(model_path)
-        self.engine.empty_compliant = empty_compliant
+        self.engine.empty_compliant = True  # the organisers' rule (README): an empty area is planogram_compliant true, and nothing switches it
         self.embedder = Embedder(self.engine.model_name or MODEL_NAME, device=device, size=self.engine.crop_size, tta=getattr(self.engine, "tta", False))
         self.embedder.warmup()
         if self.embedder.device != "cpu":  # compare patches with the reference day on the GPU too
@@ -71,18 +71,9 @@ class ShelfService:
         self.run: dict[str, dict[str, dict]] = {}
         self.lock = threading.Lock()
         self.model_lock = threading.Lock()
-        self._reference_frames: dict = {}  # policy -> {camera: {file: frame json}}, built once
+        self._reference_frames: dict = {}  # camera -> {file: frame json}, built once
         self._load_run()
         self.load_seconds = time.time() - t0
-
-    # ---- policy ---------------------------------------------------------------------------
-    @property
-    def empty_compliant(self) -> bool:
-        return self.engine.empty_compliant
-
-    @empty_compliant.setter
-    def empty_compliant(self, value: bool) -> None:
-        self.engine.empty_compliant = bool(value)
 
     # ---- one image ------------------------------------------------------------------------
     def resolve_camera(self, rel_path: str, image: np.ndarray | None) -> tuple[str | None, str | None, list[str]]:
@@ -288,7 +279,7 @@ class ShelfService:
             "looks": d.get("looks_like", []),
             "obstruction": round(float(d.get("obstruction", 0.0)), 3),
             "source": d.get("source", "image"),
-            "official": official(d, self.empty_compliant),
+            "official": official(d),
         }
 
     def _frame_json(self, record: dict, origin: str) -> dict:
@@ -296,7 +287,7 @@ class ShelfService:
                 "warnings": record.get("warnings", []), "areas": {aid: self._area_json(d) for aid, d in record["areas"].items()}}
 
     def _reference(self, cam: str) -> dict:
-        cache = self._reference_frames.setdefault(self.empty_compliant, {})
+        cache = self._reference_frames
         if cam not in cache:
             cache[cam] = {fname: self._frame_json({"file": fname, "ts": timestamp_of(fname), "areas": per_area}, "reference")
                           for fname, per_area in self.reference.get(cam, {}).items() if timestamp_of(fname) is not None}
@@ -324,28 +315,27 @@ class ShelfService:
         return {
             "store": "Continente Bom Dia S. Romão, Leiria", "section": "Frutas e Legumes",
             "width": self.engine.frame_size[0], "height": self.engine.frame_size[1],
-            "emptyCompliant": self.empty_compliant, "products": products, "cameras": cameras,
+            "emptyCompliant": True, "products": products, "cameras": cameras,  # emptyCompliant: the rule in force, read by the assistant
             "run": {"images": n_img, "areas": sum(len(r["areas"]) for v in run.values() for r in v.values()),
                     "ms": sum(r.get("ms") or 0 for v in run.values() for r in v.values())} if n_img else None,
         }
 
-    def predictions(self, scope: str = "run", empty_compliant: bool | None = None) -> dict:
+    def predictions(self, scope: str = "run") -> dict:
         """Official nested format {camera: {image file: {area_id: {planogram_compliant, stock_level, stock_value}}}}."""
-        policy = self.empty_compliant if empty_compliant is None else empty_compliant
         out: dict = {}
         if scope == "all":
             for cam, files in self.reference.items():
                 for fname, per_area in files.items():
-                    out.setdefault(cam, {})[fname] = {aid: official(d, policy) for aid, d in per_area.items()}
+                    out.setdefault(cam, {})[fname] = {aid: official(d) for aid, d in per_area.items()}
         with self.lock:
             for cam, files in self.run.items():
                 for fname, record in files.items():
-                    out.setdefault(cam, {})[fname] = {aid: official(d, policy) for aid, d in record["areas"].items()}
+                    out.setdefault(cam, {})[fname] = {aid: official(d) for aid, d in record["areas"].items()}
         return out
 
-    def score(self, annotations: dict, empty_compliant: bool | None = None) -> dict:
+    def score(self, annotations: dict) -> dict:
         """Official score of the current run against an annotation file, with the list of mistakes."""
-        pred = self.predictions("all", empty_compliant)
+        pred = self.predictions("all")
         res = score_submission(pred, annotations)
         mistakes = []
         for cam, images in annotations.items():
@@ -365,5 +355,5 @@ class ShelfService:
 
     def health(self) -> dict:
         return {"ready": True, "device": self.embedder.device, "model": self.embedder.model_name, "cameras": len(self.areas),
-                "areas": sum(len(v) for v in self.areas.values()), "emptyCompliant": self.empty_compliant, "loadSeconds": round(self.load_seconds, 1),
+                "areas": sum(len(v) for v in self.areas.values()), "emptyCompliant": True, "loadSeconds": round(self.load_seconds, 1),
                 "engine": self.model_path.name, "engineTime": self.model_time}

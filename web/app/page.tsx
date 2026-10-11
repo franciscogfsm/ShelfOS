@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Health, RunEvent, Score, ShelfModel, Upload, analyzeFiles, analyzeFolder, fromDrop, loadHealth, loadStore, resetRun, scoreAgainst, setPolicy, sort } from "./api";
+import { Health, RunEvent, Score, ShelfModel, Upload, analyzeFiles, analyzeFolder, fromDrop, loadHealth, loadStore, resetRun, scoreAgainst, sort } from "./api";
 import { AreaDetail, AreaList, Badges, CameraStage, CountUp, Crop, DayStrip, FrameView, Kpi } from "./components";
 import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task, byImpact, clock, confidence, duration, frameAt, gain, since, statusOf, storeScore, tally, tasksAt, timeline, withFrame } from "./lib";
 import { IDLE, RunState, RunView } from "./run";
@@ -43,7 +43,6 @@ export default function Page() {
   const [shelfModel, setShelfModel] = useState<ShelfModel>("full");
   const [score, setScore] = useState<Score | null>(null);
   const [scoreError, setScoreError] = useState<string | null>(null);
-  const [truth, setTruth] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);
   const [searching, setSearching] = useState(false);
   const abort = useRef<AbortController | null>(null);
@@ -183,7 +182,6 @@ export default function Page() {
     setScoreError(null);
     try {
       setScore(await scoreAgainst(annotations));
-      setTruth(annotations);
     } catch (err) {
       setScore(null);
       setScoreError(`Could not score that file: ${message(err)}`);
@@ -212,18 +210,6 @@ export default function Page() {
     setStore(s);
     return s;
   }, []);
-  const changePolicy = useCallback(
-    async (emptyCompliant: boolean) => {
-      try {
-        await setPolicy(emptyCompliant);
-        await refresh();
-        if (truth) await doScore(truth);
-      } catch (err) {
-        setScoreError(`Could not change the rule: ${message(err)}`);
-      }
-    },
-    [refresh, truth, doScore],
-  );
   const clearRun = useCallback(async () => {
     abort.current?.abort();
     try {
@@ -234,7 +220,6 @@ export default function Page() {
     setRun(IDLE);
     setScore(null);
     setScoreError(null);
-    setTruth(null);
   }, [refresh]);
 
   // dropping files anywhere on the page starts a test run
@@ -430,7 +415,6 @@ export default function Page() {
               onCancel={() => abort.current?.abort()}
               onOpen={openFrame}
               onFocus={(c, f, a) => openFrame(c, f, a)}
-              onPolicy={changePolicy}
               onScore={doScore}
               onReset={clearRun}
             />

@@ -28,13 +28,13 @@ const say = (m: Mistake, v: Mistake["predicted"] | Mistake["truth"]) =>
   v === null || v === undefined || typeof v === "object" ? "nothing" : m.field === "id" ? (v === true || v === "true" ? "compliant" : "not compliant") : LEVEL_NAME[String(v)] ?? String(v);
 
 export function RunView({
-  store, health, run, model, onModel, score, scoreError, onFiles, onFolder, onCancel, onOpen, onFocus, onPolicy, onScore, onReset,
+  store, health, run, model, onModel, score, scoreError, onFiles, onFolder, onCancel, onOpen, onFocus, onScore, onReset,
 }: {
   store: Store; health: Health | null; run: RunState; score: Score | null; scoreError: string | null;
   model: ShelfModel; onModel: (model: ShelfModel) => void;
   onFiles: (items: Upload[]) => void; onFolder: (path: string) => void; onCancel: () => void;
   onOpen: (cam: Camera, frame: Frame) => void; onFocus: (cam: Camera, frame: Frame, areaId: string) => void;
-  onPolicy: (emptyCompliant: boolean) => void; onScore: (annotations: string) => void; onReset: () => void;
+  onScore: (annotations: string) => void; onReset: () => void;
 }) {
   const frames = useMemo(() => {
     const all = runFrames(store);
@@ -57,7 +57,6 @@ export function RunView({
   const recognised = frames.filter((x) => x.frame.cameraSource === "auto").length;
   const fromMemory = frames.reduce((n, x) => n + Object.values(x.frame.areas).filter((p) => p.source === "memory").length, 0);
   const hasRun = frames.length > 0 || running;
-  const emptyCompliant = store.emptyCompliant ?? true;
 
   return (
     <div className="run-workspace flex flex-col gap-5">
@@ -145,18 +144,6 @@ export function RunView({
             {recognised > 0 && <span className="text-muted">{recognised} camera{recognised === 1 ? "" : "s"} recognised from the picture</span>}
             {fromMemory > 0 && <span className="text-low">⚠ {fromMemory} area{fromMemory === 1 ? "" : "s"} answered from the last known state</span>}
             <div className="flex-1" />
-            <label className="flex items-center gap-2">
-              <span className="text-muted" title="The brief does not say how an empty area is annotated. This switch rewrites planogram_compliant for the empty areas, on screen and in the file.">
-                An empty slot counts as
-              </span>
-              <span className="flex rounded-md border border-line p-0.5">
-                {[true, false].map((v) => (
-                  <button key={String(v)} disabled={running} onClick={() => onPolicy(v)} className={`px-2.5 py-1 rounded transition-colors ${emptyCompliant === v ? "bg-raised text-white" : "text-muted hover:text-white"}`}>
-                    {v ? "compliant" : "not compliant"}
-                  </button>
-                ))}
-              </span>
-            </label>
             <button onClick={onReset} disabled={running} className="text-muted hover:text-white disabled:opacity-40">
               Clear run
             </button>

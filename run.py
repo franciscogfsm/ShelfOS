@@ -8,7 +8,6 @@ The first start builds the model from the reference day (about a minute on a GPU
 
 options
     --out FILE              where --images writes the predictions (default predictions.json)
-    --empty-noncompliant    report empty areas as planogram_compliant=false (default: true)
     --port N                port of the app (default 8000)
     --lan                   also reachable from other devices on the same network
     --no-browser            do not open the browser
@@ -70,7 +69,7 @@ def predict(a) -> None:
     from shelfos.predict import run
 
     t0 = time.time()
-    service, events = run(a.images, str(MODEL), str(PLANOGRAM), empty_compliant=not a.empty_noncompliant, device="cpu" if a.cpu else None)
+    service, events = run(a.images, str(MODEL), str(PLANOGRAM), device="cpu" if a.cpu else None)
     pred = service.predictions("run")
     out = Path(a.out)
     if not pred:
@@ -83,7 +82,6 @@ def predict(a) -> None:
     warned = [e for e in events if e["type"] == "frame" and e["warnings"]]
     print(f"\n{out.resolve()}\n{n_img} images, {n_area} areas, {time.time() - t0:.1f}s on {service.embedder.device}"
           f"{f', {len(skipped)} files skipped' if skipped else ''}{f', {len(warned)} images with warnings' if warned else ''}")
-    print(f"empty areas reported as planogram_compliant={'false' if a.empty_noncompliant else 'true'}")
     from shelfos.validate import expected_images, validate
 
     problems = validate(pred, service.areas, expected_images(a.images, set(service.areas)))
@@ -111,7 +109,7 @@ def serve(a) -> None:
     if built.exists() and any(p.stat().st_mtime > built.stat().st_mtime for p in (ROOT / "web" / "app").rglob("*") if p.is_file()):
         print("NOTE: the built interface (web/out) is older than web/app. Run `npm run build` inside web/ to see the latest screens.")
     print("Loading the model ...")
-    service = ShelfService(str(MODEL), str(PLANOGRAM), str(REFERENCE), str(IMAGES), device="cpu" if a.cpu else None, empty_compliant=not a.empty_noncompliant)
+    service = ShelfService(str(MODEL), str(PLANOGRAM), str(REFERENCE), str(IMAGES), device="cpu" if a.cpu else None)
     app = create_app(service, ROOT / "web" / "out")
     host = "0.0.0.0" if a.lan else "127.0.0.1"
     url = f"http://localhost:{a.port}"
@@ -130,7 +128,6 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--images")
     ap.add_argument("--out", default="predictions.json")
-    ap.add_argument("--empty-noncompliant", action="store_true")
     ap.add_argument("--train", action="store_true")
     ap.add_argument("--port", type=int, default=8000)
     ap.add_argument("--lan", action="store_true")

@@ -221,26 +221,19 @@ export async function analyzeFolder(path: string, onEvent: (e: RunEvent) => void
   await stream(res, onEvent);
 }
 
-const emptyParam = (emptyCompliant?: boolean) => (emptyCompliant === undefined ? "" : `&empty=${emptyCompliant ? "compliant" : "noncompliant"}`);
+export const predictionsUrl = (scope: "run" | "all", download = true) =>
+  `${apiBase()}/api/predictions?scope=${scope}${download ? "&download=1" : ""}`;
 
-export const predictionsUrl = (scope: "run" | "all", emptyCompliant?: boolean, download = true) =>
-  `${apiBase()}/api/predictions?scope=${scope}${emptyParam(emptyCompliant)}${download ? "&download=1" : ""}`;
-
-export async function loadPredictions(scope: "run" | "all", emptyCompliant?: boolean): Promise<Record<string, Record<string, Record<string, unknown>>>> {
-  const r = await fetch(predictionsUrl(scope, emptyCompliant, false), { cache: "no-store" });
+export async function loadPredictions(scope: "run" | "all"): Promise<Record<string, Record<string, Record<string, unknown>>>> {
+  const r = await fetch(predictionsUrl(scope, false), { cache: "no-store" });
   if (!r.ok) await fail(r);
   return r.json();
 }
 
-export async function scoreAgainst(annotations: string, emptyCompliant?: boolean): Promise<Score> {
-  const r = await fetch(`${apiBase()}/api/score?${emptyParam(emptyCompliant).slice(1)}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: annotations });
+export async function scoreAgainst(annotations: string): Promise<Score> {
+  const r = await fetch(`${apiBase()}/api/score`, { method: "POST", headers: { "Content-Type": "application/json" }, body: annotations });
   if (!r.ok) await fail(r);
   return r.json();
-}
-
-export async function setPolicy(emptyCompliant: boolean): Promise<void> {
-  const r = await fetch(`${apiBase()}/api/policy`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ emptyCompliant }) });
-  if (!r.ok) await fail(r);
 }
 
 export async function resetRun(): Promise<void> {

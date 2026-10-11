@@ -4,7 +4,7 @@ Every fold trains a fresh Engine on some frames and predicts whole held-out fram
 same code path the app uses. Scores follow the official rules but are measured against
 OUR OWN labels, not the hidden official annotations.
 
-usage: python tools/cv.py [--bank cache/bank.npz] [--split late|fwd|lofo] [--empty-noncompliant] [--save oof.npz]
+usage: python tools/cv.py [--bank cache/bank.npz] [--split late|fwd|lofo] [--save oof.npz]
 
   late  the last two frames of every camera, trained on everything before (what validation looks like)
   fwd   four such steps back through the day, always trained on the past only
@@ -80,12 +80,11 @@ def main():
     ap.add_argument("--labels", default="labels/silver_labels.txt")
     ap.add_argument("--rects", default="labels/background_rects.txt")
     ap.add_argument("--split", default="late")
-    ap.add_argument("--empty-noncompliant", action="store_true")
     ap.add_argument("--save")
     a = ap.parse_args()
     bank = dict(np.load(a.bank))
     for split in a.split.split(","):
-        r, oof = evaluate(bank, a.labels, a.rects, split, empty_compliant=not a.empty_noncompliant)
+        r, oof = evaluate(bank, a.labels, a.rects, split)
         show("engine", r)
         if a.save:
             np.savez(a.save.replace(".npz", f"_{split}.npz"), **oof)

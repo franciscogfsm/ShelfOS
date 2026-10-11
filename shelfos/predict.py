@@ -1,8 +1,7 @@
 """Run ShelfOS on a folder of camera images and write the official submission file.
 
 usage: python -m shelfos.predict --images <folder> --out predictions.json
-       [--model models/engine.pkl] [--planogram data/planogram.json] [--details details.json]
-       [--empty-noncompliant] [--cpu]
+       [--model models/engine.pkl] [--planogram data/planogram.json] [--details details.json] [--cpu]
 
 The folder may be laid out as <folder>/<camera>/<file>.jpg, or hold loose files (the camera
 is then recognised from the picture), or be a .zip. Every planogram area of every image
@@ -18,9 +17,9 @@ from pathlib import Path
 from .service import ShelfService
 
 
-def run(images, model="models/engine.pkl", planogram="data/planogram.json", empty_compliant=True, device=None, verbose=True):
+def run(images, model="models/engine.pkl", planogram="data/planogram.json", device=None, verbose=True):
     """-> (service, list of events). The run is kept in memory only."""
-    service = ShelfService(model, planogram, reference_path=None, run_dir=Path("runs") / "cli", device=device, empty_compliant=empty_compliant)
+    service = ShelfService(model, planogram, reference_path=None, run_dir=Path("runs") / "cli", device=device)
     service.reset()
     events = []
     for ev in service.analyze_folder(str(images)):
@@ -42,11 +41,10 @@ def main():
     ap.add_argument("--model", default="models/engine.pkl")
     ap.add_argument("--planogram", default="data/planogram.json")
     ap.add_argument("--details", help="also write per-area evidence (probabilities, occupancy maps)")
-    ap.add_argument("--empty-noncompliant", action="store_true", help="report empty areas as planogram_compliant=false")
     ap.add_argument("--cpu", action="store_true")
     a = ap.parse_args()
     t0 = time.time()
-    service, events = run(a.images, a.model, a.planogram, empty_compliant=not a.empty_noncompliant, device="cpu" if a.cpu else None)
+    service, events = run(a.images, a.model, a.planogram, device="cpu" if a.cpu else None)
     pred = service.predictions("run")
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text(json.dumps(pred, indent=1), encoding="utf-8")
