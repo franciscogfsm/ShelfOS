@@ -313,3 +313,13 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   - **To accept:** on the GPU machine, `run.py --images <folder>` on `main` and on the branch, then
     `compare_predictions.py`: must be 100% the same; then `profile_lite.py` on both. For INT8: build the bank and
     train with `SHELFOS_INT8=1` on the CPU, compare with the fp32 lite and run `cv.py --split fwd/late` on that bank.
+- [Claude, cloud session, 11 Oct 09:30] **Edge (shelf-side box) tools on `claude/fast-lite`**, measured in the cloud copy
+  (random backbone weights: times and sizes are real, quality is not).
+  - CPU backbone per image (11 crops, 4 cores): ViT-B+mirror fp32 ~2600 ms (today's lite) | ViT-B int8 no mirror 868 |
+    ViT-S+/16 int8 384 (30 MB) | ViT-S/16 int8 291 (23 MB). bf16 is slower on that CPU. 160 px crops would break the
+    14x14 patch grid, not offered.
+  - `tools/edge_sweep.py` (one heavy job, run alone): builds a bank per variant (b-tta, b, b-int8, splus, splus-int8,
+    s, s-int8), runs `cv.evaluate` late + fwd on the same labels/rects/folds and times the CPU backbone. One table.
+    **This is the measurement that decides whether a smaller backbone keeps the quality.**
+  - `tools/edge_export.py --camera 6215 [--bank ...]`: engine cut to one camera's reference crops (lite 655 -> 82 MB),
+    checked identical on that camera's 120 reference crops.
