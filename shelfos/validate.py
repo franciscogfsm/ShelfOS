@@ -18,7 +18,7 @@ from pathlib import Path
 from .planogram import load_planogram
 from .scoring import LEVELS, VALUES
 
-IMAGE_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+IMAGE_EXT = {".jpg", ".jpeg", ".jpe", ".jfif", ".png", ".bmp", ".webp", ".tif", ".tiff", ".jp2"}  # same set in service.py
 
 
 def expected_images(images: str | Path, cameras: set[str]) -> dict[str, set[str]]:
@@ -40,6 +40,12 @@ def expected_images(images: str | Path, cameras: set[str]) -> dict[str, set[str]
         if cam is None:
             hits = [c for c in re.findall(r"(?<!\d)(\d{3,6})(?!\d)", Path(base).stem) if c in cameras]
             cam = hits[0] if len(set(hits)) == 1 else None
+        if cam is None:  # a folder that carries the id among other text: cam_6215
+            for p in reversed(parts[:-1]):
+                hits = {c for c in re.findall(r"(?<!\d)(\d{3,6})(?!\d)", p) if c in cameras}
+                if len(hits) == 1:
+                    cam = hits.pop()
+                    break
         if cam is not None:
             out.setdefault(cam, set()).add(base)
     return out

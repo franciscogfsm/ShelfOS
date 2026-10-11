@@ -33,7 +33,7 @@ export const FrameView = memo(function FrameView({
   return (
     <svg ref={svg} viewBox={`0 0 ${w} ${h}`} className={`frame-view select-none ${fit ? "camera-frame-fit" : "block w-full h-auto"}`} data-loaded={loaded}>
       <rect width={w} height={h} fill="none" />
-      {visible && <image className="frame-image" href={frameSrc(store, cam, frame)} width={w} height={h} onLoad={() => setLoaded(true)} />}
+      {visible && <image className="frame-image" href={frameSrc(store, cam, frame)} width={w} height={h} preserveAspectRatio="none" onLoad={() => setLoaded(true)} />}
       {!compact && <rect width={w} height={h} fill={`url(#${vignette})`} pointerEvents="none" />}
       <defs>
         <radialGradient id={vignette} cx="50%" cy="50%" r="75%">
@@ -135,7 +135,7 @@ export const Crop = memo(function Crop({ store, cam, frame, area, className }: {
   const b = bbox(area.quad, store.width, store.height);
   return (
     <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} preserveAspectRatio="xMidYMid slice" className={`crop ${className ?? ""}`}>
-      <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} />
+      <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} preserveAspectRatio="none" />
     </svg>
   );
 });
@@ -298,7 +298,8 @@ export function DayStrip({ store, ts, line, onChange }: { store: Store; ts: numb
         max={line.max}
         step={60}
         value={Math.min(ts, line.max)}
-        onChange={(e) => onChange(Number(e.target.value) >= line.max ? line.latest : Number(e.target.value))}
+        // the day is rarely a whole number of steps long, so the last step short of the end counts as the end
+        onChange={(e) => { const v = Number(e.target.value); onChange(v + 60 > line.max ? line.latest : v); }}
       />
     </div>
   );
@@ -386,7 +387,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
         <figure>
           <div className="relative">
             <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} className="w-full aspect-square rounded-lg bg-black" preserveAspectRatio="xMidYMid slice">
-              <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} />
+              <image href={frameSrc(store, cam, frame)} width={store.width} height={store.height} preserveAspectRatio="none" />
               <polygon points={points(area.quad)} fill="none" stroke={STATUS[s].color} strokeWidth={Math.max(b.w, b.h) / 90} strokeLinejoin="round" />
               {tally?.result?.boxes.map((u, i) => (
                 <g key={i} fill="none" strokeDasharray={u.partial ? `${line / 70} ${line / 110}` : undefined}>
@@ -408,7 +409,7 @@ export function AreaDetail({ store, cam, frame, area, onPick, onClose }: { store
         <figure>
           <button onClick={() => onPick(best.ts)} className="block w-full" title="Jump to this moment">
             <svg viewBox={`${b.x} ${b.y} ${b.w} ${b.h}`} className="w-full aspect-square rounded-lg bg-black opacity-90 hover:opacity-100" preserveAspectRatio="xMidYMid slice">
-              <image href={frameSrc(store, cam, best)} width={store.width} height={store.height} />
+              <image href={frameSrc(store, cam, best)} width={store.width} height={store.height} preserveAspectRatio="none" />
             </svg>
           </button>
           <figcaption className="mt-1.5 text-[10px] uppercase tracking-[0.12em] text-muted">At its best · {clock(best.ts)}</figcaption>

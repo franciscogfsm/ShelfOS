@@ -63,7 +63,7 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
     @app.post('/api/assistant/chat')
     async def assistant_chat(request: Request):
         raw = await request.body()
-        if len(raw) > 48000:
+        if len(raw) > 400000:  # 20 messages of 6000 characters fit; older builds of the app also send their cards back
             raise HTTPException(413, 'Conversation is too long.')
         try:
             body = json.loads(raw)
@@ -165,8 +165,13 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
 
     @app.post("/api/analyze-folder")
     async def analyze_folder(request: Request):
-        body = await request.json()
-        path = str(body.get("path", "")).strip()
+        # reads any folder of this machine and shows its images: only for whoever sits at it
+        if request.client is None or request.client.host not in ("127.0.0.1", "::1"):
+            raise HTTPException(403, "A folder path can only be analysed from the computer that runs ShelfOS. Drop the images or a zip here instead.")
+        try:
+            path = str(json.loads(await request.body())["path"]).strip()
+        except (ValueError, KeyError, TypeError):
+            path = ""
         if not path:
             raise HTTPException(400, "path is required")
         return StreamingResponse(_ndjson(service.analyze_folder(path)), media_type="application/x-ndjson", headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
@@ -187,12 +192,20 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
             raise HTTPException(400, "the body is not valid JSON")
         if not isinstance(annotations, dict) or not all(isinstance(v, dict) for v in annotations.values()):
             raise HTTPException(400, "expected the annotation format {camera: {image: {area: {...}}}}")
-        return service.score(annotations, _policy(empty, service.empty_compliant))
+        try:
+            return service.score(annotations, _policy(empty, service.empty_compliant))
+        except (KeyError, TypeError, ValueError, AttributeError):  # an area without stock_value / planogram_compliant, a list for an object
+            raise HTTPException(400, "expected the annotation format {camera: {image: {area: {...}}}}")
 
     @app.post("/api/policy")
     async def policy(request: Request):
-        body = await request.json()
-        service.empty_compliant = bool(body.get("emptyCompliant", True))
+        try:
+            value = json.loads(await request.body())["emptyCompliant"]
+        except (ValueError, KeyError, TypeError):
+            value = None
+        if not isinstance(value, bool):  # bool("false") is True: only a real boolean changes the policy
+            raise HTTPException(400, 'Send {"emptyCompliant": true} or {"emptyCompliant": false}.')
+        service.empty_compliant = value
         return {"emptyCompliant": service.empty_compliant}
 
     @app.post("/api/reset")
@@ -205,7 +218,8 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
         p = service.frame_path(camera, file)
         if p is None:
             raise HTTPException(404, "no such frame")
-        return FileResponse(p, headers={"Cache-Control": "public, max-age=86400"})
+        # a reference frame never changes; an analysed image can be dropped again under the same name
+        return FileResponse(p, headers={"Cache-Control": "no-cache" if service.run_dir in p.parents else "public, max-age=86400"})
 
     ui = Path(ui_dir)
     if (ui / "index.html").exists():

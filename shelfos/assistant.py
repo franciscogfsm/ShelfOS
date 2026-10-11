@@ -134,8 +134,8 @@ def stream_chat(messages, context, key, model):
                 if chunk.get('error'):
                     yield dict(type='error', message='OpenRouter interrupted the response. Try again.')
                     return
-                for choice in chunk.get('choices', []):
-                    content = choice.get('delta', {}).get('content')
+                for choice in chunk.get('choices') or []:
+                    content = (choice.get('delta') or {}).get('content')
                     if isinstance(content, str) and content:
                         yield dict(type='delta', text=content)
             yield dict(type='error', message='The response ended unexpectedly. Please retry.')
