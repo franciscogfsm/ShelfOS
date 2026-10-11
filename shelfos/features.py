@@ -1,6 +1,7 @@
 """DINOv3 embeddings of rectified planogram-area crops."""
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 import cv2
@@ -50,6 +51,11 @@ class Embedder:
         self.tta = bool(tta)
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.models = [load_backbone(n).to(self.device) for n in split_names(model_name)]
+        # SHELFOS_INT8=1: int8 weights for the linear layers on the CPU (about 2x faster there). Opt-in: check
+        # it with tools/compare_predictions.py first, and build the bank with the same setting before training.
+        self.int8 = self.device == "cpu" and os.environ.get("SHELFOS_INT8") == "1"
+        if self.int8:
+            self.models = [torch.ao.quantization.quantize_dynamic(m, {torch.nn.Linear}, dtype=torch.qint8) for m in self.models]
         self.model = self.models[0]
         self.n_prefix = [getattr(m, "num_prefix_tokens", 1) for m in self.models]
         self.half = self.device == "cuda"  # half precision on GPU: 3x faster, cosine to fp32 > 0.99999
