@@ -1,0 +1,6 @@
+*
+!vercel.json
+!vercel-demo
+vercel-demo/*
+!vercel-demo/public
+!vercel-demo/public/**

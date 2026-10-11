@@ -1,0 +1,7 @@
+{
+  "framework": null,
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "vercel-demo/public",
+  "cleanUrls": true
+}

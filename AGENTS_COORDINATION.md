@@ -147,13 +147,10 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
 ## Running now
 - Advisor vote applied at 10:56. Two labels changed: `6376_15` t11 half -> full, `6491_8` t12 full -> half. The other six votes matched the label. Backup `labeler/backups/silver_labels-20261011-105638.txt`. Both models retrained (lite 64s, full 169s, 234s total). New calls match those labels. Nothing heavy running.
 - The :8000 backend still has the previous model in memory. Restart it so `ShelfService` loads the new `engine.pkl`.
-- [Opus, 11 Oct 10:45] The two lines above are out of date: the advisor page submitted once at 23:21 on 10 Oct (one
-  photo, 6215_2 t11 H -> E; both models retrained 23:22-23:24) and nothing listens on :8777 or :8000 now.
-  My experiments of this morning are finished (results at the end of "Proposals").
-- [Opus, 11 Oct 10:50] The user wants the single best model decided, not a tie. **Running cv again from my
-  scratchpad, one process at a time** (a second held-out split and a few more feature extractors, banks in scratch);
-  nothing in production is touched. A backend started by another session answers on :8000 since 10:24 (`engine.pkl`).
-  Please hold other train / cv jobs until this line is gone; RAM is at 2.3 GB free.
+- [Opus, 11 Oct 11:10] My cv runs of 10:50-11:05 are finished: nothing of mine is running, no need to hold jobs for
+  me (results at the end of "Proposals"). The backend on :8000 (pid 32428, started 10:24) still holds the model from
+  before the retrain of 10:57-11:00.
+- [review page, 11 Oct 11:05] Manual check of the model that just trained. Reads `models/reference_day.json` only, no train and no cv. Page on http://127.0.0.1:8788.
 
 ## Proposals (Opus writes, Fable applies)
 - [Opus 20:10] Context for everything below. Organisers' definition, relayed by the user: "would someone be
@@ -356,7 +353,8 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   1. **Full is not better than lite on these labels** (late -1 point, fwd +1) and takes 2.8x the time. On the 96
      reviewed synthetic edge cases (1136 areas) full is ahead: 46.5% of max, ViT-S 4 views 45.0%, ViT-S mirror 44.9%,
      lite 44.3%; the difference is the product answer under packaging and shoppers (1084 right against 1064 for lite).
-  2. **ViT-S with 4 views is the best row on both splits and halves the CPU time of lite; on this GPU it is no faster
+  2. *(The accuracy claim is superseded, see the correction of 11:10 at the end: on a second held-out split the
+     advantage is gone.)* **ViT-S with 4 views is the best row on both splits and halves the CPU time of lite; on this GPU it is no faster
      than lite** (four small forward calls: backbone stage 110-137 ms against 98). Checked end to end in a scratch
      copy of `main`: patch `cache/opus11_tta4.patch` (`features.py` +17 -7, `bank.py`, `train.py`,
      `tools/build_bank.py`; `git apply --check` passes on `6dc1f57`). With the patch, `engine_lite.pkl` and
@@ -384,8 +382,66 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   - (a) No new code: ship lite. In `run.py`: `BANK = cache/bank_tta.npz`, `MODEL = models/engine_lite.pkl`,
     `REFERENCE = models/reference_day_lite.json`, `BACKBONES` = ViT-B alone. Same score on real frames as full, 2.8x
     less time per image.
-  - (b) ViT-S 4 views: `git apply cache/opus11_tta4.patch`, then
+  - (b) **Withdrawn at 11:10, see the correction below.** ViT-S 4 views: `git apply cache/opus11_tta4.patch`, then
     `python tools/build_bank.py data/planogram.json data/images cache/bank_s4.npz vit_small_patch16_dinov3.lvd1689m 224 --tta4`
     (the first run downloads 82 MB into `models/backbone/`) and
     `python -m shelfos.train --bank cache/bank_s4.npz --out models/engine_s4.pkl --reference models/reference_day_s4.json`;
     point `run.py` at those; `tools/selftest.py`, `tools/rehearsal.py --zip`, restart the backend.
+- [Opus, 11 Oct 11:10] **Correction to finding 2 and to (b) above: ViT-S with 4 views is not better than lite.**
+  Checked on a second held-out split, `odd`: photos 1-2, 3-4, 5-6 and 7-8 from the end held out, trained on the
+  past only. With `fwd`, every photo from the last to the ninth from the end is answered twice, once one step and
+  once two steps after the newest training photo: 2432 answers. Labels of 23:21.
+  - ViT-S 4 views against lite on `odd`: +0.770 against +0.772 stock points per area. Over fwd + odd: **+7 stock
+    points, 95% interval -86 to +98** (bootstrap over the 152 areas). The +17 / +10 in the table was noise.
+    **(b) is withdrawn; (a) stands**: lite and full tie on late and fwd, and lite takes 2.8x less time.
+  - Where the points are lost (lite, +1907 over the 2432 answers). Shelf at the same level as in the newest training
+    photo: 2120 answers, 2086 right, +2013. **Shelf lower than in that photo: 225 answers, 132 right, 88 answered
+    above, -142.** Shelf higher: 87 answers, 70 right. ViT-S 4 views loses them the same way (131 of 225 right, 89
+    above).
+  - Tried: training crops whose label differs from the previous photo of their area weigh 1 + W. ViT-S 4-view bank,
+    same 2432 answers, engine +1914: W=1 -22, W=2 -14, W=4 +6, W=8 +21 (drops right 131 -> 141 of 225; same-level
+    crops answered below 22 -> 27). Only the drops weighted: W=2 -4, W=4 -8, W=8 -15. `min_samples_leaf` 10: -8.
+    Without the change features: -46. All of it is inside the interval above and none was repeated on `bank_tta`,
+    so **there is nothing to propose**. The rows after W=8 ran after the label change of 10:56 (two labels) against
+    a baseline from before it.
+  - Logs in my scratchpad: `out/k_stats.log`, `l_errors.log`, `m_trans.log`, `n_diag.log`.
+- [Opus, 11 Oct 11:10] **Code check asked by the user (a list from another assistant), against `f147488`.** Nothing
+  in the repo was changed. Two things are worth a fix, both small:
+  - **The empty-area switch is still on the run screen** (`web/app/run.tsx:148-159`, in the built `web/out` too;
+    `POST /api/policy`, `?empty=` on `/api/predictions`) as well as in `run.py`, `shelfos/predict.py` and
+    `tools/cv.py`. It is off by default everywhere. Its tooltip still says the brief leaves the question open. 93 of
+    our 1950 labelled crops are empty (4.8%); with the switch on each of them goes from +1 to -2, about 7% of the
+    maximum. Suggest taking it off the screen and out of the two commands that write `predictions.json`.
+  - `tools/edge_manifest_from_labeler.py`: the docstring shows `--out FILE`, the code reads only `--out=FILE`. Run
+    in a scratch copy: with the space it stops with an error and writes nothing (`FileNotFoundError`, or
+    `AttributeError` when the file exists, because the output path is read as one more input). `--out=FILE` works
+    and gives the `manifest_human.json` we have, byte for byte. Fix: argparse, or `--out=` in the docstring.
+
+  Checked and fine:
+  - `run.py --images` does check the file since `2747a61` (00:49). `run.predict()` called with a stand-in for the
+    model printed "validated" for a complete set of answers and listed all 4 faults planted in a damaged one. It
+    reports them and exits 0; `python -m shelfos.predict` exits 1.
+  - The three `folds()` (`tools/cv.py`, `exp2.py`, `experiment.py`) hold out and train on the same rows for `late`
+    (304 / 1646 on `bank_tta`) and `lofo`, and the first two for `fwd`. They differ in what they return, not in the
+    split.
+  - `tools/cut_product_assets.py` reads a folder of this laptop (it exists here); Pillow comes with torchvision.
+  - Unused, safe to delete, housekeeping only: `tools/exp2.py`, `exp3.py`, `experiment.py`,
+    `experiment_compliance.py`, `occ_probe.py`, `lab_sequential.py` (nothing outside these six imports them; `tools/` is not
+    copied into `release/`); `STOCK`, `LEVELS`, `VALUES` in `shelfos/labels.py` and `id_points`, `decide_compliant`
+    in `shelfos/scoring.py` (no other file uses them and neither pickle refers to them).
+- [Opus, 11 Oct 11:15] **Rules on top of the engine's answer: nothing to propose. Labels of 10:56 (after the vote).**
+  Same 2432 held-out answers (fwd + odd), engine fitted per fold on today's labels: lite (`bank_tta`) 2291 right,
+  50 below, 91 above, +1918 stock points; ViT-S 4 views the same 2291 / 50 / 91, +1918. They tie to the point.
+  - Answered half and occupancy below T -> empty: T=0.03 +12 (lite) / +4 (ViT-S); from T=0.05 up it is 0 or negative
+    on both (T=0.10: -11 / -7). Labelled-half crops go down to occupancy 0.04.
+  - Answered half and occupancy below 0.3 x the lowest training 'half' of the same area -> empty: +12 (3 answers
+    moved, 0 worse) on lite, +24 (6 moved, 0 worse) on ViT-S. At 0.5: +16 / +7, at 0.7: +26 / -5, at 0.9: -49 / -67.
+    Three to six answers out of 2432; too few to call.
+  - Answered full and occupancy / full references below T -> half: negative at every T (0.7: -20 / -11).
+  - Answered full and occupancy fell by more than T since the last photos -> half: T=0.15 +14 / +2, T=0.10 -39 / +2.
+  - Why: of the 91 answers above the label, about 71 are 'full' answered on a 'half' label. Their occupancy against
+    the full references has median 0.91 (quartiles 0.87 to 0.97); the 1886 right 'full' answers have median 1.00
+    (0.98 to 1.02), and 5% of them are below 0.89. Contact sheet of the 11 missed drops of the late fold: six are
+    full -> half with a few fruits gone from one corner, five are half -> empty with one to three items left.
+  - Scripts and logs in my scratchpad: `p_feats.py`, `q_rules.py`, `out/q_rules.log`, `out/diag_S224t4_*.jpg`.
+  Nothing of mine is running.
