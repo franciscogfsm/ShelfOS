@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Health, RunEvent, Score, Upload, analyzeFiles, analyzeFolder, fromDrop, loadHealth, loadStore, resetRun, scoreAgainst, setPolicy, sort } from "./api";
+import { Health, RunEvent, Score, ShelfModel, Upload, analyzeFiles, analyzeFolder, fromDrop, loadHealth, loadStore, resetRun, scoreAgainst, setPolicy, sort } from "./api";
 import { AreaDetail, AreaList, Badges, CameraStage, CountUp, Crop, DayStrip, FrameView, Kpi } from "./components";
 import { Camera, Frame, ISSUES, LEVEL_VALUE, ORDER, STATUS, Status, Store, Task, byImpact, clock, confidence, duration, frameAt, gain, since, statusOf, storeScore, tally, tasksAt, timeline, withFrame } from "./lib";
 import { IDLE, RunState, RunView } from "./run";
@@ -40,6 +40,7 @@ export default function Page() {
   const [notice, setNotice] = useState<{ key: string; product: string } | null>(null);
   const [playing, setPlaying] = useState(false);
   const [run, setRun] = useState<RunState>(IDLE);
+  const [shelfModel, setShelfModel] = useState<ShelfModel>("full");
   const [score, setScore] = useState<Score | null>(null);
   const [scoreError, setScoreError] = useState<string | null>(null);
   const [truth, setTruth] = useState<string | null>(null);
@@ -200,11 +201,11 @@ export default function Page() {
         return setRun((r) => ({ ...r, phase: "error", error: "there were no images in what was dropped", skipped: picked.ignored }));
       }
       const archive = picked.uploads.some((u) => /\.zip$/i.test(u.path));
-      begin((on, signal) => analyzeFiles(picked.uploads, on, signal), archive ? null : picked.uploads.length, { annotations: picked.annotations, skipped: picked.ignored });
+      begin((on, signal) => analyzeFiles(picked.uploads, on, signal, shelfModel), archive ? null : picked.uploads.length, { annotations: picked.annotations, skipped: picked.ignored });
     },
-    [raw?.live, hasRun, begin, doScore],
+    [raw?.live, hasRun, begin, doScore, shelfModel],
   );
-  const startFolder = useCallback((path: string) => begin((on, signal) => analyzeFolder(path, on, signal), null, {}), [begin]);
+  const startFolder = useCallback((path: string) => begin((on, signal) => analyzeFolder(path, on, signal, shelfModel), null, {}), [begin, shelfModel]);
 
   const refresh = useCallback(async () => {
     const s = await loadStore();
@@ -420,6 +421,8 @@ export default function Page() {
               store={store}
               health={health}
               run={run}
+              model={shelfModel}
+              onModel={setShelfModel}
               score={score}
               scoreError={scoreError}
               onFiles={startFiles}

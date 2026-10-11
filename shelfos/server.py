@@ -15,7 +15,9 @@
 from __future__ import annotations
 
 import asyncio
+import copy
 import json
+import threading
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
@@ -47,6 +49,52 @@ def _ndjson(events):
 def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI:
     app = FastAPI(title="ShelfOS", docs_url="/docs", redoc_url=None)
     app.add_middleware(CORSMiddleware, allow_origin_regex=r"http://(localhost|127\.0\.0\.1)(:\d+)?", allow_methods=["*"], allow_headers=["*"])
+
+    # A request-local service view shares the run, while keeping its model fixed.
+    # Lite reuses the already-loaded backbone rather than duplicating GPU weights.
+    variants = {}
+    variant_lock = threading.Lock()
+
+    def analysis_service(model):
+        from .engine import Engine
+        from .features import Embedder, MODEL_NAME, split_names
+        from .service import MIN_VISIBLE
+        if model not in ("full", "lite"):
+            raise HTTPException(422, "Choose Shelf Full or Shelf Lite.")
+        if model == "full":
+            return service
+        with variant_lock:
+            if model not in variants:
+                path = service.model_path.with_name("engine_lite.pkl")
+                if not path.is_file():
+                    raise HTTPException(503, "Shelf Lite is not installed on this server.")
+                engine = Engine.load(path)
+                names = split_names(engine.model_name or MODEL_NAME)
+                loaded = split_names(service.embedder.model_name)
+                if all(name in loaded for name in names):
+                    embedder = copy.copy(service.embedder)
+                    indices = [loaded.index(name) for name in names]
+                    embedder.models = [service.embedder.models[i] for i in indices]
+                    embedder.model = embedder.models[0]
+                    embedder.n_prefix = [service.embedder.n_prefix[i] for i in indices]
+                    embedder.model_name = engine.model_name or MODEL_NAME
+                    embedder.size = engine.crop_size
+                    embedder.tta = getattr(engine, "tta", False)
+                    embedder._plans = {}
+                else:
+                    embedder = Embedder(engine.model_name or MODEL_NAME, device=service.embedder.device,
+                                        size=engine.crop_size, tta=getattr(engine, "tta", False))
+                if embedder.device != "cpu":
+                    engine.memory.to(embedder.device)
+                variants[model] = (engine, embedder)
+            engine, embedder = variants[model]
+        selected = copy.copy(service)
+        selected.engine, selected.embedder = engine, embedder
+        engine.empty_compliant = service.empty_compliant
+        w, h = engine.frame_size
+        selected.hidden = {cam: [i for i, area in enumerate(areas) if area.visible_fraction((h, w)) < MIN_VISIBLE]
+                           for cam, areas in service.areas.items()}
+        return selected
 
     @app.get("/api/health")
     def health():
@@ -156,12 +204,13 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
             raise HTTPException(502, str(e))
 
     @app.post("/api/analyze")
-    async def analyze(files: list[UploadFile] = File(...), paths: list[str] = Form(default=[])):
+    async def analyze(files: list[UploadFile] = File(...), paths: list[str] = Form(default=[]), model: str = Form(default="full")):
+        selected = await asyncio.to_thread(analysis_service, model)
         items = []
         for i, f in enumerate(files):
             rel = paths[i] if i < len(paths) and paths[i] else (f.filename or f"image_{i}.jpg")
             items.append((rel, await f.read()))
-        return StreamingResponse(_ndjson(service.analyze_items(items)), media_type="application/x-ndjson", headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
+        return StreamingResponse(_ndjson(selected.analyze_items(items)), media_type="application/x-ndjson", headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
 
     @app.post("/api/analyze-folder")
     async def analyze_folder(request: Request):
@@ -169,12 +218,14 @@ def create_app(service: ShelfService, ui_dir: str | Path = "web/out") -> FastAPI
         if request.client is None or request.client.host not in ("127.0.0.1", "::1"):
             raise HTTPException(403, "A folder path can only be analysed from the computer that runs ShelfOS. Drop the images or a zip here instead.")
         try:
-            path = str(json.loads(await request.body())["path"]).strip()
+            body = json.loads(await request.body())
+            path = str(body["path"]).strip()
         except (ValueError, KeyError, TypeError):
             path = ""
         if not path:
             raise HTTPException(400, "path is required")
-        return StreamingResponse(_ndjson(service.analyze_folder(path)), media_type="application/x-ndjson", headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
+        selected = await asyncio.to_thread(analysis_service, body.get("model", "full"))
+        return StreamingResponse(_ndjson(selected.analyze_folder(path)), media_type="application/x-ndjson", headers={"X-Accel-Buffering": "no", "Cache-Control": "no-store"})
 
     @app.get("/api/predictions")
     def predictions(scope: str = "run", empty: str | None = None, download: int = 0):

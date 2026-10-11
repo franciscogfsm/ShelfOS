@@ -196,8 +196,11 @@ export interface Upload {
   path: string;
 }
 
-export async function analyzeFiles(items: Upload[], onEvent: (e: RunEvent) => void, signal?: AbortSignal) {
+export type ShelfModel = "full" | "lite";
+
+export async function analyzeFiles(items: Upload[], onEvent: (e: RunEvent) => void, signal?: AbortSignal, model: ShelfModel = "full") {
   const body = new FormData();
+  body.append("model", model);
   for (const it of items) {
     body.append("files", it.file, it.file.name);
     body.append("paths", it.path);
@@ -205,8 +208,8 @@ export async function analyzeFiles(items: Upload[], onEvent: (e: RunEvent) => vo
   await stream(await fetch(`${apiBase()}/api/analyze`, { method: "POST", body, signal }), onEvent);
 }
 
-export async function analyzeFolder(path: string, onEvent: (e: RunEvent) => void, signal?: AbortSignal) {
-  const res = await fetch(`${apiBase()}/api/analyze-folder`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ path }), signal });
+export async function analyzeFolder(path: string, onEvent: (e: RunEvent) => void, signal?: AbortSignal, model: ShelfModel = "full") {
+  const res = await fetch(`${apiBase()}/api/analyze-folder`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ path, model }), signal });
   await stream(res, onEvent);
 }
 

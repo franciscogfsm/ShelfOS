@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Health, Mistake, Score, Upload, fromInput, predictionsUrl } from "./api";
+import { Health, Mistake, Score, ShelfModel, Upload, fromInput, predictionsUrl } from "./api";
 import { Badges, Crop, FrameView } from "./components";
 import { ACCENT, Camera, Frame, ORDER, STATUS, Status, Store, clock, millis, runFrames, statusOf, tally } from "./lib";
 
@@ -28,9 +28,10 @@ const say = (m: Mistake, v: Mistake["predicted"] | Mistake["truth"]) =>
   v === null || v === undefined || typeof v === "object" ? "nothing" : m.field === "id" ? (v === true || v === "true" ? "compliant" : "not compliant") : LEVEL_NAME[String(v)] ?? String(v);
 
 export function RunView({
-  store, health, run, score, scoreError, onFiles, onFolder, onCancel, onOpen, onFocus, onPolicy, onScore, onReset,
+  store, health, run, model, onModel, score, scoreError, onFiles, onFolder, onCancel, onOpen, onFocus, onPolicy, onScore, onReset,
 }: {
   store: Store; health: Health | null; run: RunState; score: Score | null; scoreError: string | null;
+  model: ShelfModel; onModel: (model: ShelfModel) => void;
   onFiles: (items: Upload[]) => void; onFolder: (path: string) => void; onCancel: () => void;
   onOpen: (cam: Camera, frame: Frame) => void; onFocus: (cam: Camera, frame: Frame, areaId: string) => void;
   onPolicy: (emptyCompliant: boolean) => void; onScore: (annotations: string) => void; onReset: () => void;
@@ -69,6 +70,18 @@ export function RunView({
           </p>
         </div>
         <ServerChip live={!!store.live} health={health} />
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="inline-flex rounded-full border border-line bg-raised/40 p-1" role="group" aria-label="Inference model">
+          {(["full", "lite"] as const).map((value) => (
+            <button key={value} type="button" aria-pressed={model === value} disabled={running} onClick={() => onModel(value)}
+              className={`rounded-full px-5 py-2 text-sm transition-colors disabled:opacity-50 ${model === value ? "bg-raised text-white shadow-sm" : "text-muted hover:text-white"}`}>
+              Shelf {value === "full" ? "Full" : "Lite"}
+            </button>
+          ))}
+        </div>
+        <span className="text-xs text-muted">{model === "full" ? "Full analysis · default" : "Lighter model · faster analysis"}</span>
       </div>
 
       {!store.live ? (

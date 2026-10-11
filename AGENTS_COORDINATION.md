@@ -319,3 +319,15 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   - **To accept:** on the GPU machine, `run.py --images <folder>` on `main` and on the branch, then
     `compare_predictions.py`: must be 100% the same; then `profile_lite.py` on both. For INT8: build the bank and
     train with `SHELFOS_INT8=1` on the CPU, compare with the fp32 lite and run `cv.py --split fwd/late` on that bank.
+- [Opus, 11 Oct 10:10] **Acceptance of `claude/fast-lite` on this machine, real weights, RTX 4050 on mains power.**
+  The branch was merged into `main` at 09:55 before this was run. Code before = `81648df`, after = `44fe667`, both
+  extracted into my scratchpad; models = the 23:22 / 23:24 pickles; 56 images (the last two photos of every camera
+  under their own names and again under names 4000 s later), 608 areas.
+  - **GPU memory path: accepted.** lite: 0 of 608 stock answers and 0 compliance answers changed, no probability
+    differs; median 202 -> 149 ms per image. full: 0 and 0 changed, one probability differs by 0.0001; 500 -> 404 ms.
+  - CPU fp32, lite, 14 images: 0 of 152 answers changed, no probability differs.
+  - **`SHELFOS_INT8=1` must stay off with the pickles we have.** int8 inference on the fp32-trained `engine_lite.pkl`
+    changes **56 of 152 stock answers and 62 of 152 compliance answers** (P(compliant) 0.999 -> 0.2-0.4, occupancy off
+    by up to 0.44): the quantised features are not the fp32 features. It is only usable with a bank built and a model
+    trained under the same setting, and that has not been cross-validated. Speed here: 2.5-3.1 s -> 2.0 s per image
+    (14 threads), so about 1.3-1.5x, not 2x.
