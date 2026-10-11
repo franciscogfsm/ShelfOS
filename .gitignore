@@ -1,5 +1,7 @@
 # challenge data and anything derived from it stays local
 data/
+!vercel-demo/public/data/
+!vercel-demo/public/data/store.json
 new_dataset_hackathon_junctionx_10_oct_2026_v2/
 __MACOSX/
 cache/
