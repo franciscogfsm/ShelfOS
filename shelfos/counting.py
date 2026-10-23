@@ -5,7 +5,7 @@ nothing here reaches predictions.json. It answers "how many units can the camera
 many are there": units under the top layer are not visible and are not guessed.
 
 By default only product groups that passed the hand-count test (tools/count_eval.py, pass mark in
-Plano.md) are counted. SHELFOS_COUNT_GROUPS=large,pack enables groups for trying them out;
+docs/Plano.md) are counted. SHELFOS_COUNT_GROUPS=large,pack enables groups for trying them out;
 SHELFOS_COUNT_GROUPS=all opts every product, including bulk produce, into experimental counting.
 The vision model may still decline when individual units cannot be distinguished.
 """

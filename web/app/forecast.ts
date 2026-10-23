@@ -5,7 +5,7 @@ import type { AreaPred, Camera, Store } from "./lib";
  *  Type imports only, so tools/forecast_backtest.ts runs this file under plain Node.
  *
  *  `paceOf` is what the app shows: how long a slot took to go from full to half, a fact read off
- *  the captures. `forecast` extrapolates a run-out time; it failed the pass mark fixed in Plano.md
+ *  the captures. `forecast` extrapolates a run-out time; it failed the pass mark fixed in docs/Plano.md
  *  (idea C) even on perfect readings, so the app does not show it. It stays for the backtest. */
 
 export const MIN_POINTS = 3; // captures since the last restock
