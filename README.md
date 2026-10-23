@@ -11,6 +11,13 @@
 
 Every shelf. In sight.
 
+<img src="https://img.shields.io/badge/Python-3-2b2f36?style=flat&logo=python&logoColor=white" alt="Python">
+<img src="https://img.shields.io/badge/PyTorch-2.4+-2b2f36?style=flat&logo=pytorch&logoColor=white" alt="PyTorch">
+<img src="https://img.shields.io/badge/DINOv3-ViT--B_+_ViT--L-2b2f36?style=flat&logo=meta&logoColor=white" alt="DINOv3">
+<img src="https://img.shields.io/badge/FastAPI-backend-2b2f36?style=flat&logo=fastapi&logoColor=white" alt="FastAPI">
+<img src="https://img.shields.io/badge/Next.js-16-2b2f36?style=flat&logo=nextdotjs&logoColor=white" alt="Next.js">
+<img src="https://img.shields.io/badge/JunctionX_Lisbon-2026-2b2f36?style=flat" alt="JunctionX Lisbon 2026">
+
 <sub>
 <a href="docs/media/shelfos-film-45s.mp4">Film with sound</a> &nbsp;·&nbsp;
 <a href="#run-it">Run it</a> &nbsp;·&nbsp;
