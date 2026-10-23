@@ -1,146 +1,72 @@
 <div align="center">
 
 <a href="docs/media/shelfos-film-45s.mp4">
-  <img src="docs/media/shelfos-film.webp" alt="ShelfOS: the 45-second film" width="100%">
+  <img src="docs/media/shelfos-film.webp" alt="ShelfOS demo film" width="100%">
 </a>
 
+<br>
 <br>
 
 # ShelfOS
 
-### Every shelf. In sight.
+Every shelf. In sight.
 
-From a ceiling camera to a to-do list a member of the store staff can act on.
-For every planogram area, ShelfOS says whether the right product is there and how full it is.
-
-<br>
-
-[![Python](https://img.shields.io/badge/Python-3-0b0b0e?style=for-the-badge&logo=python&logoColor=FFD43B)](https://www.python.org)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.4+-0b0b0e?style=for-the-badge&logo=pytorch&logoColor=EE4C2C)](https://pytorch.org)
-[![DINOv3](https://img.shields.io/badge/DINOv3-ViT--B_+_ViT--L-0b0b0e?style=for-the-badge&logo=meta&logoColor=0081FB)](https://github.com/facebookresearch/dinov3)
-[![FastAPI](https://img.shields.io/badge/FastAPI-backend-0b0b0e?style=for-the-badge&logo=fastapi&logoColor=009688)](https://fastapi.tiangolo.com)
-[![Next.js](https://img.shields.io/badge/Next.js-16-0b0b0e?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
-
-![JunctionX](https://img.shields.io/badge/JunctionX_Lisbon_2026-Sensei_challenge-f5b83d?style=flat-square&labelColor=0b0b0e)
-![no fine-tuning](https://img.shields.io/badge/backbone-frozen,_no_fine--tuning-3ddc97?style=flat-square&labelColor=0b0b0e)
-![product](https://img.shields.io/badge/product_answer-99%25+_on_our_labels-3ddc97?style=flat-square&labelColor=0b0b0e)
-![output](https://img.shields.io/badge/output-official_predictions.json-8b8bff?style=flat-square&labelColor=0b0b0e)
-
-<br>
-
-**[▶ Watch with sound](docs/media/shelfos-film-45s.mp4)** &nbsp;·&nbsp;
-**[Features](#-what-you-get)** &nbsp;·&nbsp;
-**[Run it](#run-it)** &nbsp;·&nbsp;
-**[How it works](#how-it-works)** &nbsp;·&nbsp;
-**[Results](#labels-and-measured-results)** &nbsp;·&nbsp;
-**[Rules](#rules-confirmed-by-the-organisers)**
+<sub>
+<a href="docs/media/shelfos-film-45s.mp4">Film with sound</a> &nbsp;·&nbsp;
+<a href="#run-it">Run it</a> &nbsp;·&nbsp;
+<a href="#how-it-works">How it works</a> &nbsp;·&nbsp;
+<a href="#labels-and-measured-results">Results</a> &nbsp;·&nbsp;
+<a href="#rules-confirmed-by-the-organisers">Rules</a>
+</sub>
 
 </div>
 
 <br>
 
-<table>
-<tr>
-<td align="center" width="25%"><h2>14</h2><sub>fixed ceiling cameras</sub></td>
-<td align="center" width="25%"><h2>152</h2><sub>planogram areas read per sweep</sub></td>
-<td align="center" width="25%"><h2>1</h2><sub>batched forward pass per image</sub></td>
-<td align="center" width="25%"><h2>0</h2><sub>fine-tuned weights: frozen DINOv3</sub></td>
-</tr>
-</table>
-
-## ✨ What you get
-
-Every clip below is a real screenshot of the running app; the film only moves a camera over them
-(see [`pitch/film/`](pitch/film/README.md)). The numbers on screen are what the app showed at capture time,
-not official evaluation results.
-
-<table>
-<tr>
-<td width="50%" valign="top">
-<img src="docs/media/wall.webp" alt="Store wall" width="100%">
-<h3>🧱 The store wall</h3>
-Availability, live problems and compliance for the whole store at a glance, with every camera underneath.
-</td>
-<td width="50%" valign="top">
-<img src="docs/media/replay.webp" alt="Day replay" width="100%">
-<h3>⏯️ Day replay</h3>
-Scrub the store from 07:35 to 23:35 and watch the shelves sell down and get refilled.
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<img src="docs/media/camera.webp" alt="Camera view and planogram check" width="100%">
-<h3>🎯 Planogram check</h3>
-Open a camera, tap a slot, and see what ShelfOS sees as product, area by area.
-</td>
-<td width="50%" valign="top">
-<img src="docs/media/tasks.webp" alt="Tasks" width="100%">
-<h3>✅ Tasks</h3>
-Problems become a to-do list. Tick one off and the store score moves.
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<img src="docs/media/analytics.webp" alt="Analytics" width="100%">
-<h3>📈 The day, in numbers</h3>
-Stock, compliance and coverage over the day, the hardest moment, and the typical time to fix.
-</td>
-<td width="50%" valign="top">
-<img src="docs/media/test-images.webp" alt="Test on new images" width="100%">
-<h3>🧪 New images, clear answers</h3>
-Drop a folder, loose files or a zip. Each image is answered as it finishes; download <code>predictions.json</code>.
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<img src="docs/media/assistant.webp" alt="ShelfOS AI" width="100%">
-<h3>🤖 ShelfOS AI</h3>
-Ask "What needs attention first?" and jump straight from the answer to the right camera and slot.
-</td>
-<td width="50%" valign="top">
-<img src="docs/media/team-mobile.webp" alt="Team mobile page" width="100%">
-<h3>📱 Team mobile</h3>
-A route through the store for the staff on the floor, at <code>/colaboradores</code>.
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<img src="docs/media/search.webp" alt="Search" width="100%">
-<h3>🔎 Search</h3>
-Find any product across every camera and area.
-</td>
-<td width="50%" valign="top">
-<img src="docs/media/light-dark.webp" alt="Light and dark themes" width="100%">
-<h3>🌗 Light and dark</h3>
-Both themes, on desktop and mobile.
-</td>
-</tr>
-</table>
-
-## 🧠 The pipeline
-
-```mermaid
-flowchart LR
-    C["📷 Ceiling camera<br/>frame"] --> G["📐 Geometry<br/>rectify each<br/>planogram area"]
-    G --> F["🧬 Frozen DINOv3<br/>ViT-B + ViT-L<br/>global + patch tokens"]
-    F --> O["🟩 Occupancy<br/>product vs crate,<br/>tray, cardboard"]
-    F --> M["🕰️ Shelf memory<br/>vs this area<br/>full and empty"]
-    F --> P["🏷️ Compliance<br/>product<br/>prototypes"]
-    O --> S["📊 Stock level<br/>max expected<br/>official score"]
-    M --> S
-    S --> J["📄 predictions.json"]
-    P --> J
-    J --> T["✅ Tasks for<br/>the store staff"]
-
-    style F fill:#1a1a2e,stroke:#8b8bff,color:#fff
-    style S fill:#0b2a1e,stroke:#3ddc97,color:#fff
-    style P fill:#0b2a1e,stroke:#3ddc97,color:#fff
-    style T fill:#2a220b,stroke:#f5b83d,color:#fff
-```
+Shelf intelligence for the Sensei challenge at JunctionX Lisbon 2026. For every planogram
+area in a ceiling-camera image, ShelfOS says whether the right product is there and how
+full the area is, and turns that into a to-do list a member of the store staff can act on.
 
 <br>
 
----
+<table>
+<tr>
+<td width="50%" valign="top"><img src="docs/media/wall.webp" alt="Store wall" width="100%"><br><b>Store wall</b><br><sub>The whole store at a glance.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/replay.webp" alt="Day replay" width="100%"><br><b>Day replay</b><br><sub>07:35 to 23:35, shelf by shelf.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="docs/media/camera.webp" alt="Planogram check" width="100%"><br><b>Planogram check</b><br><sub>What ShelfOS sees as product, per area.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/tasks.webp" alt="Tasks" width="100%"><br><b>Tasks</b><br><sub>Problems become a to-do list.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="docs/media/analytics.webp" alt="Analytics" width="100%"><br><b>Analytics</b><br><sub>Stock, compliance and coverage over the day.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/test-images.webp" alt="Test images" width="100%"><br><b>Test images</b><br><sub>Drop images, download <code>predictions.json</code>.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="docs/media/assistant.webp" alt="Assistant" width="100%"><br><b>Assistant</b><br><sub>Ask what needs attention first.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/team-mobile.webp" alt="Team mobile" width="100%"><br><b>Team mobile</b><br><sub>A route through the store for staff.</sub></td>
+</tr>
+</table>
+
+<sub>Real screenshots of the running app. Numbers on screen are from capture time, not official results.</sub>
+
+<br>
+
+```mermaid
+flowchart LR
+    C[Camera frame] --> G[Rectify areas]
+    G --> F[Frozen DINOv3]
+    F --> O[Occupancy]
+    F --> M[Shelf memory]
+    F --> P[Compliance]
+    O --> S[Stock level]
+    M --> S
+    S --> J[predictions.json]
+    P --> J
+    J --> T[Staff tasks]
+```
+
+<br>
 
 ## Rules confirmed by the organisers
 
@@ -324,8 +250,8 @@ docs/arquivo/       superseded documents, kept for reference
 
 <div align="center">
 
-<a href="docs/media/shelfos-film-45s.mp4"><img src="docs/media/wordmark.jpg" alt="ShelfOS" width="60%"></a>
+<a href="docs/media/shelfos-film-45s.mp4"><img src="docs/media/wordmark.jpg" alt="ShelfOS" width="40%"></a>
 
-<sub>The film is rendered frame by frame from <a href="pitch/film/film45.html"><code>pitch/film/film45.html</code></a>, with a soundtrack synthesised by <a href="pitch/film/audio45.py"><code>audio45.py</code></a>. No third-party music, nothing in the UI redrawn.</sub>
+<sub>Film rendered from <a href="pitch/film/README.md"><code>pitch/film</code></a>.</sub>
 
 </div>
