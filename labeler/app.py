@@ -21,7 +21,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-DATASET = REPO / "new_dataset_hackathon_junctionx_10_oct_2026_v2"
+DATASET = REPO / "dataset"
 ZIP = DATASET / "Frutas e Legumes (train & test).zip"
 PLANOGRAM = DATASET / "planogram.json"
 SILVER = REPO / "labels" / "silver_labels.txt"  # fonte de treino do modelo (shelfos)

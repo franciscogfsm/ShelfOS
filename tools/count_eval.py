@@ -1,4 +1,4 @@
-"""Test the "Count units" button against hand counts, per product group, with the pass mark fixed in Plano.md.
+"""Test the "Count units" button against hand counts, per product group, with the pass mark fixed in docs/Plano.md.
 
 A group may be switched on (shelfos/counting.py, ENABLED_GROUPS) only if it has at least 5 hand-counted areas and
 at least 80% of them land within max(2, 15%) of the hand count. Calls the vision model once per area (a few cents).

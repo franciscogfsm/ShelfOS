@@ -149,6 +149,14 @@ Nobody edits `labels/silver_labels.txt` — labels come from the humans via `lab
   Its own `.gitignore` keeps `*.mp4`, `*.zip` and `node_modules/` out (the 4K film is over GitHub's 100 MB limit).
   No model, label, app or deployment file touched; one line added to the Layout list in `README.md`.
 
+- [Claude Code, 23 Oct] Repo tidy at the user's request; no model, label, engine.py, rects or models/ change.
+  Moved: `Plano.md` and `CUSTO_E_VELOCIDADE.md` -> `docs/`; `PITCH_DECK_PROMPT.md`, `PITCH_MODEL.md` -> `pitch/`;
+  `new_dataset_hackathon_junctionx_10_oct_2026_v2/` -> `dataset/` (`labeler/app.py` and `.gitignore` follow).
+  Deleted: stray Next builds `web/.next-count-build/`, `web/.next-side-layout/` (unreferenced; `web/.next-*/` now ignored),
+  unused create-next-app SVGs in `web/public/`, and two archived duplicates in `docs/arquivo/`.
+  Checked: Python compiles, labeler finds the dataset, `web` tsc + `next build` + staff tests (8/8) pass.
+  Local untracked files in the old dataset folder (unzipped images) are not moved by git: move them to `dataset/` by hand.
+
 ## Running now
 - [index, 11 Oct 12:09] Full model retrained on the 11:59 labels: `models/engine.pkl` and `models/reference_day.json`, 1950 crops, 122s. Index of every area is going up on http://127.0.0.1:8791. No other train is running.
 - Advisor vote applied at 10:56. Two labels changed: `6376_15` t11 half -> full, `6491_8` t12 full -> half. The other six votes matched the label. Backup `labeler/backups/silver_labels-20261011-105638.txt`. Both models retrained (lite 64s, full 169s, 234s total). New calls match those labels. Nothing heavy running.

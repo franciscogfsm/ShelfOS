@@ -147,7 +147,7 @@ are not visible and are not guessed.
   `OPENROUTER_API_KEY` as the assistant), on demand only.
 - It is separate from the engine. It uses no GPU and never touches `predictions.json`.
 - It counts only the product groups that passed the hand-count test: `python tools/count_eval.py`
-  against `labels/unit_counts.txt`, pass mark in `Plano.md`.
+  against `labels/unit_counts.txt`, pass mark in `docs/Plano.md`.
 - `python tools/precount.py` caches the reference day, so the demo needs no network.
 
 ## What it does with awkward input
@@ -237,20 +237,25 @@ organisers" at the top.
 ## Layout
 
 ```
-run.py              one command: the app, or predictions for a folder
-shelfos/            engine (features, occupancy, memory, compliance, scoring), service, server
-web/                the interface (Next.js, exported to static files and served by run.py)
-tools/cv.py         cross-validation of the shipped engine against our labels
-tools/selftest.py   edge-case drill
-labeler/            label review tool (standalone, see labeler/README.md)
-labels/             our labels for the reference day
-edgecase_labeler/   label tool for the AI-generated edge cases
-ai_generated_edgecases/  synthetic stress tests and their reviewed labels
-pitch/film/         demo film generator: edit, renderer, soundtrack, screenshots (see pitch/film/README.md)
-Plano.md            current plan: the four UI ideas
-docs/DEPLOY.md      deploying the container (Hugging Face Spaces, Fly.io, ...)
-docs/Sensei - JunctionX Lisbon 2026.txt   the challenge brief
-docs/arquivo/       superseded documents, kept for reference
+run.py                    one command: the app, or predictions for a folder
+requirements.txt          Python dependencies
+Dockerfile                one container: model, API and interface (see docs/DEPLOY.md)
+
+shelfos/                  engine (features, occupancy, memory, compliance, scoring), service, server
+web/                      the interface (Next.js, exported to static files and served by run.py)
+tools/                    cross-validation (cv.py), edge-case drill (selftest.py), release, experiments
+
+dataset/                  the challenge download: planogram.json, images zip, brief PDF
+labels/                   our labels for the reference day
+labeler/                  label review tool (standalone, see labeler/README.md)
+edgecase_labeler/         label tool for the AI-generated edge cases
+ai_generated_edgecases/   synthetic stress tests and their reviewed labels
+
+docs/                     plan (Plano.md), cost and speed (CUSTO_E_VELOCIDADE.md), deploy, challenge brief
+docs/media/               the clips and stills in this README
+docs/arquivo/             superseded documents, kept for reference
+pitch/                    pitch deck, its prompts, and the demo film generator (pitch/film/)
+vercel-demo/              static demo published on Vercel
 ```
 
 <br>

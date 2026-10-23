@@ -3,7 +3,7 @@
  *
  * At every capture of every area, forecast from the captures up to then only, and compare with the
  * first capture labelled empty afterwards. The pass mark was fixed before any result was seen
- * (Plano.md, idea C): median error at most 60 min, at least 15 distinct run-outs forecast, and at
+ * (docs/Plano.md, idea C): median error at most 60 min, at least 15 distinct run-outs forecast, and at
  * most a third of the judged forecasts announcing a run-out that never came.
  *
  * usage: node --experimental-strip-types tools/forecast_backtest.ts cache/forecast_series.json [--signal fill|occ] [--area 6215_9]

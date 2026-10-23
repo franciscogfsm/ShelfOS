@@ -13,7 +13,7 @@ Facts (checked): 181 images (1280×720) in 14 camera folders, filenames = Unix t
 1. Clone the repo, create a venv, install: `pip install opencv-python numpy` (nothing else for Step 1).
 2. Unzip the images into `data/raw/` (add `data/` to `.gitignore`, never commit images or crops):
    ```bash
-   mkdir -p data/raw && unzip -q "new_dataset_hackathon_junctionx_10_oct_2026_v2/Frutas e Legumes (train & test).zip" -x '__MACOSX/*' -d data/raw
+   mkdir -p data/raw && unzip -q "dataset/Frutas e Legumes (train & test).zip" -x '__MACOSX/*' -d data/raw
    ```
 3. Agree on the **contract** below (5 min). After that, A and B never wait for each other.
 4. Create `HACKATHON_LOG.md` (template in the Project instructions) and write your names in it.
